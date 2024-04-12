@@ -26,3 +26,16 @@ body {
     text-wrap: balance;
   }
 }
+
+@layer base {
+  :root {
+    --primary: #1287D8;
+    --secondary: #ffffff;
+    --tertiary: #aaaaaa;
+    --quarteriary: #6c6c6c;
+
+    --bg-primary: #464648;
+    --bg-secondary: #151515;
+
+  }
+}
