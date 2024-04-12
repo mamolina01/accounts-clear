@@ -18,7 +18,7 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: rgb(49, 49, 49)
+  background: #464648;
 }
 
 @layer utilities {
@@ -34,8 +34,8 @@ body {
     --tertiary: #aaaaaa;
     --quarteriary: #6c6c6c;
 
-    --bg-primary: #464648;
-    --bg-secondary: #151515;
+    --bg-primary: #151515;
+    --bg-secondary: #202020;
 
   }
 }
