@@ -37,6 +37,13 @@ export const Form = () => {
             setFieldValue('participants', tempParticipants)
           }
 
+          const removeParticipant = (participant: ParticipantProps) => {
+            const tempParticipants = values.participants.filter(
+              tempParticipant => tempParticipant.id !== participant.id
+            )
+            setFieldValue('participants', tempParticipants)
+          }
+
           const onSubmit: FormEventHandler<HTMLFormElement> = e => {
             e.preventDefault()
             if (values.participants.length === 0) {
@@ -85,14 +92,19 @@ export const Form = () => {
                   Participantes {'('}
                   {values.participants.length}/50{')'}
                 </p>
-                <div className="p-1 text-tertiary flex flex-col gap-2">
+                <div className="text-tertiary flex flex-col gap-2 max-h-40 overflow-scroll px-3 mt-2 border-x-[2px] border-tertiary">
                   {values.participants.map(participant => (
-                    <Participant participant={participant} editParticipant={editParticipant} key={participant.id} />
+                    <Participant
+                      participant={participant}
+                      editParticipant={editParticipant}
+                      removeParticipant={removeParticipant}
+                      key={participant.id}
+                    />
                   ))}
-                  <FormParticipants addParticipant={addParticipant} />
                 </div>
+                <FormParticipants addParticipant={addParticipant} />
               </div>
-              <button type="submit" className="bg-blue-500 rounded p-1 w-3/4 mx-auto mt-4">
+              <button type="submit" className="bg-blue-500 rounded-sm p-1 w-3/4 mx-auto mt-4">
                 Crear balance
               </button>
             </form>
