@@ -31,7 +31,7 @@ export const OutgoingItem = ({ outgoing }: { outgoing: OutgoingProps }) => {
         </div>
         {showMore && (
           <div className="text-tertiary">
-            <p>Para {outgoing.payers.length} participantes</p>
+            <p className="text-sm">Para {outgoing.payers.length} participantes:</p>
             <ul className="pl-1">
               {outgoing.payers.map(payer => (
                 <li className="text-sm flex justify-between">
