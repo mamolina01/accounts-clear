@@ -1,17 +1,14 @@
 'use client'
 import { FormParticipants } from '@/app/create-count/FormParticipants'
+import { Participant } from '@/app/create-count/Participant'
+import { generateID } from '@/helpers'
+import { ParticipantProps, newBalanceProps } from '@/types/newBalance'
 import { validationSchemaNewBalance } from '@/validations'
 import { Formik } from 'formik'
 import { FormEventHandler } from 'react'
 
-interface initialValues {
-  title: string
-  description: string
-  participants: string[]
-}
-
 export const Form = () => {
-  const initialValues: initialValues = { title: '', description: '', participants: [] }
+  const initialValues: newBalanceProps = { title: '', description: '', participants: [] }
 
   return (
     <div className="flex flex-col w-1/2 px-3 py-5 rounded-md bg-secondary">
@@ -26,17 +23,25 @@ export const Form = () => {
         validateOnMount={false}
       >
         {props => {
-          const { handleSubmit, values, errors, setFieldValue } = props
+          const { values, errors, setFieldValue, handleSubmit, validateField } = props
 
           const addParticipant = (newParticipant: string) => {
-            if (values.participants.length >= 3) return
-            setFieldValue('participants', [...values.participants, newParticipant])
+            if (values.participants.length >= 50) return
+            setFieldValue('participants', [...values.participants, { name: newParticipant, id: generateID() }])
+          }
+
+          const editParticipant = (newParticipant: ParticipantProps) => {
+            const tempParticipants = values.participants.map(participant =>
+              participant.id === newParticipant.id ? newParticipant : participant
+            )
+            setFieldValue('participants', tempParticipants)
           }
 
           const onSubmit: FormEventHandler<HTMLFormElement> = e => {
             e.preventDefault()
             if (values.participants.length === 0) {
-              setFieldValue('participants', ['Matias (yo)'])
+              setFieldValue('participants', [...values.participants, { name: 'Matias (yo)', id: generateID() }])
+              validateField('participants')
             }
             handleSubmit()
           }
@@ -76,24 +81,20 @@ export const Form = () => {
                 {errors.description}
               </div>
               <div className="flex flex-col">
-                <label htmlFor="" className="text-start text-sm">
+                <p className="text-start text-sm">
                   Participantes {'('}
                   {values.participants.length}/50{')'}
-                </label>
+                </p>
                 <div className="p-1 text-tertiary flex flex-col gap-2">
                   {values.participants.map(participant => (
-                    <input
-                      type="text"
-                      value={participant}
-                      className="bg-transparent outline-none mx-1 border-b-[1px] border-tertiary"
-                      onChange={() => {}}
-                      key={participant}
-                    />
+                    <Participant participant={participant} editParticipant={editParticipant} key={participant.id} />
                   ))}
                   <FormParticipants addParticipant={addParticipant} />
                 </div>
               </div>
-              <button className="bg-blue-500 rounded p-1 w-3/4 mx-auto mt-4">Crear balance</button>
+              <button type="submit" className="bg-blue-500 rounded p-1 w-3/4 mx-auto mt-4">
+                Crear balance
+              </button>
             </form>
           )
         }}
