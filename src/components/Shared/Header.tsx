@@ -2,7 +2,7 @@ import React from 'react'
 
 export const Header = () => {
   return (
-    <div className="w-full bg-primary p-3 grid grid-cols-3 items-center">
+    <div className="w-full bg-primary p-3 grid grid-cols-3 items-center fixed">
       <h1 className="text-3xl font-semibold text-primary capitalize text-center col-start-2">CuentasClaras</h1>
 
       <div className="flex gap-2 items-center justify-end">

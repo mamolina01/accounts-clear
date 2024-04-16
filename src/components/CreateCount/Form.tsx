@@ -1,6 +1,6 @@
 'use client'
-import { FormParticipants } from '@/app/create-count/FormParticipants'
-import { Participant } from '@/app/create-count/Participant'
+import { FormParticipants } from '@/components/CreateCount/FormParticipants'
+import { Participant } from '@/components/CreateCount/Participant'
 import { generateID } from '@/helpers'
 import { ParticipantProps, newBalanceProps } from '@/types/newBalance'
 import { validationSchemaNewBalance } from '@/validations'
