@@ -39,7 +39,7 @@ export default function Home() {
     outgoings: outgoings
   }
   return (
-    <div className="flex justify-center p-5">
+    <div className="flex justify-center h-screen items-center">
       <div className="flex flex-col w-1/2 gap-2">
         <HeaderContent count={countDetails} />
         <OutgoinsList outgoings={countDetails.outgoings} />

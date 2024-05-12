@@ -1,0 +1,65 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Category {
+  travel
+  house
+  relationship
+  celebration
+  project
+  others
+}
+
+model Group {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  total       Int      @default(0)
+  category    Category
+  users       User[]
+  costs       Cost[]
+}
+
+model User {
+  id            String           @id @default(uuid())
+  name          String
+  email         String           @unique
+  password      String
+  image         String?
+  groups        Group[]
+  // Relación para los costos asignados a este usuario
+  assignedCosts CostAssignment[]
+}
+
+model Cost {
+  id            String           @id @default(uuid())
+  title         String
+  amount        Int
+  date          DateTime
+  // Relación con los usuarios asignados a este costo
+  assignedUsers CostAssignment[]
+  Group         Group?           @relation(fields: [groupId], references: [id])
+  groupId       String?
+}
+
+// Tabla adicional para asignar usuarios a costos y realizar un seguimiento de si han pagado o no
+model CostAssignment {
+  id     String  @id @default(uuid())
+  user   User    @relation(fields: [userId], references: [id])
+  userId String
+  cost   Cost    @relation(fields: [costId], references: [id])
+  costId String
+  paid   Boolean @default(false)
+}
