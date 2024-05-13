@@ -23,33 +23,44 @@ const addData = async () => {
   })
 
   // * CREATE USERS
-  const { id: userId } = await prisma.user.create({
-    data: {
-      name: initialData.users[0].name,
-      email: initialData.users[0].email,
-      password: initialData.users[0].password,
-      groups: {
-        connect: { id: groupId }
-      }
+  for (const user of initialData.users) {
+    try {
+      await prisma.user.create({
+        data: {
+          name: user.name,
+          email: user.email,
+          password: user.password,
+          groups: {
+            connect: { id: groupId }
+          }
+        }
+      })
+    } catch (error) {
+      console.log(error)
     }
-  })
+  }
+
+  const users = await prisma.user.findMany()
 
   // * CREATE COSTS
   const { id: costId, amount } = await prisma.cost.create({
     data: {
       title: 'food',
       amount: 100,
+      userId: users[0].id,
       date: new Date(),
       groupId: groupId
     }
   })
 
-  // * CREATE RELATIONSHIP BETWEEN USER AND COST
-  await prisma.costAssignment.create({
-    data: {
-      userId: userId,
-      costId: costId
-    }
+  users.forEach(async user => {
+    // * CREATE RELATIONSHIP BETWEEN USER AND COST
+    await prisma.costAssignment.create({
+      data: {
+        user: { connect: { id: user.id } },
+        cost: { connect: { id: costId } }
+      }
+    })
   })
 
   await prisma.group.update({
@@ -62,13 +73,13 @@ const addData = async () => {
   })
 
   // * GET GROUPS
-  const prismaGroup = await prisma.group.findFirst({
-    include: {
-      users: true,
-      costs: true
-    }
-  })
-  console.log(prismaGroup)
+  // const prismaGroup = await prisma.group.findFirst({
+  //   include: {
+  //     users: true,
+  //     costs: true
+  //   }
+  // })
+  // console.log(prismaGroup)
 
   // * GET COSTS
   // const prismaCosts = await prisma.cost.findMany()

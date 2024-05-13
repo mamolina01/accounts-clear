@@ -1,3 +1,3 @@
 export * from './HeaderContent'
-export * from './OutgoinsList'
-export * from './OutgoingItem'
+export * from './CostsList'
+export * from './CostItem'
