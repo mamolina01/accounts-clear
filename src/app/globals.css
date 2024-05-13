@@ -29,13 +29,28 @@ body {
 
 @layer base {
   :root {
-    --primary: #1287D8;
+    --primary: #1287d8;
     --secondary: #ffffff;
     --tertiary: #aaaaaa;
     --quarteriary: #6c6c6c;
 
     --bg-primary: #151515;
     --bg-secondary: #202020;
-
   }
+}
+
+.btn-primary {
+  @apply bg-blue-600 hover:bg-blue-800 text-white py-2 px-4 rounded transition-all;
+
+  &:disabled {
+    @apply bg-gray-600 cursor-not-allowed;
+  }
+}
+
+.btn-secondary {
+  @apply bg-gray-200 hover:bg-gray-300 text-black py-2 px-4 rounded transition-all;
+}
+
+.btn-danger {
+  @apply bg-red-500 hover:bg-red-700 text-white py-2 px-4 transition-all;
 }
