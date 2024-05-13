@@ -1,36 +1,32 @@
 import { Category } from '@prisma/client'
+import bcryptjs from 'bcryptjs'
 
 export const initialData = {
   users: [
     {
       email: 'matias@mail.com',
       name: 'Matias Molina',
-      //   password: bcryptjs.hashSync('123456'),
-      password: '123456'
+      password: bcryptjs.hashSync('123456')
     },
     {
       email: 'martin@mail.com',
       name: 'Martin Flores',
-      //   password: bcryptjs.hashSync('123456'),
-      password: '123456'
+      password: bcryptjs.hashSync('123456')
     },
     {
       email: 'Maria@mail.com',
       name: 'Maria Lopez',
-      //   password: bcryptjs.hashSync('123456'),
-      password: '123456'
+      password: bcryptjs.hashSync('123456')
     },
     {
       email: 'Pedro@mail.com',
       name: 'Pedro Martinez',
-      //   password: bcryptjs.hashSync('123456'),
-      password: '123456'
+      password: bcryptjs.hashSync('123456')
     },
     {
       email: 'Agustin@mail.com',
       name: 'Agustin Garcia',
-      //   password: bcryptjs.hashSync('123456'),
-      password: '123456'
+      password: bcryptjs.hashSync('123456')
     }
   ],
   groups: [

@@ -41,6 +41,7 @@ model User {
   groups        Group[]
   // Relación para los costos asignados a este usuario
   assignedCosts CostAssignment[]
+  Cost          Cost[]
 }
 
 model Cost {
@@ -48,13 +49,14 @@ model Cost {
   title         String
   amount        Int
   date          DateTime
+  paidBy        User             @relation(fields: [userId], references: [id])
   // Relación con los usuarios asignados a este costo
   assignedUsers CostAssignment[]
   Group         Group?           @relation(fields: [groupId], references: [id])
   groupId       String?
+  userId        String
 }
 
-// Tabla adicional para asignar usuarios a costos y realizar un seguimiento de si han pagado o no
 model CostAssignment {
   id     String  @id @default(uuid())
   user   User    @relation(fields: [userId], references: [id])

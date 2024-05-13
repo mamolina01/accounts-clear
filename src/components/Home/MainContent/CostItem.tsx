@@ -1,0 +1,63 @@
+'use client'
+import { useEffect, useState } from 'react'
+import { BsChevronDown } from 'react-icons/bs'
+
+interface UserProps {
+  paid: boolean
+  id: string
+  user: {
+    name: string
+  }
+}
+
+export const CostItem = ({ cost }: { cost: any }) => {
+  const [showMore, setShowMore] = useState<boolean>(false)
+  const [loaded, setLoaded] = useState<boolean>(false)
+
+  const toggleShowMore = () => setShowMore(!showMore)
+
+  const amountPerPerson = (amountMoney: number, payers: number) => {
+    return (amountMoney / payers).toFixed(2)
+  }
+
+  useEffect(() => {
+    setLoaded(true)
+  }, [])
+
+  if (!loaded) return
+
+  return (
+    <>
+      <div
+        className="bg-secondary w-full p-3 rounded-md grid grid-cols-2 hover:opacity-80 cursor-pointer"
+        onClick={toggleShowMore}
+      >
+        <div>
+          <p className="capitalize text-xl">{cost.title}</p>
+          <p className="text-tertiary text-sm">Pagado por: {cost.paidBy.name}</p>
+        </div>
+        <div className="flex justify-end items-center gap-2">
+          <div className="text-end">
+            <p className="text-xl">${cost.amount}</p>
+            <p className="text-tertiary text-sm">{cost.date.toLocaleDateString()}</p>
+          </div>
+          <BsChevronDown className={`${showMore && 'rotate-180'} transition-all`} />
+        </div>
+        {showMore && (
+          <div className="text-tertiary col-span-2">
+            <p className="text-sm">Para {cost.assignedUsers.length} participantes:</p>
+            <ul className="pl-1">
+              {cost.assignedUsers.map((user: UserProps) => (
+                <li className="text-sm grid grid-cols-3 justify-between w-full" key={user.id}>
+                  <p>{user.user.name} </p>
+                  <p>${amountPerPerson(cost.amount, cost.assignedUsers.length)}</p>
+                  <p>{user.paid ? 'ya pago' : 'debe pagar'}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+    </>
+  )
+}
