@@ -1,9 +1,10 @@
 import { getGroupById } from '@/actions'
+import { auth } from '@/auth.config'
 import { CountProps } from '@/types/count'
 import React from 'react'
 
-export const HeaderContent = async () => {
-  const group = await getGroupById()
+export const HeaderContent = async ({ groupId }: { groupId: string }) => {
+  const group = await getGroupById(groupId)
 
   if (!group) return <></>
 

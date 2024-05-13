@@ -2,10 +2,14 @@
 
 import prisma from '@/lib/prisma'
 
-export const getGroupById = async () => {
+export const getGroupById = async (groupId: string) => {
   try {
     // TODO: filter by group id
-    const group = await prisma.group.findFirst()
+    const group = await prisma.group.findFirst({
+      where: {
+        id: groupId
+      }
+    })
 
     if (!group) return null
 
