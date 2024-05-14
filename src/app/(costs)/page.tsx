@@ -1,10 +1,9 @@
-import { HeaderContent, CostsList } from '@/components/Home/MainContent'
+import { CostsContainer } from '@/components'
 
 export default function Home() {
   return (
     <>
-      <HeaderContent />
-      <CostsList />
+      <CostsContainer />
     </>
   )
 }

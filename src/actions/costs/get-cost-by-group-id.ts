@@ -1,9 +1,12 @@
 'use server'
 import prisma from '@/lib/prisma'
 
-export const getCostByGroupId = async () => {
+export const getCostByGroupId = async (groupId: string) => {
   try {
     const costs = await prisma.cost.findMany({
+      where: {
+        groupId: groupId
+      },
       include: {
         paidBy: {
           select: {
