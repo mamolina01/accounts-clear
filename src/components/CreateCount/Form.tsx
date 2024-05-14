@@ -1,24 +1,42 @@
 'use client'
+import { createGroup } from '@/actions'
 import { FormParticipants } from '@/components/CreateCount/FormParticipants'
 import { Participant } from '@/components/CreateCount/Participant'
 import { generateID } from '@/helpers'
 import { ParticipantProps, newBalanceProps } from '@/types/newBalance'
 import { validationSchemaNewBalance } from '@/validations'
+import { Category } from '@prisma/client'
 import { Formik } from 'formik'
+import { useSession } from 'next-auth/react'
 import { FormEventHandler } from 'react'
 
 export const Form = () => {
   const initialValues: newBalanceProps = { title: '', description: '', participants: [] }
+  const { data: session } = useSession()
+
+  const handleSubmit = async (values: newBalanceProps) => {
+    if (!session?.user.id) return
+
+    const data = {
+      name: values.title,
+      description: values.description,
+      category: Category.travel,
+      id: session?.user.id
+    }
+    const { ok } = await createGroup(data)
+
+    console.log(ok)
+  }
 
   return (
-    <div className="flex flex-col w-1/2 px-3 py-5 rounded-md bg-secondary">
+    <div className="flex flex-col w-full px-3 py-5 rounded-md bg-secondary">
       <h5 className="text-lg text-center font-semibold">Nuevo balance de gastos</h5>
       <Formik
         initialValues={initialValues}
         validateOnChange
         validationSchema={validationSchemaNewBalance()}
         onSubmit={values => {
-          console.log(values)
+          handleSubmit({ ...values })
         }}
         validateOnMount={false}
       >

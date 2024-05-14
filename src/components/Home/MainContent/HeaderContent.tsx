@@ -1,10 +1,6 @@
-import { getGroupById } from '@/actions'
+import { GroupProps } from '@/types/group'
 
-export const HeaderContent = async ({ groupId }: { groupId: string }) => {
-  const group = await getGroupById(groupId)
-
-  if (!group) return <></>
-
+export const HeaderContent = async ({ group }: { group: GroupProps }) => {
   return (
     <div className="flex justify-between p-3 bg-primary rounded-md items-center">
       <div className="flex flex-col">
