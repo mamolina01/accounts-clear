@@ -33,17 +33,17 @@ export const initialData = {
     {
       name: 'My Birthday',
       description: 'Celebrating my 25 years old',
-      category: Category.celebration
+      category: Category.Celebration
     },
     {
       name: 'My degree',
       description: 'Celebrating my engineering degree',
-      category: Category.celebration
+      category: Category.Celebration
     },
     {
       name: 'New York 2024',
       description: 'Organazing our travel',
-      category: Category.travel
+      category: Category.Travel
     }
   ]
 }

@@ -13,7 +13,7 @@ import { FormEventHandler } from 'react'
 import styles from './Form.module.scss'
 
 export const Form = () => {
-  const initialValues: newBalanceProps = { title: '', description: '', participants: [] }
+  const initialValues: newBalanceProps = { title: '', description: '', category: Category.Travel, participants: [] }
   const { data: session } = useSession()
   const router = useRouter()
   const handleSubmit = async (values: newBalanceProps) => {
@@ -22,7 +22,7 @@ export const Form = () => {
     const data = {
       name: values.title,
       description: values.description,
-      category: Category.travel,
+      category: values.category,
       id: session?.user.id
     }
     const { ok } = await createGroup(data)
@@ -31,6 +31,15 @@ export const Form = () => {
       router.push('/')
     }
   }
+
+  const categoryOptions = [
+    Category.Celebration,
+    Category.House,
+    Category.Project,
+    Category.Relationship,
+    Category.Travel,
+    Category.Others
+  ]
 
   return (
     <div className={styles.container}>
@@ -105,6 +114,23 @@ export const Form = () => {
                   onChange={e => setFieldValue('description', e.target.value)}
                   className={`${styles.input} ${errors.description && styles.error}`}
                 />
+                {errors.description}
+              </div>
+              <div className={styles.inputContainer}>
+                <label htmlFor="description" className={styles.label}>
+                  Categoria
+                </label>
+                <select
+                  value={values.category}
+                  className={styles.input}
+                  onChange={e => setFieldValue('category', e.target.value)}
+                >
+                  {categoryOptions.map(category => (
+                    <option value={category} key={category}>
+                      {category}
+                    </option>
+                  ))}
+                </select>
                 {errors.description}
               </div>
               <div className={styles.inputContainer}>

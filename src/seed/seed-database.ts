@@ -1,6 +1,5 @@
 import { initialData } from './seed'
 import prisma from '../lib/prisma'
-import { Category } from '@prisma/client'
 
 const main = async () => {
   // DELETE TABLES

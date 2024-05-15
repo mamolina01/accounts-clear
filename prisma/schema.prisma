@@ -14,12 +14,12 @@ datasource db {
 }
 
 enum Category {
-  travel
-  house
-  relationship
-  celebration
-  project
-  others
+  Travel
+  House
+  Relationship
+  Celebration
+  Project
+  Others
 }
 
 model Group {
@@ -58,9 +58,9 @@ model Cost {
 }
 
 model CostAssignment {
-  id     String  @id @default(uuid())
-  user   User    @relation(fields: [userId], references: [id])
+  id     String @id @default(uuid())
+  user   User   @relation(fields: [userId], references: [id])
   userId String
-  cost   Cost    @relation(fields: [costId], references: [id])
+  cost   Cost   @relation(fields: [costId], references: [id])
   costId String
 }
