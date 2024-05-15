@@ -63,5 +63,4 @@ model CostAssignment {
   userId String
   cost   Cost    @relation(fields: [costId], references: [id])
   costId String
-  paid   Boolean @default(false)
 }

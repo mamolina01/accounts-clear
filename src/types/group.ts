@@ -1,4 +1,5 @@
 import { Category } from '@prisma/client'
+import { ParticipantProps } from './newBalance'
 
 export interface GroupProps {
   id: string
@@ -6,4 +7,5 @@ export interface GroupProps {
   description: string
   category: Category
   total: number
+  users: ParticipantProps[]
 }

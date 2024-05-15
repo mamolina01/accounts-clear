@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 import { BsChevronDown } from 'react-icons/bs'
 
 interface UserProps {
-  paid: boolean
   id: string
   user: {
     name: string
@@ -27,7 +26,6 @@ export const CostItem = ({ cost }: { cost: any }) => {
   if (!loaded) return
 
   return (
-    <>
       <div
         className="bg-secondary w-full p-3 rounded-md grid grid-cols-2 hover:opacity-80 cursor-pointer"
         onClick={toggleShowMore}
@@ -51,13 +49,11 @@ export const CostItem = ({ cost }: { cost: any }) => {
                 <li className="text-sm grid grid-cols-3 justify-between w-full" key={user.id}>
                   <p>{user.user.name} </p>
                   <p>${amountPerPerson(cost.amount, cost.assignedUsers.length)}</p>
-                  <p>{user.paid ? 'ya pago' : 'debe pagar'}</p>
                 </li>
               ))}
             </ul>
           </div>
         )}
       </div>
-    </>
   )
 }

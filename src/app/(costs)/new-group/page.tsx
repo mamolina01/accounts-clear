@@ -1,4 +1,4 @@
-import { Form } from '@/components/CreateCount/Form'
+import { Form } from '@/components/FormBalance/Form'
 
 const CreateCount = () => {
   return <Form />

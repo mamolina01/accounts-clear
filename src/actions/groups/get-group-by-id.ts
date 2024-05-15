@@ -2,6 +2,7 @@
 
 import prisma from '@/lib/prisma'
 
+// TODO: Remove if isn't used
 export const getGroupById = async (groupId: string) => {
   try {
     const group = await prisma.group.findFirst({
@@ -30,11 +31,25 @@ export const getGroupsById = async (userId: string) => {
             id: userId
           }
         }
+      },
+      select: {
+        id: true,
+        name: true,
+        description: true,
+        total: true,
+        category: true,
+        users: {
+          select: {
+            name: true,
+            id: true
+          }
+        }
       }
     })
 
-    if (!groups) return null
+    if (!groups) return []
 
+    console.log(groups)
     return groups
   } catch (error) {
     console.log(error)
