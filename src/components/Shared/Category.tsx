@@ -6,7 +6,7 @@ export const Category = ({ category }: { category: string }) => {
     <div className="flex gap-2 items-center">
       <span className="text-sm sm:text-xl capitalize">{category}</span>
       <Image
-        src={`/icons/${category}.png`}
+        src={`/icons/${category.toLowerCase()}.png`}
         alt={category}
         width={20}
         height={20}
