@@ -1,24 +1,46 @@
 'use client'
-import { FormParticipants } from '@/components/CreateCount/FormParticipants'
-import { Participant } from '@/components/CreateCount/Participant'
+import { createGroup } from '@/actions'
+import { FormParticipants } from '@/components/FormBalance/FormParticipants'
+import { Participant } from '@/components/FormBalance/Participant'
 import { generateID } from '@/helpers'
 import { ParticipantProps, newBalanceProps } from '@/types/newBalance'
 import { validationSchemaNewBalance } from '@/validations'
+import { Category } from '@prisma/client'
 import { Formik } from 'formik'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 import { FormEventHandler } from 'react'
+import styles from './Form.module.scss'
 
 export const Form = () => {
   const initialValues: newBalanceProps = { title: '', description: '', participants: [] }
+  const { data: session } = useSession()
+  const router = useRouter()
+  const handleSubmit = async (values: newBalanceProps) => {
+    if (!session?.user.id) return
+
+    const data = {
+      name: values.title,
+      description: values.description,
+      category: Category.travel,
+      id: session?.user.id
+    }
+    const { ok } = await createGroup(data)
+
+    if (ok) {
+      router.push('/')
+    }
+  }
 
   return (
-    <div className="flex flex-col w-1/2 px-3 py-5 rounded-md bg-secondary">
-      <h5 className="text-lg text-center font-semibold">Nuevo balance de gastos</h5>
+    <div className={styles.container}>
+      <h5 className={styles.title}>Nuevo balance de gastos</h5>
       <Formik
         initialValues={initialValues}
         validateOnChange
         validationSchema={validationSchemaNewBalance()}
         onSubmit={values => {
-          console.log(values)
+          handleSubmit({ ...values })
         }}
         validateOnMount={false}
       >
@@ -54,9 +76,9 @@ export const Form = () => {
           }
 
           return (
-            <form onSubmit={onSubmit} className="flex flex-col gap-4">
-              <div className="flex flex-col">
-                <label htmlFor="title" className="text-start text-sm">
+            <form onSubmit={onSubmit} className={styles.form}>
+              <div className={styles.inputContainer}>
+                <label htmlFor="title" className={styles.label}>
                   Titulo
                 </label>
                 <input
@@ -66,13 +88,12 @@ export const Form = () => {
                   value={values.title}
                   placeholder="Ingrese un titulo"
                   onChange={e => setFieldValue('title', e.target.value)}
-                  className={`bg-transparent outline-none m-1 border-b-[1px] border-transparent focus:border-tertiary 
-                  ${errors.title && '!border-red-500'}`}
+                  className={`${styles.input} ${errors.title && styles.error}`}
                 />
-                {errors.title && <p className="text-red-500 text-sm mx-1">El titulo es requerido</p>}
+                {errors.title && <p className={styles.errorText}>El titulo es requerido</p>}
               </div>
-              <div className="flex flex-col">
-                <label htmlFor="description" className="text-start text-sm">
+              <div className={styles.inputContainer}>
+                <label htmlFor="description" className={styles.label}>
                   Descripcion
                 </label>
                 <input
@@ -82,17 +103,16 @@ export const Form = () => {
                   value={values.description}
                   placeholder="Ingrese una descripción"
                   onChange={e => setFieldValue('description', e.target.value)}
-                  className={`bg-transparent outline-none m-1 border-b-[1px] border-transparent focus:border-tertiary 
-                  ${errors.description && '!border-red-500'}`}
+                  className={`${styles.input} ${errors.description && styles.error}`}
                 />
                 {errors.description}
               </div>
-              <div className="flex flex-col">
-                <p className="text-start text-sm">
+              <div className={styles.inputContainer}>
+                <p className={styles.label}>
                   Participantes {'('}
                   {values.participants.length}/50{')'}
                 </p>
-                <div className="text-tertiary flex flex-col gap-2 max-h-40 overflow-scroll px-3 mt-2 border-x-[2px] border-tertiary">
+                <div className={styles.participantList}>
                   {values.participants.map(participant => (
                     <Participant
                       participant={participant}
@@ -104,7 +124,7 @@ export const Form = () => {
                 </div>
                 <FormParticipants addParticipant={addParticipant} />
               </div>
-              <button type="submit" className="bg-blue-500 rounded-sm p-1 w-3/4 mx-auto mt-4">
+              <button type="submit" className={styles.submitButton}>
                 Crear balance
               </button>
             </form>

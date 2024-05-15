@@ -2,13 +2,16 @@
 import { signOut, useSession } from 'next-auth/react'
 import { logout } from '@/actions'
 import { IoLogOutOutline } from 'react-icons/io5'
+import Link from 'next/link'
 
 export const Header = () => {
   const { data: session } = useSession()
 
   return (
     <div className="w-full bg-primary p-3 grid grid-cols-3 items-center fixed">
-      <h1 className="text-3xl font-semibold text-primary capitalize text-center col-start-2">Costs Management</h1>
+      <Link href="/" className="text-3xl font-semibold text-primary capitalize text-center col-start-2 cursor-pointer">
+        <h1>Costs Management</h1>
+      </Link>
 
       {session?.user && (
         <div className="flex gap-5 items-center justify-end">
