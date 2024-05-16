@@ -2,46 +2,29 @@
 
 import prisma from '@/lib/prisma'
 
-// TODO: Remove if isn't used
-export const getGroupById = async (groupId: string) => {
+export const getGroupsById = async (userId: string) => {
   try {
-    const group = await prisma.group.findFirst({
+    const participant = await prisma.participant.findFirst({
       where: {
-        id: groupId
+        userId: userId
       }
     })
 
-    if (!group) return null
+    if (!participant) return []
 
-    return {
-      ...group
-    }
-  } catch (error) {
-    console.log(error)
-    throw new Error('There was an error getting a group')
-  }
-}
-
-export const getGroupsById = async (userId: string) => {
-  try {
     const groups = await prisma.group.findMany({
       where: {
-        users: {
+        participants: {
           some: {
-            id: userId
+            userId: participant.userId
           }
         }
       },
-      select: {
-        id: true,
-        name: true,
-        description: true,
-        total: true,
-        category: true,
-        users: {
+      include: {
+        participants: {
           select: {
-            name: true,
-            id: true
+            id: true,
+            name: true
           }
         }
       }
@@ -49,7 +32,6 @@ export const getGroupsById = async (userId: string) => {
 
     if (!groups) return []
 
-    console.log(groups)
     return groups
   } catch (error) {
     console.log(error)

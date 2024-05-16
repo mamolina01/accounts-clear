@@ -3,8 +3,7 @@ import { GroupProps } from '@/types/group'
 
 export const HeaderContent = async ({ group }: { group: GroupProps }) => {
   const getUsers = () => {
-    let users = group.users.map(persona => persona.name).join(', ')
-
+    let users = group.participants.map(participant => participant.name).join(', ')
     return users
   }
 
