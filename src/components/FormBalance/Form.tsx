@@ -19,11 +19,16 @@ export const Form = () => {
   const handleSubmit = async (values: newBalanceProps) => {
     if (!session?.user.id) return
 
+    const participantNames = values.participants.map(participant => {
+      const { name } = participant
+      return name
+    })
+
     const data = {
       name: values.title,
       description: values.description,
       category: values.category,
-      id: session?.user.id
+      participants: participantNames
     }
     const { ok } = await createGroup(data)
 
@@ -78,7 +83,6 @@ export const Form = () => {
           const onSubmit: FormEventHandler<HTMLFormElement> = e => {
             e.preventDefault()
             if (values.participants.length === 0) {
-              setFieldValue('participants', [...values.participants, { name: 'Matias (yo)', id: generateID() }])
               validateField('participants')
             }
             handleSubmit()
@@ -136,9 +140,16 @@ export const Form = () => {
               <div className={styles.inputContainer}>
                 <p className={styles.label}>
                   Participantes {'('}
-                  {values.participants.length}/50{')'}
+                  {values.participants.length + 1}/50{')'}
                 </p>
                 <div className={styles.participantList}>
+                  {session?.user && (
+                    <div className="w-full flex justify-between gap-2 items-center">
+                      <p className="bg-transparent outline-none border-b-[1px] border-tertiary w-11/12 focus:text-secondary">
+                        {session?.user.name} {'(yo)'}
+                      </p>
+                    </div>
+                  )}
                   {values.participants.map(participant => (
                     <Participant
                       participant={participant}

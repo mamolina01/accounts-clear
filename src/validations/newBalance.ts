@@ -5,15 +5,6 @@ export function validationSchemaNewBalance() {
     title: yup.string().required(),
     description: yup.string(),
     category: yup.string().required(),
-    participants: yup
-      .array()
-      .of(
-        yup.object({
-          name: yup.string().required(),
-          id: yup.number().required()
-        })
-      )
-      .min(1)
-      .required()
+    participants: yup.array()
   })
 }
