@@ -2,7 +2,7 @@ import { Category } from '@prisma/client'
 
 export interface ParticipantProps {
   name: string
-  id: number
+  id: string
 }
 
 export interface newBalanceProps {

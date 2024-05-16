@@ -7,5 +7,5 @@ export interface GroupProps {
   description: string
   category: Category
   total: number
-  users: ParticipantProps[]
+  participants: ParticipantProps[]
 }

@@ -16,18 +16,18 @@ export const createGroup = async (data: Props) => {
       data: {
         name: data.name,
         description: data.description,
-        category: data.category,
-        users: {
-          connect: { id: data.id }
-        }
+        category: data.category
       }
     })
 
-    await prisma.user.update({
-      where: { id: data.id },
+    await prisma.participant.create({
       data: {
+        name: 'Pedro',
         groups: {
           connect: { id: groupId }
+        },
+        user: {
+          connect: { id: data.id }
         }
       }
     })

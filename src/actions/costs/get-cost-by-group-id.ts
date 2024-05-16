@@ -16,7 +16,7 @@ export const getCostByGroupId = async (groupId: string) => {
         assignedUsers: {
           select: {
             id: true,
-            user: {
+            participant: {
               select: {
                 name: true
               }

@@ -29,6 +29,7 @@ export const initialData = {
       password: bcryptjs.hashSync('123456')
     }
   ],
+  participants: ['pedro', 'sam', 'paul', 'roger'],
   groups: [
     {
       name: 'My Birthday',
