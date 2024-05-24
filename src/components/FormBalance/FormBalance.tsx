@@ -88,29 +88,29 @@ export const FormBalance = () => {
           <form onSubmit={onSubmit} className={styles.form}>
             <div className={styles.inputContainer}>
               <label htmlFor="title" className={styles.label}>
-                Titulo
+                Title
               </label>
               <input
                 id="title"
                 name="title"
                 type="text"
                 value={values.title}
-                placeholder="Ingrese un titulo"
+                placeholder="Enter a title"
                 onChange={e => setFieldValue('title', e.target.value)}
                 className={`${styles.input} ${errors.title && styles.error}`}
               />
-              {errors.title && <p className={styles.errorText}>El titulo es requerido</p>}
+              {errors.title && <p className={styles.errorText}>Title is required</p>}
             </div>
             <div className={styles.inputContainer}>
               <label htmlFor="description" className={styles.label}>
-                Descripcion
+                Description
               </label>
               <input
                 id="description"
                 name="description"
                 type="text"
                 value={values.description}
-                placeholder="Ingrese una descripción"
+                placeholder="Enter a description"
                 onChange={e => setFieldValue('description', e.target.value)}
                 className={`${styles.input} ${errors.description && styles.error}`}
               />
@@ -118,7 +118,7 @@ export const FormBalance = () => {
             </div>
             <div className={styles.inputContainer}>
               <label htmlFor="description" className={styles.label}>
-                Categoria
+                Category
               </label>
               <select
                 value={values.category}
@@ -135,7 +135,7 @@ export const FormBalance = () => {
             </div>
             <div className={styles.inputContainer}>
               <p className={styles.label}>
-                Participantes {'('}
+                Participants {'('}
                 {values.participants.length + 1}/50{')'}
               </p>
               <div className={styles.participantList}>
@@ -158,7 +158,7 @@ export const FormBalance = () => {
               <FormParticipants addParticipant={addParticipant} />
             </div>
             <button type="submit" className={styles.submitButton}>
-              Crear balance
+              Create Balance
             </button>
           </form>
         )
