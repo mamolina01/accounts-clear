@@ -2,7 +2,6 @@
 
 import { auth } from '@/auth.config'
 import prisma from '@/lib/prisma'
-import { ParticipantProps } from '@/types/newBalance'
 import { Category } from '@prisma/client'
 
 interface Props {
