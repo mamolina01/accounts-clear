@@ -1,7 +1,52 @@
-.container {
-  @apply flex flex-col w-full px-3 py-5 rounded-md bg-secondary;
+.form {
+  @apply flex flex-col;
 
-  .title {
-    @apply text-2xl text-center font-semibold;
+  .inputContainer {
+    @apply flex flex-col;
+
+    .label {
+      @apply text-start text-xl capitalize;
+    }
+
+    .input,
+    .select {
+      @apply bg-transparent outline-none mx-1 pb-1 border-b-[1px] border-tertiary focus:border-primary;
+
+      &.error {
+        @apply border-red-500;
+      }
+    }
+
+    .amountContainer {
+      @apply flex;
+
+      .input {
+        @apply flex-1;
+      }
+    }
+
+    .participantList {
+      @apply max-h-[110px] overflow-scroll border-b border-tertiary mx-1;
+
+      &.error {
+        @apply border-red-500;
+      }
+
+      .participantContainer {
+        @apply flex items-center gap-2;
+
+        span {
+          @apply text-lg;
+        }
+      }
+    }
+
+    .errorText {
+      @apply text-red-500 text-sm mx-1 h-5;
+    }
+  }
+
+  .submitButton {
+    @apply bg-blue-500 rounded-sm p-1 w-3/4 mx-auto mt-4;
   }
 }

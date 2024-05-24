@@ -1,38 +1,45 @@
+'use client'
 import { Formik } from 'formik'
 import styles from './FormCost.module.scss'
 import { validationSchemaNewCost } from '@/validations'
+import { ImCheckboxChecked, ImCheckboxUnchecked } from 'react-icons/im'
+import { createCost } from '@/actions'
+import { CostProps, Participant } from '@/types/cost'
+import { useRouter } from 'next/navigation'
 
-interface FormProps {
-  title: string
-  description: string
-  amount: number
-}
+export const FormCost = ({ participants, groupId }: { participants: Participant[], groupId: string }) => {
+  const router = useRouter()
+  const initialValues: CostProps = {
+    title: '',
+    amount: '',
+    paidBy: {
+      id: '',
+      name: ''
+    },
+    participants: participants
+  }
 
-export const FormCost = () => {
-  const initialValues: FormProps = { title: '', description: '', amount: 0 }
 
-  const handleSubmit = async (values: FormProps) => {
+  const handleSubmit = async (values: CostProps) => {
     // if (!session?.user.id) return
-    // const participantNames = values.participants.map(participant => {
-    //   const { name } = participant
-    //   return name
-    // })
-    // const data = {
-    //   name: values.title,
-    //   description: values.description,
-    //   category: values.category,
-    //   participants: participantNames
-    // }
-    // const { ok } = await createGroup(data)
-    // if (ok) {
-    //   router.push('/')
-    // }
+
+    const data = {
+      title: values.title,
+      amount: values.amount,
+      paidBy: values.paidBy,
+      participants: values.participants
+    }
+
+    const { ok } = await createCost(data, groupId)
+    if (ok) {
+      router.push('/')
+    }
   }
 
   return (
     <Formik
       initialValues={initialValues}
-      validateOnChange
+      validateOnChange={false}
       validationSchema={validationSchemaNewCost()}
       onSubmit={values => {
         handleSubmit({ ...values })
@@ -40,43 +47,113 @@ export const FormCost = () => {
       validateOnMount={false}
     >
       {props => {
-        const { values, errors, setFieldValue, handleSubmit, validateField } = props
+        const { values, errors, setFieldValue, handleSubmit } = props
+
+        const handleParticipants = (participant: Participant) => {
+          const tempParticipants = participants.map(participantItem => {
+            if (participantItem.id === participant.id) {
+              participantItem.selected = !participantItem.selected
+            }
+            return participantItem
+          })
+          const selectedParticipants = tempParticipants.filter(
+            (participant: Participant) => participant.selected === true
+          )
+          console.log(selectedParticipants)
+          setFieldValue('participants', selectedParticipants)
+        }
+
+        const handlePaidBy = (id: string) => {
+          const paidBy = participants.find((participant: Participant) => participant.id === id)
+          if (!paidBy) return
+          const { selected, ...participant } = paidBy
+          setFieldValue('paidBy', participant)
+        }
 
         return (
           <form onSubmit={handleSubmit} className={styles.form}>
             <div className={styles.inputContainer}>
               <label htmlFor="title" className={styles.label}>
-                Titulo
+                Title
               </label>
               <input
                 id="title"
                 name="title"
                 type="text"
                 value={values.title}
-                placeholder="Ingrese un titulo"
+                placeholder="Enter a title"
                 onChange={e => setFieldValue('title', e.target.value)}
-                className={`${styles.input} ${errors.title && styles.error}`}
+                className={`${styles.input} ${errors.title ? styles.error : ''}`}
               />
-              {errors.title && <p className={styles.errorText}>El titulo es requerido</p>}
+              <p className={styles.errorText}>{errors.title}</p>
             </div>
+
             <div className={styles.inputContainer}>
-              <label htmlFor="description" className={styles.label}>
-                Descripcion
+              <label htmlFor="amount" className={styles.label}>
+                Amount
               </label>
-              <input
-                id="description"
-                name="description"
-                type="text"
-                value={values.description}
-                placeholder="Ingrese una descripción"
-                onChange={e => setFieldValue('description', e.target.value)}
-                className={`${styles.input} ${errors.description && styles.error}`}
-              />
-              {errors.description}
+              <div className={styles.amountContainer}>
+                <input
+                  id="amount"
+                  name="amount"
+                  type="text"
+                  value={values.amount}
+                  placeholder="Enter an amount"
+                  onChange={e => setFieldValue('amount', e.target.value)}
+                  className={`${styles.input} ${errors.amount ? styles.error : ''}`}
+                />
+                <span>ARS</span>
+              </div>
+              <p className={styles.errorText}>{errors.amount}</p>
+            </div>
+
+            <div className={styles.inputContainer}>
+              <label htmlFor="paidBy" className={styles.label}>
+                Paid by
+              </label>
+
+              <select
+                className={`${styles.select} ${errors.paidBy ? styles.error : ''}`}
+                id="paidBy"
+                defaultValue="selectOne"
+                onChange={e => handlePaidBy(e.target.value)}
+              >
+                <option value="selectOne" disabled>
+                  -- Select one --
+                </option>
+                {participants.map((participant, index) => (
+                  <option key={participant.id} value={participant.id}>
+                    {participant.name}
+                  </option>
+                ))}
+              </select>
+              <p className={styles.errorText}>{errors.paidBy?.id}</p>
+            </div>
+
+            <div className={styles.inputContainer}>
+              <label htmlFor="participants" className={styles.label}>
+                Participants
+              </label>
+              <div className={`${styles.participantList} ${errors.participants ? styles.error : ''}`}>
+                {participants.map(participant => (
+                  <div key={participant.id} className={styles.participantContainer}>
+                    {participant.selected ? (
+                      <ImCheckboxChecked
+                        className="text-sm text-primary"
+                        onClick={() => handleParticipants(participant)}
+                      />
+                    ) : (
+                      <ImCheckboxUnchecked className="text-sm" onClick={() => handleParticipants(participant)} />
+                    )}
+                    <span>{participant.name}</span>
+                  </div>
+                ))}
+              </div>
+              {/* <p className={styles.errorText}>{errors.participants}</p> */}
             </div>
 
             <button type="submit" className={styles.submitButton}>
-              Crear balance
+              Create Cost
             </button>
           </form>
         )
