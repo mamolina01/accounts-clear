@@ -92,8 +92,8 @@ const addData = async () => {
   // console.log(prismaCostsAssignments)
 }
 
-;(() => {
-  if (process.env.NODE_ENV === 'production') return
+  ; (() => {
+    if (process.env.NODE_ENV === 'production') return
 
-  main()
-})()
+    main()
+  })()
