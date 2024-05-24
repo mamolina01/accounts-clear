@@ -1,39 +1,31 @@
-.container {
-  @apply flex flex-col w-full px-3 py-5 rounded-md bg-secondary;
+.form {
+  @apply flex flex-col gap-4;
 
-  .title {
-    @apply text-2xl text-center font-semibold;
+  .inputContainer {
+    @apply flex flex-col;
+
+    .label {
+      @apply text-start text-sm;
+    }
+
+    .input {
+      @apply bg-transparent outline-none m-1 border-b-[1px] border-transparent focus:border-tertiary;
+
+      &.error {
+        @apply border-red-500;
+      }
+    }
+
+    .participantList {
+      @apply text-tertiary flex flex-col gap-2 max-h-40 overflow-scroll px-3 mt-2 border-x-[2px] border-tertiary;
+    }
+
+    .errorText {
+      @apply text-red-500 text-sm mx-1;
+    }
   }
 
-  .form {
-    @apply flex flex-col gap-4;
-
-    .inputContainer {
-      @apply flex flex-col;
-
-      .label {
-        @apply text-start text-sm;
-      }
-
-      .input {
-        @apply bg-transparent outline-none m-1 border-b-[1px] border-transparent focus:border-tertiary;
-
-        &.error {
-          @apply border-red-500;
-        }
-      }
-
-      .participantList {
-        @apply text-tertiary flex flex-col gap-2 max-h-40 overflow-scroll px-3 mt-2 border-x-[2px] border-tertiary;
-      }
-
-      .errorText {
-        @apply text-red-500 text-sm mx-1;
-      }
-    }
-
-    .submitButton {
-      @apply bg-blue-500 rounded-sm p-1 w-3/4 mx-auto mt-4;
-    }
+  .submitButton {
+    @apply bg-blue-500 rounded-sm p-1 w-3/4 mx-auto mt-4;
   }
 }
