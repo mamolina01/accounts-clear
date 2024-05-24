@@ -12,7 +12,6 @@ interface UserProps {
 export const CostItem = ({ cost }: { cost: any }) => {
   const [showMore, setShowMore] = useState<boolean>(false)
   const [loaded, setLoaded] = useState<boolean>(false)
-
   const toggleShowMore = () => setShowMore(!showMore)
 
   const amountPerPerson = (amountMoney: number, payers: number) => {
@@ -32,7 +31,7 @@ export const CostItem = ({ cost }: { cost: any }) => {
     >
       <div>
         <p className="capitalize text-xl">{cost.title}</p>
-        <p className="text-tertiary text-sm">Pagado por: {cost.paidBy.name}</p>
+        <p className="text-tertiary text-sm">Paid by: {cost.paidBy.name}</p>
       </div>
       <div className="flex justify-end items-center gap-2">
         <div className="text-end">
@@ -43,7 +42,7 @@ export const CostItem = ({ cost }: { cost: any }) => {
       </div>
       {showMore && (
         <div className="text-tertiary col-span-2">
-          <p className="text-sm">Para {cost.assignedUsers.length} participantes:</p>
+          <p className="text-sm">For {cost.assignedUsers.length} participants:</p>
           <ul className="pl-1">
             {cost.assignedUsers.map((user: UserProps) => (
               <li className="text-sm grid grid-cols-3 justify-between w-full" key={user.id}>
