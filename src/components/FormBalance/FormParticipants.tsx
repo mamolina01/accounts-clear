@@ -25,13 +25,13 @@ export const FormParticipants = ({ addParticipant }: FormParticipantsProps) => {
       <input
         type="text"
         value={participantName}
-        placeholder="Nombre del participante"
+        placeholder="Participant name"
         onChange={e => setParticipantName(e.target.value)}
         onSubmit={handleSubmit}
         className={`bg-transparent text-secondary outline-none w-10/12 border-b-[1px] border-transparent focus:border-tertiary`}
       />
       <button type="button" className="bg-blue-500 text-sm py-1 px-2 rounded-sm" onClick={handleAddParticipant}>
-        Añadir
+        Add
       </button>
     </div>
   )

@@ -2,7 +2,7 @@
 
 import prisma from '@/lib/prisma'
 
-export const getGroupsById = async (userId: string) => {
+export const getGroupsByUserId = async (userId: string) => {
   try {
     const participant = await prisma.participant.findFirst({
       where: {
@@ -38,3 +38,4 @@ export const getGroupsById = async (userId: string) => {
     throw new Error('There was an error getting a group')
   }
 }
+
