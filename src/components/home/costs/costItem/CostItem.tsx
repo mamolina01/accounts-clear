@@ -26,7 +26,7 @@ export const CostItem = ({ cost }: { cost: any }) => {
 
   return (
     <div
-      className="bg-secondary w-full p-3 rounded-md grid grid-cols-2 hover:opacity-80 cursor-pointer"
+      className="bg-secondary w-full p-3 rounded grid grid-cols-2 hover:opacity-80 cursor-pointer"
       onClick={toggleShowMore}
     >
       <div>
@@ -35,7 +35,7 @@ export const CostItem = ({ cost }: { cost: any }) => {
       </div>
       <div className="flex justify-end items-center gap-2">
         <div className="text-end">
-          <p className="text-xl">${cost.amount}</p>
+          <p className="text-xl text-primary">${cost.amount}</p>
           <p className="text-tertiary text-sm">{cost.date.toLocaleDateString()}</p>
         </div>
         <BsChevronDown className={`${showMore && 'rotate-180'} transition-all`} />
