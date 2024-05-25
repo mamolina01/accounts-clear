@@ -1,11 +1,14 @@
 'use client'
-import { useState } from 'react'
 import { BsFillBarChartFill } from 'react-icons/bs'
 import { IoMdMenu } from 'react-icons/io'
 import styles from './Tabs.module.scss'
 
-export const Tabs = () => {
-  const [tabActive, setTabActive] = useState('costs')
+interface Props {
+  tabActive: string
+  setTabActive: (value: string) => void
+}
+
+export const Tabs = ({ tabActive, setTabActive }: Props) => {
   return (
     <div className={styles.container}>
       <button
