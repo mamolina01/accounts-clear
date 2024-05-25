@@ -20,7 +20,7 @@ export default async function Home() {
         {groups.map((group: GroupProps) => (
           <div key={group.id} className="flex flex-col gap-5">
             <GroupData group={group} />
-            <Costs groupId={group.id} />
+            <Costs costs={group.costs} />
           </div>
         ))}
       </div>

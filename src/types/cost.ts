@@ -5,11 +5,18 @@ export interface Participant {
 }
 
 export interface CostProps {
+    id: string
     title: string
-    amount: string
+    date: Date
+    amount: number
     paidBy: {
         id: string
         name: string
     }
-    participants: Participant[]
+    assignedUsers: {
+        participant: {
+            id: string
+            name: string
+        } | null
+    }[]
 }

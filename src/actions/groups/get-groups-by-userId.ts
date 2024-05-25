@@ -1,6 +1,7 @@
 'use server'
 
 import prisma from '@/lib/prisma'
+import { Participant } from '../../types/cost';
 
 export const getGroupsByUserId = async (userId: string) => {
   try {
@@ -25,6 +26,30 @@ export const getGroupsByUserId = async (userId: string) => {
           select: {
             id: true,
             name: true
+          }
+        },
+        costs: {
+          select: {
+            id: true,
+            title: true,
+            date: true,
+            amount: true,
+            paidBy: {
+              select: {
+                id: true,
+                name: true
+              }
+            },
+            assignedUsers: {
+              select: {
+                participant: {
+                  select: {
+                    id: true,
+                    name: true,
+                  }
+                }
+              }
+            }
           }
         }
       }
