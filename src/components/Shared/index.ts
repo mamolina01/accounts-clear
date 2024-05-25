@@ -1,3 +1,3 @@
-export * from './Header'
-export * from './Category'
-export * from './FormContainer'
+export * from './Header/Header'
+export * from './Category/Category'
+export * from './FormContainer/FormContainer'

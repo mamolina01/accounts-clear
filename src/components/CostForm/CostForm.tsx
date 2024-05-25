@@ -1,13 +1,13 @@
 'use client'
 import { Formik } from 'formik'
-import styles from './FormCost.module.scss'
+import styles from './CostForm.module.scss'
 import { validationSchemaNewCost } from '@/validations'
 import { ImCheckboxChecked, ImCheckboxUnchecked } from 'react-icons/im'
 import { createCost } from '@/actions'
 import { CostProps, Participant } from '@/types/cost'
 import { useRouter } from 'next/navigation'
 
-export const FormCost = ({ participants, groupId }: { participants: Participant[], groupId: string }) => {
+export const CostForm = ({ participants, groupId }: { participants: Participant[], groupId: string }) => {
   const router = useRouter()
   const initialValues: CostProps = {
     title: '',
