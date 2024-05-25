@@ -1,7 +1,7 @@
-export * from './Auth'
+export * from './auth'
 
-export * from './BalanceForm'
-export * from './CostForm'
-export * from './Home'
+export * from './balanceForm'
+export * from './costForm'
+export * from './home'
 
-export * from './Shared'
+export * from './shared'

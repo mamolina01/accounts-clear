@@ -1,6 +1,6 @@
 'use client'
 import { createGroup } from '@/actions'
-import { Participant } from '@/components/BalanceForm/Participant/Participant'
+import { Participant } from '@/components/balanceForm/participant/Participant'
 import { generateID } from '@/helpers'
 import { ParticipantProps, newBalanceProps } from '@/types/newBalance'
 import { validationSchemaNewBalance } from '@/validations'
@@ -10,7 +10,7 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { FormEventHandler } from 'react'
 import styles from './BalanceForm.module.scss'
-import { ParticipantsForm } from './ParticipantsForm/ParticipantsForm'
+import { ParticipantsForm } from './participantsForm/ParticipantsForm'
 
 export const BalanceForm = () => {
   const initialValues: newBalanceProps = { title: '', description: '', category: Category.Travel, participants: [] }
