@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { BsFillBarChartFill, BsPlusLg } from 'react-icons/bs'
 import { IoMdMenu } from 'react-icons/io'
 
-export const HeaderContent = async ({ group }: { group: GroupProps }) => {
+export const GroupData = async ({ group }: { group: GroupProps }) => {
   const getUsers = () => {
     let users = group.participants.map(participant => participant.name).join(', ')
     return users
@@ -26,18 +26,18 @@ export const HeaderContent = async ({ group }: { group: GroupProps }) => {
       </div>
       <div className="flex justify-between gap-4 w-full col-span-2 mt-4 mb-3 text-lg">
         <button className="flex items-center justify-center gap-2 w-full text-center rounded-lg border border-tertiary py-1">
-          <BsFillBarChartFill />
-          Balance
-        </button>
-        <button className="flex items-center justify-center gap-2 w-full text-center rounded-lg border border-tertiary py-1">
           <IoMdMenu />
           Costs
+        </button>
+        <button className="flex items-center justify-center gap-2 w-full text-center rounded-lg border border-tertiary py-1">
+          <BsFillBarChartFill />
+          Balance
         </button>
       </div>
       <div className="w-full absolute -bottom-4 ">
         <Link
           href={`/new-cost/${group.id}`}
-          className=" bg-sky-600 rounded-full h-10 w-10 mx-auto flex justify-center items-center"
+          className=" bg-sky-600 hover:bg-sky-700 rounded-full h-10 w-10 mx-auto flex justify-center items-center"
         >
           <BsPlusLg className=" text-3xl" />
         </Link>

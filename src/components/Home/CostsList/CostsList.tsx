@@ -1,5 +1,5 @@
 import { getCostByGroupId } from '@/actions'
-import { CostItem } from '.'
+import { CostItem } from './CostItem/CostItem'
 
 export const CostsList = async ({ groupId }: { groupId: string }) => {
   const costs = await getCostByGroupId(groupId)

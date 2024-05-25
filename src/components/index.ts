@@ -1,8 +1,7 @@
-export * from './Auth/RegisterForm/RegisterForm'
-export * from './Auth/LoginForm/LoginForm'
+export * from './Auth'
 
-export * from './FormBalance'
-export * from './FormCost'
-export * from './Home/Group'
+export * from './BalanceForm'
+export * from './CostForm'
+export * from './Home'
 
 export * from './Shared'

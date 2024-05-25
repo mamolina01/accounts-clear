@@ -1,7 +1,6 @@
 'use client'
 import { createGroup } from '@/actions'
-import { FormParticipants } from '@/components/FormBalance/FormParticipants'
-import { Participant } from '@/components/FormBalance/Participant'
+import { Participant } from '@/components/BalanceForm/Participant/Participant'
 import { generateID } from '@/helpers'
 import { ParticipantProps, newBalanceProps } from '@/types/newBalance'
 import { validationSchemaNewBalance } from '@/validations'
@@ -10,9 +9,10 @@ import { Formik } from 'formik'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { FormEventHandler } from 'react'
-import styles from './FormBalance.module.scss'
+import styles from './BalanceForm.module.scss'
+import { ParticipantsForm } from './ParticipantsForm/ParticipantsForm'
 
-export const FormBalance = () => {
+export const BalanceForm = () => {
   const initialValues: newBalanceProps = { title: '', description: '', category: Category.Travel, participants: [] }
   const { data: session } = useSession()
   const router = useRouter()
@@ -155,7 +155,7 @@ export const FormBalance = () => {
                   />
                 ))}
               </div>
-              <FormParticipants addParticipant={addParticipant} />
+              <ParticipantsForm addParticipant={addParticipant} />
             </div>
             <button type="submit" className={styles.submitButton}>
               Create Balance

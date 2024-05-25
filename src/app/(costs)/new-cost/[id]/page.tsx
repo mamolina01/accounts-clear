@@ -1,5 +1,5 @@
 import { getParticipantsByGroupId } from '@/actions'
-import { FormContainer, FormCost } from '@/components'
+import { CostForm, FormContainer } from '@/components'
 
 interface Props {
   params: {
@@ -23,7 +23,7 @@ const NewCostPage = async ({ params }: Props) => {
   })
   return (
     <FormContainer title="New Cost">
-      <FormCost participants={newParticipants} groupId={id} />
+      <CostForm participants={newParticipants} groupId={id} />
     </FormContainer>
   )
 }

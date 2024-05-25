@@ -5,7 +5,7 @@ interface FormParticipantsProps {
   addParticipant(name: string): void
 }
 
-export const FormParticipants = ({ addParticipant }: FormParticipantsProps) => {
+export const ParticipantsForm = ({ addParticipant }: FormParticipantsProps) => {
   const [participantName, setParticipantName] = useState<string>('')
 
   const handleSubmit: FormEventHandler<HTMLInputElement> = e => {
