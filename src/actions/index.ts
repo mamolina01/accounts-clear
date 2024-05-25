@@ -1,7 +1,6 @@
 export * from './groups/create-group'
 export * from './groups/get-groups-by-userId'
 
-export * from './costs/get-cost-by-group-id'
 export * from './costs/create-cost'
 
 export * from './auth/login'

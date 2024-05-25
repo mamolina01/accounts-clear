@@ -1,22 +1,7 @@
-import { CostItem } from "../costItem/CostItem"
+import { CostProps } from '@/types/cost'
+import { CostItem } from '../costItem/CostItem'
 
-interface Props {
-  paidBy: {
-    name: string
-  }
-  assignedUsers: {
-    id: string
-    participant: { name: string } | null
-  }[]
-  id: string
-  title: string
-  amount: number
-  date: Date
-  groupId: string | null
-  participantId: string
-}
-
-export const CostsList = ({ costs }: { costs: Props[] }) => {
+export const CostsList = ({ costs }: { costs: CostProps[] }) => {
   return (
     <div className="flex flex-col gap-1">
       {costs.map(cost => (
