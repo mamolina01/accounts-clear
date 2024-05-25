@@ -12,8 +12,7 @@ const CostsLayout = async ({ children }: { readonly children: React.ReactNode })
   return (
     <>
       <Header />
-
-      <div className="flex justify-center h-screen pt-32">
+      <div className="flex justify-center h-full mt-5">
         <div className="flex flex-col w-1/2 gap-5">{children}</div>
       </div>
     </>
