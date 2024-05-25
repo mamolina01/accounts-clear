@@ -1,10 +1,10 @@
-import { BalanceForm, FormContainer } from '@/components'
+import { BalanceForm, ContainerForm } from '@/components'
 
 const CreateCount = () => {
   return (
-    <FormContainer title="Nuevo balance de gastos">
+    <ContainerForm title="Nuevo balance de gastos">
       <BalanceForm />
-    </FormContainer>
+    </ContainerForm>
   )
 }
 
