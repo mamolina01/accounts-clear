@@ -30,7 +30,7 @@ export const CostItem = ({ cost }: { cost: any }) => {
       onClick={toggleShowMore}
     >
       <div>
-        <p className="capitalize text-xl">{cost.title}</p>
+        <p className="text-xl">{cost.title}</p>
         <p className="text-tertiary text-sm">Paid by: {cost.paidBy.name}</p>
       </div>
       <div className="flex justify-end items-center gap-2">
