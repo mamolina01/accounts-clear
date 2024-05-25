@@ -1,7 +1,6 @@
 export interface Participant {
     name: string
     id: string
-    selected: boolean
 }
 
 export interface CostProps {
@@ -14,9 +13,6 @@ export interface CostProps {
         name: string
     }
     assignedUsers: {
-        participant: {
-            id: string
-            name: string
-        } | null
+        participant: Participant | null
     }[]
 }
