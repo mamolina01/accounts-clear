@@ -30,7 +30,7 @@ export const ParticipantsForm = ({ addParticipant }: FormParticipantsProps) => {
         onSubmit={handleSubmit}
         className={`bg-transparent text-secondary outline-none w-10/12 border-b-[1px] border-transparent focus:border-tertiary`}
       />
-      <button type="button" className="bg-blue-500 text-sm py-1 px-2 rounded-sm" onClick={handleAddParticipant}>
+      <button type="button" className="bg-blue-500 text-sm py-1 px-2 rounded" onClick={handleAddParticipant}>
         Add
       </button>
     </div>

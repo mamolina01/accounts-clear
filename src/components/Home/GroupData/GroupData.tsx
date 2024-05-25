@@ -1,8 +1,7 @@
 import { Category } from '@/components'
 import { GroupProps } from '@/types/group'
 import Link from 'next/link'
-import { BsFillBarChartFill, BsPlusLg } from 'react-icons/bs'
-import { IoMdMenu } from 'react-icons/io'
+import { BsPlusLg } from 'react-icons/bs'
 
 export const GroupData = async ({ group }: { group: GroupProps }) => {
   const getUsers = () => {
@@ -11,7 +10,7 @@ export const GroupData = async ({ group }: { group: GroupProps }) => {
   }
 
   return (
-    <div className="grid grid-cols-2 p-3 bg-primary rounded-md relative">
+    <div className="grid grid-cols-2 p-3 bg-primary rounded relative">
       <h4 className="text-3xl col-span-2 text-center">{group.name}</h4>
       <div className="flex flex-col">
         <span className="text-lg">Description</span>
@@ -23,16 +22,6 @@ export const GroupData = async ({ group }: { group: GroupProps }) => {
         <Category category={group.category} />
         <p className="text-xl">Total</p>
         <p className="text-2xl text-primary">${group.total}</p>
-      </div>
-      <div className="flex justify-between gap-4 w-full col-span-2 mt-4 mb-3 text-lg">
-        <button className="flex items-center justify-center gap-2 w-full text-center rounded-lg border border-tertiary py-1">
-          <IoMdMenu />
-          Costs
-        </button>
-        <button className="flex items-center justify-center gap-2 w-full text-center rounded-lg border border-tertiary py-1">
-          <BsFillBarChartFill />
-          Balance
-        </button>
       </div>
       <div className="w-full absolute -bottom-4 ">
         <Link
