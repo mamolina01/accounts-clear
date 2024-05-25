@@ -15,11 +15,13 @@ export const createCost = async (data: CostProps, groupId: string) => {
             }
         })
 
-        await prisma.costAssignment.create({
-            data: {
-                costId: costId,
-                participantId: data.paidBy.id
-            }
+        const participantsData = data.participants.map(participant => ({
+            costId: costId,
+            participantId: participant.id
+        }))
+
+        await prisma.costAssignment.createMany({
+            data: participantsData
         })
 
         await prisma.group.update({
@@ -27,7 +29,9 @@ export const createCost = async (data: CostProps, groupId: string) => {
                 id: groupId
             },
             data: {
-                total: Number(data.amount)
+                total: {
+                    increment: Number(data.amount)
+                },
             }
         })
 
