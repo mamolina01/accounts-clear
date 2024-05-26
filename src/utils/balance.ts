@@ -49,7 +49,6 @@ interface Props {
 export const getBalance = (costs: CostProps[], participants: Participant[]) => {
     const totalPaidByParticipant = getTotalPaidByParticipant(costs, participants)
     const totalAssignedByParticipant = getTotalAssignedByParticipant(costs, participants)
-    console.log({ totalAssignedByParticipant })
 
     return totalAssignedByParticipant.map(totalAssigned => {
         let total = 0
@@ -71,35 +70,57 @@ export const getBalance = (costs: CostProps[], participants: Participant[]) => {
     })
 }
 
-export const getRefunds = (balances: Props[]) => {
-    const tempBalances = balances
+interface transactionProps {
+    to: string
+    from: string
+    amount: number
+}
 
-    const refunds = balances.map((balance: Props) => {
-        const participantsToPay: Props[] = []
-        if (balance.total < 0) {
-            tempBalances.map((tempBalance: Props) => {
-                if (tempBalance.total > 0) {
-                    console.log(`${tempBalance.name} - ${tempBalance.total}`)
-                    if (tempBalance.total - balance.total > 0) {
-                        participantsToPay.push({
-                            id: tempBalance.id,
-                            name: tempBalance.name,
-                            total: -balance.total
-                        })
-                        tempBalance.total += balance.total
-                        // console.log(tempBalance.total += balance.total)
-                    } else if (tempBalance.total - balance.total <= 0) {
-                        console.log(`${tempBalance.name} - ${tempBalance.total}`)
-                    }
-                    // console.log(`${tempBalance.name} - ${tempBalance.total}`)
+export const getRefunds = (costs: CostProps[], participants: Participant[]) => {
+    const balances = getBalance(costs, participants)
+    let debtors = balances.filter(balance => balance.total < 0);
+    let creditors = balances.filter(balance => balance.total > 0);
+    let transactions: transactionProps[] = [];
+
+    debtors.forEach(debtor => {
+        let debt = -debtor.total;
+        creditors.forEach(creditor => {
+            if (debt > 0) {
+                let credit = creditor.total;
+                let amountToPay = Math.min(debt, credit);
+                transactions.push({
+                    from: debtor.name,
+                    to: creditor.name,
+                    amount: amountToPay
+                });
+                debtor.total += amountToPay;
+                creditor.total -= amountToPay;
+                debt -= amountToPay;
+            }
+        });
+    });
+
+    const refunds = balances.map(balance => {
+        const participantsToPay = transactions.filter(transaction => transaction.from === balance.name || transaction.to === balance.name)
+            .map(transaction => {
+                if (transaction.from === balance.name) {
+                    return {
+                        to: transaction.to,
+                        amount: transaction.amount
+                    };
+                } else {
+                    return {
+                        from: transaction.from,
+                        amount: transaction.amount
+                    };
                 }
-            })
-        }
+            });
+
         return {
             ...balance,
             participantsToPay
         }
-    })
+    });
 
-    console.log(refunds)
+    return refunds;
 }
