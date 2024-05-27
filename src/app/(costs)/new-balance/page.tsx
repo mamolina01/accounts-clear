@@ -2,7 +2,7 @@ import { BalanceForm, ContainerForm } from '@/components'
 
 const CreateCount = () => {
   return (
-    <ContainerForm title="Nuevo balance de gastos">
+    <ContainerForm title="New balance">
       <BalanceForm />
     </ContainerForm>
   )

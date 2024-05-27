@@ -10,7 +10,10 @@ export const BalancesList = ({ balance }: { balance: Props[] }) => {
   return (
     <>
       {balance.map(participant => (
-        <div className={`flex w-full ${participant.total < 0 ? 'flex-row-reverse' : ''}`} key={participant.id}>
+        <div
+          className={`flex w-full animate__animated animate__fadeIn ${participant.total < 0 ? 'flex-row-reverse' : ''}`}
+          key={participant.id}
+        >
           <p className={`${participant.total > 0 ? 'text-end' : 'text-start'} flex-1 px-2`}>{participant.name}</p>
           <p
             className={`${

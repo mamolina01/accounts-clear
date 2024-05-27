@@ -28,7 +28,7 @@ export const Participant = ({ participant, editParticipant, removeParticipant }:
   }
 
   return (
-    <div className="w-full flex justify-between gap-2 items-center">
+    <div className="w-full flex justify-between gap-2 items-center animate__animated animate__fadeIn">
       <input
         type="text"
         value={tempParticipant.name}

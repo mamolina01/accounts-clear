@@ -22,7 +22,7 @@ export const Refunds = ({ refunds }: { refunds: Props[] }) => {
   return (
     <>
       {refunds.map((refund, refundIndex) => (
-        <div key={`refund-${refundIndex}`} className="flex flex-col gap-2">
+        <div key={`refund-${refundIndex}`} className="flex flex-col gap-2 animate__animated animate__fadeIn">
           {refund.participantsToPay.map(participant => (
             <div className="grid grid-cols-2 gap-2 bg-secondary p-2 rounded" key={`${refund.name} - ${participant.to}`}>
               <div className="flex flex-col">
