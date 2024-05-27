@@ -27,7 +27,7 @@ export const CostItem = ({ cost }: { cost: any }) => {
 
   return (
     <div
-      className="bg-secondary w-full p-3 rounded grid grid-cols-2 hover:opacity-80 cursor-pointer"
+      className="bg-secondary w-full p-3 rounded grid grid-cols-2 hover:opacity-80 cursor-pointer animate__animated animate__fadeIn"
       onClick={toggleShowMore}
     >
       <div>

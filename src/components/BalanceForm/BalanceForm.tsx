@@ -49,7 +49,7 @@ export const BalanceForm = () => {
   return (
     <Formik
       initialValues={initialValues}
-      validateOnChange
+      validateOnChange={false}
       validationSchema={validationSchemaNewBalance()}
       onSubmit={values => {
         handleSubmit({ ...values })
@@ -138,9 +138,10 @@ export const BalanceForm = () => {
                 Participants {'('}
                 {values.participants.length + 1}/50{')'}
               </p>
-              <div className={styles.participantList}>
+              {/* TODO: Handle a loader for first participant */}
+              <div className={`${styles.participantList}`}>
                 {session?.user && (
-                  <div className="w-full flex justify-between gap-2 items-center">
+                  <div className="w-full flex justify-between gap-2 items-center animate__animated animate__fadeIn">
                     <p className="bg-transparent outline-none border-b-[1px] border-tertiary w-11/12 focus:text-secondary">
                       {session?.user.name} {'(yo)'}
                     </p>

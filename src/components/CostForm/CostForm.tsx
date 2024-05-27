@@ -7,7 +7,7 @@ import { createCost } from '@/actions'
 import { CostProps, Participant } from '@/types/cost'
 import { useRouter } from 'next/navigation'
 
-export const CostForm = ({ participants, groupId }: { participants: Participant[], groupId: string }) => {
+export const CostForm = ({ participants, groupId }: { participants: Participant[]; groupId: string }) => {
   const router = useRouter()
   const initialValues: CostProps = {
     title: '',
@@ -18,7 +18,6 @@ export const CostForm = ({ participants, groupId }: { participants: Participant[
     },
     participants: participants
   }
-
 
   const handleSubmit = async (values: CostProps) => {
     // if (!session?.user.id) return
@@ -149,6 +148,7 @@ export const CostForm = ({ participants, groupId }: { participants: Participant[
                   </div>
                 ))}
               </div>
+              {/* TODO: Check participants error */}
               {/* <p className={styles.errorText}>{errors.participants}</p> */}
             </div>
 
