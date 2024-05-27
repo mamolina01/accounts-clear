@@ -1,5 +1,5 @@
 .container {
-  @apply flex justify-between w-full gap-4 rounded;
+  @apply flex justify-between w-full rounded;
 
   .button {
     @apply w-full pb-2 flex justify-center items-center gap-2 border-b-2 cursor-pointer transition-all;

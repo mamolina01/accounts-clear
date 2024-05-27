@@ -1,0 +1,15 @@
+.container {
+  @apply flex justify-between w-full rounded px-1;
+
+  .button {
+    @apply w-full flex pt-1 justify-center items-center gap-1 cursor-pointer transition-all text-tertiary border-t-2 border-transparent;
+
+    &.active {
+      @apply text-secondary border-t-amber-200;
+    }
+
+    span {
+      @apply text-center text-sm;
+    }
+  }
+}

@@ -40,12 +40,6 @@ export const getTotalAssignedByParticipant = (costs: CostProps[], participants: 
     return mustPaid
 }
 
-interface Props {
-    id: string
-    name: string
-    total: number
-}
-
 export const getBalance = (costs: CostProps[], participants: Participant[]) => {
     const totalPaidByParticipant = getTotalPaidByParticipant(costs, participants)
     const totalAssignedByParticipant = getTotalAssignedByParticipant(costs, participants)
