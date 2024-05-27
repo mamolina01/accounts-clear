@@ -79,8 +79,8 @@ export const getRefunds = (costs: CostProps[], participants: Participant[]) => {
     debtors.forEach(debtor => {
         let debt = -debtor.total;
         creditors.forEach(creditor => {
-            if (debt > 0) {
-                let credit = creditor.total;
+            let credit = creditor.total;
+            if (debt > 0 && credit > 0) {
                 let amountToPay = Math.min(debt, credit);
                 transactions.push({
                     from: debtor.name,
@@ -114,7 +114,7 @@ export const getRefunds = (costs: CostProps[], participants: Participant[]) => {
             ...balance,
             participantsToPay
         }
-    });
+    }).filter(refund => refund.participantsToPay.some(participant => participant.to));
 
     return refunds;
 }

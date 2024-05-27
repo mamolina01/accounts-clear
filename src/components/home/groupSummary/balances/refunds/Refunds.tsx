@@ -21,14 +21,19 @@ interface Props {
 export const Refunds = ({ refunds }: { refunds: Props[] }) => {
   return (
     <>
-      {refunds.map(refund => (
-        <div className="flex gap-2" key={refund.id}>
-          <p>{refund.name}</p>
+      {refunds.map((refund, refundIndex) => (
+        <div key={`refund-${refundIndex}`} className="flex flex-col gap-2">
           {refund.participantsToPay.map(participant => (
-            <>
-              <p>{participant.to}</p>
-              <p>{participant.amount}</p>
-            </>
+            <div className="grid grid-cols-2 gap-2 bg-secondary p-2 rounded" key={`${refund.name} - ${participant.to}`}>
+              <div className="flex flex-col">
+                <p>{refund.name}</p>
+                <p className="text-xs text-tertiary">must pay to</p>
+                <p>{participant.to}</p>
+              </div>
+              <div className="flex flex-col items-end justify-center">
+                <p className="text-primary text-xl">${participant.amount}</p>
+              </div>
+            </div>
           ))}
         </div>
       ))}

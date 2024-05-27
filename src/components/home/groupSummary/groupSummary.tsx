@@ -1,6 +1,6 @@
 'use client'
-import { Tabs } from './tabs/Tabs'
-import { CostsList } from './costsList/CostsList'
+import { Tabs } from './costs/tabs/Tabs'
+import { CostsList } from './costs/costsList/CostsList'
 import { useState } from 'react'
 import { Balances } from './balances/Balance'
 import { GroupProps } from '@/types/group'
