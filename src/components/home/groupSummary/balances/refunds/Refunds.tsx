@@ -27,7 +27,7 @@ export const Refunds = ({ refunds }: { refunds: Props[] }) => {
             <div className="grid grid-cols-2 gap-2 bg-secondary p-2 rounded" key={`${refund.name} - ${participant.to}`}>
               <div className="flex flex-col">
                 <p>{refund.name}</p>
-                <p className="text-xs text-tertiary">must pay to</p>
+                <p className="text-xs text-tertiary">Must pay to</p>
                 <p>{participant.to}</p>
               </div>
               <div className="flex flex-col items-end justify-center">

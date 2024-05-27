@@ -13,9 +13,11 @@ export const Balances = ({ group }: { group: GroupProps }) => {
   const refunds = getRefunds(costs, participants)
 
   return (
-    <div className="flex flex-col gap-2">
-      {activeTab === 'refunds' ? <Refunds refunds={refunds} /> : <BalancesList balance={balance} />}
+    <>
+      <div className="flex flex-col gap-2 max-h-[280px] overflow-scroll">
+        {activeTab === 'refunds' ? <Refunds refunds={refunds} /> : <BalancesList balance={balance} />}
+      </div>
       <TabsBalances activeTab={activeTab} setActiveTab={setActiveTab} />
-    </div>
+    </>
   )
 }
