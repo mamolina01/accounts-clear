@@ -9,6 +9,7 @@ interface UserProps {
   }
 }
 
+// TODO: Check this any
 export const CostItem = ({ cost }: { cost: any }) => {
   const [showMore, setShowMore] = useState<boolean>(false)
   const [loaded, setLoaded] = useState<boolean>(false)

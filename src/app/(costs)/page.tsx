@@ -2,7 +2,7 @@ import { auth } from '@/auth.config'
 import { GroupProps } from '@/types/group'
 import { getGroupsByUserId } from '@/actions'
 import { GroupData, HeaderGroups } from '@/components'
-import { Costs } from '@/components/home/costs/Costs'
+import { GroupSummary } from '@/components/home/groupSummary/groupSummary'
 
 export default async function Home() {
   const session = await auth()
@@ -20,7 +20,7 @@ export default async function Home() {
         {groups.map((group: GroupProps) => (
           <div key={group.id} className="flex flex-col gap-5">
             <GroupData group={group} />
-            <Costs costs={group.costs} />
+            <GroupSummary group={group} />
           </div>
         ))}
       </div>
