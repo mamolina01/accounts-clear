@@ -1,11 +1,12 @@
 'use client'
-import { useOutsideClick } from '@/hooks/useOutsideClick'
+import { removeGroup } from '@/actions'
+import { useOutsideClick } from '@/hooks'
 import React, { useRef, useState } from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import { FaEdit, FaTrashAlt } from 'react-icons/fa'
 import Swal from 'sweetalert2'
 
-export const Menu = () => {
+export const Menu = ({ groupId }: { groupId: string }) => {
   const [showMenu, setShowMenu] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
 
@@ -13,7 +14,7 @@ export const Menu = () => {
     setShowMenu(false)
   }
 
-  const deleteGroup = () => {
+  const deleteGroup = async () => {
     Swal.fire({
       title: 'Do you want to remove this group?',
       icon: 'warning',
@@ -25,7 +26,7 @@ export const Menu = () => {
       cancelButtonText: 'No'
     }).then(result => {
       if (result.isConfirmed) {
-        console.log('remove group')
+        removeGroup(groupId)
       }
     })
   }
