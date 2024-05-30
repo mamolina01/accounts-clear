@@ -46,7 +46,10 @@ export const CostItem = ({ cost }: { cost: any }) => {
           <p className="text-sm">For {cost.assignedUsers.length} participants:</p>
           <ul className="pl-1">
             {cost.assignedUsers.map((user: UserProps) => (
-              <li className="text-sm grid grid-cols-3 justify-between w-full" key={user.id}>
+              <li
+                className="text-sm grid grid-cols-3 justify-between w-full"
+                key={`${cost.title}-${user.participant.name}`}
+              >
                 <p>{user.participant.name} </p>
                 <p>${amountPerPerson(cost.amount, cost.assignedUsers.length)}</p>
               </li>
