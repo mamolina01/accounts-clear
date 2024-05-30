@@ -3,6 +3,7 @@ import { useOutsideClick } from '@/hooks/useOutsideClick'
 import React, { useRef, useState } from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import { FaEdit, FaTrashAlt } from 'react-icons/fa'
+import Swal from 'sweetalert2'
 
 export const Menu = () => {
   const [showMenu, setShowMenu] = useState(false)
@@ -12,7 +13,22 @@ export const Menu = () => {
     setShowMenu(false)
   }
 
-  const deleteGroup = () => {}
+  const deleteGroup = () => {
+    Swal.fire({
+      title: 'Do you want to remove this group?',
+      icon: 'warning',
+      background: '#151515',
+      color: '#ffffff',
+      confirmButtonColor: '#0284c7',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    }).then(result => {
+      if (result.isConfirmed) {
+        console.log('remove group')
+      }
+    })
+  }
 
   useOutsideClick(menuRef, closeMenu)
   return (
