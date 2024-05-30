@@ -6,7 +6,7 @@ import { FaPlusCircle } from 'react-icons/fa'
 export const HeaderGroups = () => {
   return (
     <div className={styles.container}>
-      <Link href="/new-balance" className={styles.button}>
+      <Link href="/balance/submit" className={styles.button}>
         <FaPlusCircle className={styles.icon} />
         <span>New group</span>
       </Link>
