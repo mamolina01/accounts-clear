@@ -7,7 +7,7 @@ import { TabsBalances } from './tabsBalances/TabsBalances'
 
 export const Balances = ({ group }: { group: GroupProps }) => {
   const { costs, participants } = group
-  const [activeTab, setActiveTab] = useState<string>('refunds')
+  const [activeTab, setActiveTab] = useState<string>('balances')
 
   const balance = getBalance(costs, participants)
   const refunds = getRefunds(costs, participants)

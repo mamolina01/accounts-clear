@@ -1,16 +1,17 @@
 import React from 'react'
+import { EmptyRefunds } from './emptyRefunds/EmptyRefunds'
 
 interface Props {
   participantsToPay: (
     | {
         to: string
         amount: number
-        from?: undefined
+        from?: string
       }
     | {
         from: string
         amount: number
-        to?: undefined
+        to?: string
       }
   )[]
   id: string
@@ -19,6 +20,10 @@ interface Props {
 }
 
 export const Refunds = ({ refunds }: { refunds: Props[] }) => {
+  if (refunds.length === 0) {
+    return <EmptyRefunds />
+  }
+
   return (
     <>
       {refunds.map((refund, refundIndex) => (
