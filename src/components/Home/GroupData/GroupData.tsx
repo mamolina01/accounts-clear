@@ -2,6 +2,7 @@ import { Category } from '@/components'
 import { GroupProps } from '@/types/group'
 import Link from 'next/link'
 import { BsPlusLg } from 'react-icons/bs'
+import { Menu } from './menu/Menu'
 
 export const GroupData = async ({ group }: { group: GroupProps }) => {
   const getUsers = () => {
@@ -10,8 +11,11 @@ export const GroupData = async ({ group }: { group: GroupProps }) => {
   }
 
   return (
-    <div className="grid grid-cols-2 gap-x-5 p-3 bg-primary rounded relative">
-      <h4 className="text-3xl col-span-2 text-center">{group.name}</h4>
+    <div className="grid grid-cols-2 gap-x-5 gap-y-3 p-3 bg-primary rounded relative">
+      <div className="col-span-2 flex items-center relative">
+        <h4 className="text-3xl text-center flex-1">{group.name}</h4>
+        <Menu />
+      </div>
       <div className="flex flex-col">
         <span className="text-lg">Description</span>
         <span className="text-tertiary">{group.description}</span>
