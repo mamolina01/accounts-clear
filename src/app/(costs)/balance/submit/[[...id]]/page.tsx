@@ -8,7 +8,7 @@ interface Props {
   }
 }
 
-const CreateCount = async ({ params }: Props) => {
+const Balance = async ({ params }: Props) => {
   const groupId = params.id ? params.id[0] : ''
   const { group } = await getGroupById(groupId)
 
@@ -19,9 +19,9 @@ const CreateCount = async ({ params }: Props) => {
 
   return (
     <ContainerForm title={title}>
-      <BalanceForm />
+      <BalanceForm group={group} />
     </ContainerForm>
   )
 }
 
-export default CreateCount
+export default Balance

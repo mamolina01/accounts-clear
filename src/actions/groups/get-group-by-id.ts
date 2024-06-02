@@ -7,6 +7,15 @@ export const getGroupById = async (id: string) => {
     const group = await prisma.group.findFirst({
       where: {
         id: id
+      },
+      include: {
+        participants: {
+          select: {
+            id: true,
+            name: true,
+            assignedCosts: true
+          }
+        }
       }
     })
 

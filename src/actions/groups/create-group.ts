@@ -2,16 +2,9 @@
 
 import { auth } from '@/auth.config'
 import prisma from '@/lib/prisma'
-import { Category } from '@prisma/client'
+import { CreateGroup } from '@/types/group'
 
-interface Props {
-  name: string
-  description: string
-  category: Category
-  participants: string[]
-}
-
-export const createGroup = async (data: Props) => {
+export const createGroup = async (data: CreateGroup) => {
   try {
     const session = await auth()
     if (!session?.user.name) {

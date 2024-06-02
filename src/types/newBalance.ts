@@ -6,7 +6,7 @@ export interface ParticipantProps {
 }
 
 export interface newBalanceProps {
-  title: string
+  name: string
   description: string
   category: Category
   participants: ParticipantProps[]

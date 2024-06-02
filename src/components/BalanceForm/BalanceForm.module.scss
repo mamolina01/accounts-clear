@@ -5,7 +5,7 @@
     @apply flex flex-col;
 
     .label {
-      @apply text-start text-sm;
+      @apply text-start text-sm font-semibold;
     }
 
     .input {
