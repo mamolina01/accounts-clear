@@ -11,7 +11,7 @@ import { useRouter } from 'next/navigation'
 import { FormEventHandler } from 'react'
 import styles from './BalanceForm.module.scss'
 import { ParticipantsForm } from './participantsForm/ParticipantsForm'
-import { GroupInfo } from '@/types/group'
+import { GroupInfo, ParticipantGroup } from '@/types/group'
 
 interface Props {
   group: GroupInfo | null
@@ -21,6 +21,29 @@ export const BalanceForm = ({ group }: Props) => {
   const initialValues: GroupInfo = { name: '', description: '', category: Category.Travel, participants: [] }
   const { data: session } = useSession()
   const router = useRouter()
+
+  const filterParticipants = (participants: ParticipantGroup[]) => {
+    if (group) {
+      const filteredParticipants = participants
+        .map((participant1: ParticipantGroup) => {
+          let tempParticipants = null
+          group.participants.map((participant2: ParticipantGroup) => {
+            if (participant1.id === participant2.id && participant1.name !== participant2.name) {
+              tempParticipants = participant1
+            }
+          })
+
+          if (tempParticipants) {
+            return tempParticipants
+          }
+        })
+        .filter(participant => participant)
+
+      return filteredParticipants
+    }
+
+    return participants
+  }
 
   const handleSubmit = async (values: GroupInfo) => {
     if (!session?.user.id) return
@@ -34,15 +57,14 @@ export const BalanceForm = ({ group }: Props) => {
 
     if (group) {
       const { ok } = await updateGroup(data, group?.id ?? '')
-      console.log(ok)
-      if (ok) {
-        router.push('/')
-      }
+      // if (ok) {
+      //   router.push('/')
+      // }
     } else {
       const { ok } = await createGroup(data)
-      if (ok) {
-        router.push('/')
-      }
+      // if (ok) {
+      //   router.push('/')
+      // }
     }
   }
 
