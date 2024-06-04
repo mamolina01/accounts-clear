@@ -2,7 +2,6 @@
 import { updateGroup, createGroup } from '@/actions'
 import { Participant } from '@/components/balanceForm/participant/Participant'
 import { generateID } from '@/helpers'
-import { ParticipantProps } from '@/types/newBalance'
 import { validationSchemaNewBalance } from '@/validations'
 import { Category } from '@prisma/client'
 import { Form, Formik } from 'formik'
@@ -61,7 +60,17 @@ export const BalanceForm = ({ group }: Props) => {
       //   router.push('/')
       // }
     } else {
-      const { ok } = await createGroup(data)
+      const participantNames = values.participants.map(participant => {
+        const { name } = participant
+        return name
+      })
+      const createGroupData = {
+        name: data.name,
+        description: data.description,
+        category: data.category,
+        participants: participantNames
+      }
+      const { ok } = await createGroup(createGroupData)
       // if (ok) {
       //   router.push('/')
       // }
@@ -95,14 +104,14 @@ export const BalanceForm = ({ group }: Props) => {
           setFieldValue('participants', [...values.participants, { name: newParticipant, id: generateID() }])
         }
 
-        const editParticipant = (newParticipant: ParticipantProps) => {
+        const editParticipant = (newParticipant: ParticipantGroup) => {
           const tempParticipants = values.participants.map(participant =>
             participant.id === newParticipant.id ? newParticipant : participant
           )
           setFieldValue('participants', tempParticipants)
         }
 
-        const removeParticipant = (participant: ParticipantProps) => {
+        const removeParticipant = (participant: ParticipantGroup) => {
           const tempParticipants = values.participants.filter(tempParticipant => tempParticipant.id !== participant.id)
           setFieldValue('participants', tempParticipants)
         }

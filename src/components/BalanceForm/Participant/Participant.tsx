@@ -25,7 +25,7 @@ export const Participant = ({ participant, editParticipant, removeParticipant }:
   }
 
   const onClickRemove = () => {
-    if (participant.assignedCosts) {
+    if (participant.assignedCosts?.length !== 0) {
       Swal.fire({
         title: "Couldn't be removed",
         text: "This user couldn't be able to be removed, because he has costs assigned to him. ",

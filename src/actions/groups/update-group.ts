@@ -13,37 +13,37 @@ export const updateGroup = async (group: GroupInfo, groupId: string) => {
       }
     }
 
-    const participants = await filterParticipants(group.participants, groupId)
+    const { modifiedUsers, removedUsers } = await filterParticipants(group.participants, groupId)
 
-    // await prisma.group.update({
-    //   where: {
-    //     id: groupId
-    //   },
-    //   data: {
-    //     name: group.name,
-    //     description: group.description,
-    //     category: group.category
-    //   }
-    // })
+    await prisma.group.update({
+      where: {
+        id: groupId
+      },
+      data: {
+        name: group.name,
+        description: group.description,
+        category: group.category
+      }
+    })
 
-    // participants.modifiedUsers.map(async (participant: ParticipantGroup) => {
-    //   await prisma.participant.update({
-    //     where: {
-    //       id: participant.id
-    //     },
-    //     data: {
-    //       name: participant.name
-    //     }
-    //   })
-    // })
+    modifiedUsers.map(async (participant: ParticipantGroup) => {
+      await prisma.participant.update({
+        where: {
+          id: participant.id
+        },
+        data: {
+          name: participant.name
+        }
+      })
+    })
 
-    // participants.removedUsers.map(async (participant: ParticipantGroup) => {
-    //   await prisma.participant.delete({
-    //     where: {
-    //       id: participant.id
-    //     }
-    //   })
-    // })
+    removedUsers.map(async (participant: ParticipantGroup) => {
+      await prisma.participant.delete({
+        where: {
+          id: participant.id
+        }
+      })
+    })
 
     return {
       ok: true
@@ -74,7 +74,13 @@ const filterParticipants = async (
         select: {
           id: true,
           name: true,
-          assignedCosts: true
+          assignedCosts: {
+            select: {
+              id: true,
+              costId: true,
+              participantId: true
+            }
+          }
         }
       }
     }
@@ -107,15 +113,17 @@ const filterParticipants = async (
 
   const combinedArray = participants.concat(initialParticipants)
 
-  const uniqueElements = combinedArray.filter((participant: ParticipantGroup) => {
-    return (
-      (participants.includes(participant) && !initialParticipants.includes(participant)) ||
-      (!participants.includes(participant) && initialParticipants.includes(participant))
-    )
-  })
+  const idCount: Record<string, number> = combinedArray.reduce((acc, obj) => {
+    acc[obj.id] = (acc[obj.id] || 0) + 1
+    return acc
+  }, {} as Record<string, number>)
+
+  const removedUsers = combinedArray.filter(
+    participant => idCount[participant.id] === 1 && participant.assignedCosts.length === 0
+  )
 
   return {
     modifiedUsers: filteredParticipants,
-    removedUsers: []
+    removedUsers
   }
 }

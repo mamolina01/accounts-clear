@@ -2,9 +2,9 @@
 
 import { auth } from '@/auth.config'
 import prisma from '@/lib/prisma'
-import { CreateGroup } from '@/types/group'
+import { CreateGroupInfo } from '@/types/group'
 
-export const createGroup = async (data: CreateGroup) => {
+export const createGroup = async (data: CreateGroupInfo) => {
   try {
     const session = await auth()
     if (!session?.user.name) {
