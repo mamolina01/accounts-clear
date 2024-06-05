@@ -34,22 +34,22 @@ export const BalanceForm = ({ group }: Props) => {
 
     if (group) {
       const { ok } = await updateGroup(data, group?.id ?? '')
-      toast.success('Successfully updated!')
 
-      setTimeout(() => {
-        if (ok) {
+      if (ok) {
+        toast.success('Successfully updated!')
+        setTimeout(() => {
           router.push('/')
-        }
-      }, 3000)
+        }, 1500)
+      }
     } else {
       const { ok } = await createGroup(data)
-      toast.success('Successfully created!')
 
-      setTimeout(() => {
-        if (ok) {
+      if (ok) {
+        toast.success('Successfully created!')
+        setTimeout(() => {
           router.push('/')
-        }
-      }, 3000)
+        }, 1500)
+      }
     }
   }
 

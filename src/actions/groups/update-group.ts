@@ -3,6 +3,7 @@
 import { auth } from '@/auth.config'
 import prisma from '@/lib/prisma'
 import { GroupInfo, ParticipantGroup } from '@/types/group'
+import { updateGroupFunctions } from '@/utils/updateGroupFunctions'
 
 export const updateGroup = async (group: GroupInfo, groupId: string) => {
   try {
@@ -13,7 +14,7 @@ export const updateGroup = async (group: GroupInfo, groupId: string) => {
       }
     }
 
-    const { modifiedUsers, removedUsers } = await filterParticipants(group.participants, groupId)
+    const { modifiedUsers, removedUsers, newUsers } = await filterParticipants(group.participants, groupId)
 
     await prisma.group.update({
       where: {
@@ -45,6 +46,15 @@ export const updateGroup = async (group: GroupInfo, groupId: string) => {
       })
     })
 
+    const participantsData = newUsers.map(({ name }) => ({
+      name: name,
+      groupId: groupId
+    }))
+
+    await prisma.participant.createMany({
+      data: participantsData
+    })
+
     return {
       ok: true
     }
@@ -59,6 +69,7 @@ export const updateGroup = async (group: GroupInfo, groupId: string) => {
 interface FilterParticipantProps {
   modifiedUsers: ParticipantGroup[]
   removedUsers: ParticipantGroup[]
+  newUsers: ParticipantGroup[]
 }
 
 const filterParticipants = async (
@@ -86,44 +97,29 @@ const filterParticipants = async (
     }
   })
 
-  if (!group || !group.participants) {
+  if (!group) {
     return {
       modifiedUsers: [],
-      removedUsers: []
+      removedUsers: [],
+      newUsers: []
     }
   }
-
   const { participants: initialParticipants } = group
 
-  const filteredParticipants = participants.reduce(
-    (accumulator: ParticipantGroup[], participant1: ParticipantGroup) => {
-      const tempParticipant = initialParticipants.find(
-        (participant2: ParticipantGroup) =>
-          participant1.id === participant2.id && participant1.name !== participant2.name
-      )
-
-      if (tempParticipant) {
-        accumulator.push(participant1)
-      }
-
-      return accumulator
-    },
-    []
+  const { getModifiedParticipants, getRemovedParticipants, getNewParticipants } = updateGroupFunctions(
+    initialParticipants,
+    participants
   )
 
-  const combinedArray = participants.concat(initialParticipants)
+  const modifiedUsers = getModifiedParticipants()
 
-  const idCount: Record<string, number> = combinedArray.reduce((acc, obj) => {
-    acc[obj.id] = (acc[obj.id] || 0) + 1
-    return acc
-  }, {} as Record<string, number>)
+  const removedUsers = getRemovedParticipants()
 
-  const removedUsers = combinedArray.filter(
-    participant => idCount[participant.id] === 1 && participant.assignedCosts.length === 0
-  )
+  const newUsers = getNewParticipants()
 
   return {
-    modifiedUsers: filteredParticipants,
-    removedUsers
+    modifiedUsers,
+    removedUsers,
+    newUsers
   }
 }
