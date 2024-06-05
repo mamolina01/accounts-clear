@@ -11,6 +11,7 @@ import { FormEventHandler } from 'react'
 import styles from './BalanceForm.module.scss'
 import { ParticipantsForm } from './participantsForm/ParticipantsForm'
 import { GroupInfo, ParticipantGroup } from '@/types/group'
+import toast from 'react-hot-toast'
 
 interface Props {
   group: GroupInfo | null
@@ -20,29 +21,6 @@ export const BalanceForm = ({ group }: Props) => {
   const initialValues: GroupInfo = { name: '', description: '', category: Category.Travel, participants: [] }
   const { data: session } = useSession()
   const router = useRouter()
-
-  const filterParticipants = (participants: ParticipantGroup[]) => {
-    if (group) {
-      const filteredParticipants = participants
-        .map((participant1: ParticipantGroup) => {
-          let tempParticipants = null
-          group.participants.map((participant2: ParticipantGroup) => {
-            if (participant1.id === participant2.id && participant1.name !== participant2.name) {
-              tempParticipants = participant1
-            }
-          })
-
-          if (tempParticipants) {
-            return tempParticipants
-          }
-        })
-        .filter(participant => participant)
-
-      return filteredParticipants
-    }
-
-    return participants
-  }
 
   const handleSubmit = async (values: GroupInfo) => {
     if (!session?.user.id) return
@@ -56,9 +34,13 @@ export const BalanceForm = ({ group }: Props) => {
 
     if (group) {
       const { ok } = await updateGroup(data, group?.id ?? '')
-      // if (ok) {
-      //   router.push('/')
-      // }
+      toast.success('Successfully updated!')
+
+      setTimeout(() => {
+        if (ok) {
+          router.push('/')
+        }
+      }, 3000)
     } else {
       const participantNames = values.participants.map(participant => {
         const { name } = participant
@@ -71,9 +53,13 @@ export const BalanceForm = ({ group }: Props) => {
         participants: participantNames
       }
       const { ok } = await createGroup(createGroupData)
-      // if (ok) {
-      //   router.push('/')
-      // }
+      toast.success('Successfully created!')
+
+      setTimeout(() => {
+        if (ok) {
+          router.push('/')
+        }
+      }, 3000)
     }
   }
 
@@ -94,7 +80,6 @@ export const BalanceForm = ({ group }: Props) => {
       onSubmit={values => {
         handleSubmit({ ...values })
       }}
-      validateOnMount={false}
     >
       {props => {
         const { values, errors, setFieldValue, handleSubmit, validateField } = props
