@@ -18,7 +18,7 @@ export const Menu = ({ groupId }: { groupId: string }) => {
 
   const deleteGroup = async () => {
     Swal.fire({
-      title: 'Do you want to remove this group?',
+      title: 'Do you want to delete this group?',
       icon: 'warning',
       background: '#151515',
       color: '#ffffff',
@@ -41,7 +41,7 @@ export const Menu = ({ groupId }: { groupId: string }) => {
     <div ref={menuRef}>
       <BsThreeDotsVertical className="text-xl cursor-pointer" onClick={() => setShowMenu(true)} />
       {showMenu && (
-        <div className="bg-secondary border border-primary rounded absolute top-2 right-4">
+        <div className="bg-secondary border border-tertiary rounded absolute top-2 right-4">
           <Link
             href={`balance/submit/${groupId}`}
             className="flex px-4 py-1 items-center gap-3 cursor-pointer hover:text-primary"
