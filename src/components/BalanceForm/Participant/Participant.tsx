@@ -1,15 +1,16 @@
 'use client'
-import { ParticipantProps } from '@/types/newBalance'
+import { ParticipantGroup as ParticipantProps } from '@/types/group'
 import React, { ChangeEvent, FormEventHandler, useState } from 'react'
 import { BsXLg, BsCheck2 } from 'react-icons/bs'
+import Swal from 'sweetalert2'
 
-interface ParticipantItemProps {
+interface Props {
   participant: ParticipantProps
   editParticipant: (participant: ParticipantProps) => void
   removeParticipant: (participant: ParticipantProps) => void
 }
 
-export const Participant = ({ participant, editParticipant, removeParticipant }: ParticipantItemProps) => {
+export const Participant = ({ participant, editParticipant, removeParticipant }: Props) => {
   const [tempParticipant, setTempParticipant] = useState(participant)
   const [isEditting, setIsEditting] = useState(false)
 
@@ -24,7 +25,18 @@ export const Participant = ({ participant, editParticipant, removeParticipant }:
   }
 
   const onClickRemove = () => {
-    removeParticipant(participant)
+    if (participant.assignedCosts?.length !== 0) {
+      Swal.fire({
+        title: "Couldn't be removed",
+        text: "This user couldn't be able to be removed, because he has costs assigned to him. ",
+        icon: 'warning',
+        background: '#151515',
+        color: '#ffffff',
+        confirmButtonColor: '#0284c7'
+      })
+    } else {
+      removeParticipant(participant)
+    }
   }
 
   return (

@@ -2,16 +2,9 @@
 
 import { auth } from '@/auth.config'
 import prisma from '@/lib/prisma'
-import { Category } from '@prisma/client'
+import { GroupInfo } from '@/types/group'
 
-interface Props {
-  name: string
-  description: string
-  category: Category
-  participants: string[]
-}
-
-export const createGroup = async (data: Props) => {
+export const createGroup = async (data: GroupInfo) => {
   try {
     const session = await auth()
     if (!session?.user.name) {
@@ -40,7 +33,7 @@ export const createGroup = async (data: Props) => {
       }
     })
 
-    const participantsData = data.participants.map(name => ({
+    const participantsData = data.participants.map(({ name }) => ({
       name: name,
       groupId: groupId
     }))

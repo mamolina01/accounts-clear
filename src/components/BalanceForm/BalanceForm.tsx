@@ -1,39 +1,55 @@
 'use client'
-import { createGroup } from '@/actions'
+import { updateGroup, createGroup } from '@/actions'
 import { Participant } from '@/components/balanceForm/participant/Participant'
 import { generateID } from '@/helpers'
-import { ParticipantProps, newBalanceProps } from '@/types/newBalance'
 import { validationSchemaNewBalance } from '@/validations'
 import { Category } from '@prisma/client'
-import { Formik } from 'formik'
+import { Form, Formik } from 'formik'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { FormEventHandler } from 'react'
 import styles from './BalanceForm.module.scss'
 import { ParticipantsForm } from './participantsForm/ParticipantsForm'
+import { GroupInfo, ParticipantGroup } from '@/types/group'
+import toast from 'react-hot-toast'
 
-export const BalanceForm = () => {
-  const initialValues: newBalanceProps = { title: '', description: '', category: Category.Travel, participants: [] }
+interface Props {
+  group: GroupInfo | null
+}
+
+export const BalanceForm = ({ group }: Props) => {
+  const initialValues: GroupInfo = { name: '', description: '', category: Category.Travel, participants: [] }
   const { data: session } = useSession()
   const router = useRouter()
-  const handleSubmit = async (values: newBalanceProps) => {
+
+  const handleSubmit = async (values: GroupInfo) => {
     if (!session?.user.id) return
 
-    const participantNames = values.participants.map(participant => {
-      const { name } = participant
-      return name
-    })
-
     const data = {
-      name: values.title,
+      name: values.name,
       description: values.description,
       category: values.category,
-      participants: participantNames
+      participants: values.participants
     }
-    const { ok } = await createGroup(data)
 
-    if (ok) {
-      router.push('/')
+    if (group) {
+      const { ok } = await updateGroup(data, group?.id ?? '')
+
+      if (ok) {
+        toast.success('Successfully updated!')
+        setTimeout(() => {
+          router.push('/')
+        }, 1500)
+      }
+    } else {
+      const { ok } = await createGroup(data)
+
+      if (ok) {
+        toast.success('Successfully created!')
+        setTimeout(() => {
+          router.push('/')
+        }, 1500)
+      }
     }
   }
 
@@ -48,30 +64,32 @@ export const BalanceForm = () => {
 
   return (
     <Formik
-      initialValues={initialValues}
+      initialValues={group ?? initialValues}
       validateOnChange={false}
       validationSchema={validationSchemaNewBalance()}
       onSubmit={values => {
         handleSubmit({ ...values })
       }}
-      validateOnMount={false}
     >
       {props => {
         const { values, errors, setFieldValue, handleSubmit, validateField } = props
 
         const addParticipant = (newParticipant: string) => {
           if (values.participants.length >= 50) return
-          setFieldValue('participants', [...values.participants, { name: newParticipant, id: generateID() }])
+          setFieldValue('participants', [
+            ...values.participants,
+            { name: newParticipant, id: generateID(), assignedCosts: [] }
+          ])
         }
 
-        const editParticipant = (newParticipant: ParticipantProps) => {
+        const editParticipant = (newParticipant: ParticipantGroup) => {
           const tempParticipants = values.participants.map(participant =>
             participant.id === newParticipant.id ? newParticipant : participant
           )
           setFieldValue('participants', tempParticipants)
         }
 
-        const removeParticipant = (participant: ParticipantProps) => {
+        const removeParticipant = (participant: ParticipantGroup) => {
           const tempParticipants = values.participants.filter(tempParticipant => tempParticipant.id !== participant.id)
           setFieldValue('participants', tempParticipants)
         }
@@ -85,21 +103,21 @@ export const BalanceForm = () => {
         }
 
         return (
-          <form onSubmit={onSubmit} className={styles.form}>
+          <Form onSubmit={onSubmit} className={styles.form}>
             <div className={styles.inputContainer}>
-              <label htmlFor="title" className={styles.label}>
-                Title
+              <label htmlFor="name" className={styles.label}>
+                Name <span className="text-red-500">*</span>
               </label>
               <input
-                id="title"
-                name="title"
+                id="name"
+                name="name"
                 type="text"
-                value={values.title}
-                placeholder="Enter a title"
-                onChange={e => setFieldValue('title', e.target.value)}
-                className={`${styles.input} ${errors.title && styles.error}`}
+                value={values.name}
+                placeholder="Enter a name"
+                onChange={e => setFieldValue('name', e.target.value)}
+                className={`${styles.input} ${errors.name && styles.error}`}
               />
-              {errors.title && <p className={styles.errorText}>Title is required</p>}
+              {errors.name && <p className={styles.errorText}>name is required</p>}
             </div>
             <div className={styles.inputContainer}>
               <label htmlFor="description" className={styles.label}>
@@ -140,7 +158,7 @@ export const BalanceForm = () => {
               </p>
               {/* TODO: Handle a loader for first participant */}
               <div className={`${styles.participantList}`}>
-                {session?.user && (
+                {session?.user && !group && (
                   <div className="w-full flex justify-between gap-2 items-center animate__animated animate__fadeIn">
                     <p className="bg-transparent outline-none border-b-[1px] border-tertiary w-11/12 focus:text-secondary">
                       {session?.user.name} {'(yo)'}
@@ -159,9 +177,9 @@ export const BalanceForm = () => {
               <ParticipantsForm addParticipant={addParticipant} />
             </div>
             <button type="submit" className={styles.submitButton}>
-              Create Balance
+              Submit
             </button>
-          </form>
+          </Form>
         )
       }}
     </Formik>
