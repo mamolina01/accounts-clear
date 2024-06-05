@@ -3,6 +3,7 @@ import { removeGroup } from '@/actions'
 import { useOutsideClick } from '@/hooks'
 import Link from 'next/link'
 import React, { useRef, useState } from 'react'
+import toast from 'react-hot-toast'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import { FaEdit, FaTrashAlt } from 'react-icons/fa'
 import Swal from 'sweetalert2'
@@ -25,9 +26,12 @@ export const Menu = ({ groupId }: { groupId: string }) => {
       showCancelButton: true,
       confirmButtonText: 'Yes',
       cancelButtonText: 'No'
-    }).then(result => {
+    }).then(async result => {
       if (result.isConfirmed) {
-        removeGroup(groupId)
+        const { ok } = await removeGroup(groupId)
+        if (ok) {
+          toast.success('Successfully removed!')
+        }
       }
     })
   }
