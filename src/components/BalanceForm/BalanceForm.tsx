@@ -42,17 +42,7 @@ export const BalanceForm = ({ group }: Props) => {
         }
       }, 3000)
     } else {
-      const participantNames = values.participants.map(participant => {
-        const { name } = participant
-        return name
-      })
-      const createGroupData = {
-        name: data.name,
-        description: data.description,
-        category: data.category,
-        participants: participantNames
-      }
-      const { ok } = await createGroup(createGroupData)
+      const { ok } = await createGroup(data)
       toast.success('Successfully created!')
 
       setTimeout(() => {
@@ -86,7 +76,10 @@ export const BalanceForm = ({ group }: Props) => {
 
         const addParticipant = (newParticipant: string) => {
           if (values.participants.length >= 50) return
-          setFieldValue('participants', [...values.participants, { name: newParticipant, id: generateID() }])
+          setFieldValue('participants', [
+            ...values.participants,
+            { name: newParticipant, id: generateID(), assignedCosts: [] }
+          ])
         }
 
         const editParticipant = (newParticipant: ParticipantGroup) => {

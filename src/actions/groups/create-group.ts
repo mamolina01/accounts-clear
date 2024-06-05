@@ -2,9 +2,9 @@
 
 import { auth } from '@/auth.config'
 import prisma from '@/lib/prisma'
-import { CreateGroupInfo } from '@/types/group'
+import { GroupInfo } from '@/types/group'
 
-export const createGroup = async (data: CreateGroupInfo) => {
+export const createGroup = async (data: GroupInfo) => {
   try {
     const session = await auth()
     if (!session?.user.name) {
@@ -33,7 +33,7 @@ export const createGroup = async (data: CreateGroupInfo) => {
       }
     })
 
-    const participantsData = data.participants.map(name => ({
+    const participantsData = data.participants.map(({ name }) => ({
       name: name,
       groupId: groupId
     }))
