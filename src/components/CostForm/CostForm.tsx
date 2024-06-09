@@ -1,5 +1,5 @@
 'use client'
-import { Formik } from 'formik'
+import { Form, Formik } from 'formik'
 import styles from './CostForm.module.scss'
 import { validationSchemaNewCost } from '@/validations'
 import { ImCheckboxChecked, ImCheckboxUnchecked } from 'react-icons/im'
@@ -16,12 +16,22 @@ export const CostForm = ({ cost, groupId }: Props) => {
   const router = useRouter()
 
   const handleSubmit = async (values: CostPropsTemp) => {
+    const formattedUsers = values.assignedUsers.map(user => {
+      return {
+        id: user.id,
+        name: user.name
+      }
+    })
 
     const data = {
       title: values.title,
       amount: values.amount,
       paidBy: values.paidBy,
-      assignedUsers: values.assignedUsers
+      assignedUsers: formattedUsers
+    }
+
+    if (cost.id) {
+      console.log('update data')
     }
 
     // const { ok } = await createCost(data, groupId)
@@ -50,9 +60,10 @@ export const CostForm = ({ cost, groupId }: Props) => {
             }
             return participantItem
           })
-          const selectedParticipants = tempParticipants.filter((participant: ParticipantPropsTemp) => participant.selected)
-          console.log(selectedParticipants)
-          setFieldValue('participants', selectedParticipants)
+          const selectedParticipants = tempParticipants.filter(
+            (participant: ParticipantPropsTemp) => participant.selected
+          )
+          setFieldValue('assignedUsers', selectedParticipants)
         }
 
         const handlePaidBy = (id: string) => {
@@ -63,7 +74,7 @@ export const CostForm = ({ cost, groupId }: Props) => {
         }
 
         return (
-          <form onSubmit={handleSubmit} className={styles.form}>
+          <Form onSubmit={handleSubmit} className={styles.form}>
             <div className={styles.inputContainer}>
               <label htmlFor="title" className={styles.label}>
                 Title
@@ -104,21 +115,21 @@ export const CostForm = ({ cost, groupId }: Props) => {
                 Paid by
               </label>
 
-              {/* <select
+              <select
                 className={`${styles.select} ${errors.paidBy ? styles.error : ''}`}
                 id="paidBy"
-                defaultValue="selectOne"
+                defaultValue={values.paidBy.id ?? 'selectOne'}
                 onChange={e => handlePaidBy(e.target.value)}
               >
                 <option value="selectOne" disabled>
                   -- Select one --
                 </option>
-                {participants.map((participant, index) => (
+                {cost.assignedUsers.map((participant, index) => (
                   <option key={participant.id} value={participant.id}>
                     {participant.name}
                   </option>
                 ))}
-              </select> */}
+              </select>
               <p className={styles.errorText}>{errors.paidBy?.id}</p>
             </div>
 
@@ -126,8 +137,8 @@ export const CostForm = ({ cost, groupId }: Props) => {
               <label htmlFor="participants" className={styles.label}>
                 Participants
               </label>
-              {/* <div className={`${styles.participantList} ${errors.participants ? styles.error : ''}`}>
-                {participants.map(participant => (
+              <div className={`${styles.participantList} ${errors.assignedUsers ? styles.error : ''}`}>
+                {cost.assignedUsers.map(participant => (
                   <div key={participant.id} className={styles.participantContainer}>
                     {participant.selected ? (
                       <ImCheckboxChecked
@@ -140,7 +151,7 @@ export const CostForm = ({ cost, groupId }: Props) => {
                     <span>{participant.name}</span>
                   </div>
                 ))}
-              </div> */}
+              </div>
               {/* TODO: Check participants error */}
               {/* <p className={styles.errorText}>{errors.participants}</p> */}
             </div>
@@ -148,7 +159,7 @@ export const CostForm = ({ cost, groupId }: Props) => {
             <button type="submit" className={styles.submitButton}>
               Create Cost
             </button>
-          </form>
+          </Form>
         )
       }}
     </Formik>

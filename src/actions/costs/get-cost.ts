@@ -43,17 +43,6 @@ export const getCost = async (id: string) => {
       }
     })
 
-    // if (cost?.assignedUsers && cost?.assignedUsers.length > 0) {
-    //   const formattedCost = {
-    //     ...cost,
-    //     assignedUsers: cost.assignedUsers.map((user: UserProps) => ({
-    //       id: user?.participant?.id,
-    //       name: user?.participant?.name
-    //     }))
-    //   }
-
-    //   return formattedCost
-    // }
 
     return cost
   } catch (error) {

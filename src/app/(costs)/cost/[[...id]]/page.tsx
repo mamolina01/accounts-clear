@@ -40,7 +40,7 @@ const NewCostPage = async ({ params }: Props) => {
     const participants = await getParticipantsByGroupId(groupId)
 
     participants.map((participant: ParticipantPropsTemp) => {
-      const tempParticipant = cost?.assignedUsers.find(
+      const tempParticipant = temporaryCost?.assignedUsers.find(
         ({ participant: participant2 }: any) => participant2.id === participant.id
       )
       if (tempParticipant) {
