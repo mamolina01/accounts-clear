@@ -31,6 +31,8 @@ export const Menu = ({ groupId }: { groupId: string }) => {
         const { ok } = await removeGroup(groupId)
         if (ok) {
           toast.success('Successfully removed!')
+        } else {
+          toast.error('There was an error. Contact the administrator.')
         }
       }
     })

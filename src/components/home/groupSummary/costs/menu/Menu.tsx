@@ -1,5 +1,6 @@
 'use client'
 import { removeGroup } from '@/actions'
+import { removeCost } from '@/actions/costs/remove-cost'
 import { useOutsideClick } from '@/hooks'
 import Link from 'next/link'
 import React, { useRef, useState } from 'react'
@@ -28,10 +29,12 @@ export const Menu = ({ costId, groupId }: { costId: string; groupId: string }) =
       cancelButtonText: 'No'
     }).then(async result => {
       if (result.isConfirmed) {
-        // const { ok } = await removeGroup(costId)
-        // if (ok) {
-        // }
-        toast.success('Successfully removed!')
+        const { ok } = await removeCost(costId)
+        if (ok) {
+          toast.success('Successfully removed!')
+        } else {
+          toast.error('There was an error. Contact the administrator.')
+        }
       }
     })
   }
