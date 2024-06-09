@@ -1,11 +1,11 @@
-import { CostProps } from '@/types/cost'
 import { CostItem } from '../costItem/CostItem'
+import { GroupProps } from '@/types/group'
 
-export const CostsList = ({ costs }: { costs: CostProps[] }) => {
+export const CostsList = ({ group }: { group: GroupProps }) => {
   return (
     <div className="flex flex-col gap-1">
-      {costs.map(cost => (
-        <CostItem key={cost.id} cost={cost} />
+      {group.costs.map(cost => (
+        <CostItem key={cost.id} cost={cost} groupId={group.id} />
       ))}
     </div>
   )

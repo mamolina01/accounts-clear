@@ -3,7 +3,8 @@ import { CostForm, ContainerForm } from '@/components'
 
 interface Props {
   params: {
-    id: string
+    groupId: string[]
+    costId?: string[]
   }
 }
 
@@ -13,8 +14,10 @@ interface ParticipantProps {
 }
 
 const NewCostPage = async ({ params }: Props) => {
-  const { id } = params
-  const participants = await getParticipantsByGroupId(id)
+  const groupId = params.groupId ? params.groupId[0] : ''
+  // const costId = params.costId ? params.costId[0] : ''
+
+  const participants = await getParticipantsByGroupId(groupId)
   const newParticipants = participants.map((participant: ParticipantProps) => {
     return {
       ...participant,
@@ -23,7 +26,7 @@ const NewCostPage = async ({ params }: Props) => {
   })
   return (
     <ContainerForm title="New Cost">
-      <CostForm participants={newParticipants} groupId={id} />
+      <CostForm participants={newParticipants} groupId={groupId} />
     </ContainerForm>
   )
 }

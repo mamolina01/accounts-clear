@@ -29,7 +29,7 @@ export const GroupData = async ({ group }: { group: GroupProps }) => {
       </div>
       <div className="w-full absolute -bottom-4 ">
         <Link
-          href={`/new-cost/${group.id}`}
+          href={`/cost/${group.id}`}
           className=" bg-sky-600 hover:bg-sky-700 rounded-full h-10 w-10 mx-auto flex justify-center items-center"
         >
           <BsPlusLg className=" text-3xl" />
