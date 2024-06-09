@@ -3,33 +3,31 @@ export interface Participant {
   id: string
 }
 
+export interface ParticipantSelectable extends Participant {
+  selected: boolean
+}
+
 export interface CostProps {
   id: string
   title: string
-  date: Date
-  amount: number
-  paidBy: {
-    id: string
-    name: string
-  }
-  assignedUsers: {
-    participant: Participant | null
-  }[]
-}
-
-export interface ParticipantPropsTemp {
-  name: string
-  id: string
-  selected?: boolean
-}
-// TODO: Check prop
-export interface CostPropsTemp {
-  id: string
-  title: string
+  date?: Date
   amount: string
   paidBy: {
     id: string
     name: string
   }
-  assignedUsers: ParticipantPropsTemp[]
+  assignedUsers: Participant[]
+}
+
+// TODO: Check prop
+export interface CostPropsTemp {
+  id: string
+  title: string
+  date?: Date
+  amount: string
+  paidBy: {
+    id: string
+    name: string
+  }
+  assignedUsers: ParticipantSelectable[]
 }

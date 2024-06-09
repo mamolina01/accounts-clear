@@ -1,6 +1,6 @@
 import { getCost, getParticipantsByGroupId } from '@/actions'
 import { CostForm, ContainerForm } from '@/components'
-import { CostPropsTemp, ParticipantPropsTemp } from '@/types/cost'
+import { CostPropsTemp, Participant, ParticipantSelectable } from '@/types/cost'
 import { redirect } from 'next/navigation'
 
 interface Props {
@@ -28,7 +28,7 @@ const NewCostPage = async ({ params }: Props) => {
     assignedUsers: []
   }
 
-  let formattedParticipants: ParticipantPropsTemp[] = []
+  let formattedParticipants: ParticipantSelectable[] = []
 
   if (costId !== '') {
     const temporaryCost = await getCost(costId)
@@ -39,7 +39,7 @@ const NewCostPage = async ({ params }: Props) => {
 
     const participants = await getParticipantsByGroupId(groupId)
 
-    participants.map((participant: ParticipantPropsTemp) => {
+    participants.map((participant: Participant) => {
       const tempParticipant = temporaryCost?.assignedUsers.find(
         ({ participant: participant2 }: any) => participant2.id === participant.id
       )
@@ -58,7 +58,7 @@ const NewCostPage = async ({ params }: Props) => {
   } else {
     const participants = await getParticipantsByGroupId(groupId)
 
-    formattedParticipants = participants.map((participant: ParticipantPropsTemp) => {
+    formattedParticipants = participants.map((participant: Participant) => {
       return {
         ...participant,
         selected: true

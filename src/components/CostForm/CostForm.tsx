@@ -4,7 +4,7 @@ import styles from './CostForm.module.scss'
 import { validationSchemaNewCost } from '@/validations'
 import { ImCheckboxChecked, ImCheckboxUnchecked } from 'react-icons/im'
 import { createCost } from '@/actions'
-import { CostPropsTemp, Participant, ParticipantPropsTemp } from '@/types/cost'
+import { CostPropsTemp, Participant, ParticipantSelectable } from '@/types/cost'
 import { useRouter } from 'next/navigation'
 
 interface Props {
@@ -24,20 +24,22 @@ export const CostForm = ({ cost, groupId }: Props) => {
     })
 
     const data = {
+      id: cost.id,
       title: values.title,
       amount: values.amount,
       paidBy: values.paidBy,
       assignedUsers: formattedUsers
     }
 
+    console.log(data)
     if (cost.id) {
       console.log('update data')
     }
 
-    // const { ok } = await createCost(data, groupId)
-    // if (ok) {
-    //   router.push('/')
-    // }
+    const { ok } = await createCost(data, groupId)
+    if (ok) {
+      router.push('/')
+    }
   }
 
   return (
@@ -61,13 +63,13 @@ export const CostForm = ({ cost, groupId }: Props) => {
             return participantItem
           })
           const selectedParticipants = tempParticipants.filter(
-            (participant: ParticipantPropsTemp) => participant.selected
+            (participant: ParticipantSelectable) => participant.selected
           )
           setFieldValue('assignedUsers', selectedParticipants)
         }
 
         const handlePaidBy = (id: string) => {
-          const paidBy = cost.assignedUsers.find((participant: ParticipantPropsTemp) => participant.id === id)
+          const paidBy = cost.assignedUsers.find((participant: ParticipantSelectable) => participant.id === id)
           if (!paidBy) return
           const { selected, ...participant } = paidBy
           setFieldValue('paidBy', participant)
