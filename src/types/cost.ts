@@ -1,18 +1,35 @@
 export interface Participant {
-    name: string
-    id: string
+  name: string
+  id: string
 }
 
 export interface CostProps {
+  id: string
+  title: string
+  date: Date
+  amount: number
+  paidBy: {
     id: string
-    title: string
-    date: Date
-    amount: number
-    paidBy: {
-        id: string
-        name: string
-    }
-    assignedUsers: {
-        participant: Participant | null
-    }[]
+    name: string
+  }
+  assignedUsers: {
+    participant: Participant | null
+  }[]
+}
+
+export interface ParticipantPropsTemp {
+  name: string
+  id: string
+  selected?: boolean
+}
+// TODO: Check prop
+export interface CostPropsTemp {
+  id: string
+  title: string
+  amount: string
+  paidBy: {
+    id: string
+    name: string
+  }
+  assignedUsers: ParticipantPropsTemp[]
 }

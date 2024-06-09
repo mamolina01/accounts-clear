@@ -4,40 +4,35 @@ import styles from './CostForm.module.scss'
 import { validationSchemaNewCost } from '@/validations'
 import { ImCheckboxChecked, ImCheckboxUnchecked } from 'react-icons/im'
 import { createCost } from '@/actions'
-import { CostProps, Participant } from '@/types/cost'
+import { CostPropsTemp, Participant, ParticipantPropsTemp } from '@/types/cost'
 import { useRouter } from 'next/navigation'
 
-export const CostForm = ({ participants, groupId }: { participants: Participant[]; groupId: string }) => {
-  const router = useRouter()
-  const initialValues: CostProps = {
-    title: '',
-    amount: '',
-    paidBy: {
-      id: '',
-      name: ''
-    },
-    participants: participants
-  }
+interface Props {
+  cost: CostPropsTemp
+  groupId: string
+}
 
-  const handleSubmit = async (values: CostProps) => {
-    // if (!session?.user.id) return
+export const CostForm = ({ cost, groupId }: Props) => {
+  const router = useRouter()
+
+  const handleSubmit = async (values: CostPropsTemp) => {
 
     const data = {
       title: values.title,
       amount: values.amount,
       paidBy: values.paidBy,
-      participants: values.participants
+      assignedUsers: values.assignedUsers
     }
 
-    const { ok } = await createCost(data, groupId)
-    if (ok) {
-      router.push('/')
-    }
+    // const { ok } = await createCost(data, groupId)
+    // if (ok) {
+    //   router.push('/')
+    // }
   }
 
   return (
     <Formik
-      initialValues={initialValues}
+      initialValues={cost}
       validateOnChange={false}
       validationSchema={validationSchemaNewCost()}
       onSubmit={values => {
@@ -49,21 +44,19 @@ export const CostForm = ({ participants, groupId }: { participants: Participant[
         const { values, errors, setFieldValue, handleSubmit } = props
 
         const handleParticipants = (participant: Participant) => {
-          const tempParticipants = participants.map(participantItem => {
+          const tempParticipants = cost.assignedUsers.map(participantItem => {
             if (participantItem.id === participant.id) {
               participantItem.selected = !participantItem.selected
             }
             return participantItem
           })
-          const selectedParticipants = tempParticipants.filter(
-            (participant: Participant) => participant.selected === true
-          )
+          const selectedParticipants = tempParticipants.filter((participant: ParticipantPropsTemp) => participant.selected)
           console.log(selectedParticipants)
           setFieldValue('participants', selectedParticipants)
         }
 
         const handlePaidBy = (id: string) => {
-          const paidBy = participants.find((participant: Participant) => participant.id === id)
+          const paidBy = cost.assignedUsers.find((participant: ParticipantPropsTemp) => participant.id === id)
           if (!paidBy) return
           const { selected, ...participant } = paidBy
           setFieldValue('paidBy', participant)
@@ -111,7 +104,7 @@ export const CostForm = ({ participants, groupId }: { participants: Participant[
                 Paid by
               </label>
 
-              <select
+              {/* <select
                 className={`${styles.select} ${errors.paidBy ? styles.error : ''}`}
                 id="paidBy"
                 defaultValue="selectOne"
@@ -125,7 +118,7 @@ export const CostForm = ({ participants, groupId }: { participants: Participant[
                     {participant.name}
                   </option>
                 ))}
-              </select>
+              </select> */}
               <p className={styles.errorText}>{errors.paidBy?.id}</p>
             </div>
 
@@ -133,7 +126,7 @@ export const CostForm = ({ participants, groupId }: { participants: Participant[
               <label htmlFor="participants" className={styles.label}>
                 Participants
               </label>
-              <div className={`${styles.participantList} ${errors.participants ? styles.error : ''}`}>
+              {/* <div className={`${styles.participantList} ${errors.participants ? styles.error : ''}`}>
                 {participants.map(participant => (
                   <div key={participant.id} className={styles.participantContainer}>
                     {participant.selected ? (
@@ -147,7 +140,7 @@ export const CostForm = ({ participants, groupId }: { participants: Participant[
                     <span>{participant.name}</span>
                   </div>
                 ))}
-              </div>
+              </div> */}
               {/* TODO: Check participants error */}
               {/* <p className={styles.errorText}>{errors.participants}</p> */}
             </div>

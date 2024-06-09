@@ -13,6 +13,9 @@ export const getParticipantsByGroupId = async (groupId: string) => {
           select: {
             id: true,
             name: true
+          },
+          orderBy: {
+            name: 'asc'
           }
         }
       }

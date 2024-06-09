@@ -1,6 +1,5 @@
 'use client'
-import { removeGroup } from '@/actions'
-import { removeCost } from '@/actions/costs/remove-cost'
+import { removeCost } from '@/actions'
 import { useOutsideClick } from '@/hooks'
 import Link from 'next/link'
 import React, { useRef, useState } from 'react'
