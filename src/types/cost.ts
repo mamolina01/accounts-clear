@@ -11,10 +11,7 @@ export interface CostProps {
   title: string
   date?: Date
   amount: string
-  paidBy: {
-    id: string
-    name: string
-  }
+  paidBy: string
   assignedUsers: Participant[]
 }
 
@@ -24,9 +21,6 @@ export interface CostPropsTemp {
   title: string
   date?: Date
   amount: string
-  paidBy: {
-    id: string
-    name: string
-  }
+  paidBy: string
   assignedUsers: ParticipantSelectable[]
 }

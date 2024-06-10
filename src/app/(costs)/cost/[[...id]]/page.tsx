@@ -17,10 +17,7 @@ const NewCostPage = async ({ params }: Props) => {
     id: '',
     title: '',
     amount: '',
-    paidBy: {
-      id: '',
-      name: ''
-    },
+    paidBy: '',
     assignedUsers: []
   }
 
@@ -49,7 +46,8 @@ const NewCostPage = async ({ params }: Props) => {
     cost = {
       ...temporaryCost,
       amount: `${temporaryCost.amount}`,
-      assignedUsers: formattedParticipants
+      assignedUsers: formattedParticipants,
+      paidBy: temporaryCost.paidBy.id
     }
   } else {
     const participants = await getParticipantsByGroupId(groupId)

@@ -9,7 +9,7 @@ export const createCost = async (data: CostProps, groupId: string) => {
       data: {
         title: data.title,
         amount: Number(data.amount),
-        participantId: data.paidBy.id,
+        participantId: data.paidBy,
         date: new Date(),
         groupId: groupId
       }

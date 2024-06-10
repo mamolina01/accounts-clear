@@ -55,7 +55,7 @@ export const CostForm = ({ cost, groupId }: Props) => {
   return (
     <Formik
       initialValues={cost}
-      validateOnChange={false}
+      validateOnChange={true}
       validationSchema={validationSchemaNewCost()}
       onSubmit={values => {
         handleSubmit({ ...values })
@@ -63,7 +63,12 @@ export const CostForm = ({ cost, groupId }: Props) => {
       validateOnMount={false}
     >
       {props => {
-        const { values, errors, setFieldValue, handleSubmit } = props
+        const { values, touched, errors, setFieldValue, handleSubmit } = props
+        const titleError = ((touched.title || values.title) && errors.title) || ''
+        const amountError = ((touched.amount || values.amount) && errors.amount) || ''
+        const paidByError = ((touched.paidBy || values.paidBy) && errors.paidBy) || ''
+        const assignedUsersError =
+          ((touched.assignedUsers || values.assignedUsers) && (errors.assignedUsers as string)) || ''
 
         const handleParticipants = (participant: Participant) => {
           const tempParticipants = cost.assignedUsers.map(participantItem => {
@@ -81,8 +86,7 @@ export const CostForm = ({ cost, groupId }: Props) => {
         const handlePaidBy = (id: string) => {
           const paidBy = cost.assignedUsers.find((participant: ParticipantSelectable) => participant.id === id)
           if (!paidBy) return
-          const { selected, ...participant } = paidBy
-          setFieldValue('paidBy', participant)
+          setFieldValue('paidBy', id)
         }
 
         return (
@@ -100,7 +104,7 @@ export const CostForm = ({ cost, groupId }: Props) => {
                 onChange={e => setFieldValue('title', e.target.value)}
                 className={`${styles.input} ${errors.title ? styles.error : ''}`}
               />
-              <p className={styles.errorText}>{errors.title}</p>
+              <p className={styles.errorText}>{titleError}</p>
             </div>
 
             <div className={styles.inputContainer}>
@@ -119,7 +123,7 @@ export const CostForm = ({ cost, groupId }: Props) => {
                 />
                 <span>ARS</span>
               </div>
-              <p className={styles.errorText}>{errors.amount}</p>
+              <p className={styles.errorText}>{amountError}</p>
             </div>
 
             <div className={styles.inputContainer}>
@@ -130,7 +134,7 @@ export const CostForm = ({ cost, groupId }: Props) => {
               <select
                 className={`${styles.select} ${errors.paidBy ? styles.error : ''}`}
                 id="paidBy"
-                defaultValue={cost.paidBy.id ? cost.paidBy.id : 'selectOne'}
+                defaultValue={cost.paidBy ? cost.paidBy : 'selectOne'}
                 onChange={e => handlePaidBy(e.target.value)}
               >
                 <option value="selectOne" disabled>
@@ -142,7 +146,7 @@ export const CostForm = ({ cost, groupId }: Props) => {
                   </option>
                 ))}
               </select>
-              <p className={styles.errorText}>{errors.paidBy?.id}</p>
+              <p className={styles.errorText}>{paidByError}</p>
             </div>
 
             <div className={styles.inputContainer}>
@@ -164,8 +168,7 @@ export const CostForm = ({ cost, groupId }: Props) => {
                   </div>
                 ))}
               </div>
-              {/* TODO: Check participants error */}
-              {/* <p className={styles.errorText}>{errors.participants}</p> */}
+              <p className={styles.errorText}>{assignedUsersError}</p>
             </div>
 
             <button type="submit" className={styles.submitButton}>

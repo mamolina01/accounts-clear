@@ -12,7 +12,7 @@ export const updateCost = async (cost: CostProps, costId: string) => {
       data: {
         title: cost.title,
         amount: Number(cost.amount),
-        participantId: cost.paidBy.id
+        participantId: cost.paidBy
       }
     })
 
