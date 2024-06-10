@@ -4,8 +4,10 @@ import styles from './CostForm.module.scss'
 import { validationSchemaNewCost } from '@/validations'
 import { ImCheckboxChecked, ImCheckboxUnchecked } from 'react-icons/im'
 import { createCost } from '@/actions'
-import { CostPropsTemp, Participant, ParticipantSelectable } from '@/types/cost'
+import { CostProps, CostPropsTemp, Participant, ParticipantSelectable } from '@/types/cost'
 import { useRouter } from 'next/navigation'
+import { updateCost } from '@/actions'
+import toast from 'react-hot-toast'
 
 interface Props {
   cost: CostPropsTemp
@@ -23,22 +25,30 @@ export const CostForm = ({ cost, groupId }: Props) => {
       }
     })
 
-    const data = {
-      id: cost.id,
+    const data: CostProps = {
       title: values.title,
       amount: values.amount,
       paidBy: values.paidBy,
       assignedUsers: formattedUsers
     }
 
-    console.log(data)
     if (cost.id) {
-      console.log('update data')
+      const { ok } = await updateCost(data, cost.id)
+      if (ok) {
+        toast.success('Successfully updated!')
+        setTimeout(() => {
+          router.push('/')
+        }, 1500)
+      }
+      return
     }
 
     const { ok } = await createCost(data, groupId)
     if (ok) {
-      router.push('/')
+      toast.success('Successfully added!')
+      setTimeout(() => {
+        router.push('/')
+      }, 1500)
     }
   }
 
@@ -120,7 +130,7 @@ export const CostForm = ({ cost, groupId }: Props) => {
               <select
                 className={`${styles.select} ${errors.paidBy ? styles.error : ''}`}
                 id="paidBy"
-                defaultValue={values.paidBy.id ?? 'selectOne'}
+                defaultValue={cost.paidBy.id ? cost.paidBy.id : 'selectOne'}
                 onChange={e => handlePaidBy(e.target.value)}
               >
                 <option value="selectOne" disabled>
@@ -159,7 +169,7 @@ export const CostForm = ({ cost, groupId }: Props) => {
             </div>
 
             <button type="submit" className={styles.submitButton}>
-              Create Cost
+              Submit
             </button>
           </Form>
         )

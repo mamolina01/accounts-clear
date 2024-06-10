@@ -8,7 +8,6 @@ export interface ParticipantSelectable extends Participant {
 }
 
 export interface CostProps {
-  id: string
   title: string
   date?: Date
   amount: string

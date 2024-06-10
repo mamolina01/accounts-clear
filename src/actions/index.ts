@@ -7,6 +7,7 @@ export * from './groups/update-group'
 export * from './costs/create-cost'
 export * from './costs/get-cost'
 export * from './costs/remove-cost'
+export * from './costs/update-cost'
 
 export * from './auth/login'
 export * from './auth/logout'

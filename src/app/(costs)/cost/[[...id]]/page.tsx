@@ -10,12 +10,8 @@ interface Props {
 }
 
 const NewCostPage = async ({ params }: Props) => {
-  const groupId = params.id ? params.id[0] : ''
-  const costId = params.id ? params.id[1] : ''
-
-  if (costId === '') {
-    redirect(`/cost/${groupId}`)
-  }
+  const groupId = params.id[0] ? params.id[0] : ''
+  const costId = params.id[1] ? params.id[1] : ''
 
   let cost: CostPropsTemp = {
     id: '',
@@ -70,8 +66,10 @@ const NewCostPage = async ({ params }: Props) => {
     }
   }
 
+  const title = cost?.id ? 'Edit cost' : 'Add a new cost'
+
   return (
-    <ContainerForm title="New Cost">
+    <ContainerForm title={title}>
       <CostForm cost={cost} groupId={groupId} />
     </ContainerForm>
   )

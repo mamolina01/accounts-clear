@@ -50,6 +50,9 @@ export const getGroupsByUserId = async (userId: string) => {
                 }
               }
             }
+          },
+          orderBy: {
+            date: 'desc'
           }
         }
       }

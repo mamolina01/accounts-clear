@@ -43,9 +43,8 @@ export const getCost = async (id: string) => {
       }
     })
 
-
     return cost
   } catch (error) {
-    throw new Error('There was an error getting a group')
+    return null
   }
 }
