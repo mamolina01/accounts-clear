@@ -154,16 +154,17 @@ export const BalanceForm = ({ group }: Props) => {
             <div className={styles.inputContainer}>
               <p className={styles.label}>
                 Participants {'('}
-                {values.participants.length + 1}/50{')'}
+                {values.participants.length + 1}
+                {')'}
               </p>
-              {/* TODO: Handle a loader for first participant */}
-              <div className={`${styles.participantList}`}>
+
+              {/* TODO: Align participants with anothers inputs */}
+              <ParticipantsForm addParticipant={addParticipant} />
+              <ul className={`${styles.participantList}`}>
                 {session?.user && !group && (
-                  <div className="w-full flex justify-between gap-2 items-center animate__animated animate__fadeIn">
-                    <p className="bg-transparent outline-none border-b-[1px] border-tertiary w-11/12 focus:text-secondary">
-                      {session?.user.name} {'(yo)'}
-                    </p>
-                  </div>
+                  <li className="w-full grid grid-cols-[1fr_50px] gap-3 items-center bg-tertiary px-2 py-1 rounded animate__animated animate__fadeIn">
+                    <p className="bg-transparent outline-none focus:text-secondary w-full">{session?.user.name}</p>
+                  </li>
                 )}
                 {values.participants.map(participant => (
                   <Participant
@@ -173,8 +174,7 @@ export const BalanceForm = ({ group }: Props) => {
                     key={participant.id}
                   />
                 ))}
-              </div>
-              <ParticipantsForm addParticipant={addParticipant} />
+              </ul>
             </div>
             <button type="submit" className={styles.submitButton}>
               Submit

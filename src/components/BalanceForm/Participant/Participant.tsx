@@ -3,6 +3,10 @@ import { ParticipantGroup as ParticipantProps } from '@/types/group'
 import React, { ChangeEvent, FormEventHandler, useState } from 'react'
 import { BsXLg, BsCheck2 } from 'react-icons/bs'
 import Swal from 'sweetalert2'
+import styles from './Participant.module.scss'
+import Image from 'next/image'
+import check from '/public/check.svg'
+import iconX from '/public/iconX.svg'
 
 interface Props {
   participant: ParticipantProps
@@ -40,16 +44,22 @@ export const Participant = ({ participant, editParticipant, removeParticipant }:
   }
 
   return (
-    <div className="w-full flex justify-between gap-2 items-center animate__animated animate__fadeIn">
+    <li className={styles.container}>
       <input
         type="text"
         value={tempParticipant.name}
-        className="bg-transparent outline-none border-b-[1px] border-tertiary w-11/12 focus:text-secondary"
+        className={`${styles.input} ${isEditting ? styles.active : ''}`}
         onChange={handleChange}
         onFocus={() => setIsEditting(true)}
       />
 
-      {isEditting ? <BsCheck2 onClick={onClickEdit} /> : <BsXLg onClick={onClickRemove} />}
-    </div>
+      <div className="flex justify-center items-center w-full">
+        {isEditting ? (
+          <Image alt="check" src={check} height={25} width={25} onClick={onClickEdit} className="cursor-pointer" />
+        ) : (
+          <Image alt="iconX" src={iconX} onClick={onClickRemove} className="cursor-pointer" />
+        )}
+      </div>
+    </li>
   )
 }
