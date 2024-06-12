@@ -1,16 +1,14 @@
 'use client'
 import { updateGroup, createGroup } from '@/actions'
-import { Participant } from '@/components/balanceForm/participant/Participant'
-import { generateID } from '@/helpers'
 import { validationSchemaNewBalance } from '@/validations'
 import { Category } from '@prisma/client'
 import { Form, Formik } from 'formik'
 import { useRouter } from 'next/navigation'
 import { FormEventHandler } from 'react'
 import styles from './BalanceForm.module.scss'
-import { ParticipantsForm } from './participantsForm/ParticipantsForm'
-import { GroupInfo, ParticipantGroup } from '@/types/group'
+import { GroupInfo } from '@/types/group'
 import toast from 'react-hot-toast'
+import { Participants } from './participants/Participants'
 
 interface Props {
   group: GroupInfo
@@ -27,7 +25,7 @@ export const BalanceForm = ({ group }: Props) => {
       participants: values.participants
     }
 
-    if (group) {
+    if (group.id) {
       const { ok } = await updateGroup(data, group?.id ?? '')
 
       if (ok) {
@@ -35,6 +33,8 @@ export const BalanceForm = ({ group }: Props) => {
         setTimeout(() => {
           router.push('/')
         }, 1500)
+      } else {
+        toast.error('Something went wrong.')
       }
     } else {
       const { ok } = await createGroup(data)
@@ -44,6 +44,8 @@ export const BalanceForm = ({ group }: Props) => {
         setTimeout(() => {
           router.push('/')
         }, 1500)
+      } else {
+        toast.error('Something went wrong.')
       }
     }
   }
@@ -69,49 +71,6 @@ export const BalanceForm = ({ group }: Props) => {
       {props => {
         const { values, isValid, isValidating, errors, setFieldValue, handleSubmit, validateField } = props
 
-        const addParticipant = (newParticipant: string) => {
-          const usernameExists = values.participants.find(
-            participant => participant.name.toLowerCase() === newParticipant.toLowerCase()
-          )
-
-          if (usernameExists) {
-            toast.error('This username exists.')
-            return { ok: false }
-          }
-
-          setFieldValue('participants', [
-            ...values.participants,
-            { name: newParticipant, id: generateID(), assignedCosts: [] }
-          ])
-          return { ok: true }
-        }
-
-        const editParticipant = (newParticipant: ParticipantGroup) => {
-          const usernameExists = values.participants.find(
-            participant => participant.name.toLowerCase() === newParticipant.name.toLowerCase()
-          )
-
-          if (usernameExists) {
-            toast.error('This username exists.')
-            return { ok: false }
-          }
-
-          const tempParticipants = values.participants.map(participant =>
-            participant.id === newParticipant.id ? newParticipant : participant
-          )
-          setFieldValue('participants', tempParticipants)
-          return { ok: true }
-        }
-
-        const removeParticipant = (participant: ParticipantGroup) => {
-          if (participant.assignedCosts.length > 0) {
-            toast.error('This user has assigned costs.')
-            return
-          }
-          const tempParticipants = values.participants.filter(tempParticipant => tempParticipant.id !== participant.id)
-          setFieldValue('participants', tempParticipants)
-        }
-
         const onSubmit: FormEventHandler<HTMLFormElement> = e => {
           e.preventDefault()
           if (values.participants.length === 0) {
@@ -119,7 +78,6 @@ export const BalanceForm = ({ group }: Props) => {
           }
           handleSubmit()
         }
-
         return (
           <Form onSubmit={onSubmit} className={styles.form}>
             <div className={styles.inputContainer}>
@@ -169,6 +127,7 @@ export const BalanceForm = ({ group }: Props) => {
               </select>
               {errors.description}
             </div>
+
             <div className={styles.inputContainer}>
               <p className={styles.label}>
                 Participants {'('}
@@ -176,17 +135,7 @@ export const BalanceForm = ({ group }: Props) => {
                 {')'}
               </p>
 
-              <ParticipantsForm addParticipant={addParticipant} />
-              <ul className={`${styles.participantList}`}>
-                {values.participants.map(participant => (
-                  <Participant
-                    participant={participant}
-                    editParticipant={editParticipant}
-                    removeParticipant={removeParticipant}
-                    key={participant.id}
-                  />
-                ))}
-              </ul>
+              <Participants participants={values.participants} setFieldValue={setFieldValue} />
             </div>
             <button type="submit" disabled={!isValid || isValidating} className={styles.submitButton}>
               Submit

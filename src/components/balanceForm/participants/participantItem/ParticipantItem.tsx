@@ -2,7 +2,7 @@
 import { ParticipantGroup as ParticipantProps } from '@/types/group'
 import React, { ChangeEvent, FormEventHandler, useEffect, useRef, useState } from 'react'
 import Swal from 'sweetalert2'
-import styles from './Participant.module.scss'
+import styles from '../Participants.module.scss'
 import Image from 'next/image'
 import check from '@/public/check.svg'
 import iconX from '@/public/iconX.svg'
@@ -15,7 +15,7 @@ interface Props {
   removeParticipant: (participant: ParticipantProps) => void
 }
 
-export const Participant = ({ participant, editParticipant, removeParticipant }: Props) => {
+export const ParticipantItem = ({ participant, editParticipant, removeParticipant }: Props) => {
   const [tempParticipant, setTempParticipant] = useState(participant)
   const [isEditting, setIsEditting] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -73,7 +73,7 @@ export const Participant = ({ participant, editParticipant, removeParticipant }:
   useOutsideClick(inputRef, onLeaveInput)
 
   return (
-    <li className={styles.container}>
+    <li className={styles.participantItem}>
       <input
         type="text"
         ref={inputRef}

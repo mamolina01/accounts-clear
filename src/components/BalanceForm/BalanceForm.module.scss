@@ -15,23 +15,6 @@
         @apply border-red-500;
       }
     }
-
-    .participantList {
-      @apply flex flex-col gap-2 max-h-40 overflow-scroll w-full mt-3 px-2 list-disc;
-
-      li::marker {
-        @apply text-orange-500;
-      }
-
-      &::-webkit-scrollbar {
-        @apply h-full w-[6px];
-      }
-
-      &::-webkit-scrollbar-thumb {
-        @apply bg-sky-700 rounded-xl;
-      }
-    }
-
     .errorText {
       @apply text-red-500 text-sm mx-1;
     }

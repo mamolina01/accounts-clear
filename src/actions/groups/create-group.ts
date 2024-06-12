@@ -33,7 +33,9 @@ export const createGroup = async (data: GroupInfo) => {
       }
     })
 
-    const participantsData = data.participants.map(({ name }) => ({
+    const tempParticipants = data.participants.filter(participant => participant.id !== session?.user.id)
+
+    const participantsData = tempParticipants.map(({ name }) => ({
       name: name,
       groupId: groupId
     }))
