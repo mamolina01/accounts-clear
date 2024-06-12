@@ -1,13 +1,13 @@
 'use client'
 import { ParticipantGroup as ParticipantProps } from '@/types/group'
-import React, { ChangeEvent, FormEventHandler, useRef, useState } from 'react'
-
+import React, { ChangeEvent, FormEventHandler, useEffect, useRef, useState } from 'react'
 import Swal from 'sweetalert2'
 import styles from './Participant.module.scss'
 import Image from 'next/image'
 import check from '@/public/check.svg'
 import iconX from '@/public/iconX.svg'
 import { useOutsideClick } from '@/hooks'
+import { useSession } from 'next-auth/react'
 
 interface Props {
   participant: ParticipantProps
@@ -19,6 +19,14 @@ export const Participant = ({ participant, editParticipant, removeParticipant }:
   const [tempParticipant, setTempParticipant] = useState(participant)
   const [isEditting, setIsEditting] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
+  const { data: session } = useSession()
+  const [isUserParticipant, setIsUserParticipant] = useState<boolean>(true)
+
+  useEffect(() => {
+    if (session) {
+      setIsUserParticipant(session?.user.id === participant.id)
+    }
+  }, [session])
 
   const handleChange: FormEventHandler<HTMLInputElement> = (e: ChangeEvent<HTMLInputElement>) => {
     setTempParticipant({ ...tempParticipant, name: e.target.value })
@@ -67,16 +75,18 @@ export const Participant = ({ participant, editParticipant, removeParticipant }:
         type="text"
         ref={inputRef}
         value={tempParticipant.name}
+        disabled={isUserParticipant}
         className={`${styles.input} ${isEditting ? styles.active : ''}`}
         onChange={handleChange}
         onFocus={() => setIsEditting(true)}
       />
 
-      {isEditting ? (
-        <Image alt="check" src={check} height={25} width={25} onClick={onClickEdit} className={styles.button} />
-      ) : (
-        <Image alt="iconX" src={iconX} onClick={onClickRemove} className={styles.button} />
-      )}
+      {!isUserParticipant &&
+        (isEditting ? (
+          <Image alt="check" src={check} height={25} width={25} onClick={onClickEdit} className={styles.button} />
+        ) : (
+          <Image alt="iconX" src={iconX} onClick={onClickRemove} className={styles.button} />
+        ))}
     </li>
   )
 }

@@ -5,7 +5,6 @@ import { generateID } from '@/helpers'
 import { validationSchemaNewBalance } from '@/validations'
 import { Category } from '@prisma/client'
 import { Form, Formik } from 'formik'
-import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { FormEventHandler } from 'react'
 import styles from './BalanceForm.module.scss'
@@ -14,17 +13,13 @@ import { GroupInfo, ParticipantGroup } from '@/types/group'
 import toast from 'react-hot-toast'
 
 interface Props {
-  group: GroupInfo | null
+  group: GroupInfo
 }
 
 export const BalanceForm = ({ group }: Props) => {
-  const initialValues: GroupInfo = { name: '', description: '', category: Category.Travel, participants: [] }
-  const { data: session } = useSession()
   const router = useRouter()
 
   const handleSubmit = async (values: GroupInfo) => {
-    if (!session?.user.id) return
-
     const data = {
       name: values.name,
       description: values.description,
@@ -64,15 +59,15 @@ export const BalanceForm = ({ group }: Props) => {
 
   return (
     <Formik
-      initialValues={group ?? initialValues}
-      validateOnChange={false}
+      initialValues={group}
+      validateOnChange
       validationSchema={validationSchemaNewBalance()}
       onSubmit={values => {
         handleSubmit({ ...values })
       }}
     >
       {props => {
-        const { values, errors, setFieldValue, handleSubmit, validateField } = props
+        const { values, isValid, isValidating, errors, setFieldValue, handleSubmit, validateField } = props
 
         const addParticipant = (newParticipant: string) => {
           const usernameExists = values.participants.find(
@@ -140,7 +135,7 @@ export const BalanceForm = ({ group }: Props) => {
                 onChange={e => setFieldValue('name', e.target.value)}
                 className={`${styles.input} ${errors.name && styles.error}`}
               />
-              {errors.name && <p className={styles.errorText}>name is required</p>}
+              {errors.name && <p className={styles.errorText}>{errors.name}</p>}
             </div>
             <div className={styles.inputContainer}>
               <label htmlFor="description" className={styles.label}>
@@ -155,7 +150,7 @@ export const BalanceForm = ({ group }: Props) => {
                 onChange={e => setFieldValue('description', e.target.value)}
                 className={`${styles.input} ${errors.description && styles.error}`}
               />
-              {errors.description}
+              {errors.description && <p className={styles.errorText}>{errors.description}</p>}
             </div>
             <div className={styles.inputContainer}>
               <label htmlFor="description" className={styles.label}>
@@ -177,17 +172,12 @@ export const BalanceForm = ({ group }: Props) => {
             <div className={styles.inputContainer}>
               <p className={styles.label}>
                 Participants {'('}
-                {values.participants.length + 1}
+                {values.participants.length}
                 {')'}
               </p>
 
               <ParticipantsForm addParticipant={addParticipant} />
               <ul className={`${styles.participantList}`}>
-                {session?.user && !group && (
-                  <li className="w-full grid grid-cols-[1fr_50px] gap-3 items-center bg-tertiary px-2 py-1 rounded animate__animated animate__fadeIn">
-                    <p className="bg-transparent outline-none focus:text-secondary w-full">{session?.user.name}</p>
-                  </li>
-                )}
                 {values.participants.map(participant => (
                   <Participant
                     participant={participant}
@@ -198,7 +188,7 @@ export const BalanceForm = ({ group }: Props) => {
                 ))}
               </ul>
             </div>
-            <button type="submit" className={styles.submitButton}>
+            <button type="submit" disabled={!isValid || isValidating} className={styles.submitButton}>
               Submit
             </button>
           </Form>

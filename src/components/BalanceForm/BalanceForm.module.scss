@@ -38,6 +38,10 @@
   }
 
   .submitButton {
-    @apply bg-sky-700 rounded p-1 w-3/4 mx-auto mt-4;
+    @apply bg-sky-700 rounded p-1 w-3/4 mx-auto mt-4 transition-all;
+
+    &:disabled {
+      @apply bg-opacity-50 bg-tertiary;
+    }
   }
 }
