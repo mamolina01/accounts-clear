@@ -24,7 +24,7 @@ export const Participant = ({ participant, editParticipant, removeParticipant }:
 
   useEffect(() => {
     if (session) {
-      setIsUserParticipant(session?.user.id === participant.id)
+      setIsUserParticipant(session?.user.name.toLowerCase() === participant.name.toLowerCase())
     }
   }, [session])
 
@@ -57,7 +57,10 @@ export const Participant = ({ participant, editParticipant, removeParticipant }:
   }
 
   const onLeaveInput = () => {
-    if (tempParticipant.name === participant.name) return
+    if (tempParticipant.name === participant.name) {
+      setIsEditting(false)
+      return
+    }
 
     const { ok } = editParticipant(tempParticipant)
 
