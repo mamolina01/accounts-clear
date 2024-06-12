@@ -2,7 +2,7 @@
 import React, { FormEventHandler, useState } from 'react'
 
 interface FormParticipantsProps {
-  addParticipant(name: string): void
+  addParticipant(name: string): { ok: boolean }
 }
 
 export const ParticipantsForm = ({ addParticipant }: FormParticipantsProps) => {
@@ -15,8 +15,10 @@ export const ParticipantsForm = ({ addParticipant }: FormParticipantsProps) => {
 
   const handleAddParticipant = () => {
     if (participantName !== '') {
-      addParticipant(participantName)
-      setParticipantName('')
+      const { ok } = addParticipant(participantName)
+      if (ok) {
+        setParticipantName('')
+      }
     }
   }
 

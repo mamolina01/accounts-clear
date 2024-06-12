@@ -11,7 +11,7 @@ import { useOutsideClick } from '@/hooks'
 
 interface Props {
   participant: ParticipantProps
-  editParticipant: (participant: ParticipantProps) => void
+  editParticipant: (participant: ParticipantProps) => { ok: boolean }
   removeParticipant: (participant: ParticipantProps) => void
 }
 
@@ -25,9 +25,12 @@ export const Participant = ({ participant, editParticipant, removeParticipant }:
   }
 
   const onClickEdit = () => {
-    setIsEditting(false)
     if (tempParticipant.name === participant.name) return
-    editParticipant(tempParticipant)
+    const { ok } = editParticipant(tempParticipant)
+
+    if (ok) {
+      setIsEditting(false)
+    }
   }
 
   const onClickRemove = () => {
@@ -45,7 +48,18 @@ export const Participant = ({ participant, editParticipant, removeParticipant }:
     }
   }
 
-  useOutsideClick(inputRef, () => setIsEditting(false))
+  const onLeaveInput = () => {
+    if (tempParticipant.name === participant.name) return
+
+    const { ok } = editParticipant(tempParticipant)
+
+    if (!ok) {
+      setTempParticipant(participant)
+      setIsEditting(false)
+    }
+  }
+
+  useOutsideClick(inputRef, onLeaveInput)
 
   return (
     <li className={styles.container}>

@@ -75,21 +75,44 @@ export const BalanceForm = ({ group }: Props) => {
         const { values, errors, setFieldValue, handleSubmit, validateField } = props
 
         const addParticipant = (newParticipant: string) => {
-          if (values.participants.length >= 50) return
+          const usernameExists = values.participants.find(
+            participant => participant.name.toLowerCase() === newParticipant.toLowerCase()
+          )
+
+          if (usernameExists) {
+            toast.error('This username exists.')
+            return { ok: false }
+          }
+
           setFieldValue('participants', [
             ...values.participants,
             { name: newParticipant, id: generateID(), assignedCosts: [] }
           ])
+          return { ok: true }
         }
 
         const editParticipant = (newParticipant: ParticipantGroup) => {
+          const usernameExists = values.participants.find(
+            participant => participant.name.toLowerCase() === newParticipant.name.toLowerCase()
+          )
+
+          if (usernameExists) {
+            toast.error('This username exists.')
+            return { ok: false }
+          }
+
           const tempParticipants = values.participants.map(participant =>
             participant.id === newParticipant.id ? newParticipant : participant
           )
           setFieldValue('participants', tempParticipants)
+          return { ok: true }
         }
 
         const removeParticipant = (participant: ParticipantGroup) => {
+          if (participant.assignedCosts.length > 0) {
+            toast.error('This user has assigned costs.')
+            return
+          }
           const tempParticipants = values.participants.filter(tempParticipant => tempParticipant.id !== participant.id)
           setFieldValue('participants', tempParticipants)
         }
