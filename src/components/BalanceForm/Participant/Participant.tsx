@@ -1,27 +1,44 @@
 'use client'
 import { ParticipantGroup as ParticipantProps } from '@/types/group'
-import React, { ChangeEvent, FormEventHandler, useState } from 'react'
-import { BsXLg, BsCheck2 } from 'react-icons/bs'
+import React, { ChangeEvent, FormEventHandler, useEffect, useRef, useState } from 'react'
 import Swal from 'sweetalert2'
+import styles from './Participant.module.scss'
+import Image from 'next/image'
+import check from '@/public/check.svg'
+import iconX from '@/public/iconX.svg'
+import { useOutsideClick } from '@/hooks'
+import { useSession } from 'next-auth/react'
 
 interface Props {
   participant: ParticipantProps
-  editParticipant: (participant: ParticipantProps) => void
+  editParticipant: (participant: ParticipantProps) => { ok: boolean }
   removeParticipant: (participant: ParticipantProps) => void
 }
 
 export const Participant = ({ participant, editParticipant, removeParticipant }: Props) => {
   const [tempParticipant, setTempParticipant] = useState(participant)
   const [isEditting, setIsEditting] = useState(false)
+  const inputRef = useRef<HTMLInputElement>(null)
+  const { data: session } = useSession()
+  const [isUserParticipant, setIsUserParticipant] = useState<boolean>(true)
+
+  useEffect(() => {
+    if (session) {
+      setIsUserParticipant(session?.user.id === participant.id)
+    }
+  }, [session])
 
   const handleChange: FormEventHandler<HTMLInputElement> = (e: ChangeEvent<HTMLInputElement>) => {
     setTempParticipant({ ...tempParticipant, name: e.target.value })
   }
 
   const onClickEdit = () => {
-    setIsEditting(false)
     if (tempParticipant.name === participant.name) return
-    editParticipant(tempParticipant)
+    const { ok } = editParticipant(tempParticipant)
+
+    if (ok) {
+      setIsEditting(false)
+    }
   }
 
   const onClickRemove = () => {
@@ -39,17 +56,37 @@ export const Participant = ({ participant, editParticipant, removeParticipant }:
     }
   }
 
+  const onLeaveInput = () => {
+    if (tempParticipant.name === participant.name) return
+
+    const { ok } = editParticipant(tempParticipant)
+
+    if (!ok) {
+      setTempParticipant(participant)
+      setIsEditting(false)
+    }
+  }
+
+  useOutsideClick(inputRef, onLeaveInput)
+
   return (
-    <div className="w-full flex justify-between gap-2 items-center animate__animated animate__fadeIn">
+    <li className={styles.container}>
       <input
         type="text"
+        ref={inputRef}
         value={tempParticipant.name}
-        className="bg-transparent outline-none border-b-[1px] border-tertiary w-11/12 focus:text-secondary"
+        disabled={isUserParticipant}
+        className={`${styles.input} ${isEditting ? styles.active : ''}`}
         onChange={handleChange}
         onFocus={() => setIsEditting(true)}
       />
 
-      {isEditting ? <BsCheck2 onClick={onClickEdit} /> : <BsXLg onClick={onClickRemove} />}
-    </div>
+      {!isUserParticipant &&
+        (isEditting ? (
+          <Image alt="check" src={check} height={25} width={25} onClick={onClickEdit} className={styles.button} />
+        ) : (
+          <Image alt="iconX" src={iconX} onClick={onClickRemove} className={styles.button} />
+        ))}
+    </li>
   )
 }

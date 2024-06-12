@@ -1,47 +1,47 @@
-"use server"
+'use server'
 
-import prisma from "@/lib/prisma"
-import { CostProps } from "@/types/cost"
+import prisma from '@/lib/prisma'
+import { CostProps } from '@/types/cost'
 
 export const createCost = async (data: CostProps, groupId: string) => {
-    try {
-        const { id: costId } = await prisma.cost.create({
-            data: {
-                title: data.title,
-                amount: Number(data.amount),
-                participantId: data.paidBy.id,
-                date: new Date(),
-                groupId: groupId
-            }
-        })
+  try {
+    const { id: costId } = await prisma.cost.create({
+      data: {
+        title: data.title,
+        amount: Number(data.amount),
+        participantId: data.paidBy,
+        date: new Date(),
+        groupId: groupId
+      }
+    })
 
-        const participantsData = data.participants.map(participant => ({
-            costId: costId,
-            participantId: participant.id
-        }))
+    const participantsData = data.assignedUsers.map(participant => ({
+      costId: costId,
+      participantId: participant.id
+    }))
 
-        await prisma.costAssignment.createMany({
-            data: participantsData
-        })
+    await prisma.costAssignment.createMany({
+      data: participantsData
+    })
 
-        await prisma.group.update({
-            where: {
-                id: groupId
-            },
-            data: {
-                total: {
-                    increment: Number(data.amount)
-                },
-            }
-        })
-
-        return {
-            ok: true
+    await prisma.group.update({
+      where: {
+        id: groupId
+      },
+      data: {
+        total: {
+          increment: Number(data.amount)
         }
-    } catch (error) {
-        console.log(error)
-        return {
-            ok: false
-        }
+      }
+    })
+
+    return {
+      ok: true
     }
+  } catch (error) {
+    console.log(error)
+    return {
+      ok: false
+    }
+  }
 }

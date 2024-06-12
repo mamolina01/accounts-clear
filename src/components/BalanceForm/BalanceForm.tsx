@@ -5,7 +5,6 @@ import { generateID } from '@/helpers'
 import { validationSchemaNewBalance } from '@/validations'
 import { Category } from '@prisma/client'
 import { Form, Formik } from 'formik'
-import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { FormEventHandler } from 'react'
 import styles from './BalanceForm.module.scss'
@@ -14,17 +13,13 @@ import { GroupInfo, ParticipantGroup } from '@/types/group'
 import toast from 'react-hot-toast'
 
 interface Props {
-  group: GroupInfo | null
+  group: GroupInfo
 }
 
 export const BalanceForm = ({ group }: Props) => {
-  const initialValues: GroupInfo = { name: '', description: '', category: Category.Travel, participants: [] }
-  const { data: session } = useSession()
   const router = useRouter()
 
   const handleSubmit = async (values: GroupInfo) => {
-    if (!session?.user.id) return
-
     const data = {
       name: values.name,
       description: values.description,
@@ -64,32 +59,55 @@ export const BalanceForm = ({ group }: Props) => {
 
   return (
     <Formik
-      initialValues={group ?? initialValues}
-      validateOnChange={false}
+      initialValues={group}
+      validateOnChange
       validationSchema={validationSchemaNewBalance()}
       onSubmit={values => {
         handleSubmit({ ...values })
       }}
     >
       {props => {
-        const { values, errors, setFieldValue, handleSubmit, validateField } = props
+        const { values, isValid, isValidating, errors, setFieldValue, handleSubmit, validateField } = props
 
         const addParticipant = (newParticipant: string) => {
-          if (values.participants.length >= 50) return
+          const usernameExists = values.participants.find(
+            participant => participant.name.toLowerCase() === newParticipant.toLowerCase()
+          )
+
+          if (usernameExists) {
+            toast.error('This username exists.')
+            return { ok: false }
+          }
+
           setFieldValue('participants', [
             ...values.participants,
             { name: newParticipant, id: generateID(), assignedCosts: [] }
           ])
+          return { ok: true }
         }
 
         const editParticipant = (newParticipant: ParticipantGroup) => {
+          const usernameExists = values.participants.find(
+            participant => participant.name.toLowerCase() === newParticipant.name.toLowerCase()
+          )
+
+          if (usernameExists) {
+            toast.error('This username exists.')
+            return { ok: false }
+          }
+
           const tempParticipants = values.participants.map(participant =>
             participant.id === newParticipant.id ? newParticipant : participant
           )
           setFieldValue('participants', tempParticipants)
+          return { ok: true }
         }
 
         const removeParticipant = (participant: ParticipantGroup) => {
+          if (participant.assignedCosts.length > 0) {
+            toast.error('This user has assigned costs.')
+            return
+          }
           const tempParticipants = values.participants.filter(tempParticipant => tempParticipant.id !== participant.id)
           setFieldValue('participants', tempParticipants)
         }
@@ -117,7 +135,7 @@ export const BalanceForm = ({ group }: Props) => {
                 onChange={e => setFieldValue('name', e.target.value)}
                 className={`${styles.input} ${errors.name && styles.error}`}
               />
-              {errors.name && <p className={styles.errorText}>name is required</p>}
+              {errors.name && <p className={styles.errorText}>{errors.name}</p>}
             </div>
             <div className={styles.inputContainer}>
               <label htmlFor="description" className={styles.label}>
@@ -132,7 +150,7 @@ export const BalanceForm = ({ group }: Props) => {
                 onChange={e => setFieldValue('description', e.target.value)}
                 className={`${styles.input} ${errors.description && styles.error}`}
               />
-              {errors.description}
+              {errors.description && <p className={styles.errorText}>{errors.description}</p>}
             </div>
             <div className={styles.inputContainer}>
               <label htmlFor="description" className={styles.label}>
@@ -154,17 +172,12 @@ export const BalanceForm = ({ group }: Props) => {
             <div className={styles.inputContainer}>
               <p className={styles.label}>
                 Participants {'('}
-                {values.participants.length + 1}/50{')'}
+                {values.participants.length}
+                {')'}
               </p>
-              {/* TODO: Handle a loader for first participant */}
-              <div className={`${styles.participantList}`}>
-                {session?.user && !group && (
-                  <div className="w-full flex justify-between gap-2 items-center animate__animated animate__fadeIn">
-                    <p className="bg-transparent outline-none border-b-[1px] border-tertiary w-11/12 focus:text-secondary">
-                      {session?.user.name} {'(yo)'}
-                    </p>
-                  </div>
-                )}
+
+              <ParticipantsForm addParticipant={addParticipant} />
+              <ul className={`${styles.participantList}`}>
                 {values.participants.map(participant => (
                   <Participant
                     participant={participant}
@@ -173,10 +186,9 @@ export const BalanceForm = ({ group }: Props) => {
                     key={participant.id}
                   />
                 ))}
-              </div>
-              <ParticipantsForm addParticipant={addParticipant} />
+              </ul>
             </div>
-            <button type="submit" className={styles.submitButton}>
+            <button type="submit" disabled={!isValid || isValidating} className={styles.submitButton}>
               Submit
             </button>
           </Form>

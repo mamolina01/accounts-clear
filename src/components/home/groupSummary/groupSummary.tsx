@@ -16,7 +16,7 @@ export const GroupSummary = ({ group }: { group: GroupProps }) => {
   return (
     <div className="flex flex-col gap-4 bg-primary p-3 rounded">
       <Tabs tabActive={tabActive} setTabActive={setTabActive} />
-      {tabActive === 'costs' ? <CostsList costs={group.costs} /> : <Balances group={group} />}
+      {tabActive === 'costs' ? <CostsList group={group} /> : <Balances group={group} />}
     </div>
   )
 }

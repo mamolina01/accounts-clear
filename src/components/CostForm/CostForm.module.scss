@@ -26,7 +26,7 @@
     }
 
     .participantList {
-      @apply max-h-[110px] overflow-scroll border-b border-tertiary mx-1;
+      @apply max-h-[120px] overflow-scroll border-b border-tertiary mx-1;
 
       &.error {
         @apply border-red-500;
@@ -38,6 +38,14 @@
         span {
           @apply text-lg;
         }
+      }
+
+      &::-webkit-scrollbar {
+        @apply h-full w-[6px];
+      }
+
+      &::-webkit-scrollbar-thumb {
+        @apply bg-sky-700 rounded-xl;
       }
     }
 

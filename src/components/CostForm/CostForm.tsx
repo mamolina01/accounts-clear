@@ -1,44 +1,61 @@
 'use client'
-import { Formik } from 'formik'
+import { Form, Formik } from 'formik'
 import styles from './CostForm.module.scss'
 import { validationSchemaNewCost } from '@/validations'
 import { ImCheckboxChecked, ImCheckboxUnchecked } from 'react-icons/im'
 import { createCost } from '@/actions'
-import { CostProps, Participant } from '@/types/cost'
+import { CostProps, CostPropsTemp, Participant, ParticipantSelectable } from '@/types/cost'
 import { useRouter } from 'next/navigation'
+import { updateCost } from '@/actions'
+import toast from 'react-hot-toast'
 
-export const CostForm = ({ participants, groupId }: { participants: Participant[]; groupId: string }) => {
+interface Props {
+  cost: CostPropsTemp
+  groupId: string
+}
+
+export const CostForm = ({ cost, groupId }: Props) => {
   const router = useRouter()
-  const initialValues: CostProps = {
-    title: '',
-    amount: '',
-    paidBy: {
-      id: '',
-      name: ''
-    },
-    participants: participants
-  }
 
-  const handleSubmit = async (values: CostProps) => {
-    // if (!session?.user.id) return
+  const handleSubmit = async (values: CostPropsTemp) => {
+    const formattedUsers = values.assignedUsers.map(user => {
+      return {
+        id: user.id,
+        name: user.name
+      }
+    })
 
-    const data = {
+    const data: CostProps = {
       title: values.title,
       amount: values.amount,
       paidBy: values.paidBy,
-      participants: values.participants
+      assignedUsers: formattedUsers
+    }
+
+    if (cost.id) {
+      const { ok } = await updateCost(data, cost.id)
+      if (ok) {
+        toast.success('Successfully updated!')
+        setTimeout(() => {
+          router.push('/')
+        }, 1500)
+      }
+      return
     }
 
     const { ok } = await createCost(data, groupId)
     if (ok) {
-      router.push('/')
+      toast.success('Successfully added!')
+      setTimeout(() => {
+        router.push('/')
+      }, 1500)
     }
   }
 
   return (
     <Formik
-      initialValues={initialValues}
-      validateOnChange={false}
+      initialValues={cost}
+      validateOnChange={true}
       validationSchema={validationSchemaNewCost()}
       onSubmit={values => {
         handleSubmit({ ...values })
@@ -46,31 +63,34 @@ export const CostForm = ({ participants, groupId }: { participants: Participant[
       validateOnMount={false}
     >
       {props => {
-        const { values, errors, setFieldValue, handleSubmit } = props
+        const { values, touched, errors, setFieldValue, handleSubmit } = props
+        const titleError = ((touched.title || values.title) && errors.title) || ''
+        const amountError = ((touched.amount || values.amount) && errors.amount) || ''
+        const paidByError = ((touched.paidBy || values.paidBy) && errors.paidBy) || ''
+        const assignedUsersError =
+          ((touched.assignedUsers || values.assignedUsers) && (errors.assignedUsers as string)) || ''
 
         const handleParticipants = (participant: Participant) => {
-          const tempParticipants = participants.map(participantItem => {
+          const tempParticipants = cost.assignedUsers.map(participantItem => {
             if (participantItem.id === participant.id) {
               participantItem.selected = !participantItem.selected
             }
             return participantItem
           })
           const selectedParticipants = tempParticipants.filter(
-            (participant: Participant) => participant.selected === true
+            (participant: ParticipantSelectable) => participant.selected
           )
-          console.log(selectedParticipants)
-          setFieldValue('participants', selectedParticipants)
+          setFieldValue('assignedUsers', selectedParticipants)
         }
 
         const handlePaidBy = (id: string) => {
-          const paidBy = participants.find((participant: Participant) => participant.id === id)
+          const paidBy = cost.assignedUsers.find((participant: ParticipantSelectable) => participant.id === id)
           if (!paidBy) return
-          const { selected, ...participant } = paidBy
-          setFieldValue('paidBy', participant)
+          setFieldValue('paidBy', id)
         }
 
         return (
-          <form onSubmit={handleSubmit} className={styles.form}>
+          <Form onSubmit={handleSubmit} className={styles.form}>
             <div className={styles.inputContainer}>
               <label htmlFor="title" className={styles.label}>
                 Title
@@ -84,7 +104,7 @@ export const CostForm = ({ participants, groupId }: { participants: Participant[
                 onChange={e => setFieldValue('title', e.target.value)}
                 className={`${styles.input} ${errors.title ? styles.error : ''}`}
               />
-              <p className={styles.errorText}>{errors.title}</p>
+              <p className={styles.errorText}>{titleError}</p>
             </div>
 
             <div className={styles.inputContainer}>
@@ -103,7 +123,7 @@ export const CostForm = ({ participants, groupId }: { participants: Participant[
                 />
                 <span>ARS</span>
               </div>
-              <p className={styles.errorText}>{errors.amount}</p>
+              <p className={styles.errorText}>{amountError}</p>
             </div>
 
             <div className={styles.inputContainer}>
@@ -114,27 +134,27 @@ export const CostForm = ({ participants, groupId }: { participants: Participant[
               <select
                 className={`${styles.select} ${errors.paidBy ? styles.error : ''}`}
                 id="paidBy"
-                defaultValue="selectOne"
+                defaultValue={cost.paidBy ? cost.paidBy : 'selectOne'}
                 onChange={e => handlePaidBy(e.target.value)}
               >
                 <option value="selectOne" disabled>
                   -- Select one --
                 </option>
-                {participants.map((participant, index) => (
+                {cost.assignedUsers.map((participant, index) => (
                   <option key={participant.id} value={participant.id}>
                     {participant.name}
                   </option>
                 ))}
               </select>
-              <p className={styles.errorText}>{errors.paidBy?.id}</p>
+              <p className={styles.errorText}>{paidByError}</p>
             </div>
 
             <div className={styles.inputContainer}>
               <label htmlFor="participants" className={styles.label}>
                 Participants
               </label>
-              <div className={`${styles.participantList} ${errors.participants ? styles.error : ''}`}>
-                {participants.map(participant => (
+              <div className={`${styles.participantList} ${errors.assignedUsers ? styles.error : ''}`}>
+                {cost.assignedUsers.map(participant => (
                   <div key={participant.id} className={styles.participantContainer}>
                     {participant.selected ? (
                       <ImCheckboxChecked
@@ -148,14 +168,13 @@ export const CostForm = ({ participants, groupId }: { participants: Participant[
                   </div>
                 ))}
               </div>
-              {/* TODO: Check participants error */}
-              {/* <p className={styles.errorText}>{errors.participants}</p> */}
+              <p className={styles.errorText}>{assignedUsersError}</p>
             </div>
 
             <button type="submit" className={styles.submitButton}>
-              Create Cost
+              Submit
             </button>
-          </form>
+          </Form>
         )
       }}
     </Formik>

@@ -1,0 +1,14 @@
+.container {
+  @apply w-full self-center grid grid-cols-[1fr_25px] gap-3 items-center bg-tertiary px-2 py-1 rounded;
+
+  .input {
+    @apply bg-transparent outline-none border-b-[1px] border-transparent w-full focus:text-secondary;
+    &.active {
+      @apply focus:border-tertiary;
+    }
+  }
+
+  .button {
+    @apply cursor-pointer;
+  }
+}

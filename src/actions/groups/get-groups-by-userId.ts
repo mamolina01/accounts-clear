@@ -1,7 +1,7 @@
 'use server'
 
 import prisma from '@/lib/prisma'
-import { Participant } from '../../types/cost';
+import { Participant } from '../../types/cost'
 
 export const getGroupsByUserId = async (userId: string) => {
   try {
@@ -45,11 +45,14 @@ export const getGroupsByUserId = async (userId: string) => {
                 participant: {
                   select: {
                     id: true,
-                    name: true,
+                    name: true
                   }
                 }
               }
             }
+          },
+          orderBy: {
+            date: 'desc'
           }
         }
       }
@@ -63,4 +66,3 @@ export const getGroupsByUserId = async (userId: string) => {
     throw new Error('There was an error getting a group')
   }
 }
-
