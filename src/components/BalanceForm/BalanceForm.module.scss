@@ -17,7 +17,7 @@
     }
 
     .participantList {
-      @apply flex flex-col gap-2 max-h-40 overflow-scroll w-full mt-3 pr-[6px] list-disc;
+      @apply flex flex-col gap-2 max-h-40 overflow-scroll w-full mt-3 px-2 list-disc;
 
       li::marker {
         @apply text-orange-500;

@@ -21,7 +21,7 @@ export const ParticipantsForm = ({ addParticipant }: FormParticipantsProps) => {
   }
 
   return (
-    <div className="grid grid-cols-[1fr_50px] gap-3 w-full mt-2 pr-[6px]">
+    <div className="grid grid-cols-[1fr_50px] gap-3 mt-2 mx-1">
       <input
         type="text"
         value={participantName}

@@ -158,7 +158,6 @@ export const BalanceForm = ({ group }: Props) => {
                 {')'}
               </p>
 
-              {/* TODO: Align participants with anothers inputs */}
               <ParticipantsForm addParticipant={addParticipant} />
               <ul className={`${styles.participantList}`}>
                 {session?.user && !group && (

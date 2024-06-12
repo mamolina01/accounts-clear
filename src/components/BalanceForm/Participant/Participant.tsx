@@ -1,12 +1,13 @@
 'use client'
 import { ParticipantGroup as ParticipantProps } from '@/types/group'
-import React, { ChangeEvent, FormEventHandler, useState } from 'react'
-import { BsXLg, BsCheck2 } from 'react-icons/bs'
+import React, { ChangeEvent, FormEventHandler, useRef, useState } from 'react'
+
 import Swal from 'sweetalert2'
 import styles from './Participant.module.scss'
 import Image from 'next/image'
-import check from '/public/check.svg'
-import iconX from '/public/iconX.svg'
+import check from '@/public/check.svg'
+import iconX from '@/public/iconX.svg'
+import { useOutsideClick } from '@/hooks'
 
 interface Props {
   participant: ParticipantProps
@@ -17,6 +18,7 @@ interface Props {
 export const Participant = ({ participant, editParticipant, removeParticipant }: Props) => {
   const [tempParticipant, setTempParticipant] = useState(participant)
   const [isEditting, setIsEditting] = useState(false)
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const handleChange: FormEventHandler<HTMLInputElement> = (e: ChangeEvent<HTMLInputElement>) => {
     setTempParticipant({ ...tempParticipant, name: e.target.value })
@@ -43,23 +45,24 @@ export const Participant = ({ participant, editParticipant, removeParticipant }:
     }
   }
 
+  useOutsideClick(inputRef, () => setIsEditting(false))
+
   return (
     <li className={styles.container}>
       <input
         type="text"
+        ref={inputRef}
         value={tempParticipant.name}
         className={`${styles.input} ${isEditting ? styles.active : ''}`}
         onChange={handleChange}
         onFocus={() => setIsEditting(true)}
       />
 
-      <div className="flex justify-center items-center w-full">
-        {isEditting ? (
-          <Image alt="check" src={check} height={25} width={25} onClick={onClickEdit} className="cursor-pointer" />
-        ) : (
-          <Image alt="iconX" src={iconX} onClick={onClickRemove} className="cursor-pointer" />
-        )}
-      </div>
+      {isEditting ? (
+        <Image alt="check" src={check} height={25} width={25} onClick={onClickEdit} className={styles.button} />
+      ) : (
+        <Image alt="iconX" src={iconX} onClick={onClickRemove} className={styles.button} />
+      )}
     </li>
   )
 }

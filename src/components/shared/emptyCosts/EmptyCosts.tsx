@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import icon from '/public/emptyCosts.svg'
+import icon from '@/public/emptyCosts.svg'
 
 export const EmptyCosts = () => {
   return (
