@@ -28,7 +28,7 @@ const Balance = async ({ params }: Props) => {
     participants: []
   }
 
-  if (session) {
+  if (session && !group) {
     initialValues.participants.push({
       name: session?.user?.name,
       id: session?.user?.id,

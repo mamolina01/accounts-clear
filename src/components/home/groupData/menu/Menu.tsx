@@ -41,7 +41,7 @@ export const Menu = ({ groupId }: { groupId: string }) => {
   useOutsideClick(menuRef, closeMenu)
   return (
     <>
-      <BsThreeDotsVertical className="text-xl cursor-pointer" onClick={() => setShowMenu(true)} />
+      <BsThreeDotsVertical className="text-xl cursor-pointer absolute right-0" onClick={() => setShowMenu(true)} />
       {showMenu && (
         <div className="bg-secondary border border-tertiary rounded absolute top-2 right-4" ref={menuRef}>
           <Link

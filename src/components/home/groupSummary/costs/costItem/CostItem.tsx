@@ -33,11 +33,13 @@ export const CostItem = ({ cost, groupId }: Props) => {
 
   return (
     // TODO: Add animation
-    <div className="bg-secondary w-full p-3 rounded grid grid-cols-[auto_1fr_1fr_auto] gap-y-1 gap-x-2 hover:opacity-80 cursor-pointer">
+    <div className="bg-secondary w-full p-3 rounded grid grid-cols-[auto_1fr_1fr_auto] gap-y-1 gap-x-2 hover:bg-neutral-800 cursor-pointer">
       <BsChevronDown className={`${showMore && 'rotate-180'} transition-all self-center`} onClick={toggleShowMore} />
       <div>
         <p className="text-xl">{cost.title}</p>
-        <p className="text-tertiary text-sm">Paid by: {cost.paidBy.name}</p>
+        <p className="text-sm">
+          Paid by: <span className="text-tertiary">{cost.paidBy.name}</span>
+        </p>
       </div>
       <div className="flex flex-col items-end">
         <p className="text-xl text-primary">${cost.amount}</p>
@@ -45,9 +47,9 @@ export const CostItem = ({ cost, groupId }: Props) => {
       </div>
       <Menu costId={cost.id} groupId={groupId} />
       {showMore && (
-        <div className="text-tertiary col-span-2 col-start-2">
+        <div className="col-span-2 col-start-2">
           <p className="text-sm">For {cost.assignedUsers.length} participants:</p>
-          <ul className="pl-1">
+          <ul className="pl-1 text-tertiary">
             {cost.assignedUsers.map((user: AssignedUserProps) => (
               <li
                 className="text-sm grid grid-cols-3 justify-between w-full"

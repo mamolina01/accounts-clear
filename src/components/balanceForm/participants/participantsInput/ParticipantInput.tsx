@@ -1,11 +1,12 @@
 'use client'
 import React, { FormEventHandler, useState } from 'react'
+import styles from '../Participants.module.scss'
 
 interface FormParticipantsProps {
   addParticipant(name: string): { ok: boolean }
 }
 
-export const ParticipantsForm = ({ addParticipant }: FormParticipantsProps) => {
+export const ParticipantInput = ({ addParticipant }: FormParticipantsProps) => {
   const [participantName, setParticipantName] = useState<string>('')
 
   const handleSubmit: FormEventHandler<HTMLInputElement> = e => {
@@ -23,16 +24,16 @@ export const ParticipantsForm = ({ addParticipant }: FormParticipantsProps) => {
   }
 
   return (
-    <div className="grid grid-cols-[1fr_50px] gap-3 mt-2 mx-1">
+    <div className={styles.participantInput}>
       <input
         type="text"
         value={participantName}
         placeholder="Participant name"
         onChange={e => setParticipantName(e.target.value)}
         onSubmit={handleSubmit}
-        className={`bg-transparent text-secondary outline-none w-full border-b-[1px] border-transparent focus:border-tertiary`}
+        className={styles.input}
       />
-      <button type="button" className="bg-sky-700 text-sm py-1 px-2 rounded" onClick={handleAddParticipant}>
+      <button type="button" className={styles.button} onClick={handleAddParticipant}>
         Add
       </button>
     </div>

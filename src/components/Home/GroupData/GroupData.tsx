@@ -12,8 +12,8 @@ export const GroupData = async ({ group }: { group: GroupProps }) => {
 
   return (
     <div className="grid grid-cols-2 gap-x-5 gap-y-3 p-3 bg-primary rounded relative">
-      <div className="col-span-2 flex items-center relative">
-        <h4 className="text-3xl text-center flex-1">{group.name}</h4>
+      <div className="col-span-2 flex justify-center items-center relative">
+        <h4 className="text-3xl">{group.name}</h4>
         <Menu groupId={group.id} />
       </div>
       <div className="flex flex-col">
