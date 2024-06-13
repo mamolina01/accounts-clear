@@ -6,7 +6,7 @@ export const HeroSection = () => {
       <div className={styles.overlay}>
         <div>
           <h4 className={styles.title}>Welcome to</h4>
-          <h4 className={styles.title}>Clear Accounts</h4>
+          <h4 className={styles.subtitle}>Clear Accounts</h4>
           <p className={styles.description}>Split your expenses with your friends!</p>
           <div className={styles.buttons}>
             <button className={styles.buttonLogin}>Login</button>
