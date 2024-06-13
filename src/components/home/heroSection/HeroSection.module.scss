@@ -1,0 +1,26 @@
+.container {
+  @apply bg-cover bg-center bg-no-repeat bg-[url('/images/background.jpg')];
+  .overlay {
+    @apply bg-black/60 text-white py-24 px-6 md:px-12 lg:px-24 xl:px-32 flex items-center justify-between;
+
+    .title {
+      @apply text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4;
+    }
+
+    .description {
+      @apply text-lg md:text-xl lg:text-2xl xl:text-3xl mb-8;
+    }
+
+    .buttons {
+      @apply flex gap-x-4;
+
+      .buttonLogin {
+        @apply bg-primary text-white py-2 px-6 rounded-lg text-lg;
+      }
+
+      .buttonRegister {
+        @apply bg-transparent text-white py-2 px-6 rounded-lg text-lg;
+      }
+    }
+  }
+}
