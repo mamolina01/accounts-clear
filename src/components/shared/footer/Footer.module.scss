@@ -1,0 +1,6 @@
+.footer {
+  @apply bg-zinc-900 text-white py-8 flex justify-center items-center text-sm sm:text-lg gap-2;
+  .text {
+    @apply text-primary;
+  }
+}
