@@ -10,7 +10,7 @@ export const GroupSummary = ({ group }: { group: GroupProps }) => {
   const [tabActive, setTabActive] = useState('costs')
 
   if (group.costs.length === 0) {
-    return <EmptyCosts />
+    return <EmptyCosts groupId={group.id} />
   }
 
   return (
