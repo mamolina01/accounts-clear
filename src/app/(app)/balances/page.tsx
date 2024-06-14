@@ -2,7 +2,7 @@ import { auth } from '@/auth.config'
 import { GroupProps } from '@/types/group'
 import { getGroupsByUserId } from '@/actions'
 import { GroupData, HeaderGroups } from '@/components'
-import { GroupSummary } from '@/components/home/groupSummary/groupSummary'
+import { GroupSummary } from '@/components/groups/groupSummary/groupSummary'
 
 export default async function Home() {
   const session = await auth()

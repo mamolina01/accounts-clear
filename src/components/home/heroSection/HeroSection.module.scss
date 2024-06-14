@@ -1,0 +1,33 @@
+.container {
+  @apply bg-cover bg-center bg-no-repeat bg-[url('/images/background.jpg')];
+  .overlay {
+    @apply bg-black/70 text-white py-24 px-6 md:px-12 lg:px-24 xl:px-32 flex items-center justify-between;
+
+    .title {
+      @apply text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4;
+    }
+    .subtitle {
+      @apply text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 text-primary;
+    }
+
+    .description {
+      @apply text-lg md:text-xl lg:text-2xl xl:text-3xl mb-8;
+    }
+
+    .buttons {
+      @apply flex gap-x-4 items-center;
+
+      .buttonBalances {
+        @apply bg-sky-600 hover:bg-sky-700 text-white py-2 px-6 rounded-lg text-lg transition-all;
+      }
+
+      .buttonLogin {
+        @apply bg-neutral-950 bg-opacity-65 hover:bg-opacity-90 text-white py-2 px-6 rounded-lg text-lg transition-all;
+      }
+
+      .buttonRegister {
+        @apply bg-transparent text-white box-border h-11 py-2 px-6 rounded-lg text-lg border border-transparent hover:border-white hover:bg-black/30 transition-all;
+      }
+    }
+  }
+}

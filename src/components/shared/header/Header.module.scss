@@ -1,0 +1,39 @@
+.header {
+  @apply bg-primary py-4 px-10 flex items-center justify-between sticky top-0 z-10;
+
+  .logo {
+    @apply flex gap-2 items-center;
+
+    .title {
+      @apply text-3xl text-primary font-medium;
+    }
+  }
+
+  .nav {
+    @apply flex gap-10 items-center;
+
+    .userContainer {
+      @apply flex gap-2 items-center;
+
+      .textContainer {
+        @apply flex flex-col items-end;
+
+        .email {
+          @apply text-sm text-tertiary;
+        }
+      }
+
+      .signOut {
+        @apply flex items-center  rounded text-primary;
+      }
+    }
+
+    .link {
+      @apply text-primary hover:text-sky-600 text-lg border-b-2 border-b-transparent hover:border-sky-600;
+    }
+
+    .register {
+      @apply bg-sky-600 hover:bg-opacity-50 text-white py-1 px-6 rounded text-lg;
+    }
+  }
+}

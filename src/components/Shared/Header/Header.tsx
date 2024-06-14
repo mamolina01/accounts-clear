@@ -1,27 +1,45 @@
-'use client'
-import { signOut, useSession } from 'next-auth/react'
-import { logout } from '@/actions'
-import { IoLogOutOutline } from 'react-icons/io5'
+import coin from '@/public/coin.svg'
 import Link from 'next/link'
+import Image from 'next/image'
+import styles from './Header.module.scss'
+import { auth } from '@/auth.config'
+import { SignOut } from './SignOut'
+import { Routes } from '@/enums/routes'
 
-export const Header = () => {
-  const { data: session } = useSession()
+export const Header = async () => {
+  const session = await auth()
 
   return (
-    <div className="w-full bg-primary p-3 grid grid-cols-3 items-center sticky top-0 z-10">
-      <Link href="/" className="text-3xl font-semibold text-primary capitalize text-center col-start-2 cursor-pointer">
-        <h1>Costs Management</h1>
+    <header className={styles.header}>
+      <Link href={Routes.HOME} className={styles.logo}>
+        <Image src={coin} alt="coin" width={35} />
+        <span className={styles.title}>Clear Accounts</span>
       </Link>
 
-      {session?.user && (
-        <div className="flex gap-5 items-center justify-end">
-          <span className="text-lg capitalize">{session.user.name}</span>
-          {session?.user?.image && <img src={session?.user?.image} alt="userimage" className="w-8 h-8 rounded-full" />}
-          <button onClick={() => signOut()} className=" bg-sky-700 flex items-center p-1 rounded">
-            <IoLogOutOutline size={25} />
-          </button>
-        </div>
+      {session?.user ? (
+        <nav className={styles.nav}>
+          <Link href={Routes.BALANCES} className={styles.link}>
+            Balances
+          </Link>
+          <div className={styles.userContainer}>
+            <div className={styles.textContainer}>
+              <p>{session.user.name}</p>
+              <p className={styles.email}>{session.user.email}</p>
+            </div>
+            {session.user.image && <Image src={session.user.image} alt="" />}
+            <SignOut />
+          </div>
+        </nav>
+      ) : (
+        <nav className={styles.nav}>
+          <Link href={Routes.LOGIN} className={styles.link}>
+            Login
+          </Link>
+          <Link href={Routes.REGISTER} className={styles.register}>
+            Register
+          </Link>
+        </nav>
       )}
-    </div>
+    </header>
   )
 }
