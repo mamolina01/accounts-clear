@@ -1,5 +1,5 @@
 .header {
-  @apply bg-primary py-4 px-10 flex items-center justify-between;
+  @apply bg-primary py-4 px-10 flex items-center justify-between sticky top-0 z-10;
 
   .logo {
     @apply flex gap-2 items-center;

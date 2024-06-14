@@ -21,9 +21,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={monserrat.className}>
         <Providers>
-          <Header />
-          {children}
-          <Footer />
+          <div className="min-h-screen flex flex-col justify-between">
+            <Header />
+            {children}
+            <Footer />
+          </div>
         </Providers>
       </body>
     </html>

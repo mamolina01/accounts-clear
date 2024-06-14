@@ -3,6 +3,7 @@ import { GroupProps } from '@/types/group'
 import Link from 'next/link'
 import { BsPlusLg } from 'react-icons/bs'
 import { Menu } from './menu/Menu'
+import { Routes } from '@/enums/routes'
 
 export const GroupData = async ({ group }: { group: GroupProps }) => {
   const getUsers = () => {
@@ -29,7 +30,7 @@ export const GroupData = async ({ group }: { group: GroupProps }) => {
       </div>
       <div className="w-full absolute -bottom-4 ">
         <Link
-          href={`/cost/${group.id}`}
+          href={`${Routes.COST_FORM}/${group.id}`}
           className=" bg-sky-600 hover:bg-sky-700 rounded-full h-10 w-10 mx-auto flex justify-center items-center"
         >
           <BsPlusLg className=" text-3xl" />

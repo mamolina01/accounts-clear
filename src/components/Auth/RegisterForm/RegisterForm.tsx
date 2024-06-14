@@ -1,5 +1,6 @@
 'use client'
 import { login, registerUser } from '@/actions'
+import { Routes } from '@/enums/routes'
 import Link from 'next/link'
 import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
@@ -69,7 +70,7 @@ export const RegisterForm = () => {
 
       <span className="text-sm text-center">
         Do you already have your account?{' '}
-        <Link href="/auth/login" className="text-blue-500 font-semibold text-base">
+        <Link href={Routes.LOGIN} className="text-blue-500 font-semibold text-base">
           Sign up!
         </Link>
       </span>

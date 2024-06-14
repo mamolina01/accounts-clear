@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import styles from './HeroSection.module.scss'
 import { auth } from '@/auth.config'
+import { Routes } from '@/enums/routes'
 
 export const HeroSection = async () => {
   const session = await auth()
@@ -16,15 +17,15 @@ export const HeroSection = async () => {
           <p className={styles.description}>Split your expenses with your friends!</p>
           <div className={styles.buttons}>
             {isAuthenticated ? (
-              <Link href={'/auth/login'} className={styles.buttonBalances}>
+              <Link href={Routes.BALANCES} className={styles.buttonBalances}>
                 My Balances
               </Link>
             ) : (
               <>
-                <Link href={'/auth/login'} className={styles.buttonLogin}>
+                <Link href={Routes.LOGIN} className={styles.buttonLogin}>
                   Login
                 </Link>
-                <Link href={'/auth/register'} className={styles.buttonRegister}>
+                <Link href={Routes.REGISTER} className={styles.buttonRegister}>
                   Register
                 </Link>
               </>

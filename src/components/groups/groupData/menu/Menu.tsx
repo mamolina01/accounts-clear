@@ -1,5 +1,6 @@
 'use client'
 import { removeGroup } from '@/actions'
+import { Routes } from '@/enums/routes'
 import { useOutsideClick } from '@/hooks'
 import Link from 'next/link'
 import React, { useRef, useState } from 'react'
@@ -45,7 +46,7 @@ export const Menu = ({ groupId }: { groupId: string }) => {
       {showMenu && (
         <div className="bg-secondary border border-tertiary rounded absolute top-2 right-4" ref={menuRef}>
           <Link
-            href={`balance/submit/${groupId}`}
+            href={`${Routes.BALANCE_FORM}/${groupId}`}
             className="flex px-4 py-1 items-center gap-3 cursor-pointer hover:text-primary"
           >
             <FaEdit />

@@ -1,6 +1,7 @@
 'use client'
 
 import { authenticate } from '@/actions'
+import { Routes } from '@/enums/routes'
 import Link from 'next/link'
 import { useEffect } from 'react'
 import { useFormState, useFormStatus } from 'react-dom'
@@ -42,7 +43,7 @@ export const LoginForm = () => {
 
       <span className="text-sm text-center">
         Still don't have your account?{' '}
-        <Link href="/auth/register" className="text-blue-500 font-semibold text-base">
+        <Link href={Routes.REGISTER} className="text-blue-500 font-semibold text-base">
           Sign up!
         </Link>
       </span>
