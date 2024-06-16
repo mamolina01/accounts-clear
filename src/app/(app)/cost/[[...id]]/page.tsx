@@ -1,5 +1,6 @@
 import { getCost, getParticipantsByGroupId } from '@/actions'
-import { CostForm, ContainerForm } from '@/components'
+import { CostForm, FormContainer } from '@/components'
+import { Routes } from '@/enums/routes'
 import { CostPropsTemp, Participant, ParticipantSelectable } from '@/types/cost'
 import { redirect } from 'next/navigation'
 
@@ -27,7 +28,7 @@ const NewCostPage = async ({ params }: Props) => {
     const temporaryCost = await getCost(costId)
 
     if (!temporaryCost) {
-      redirect(`/cost/${groupId}`)
+      redirect(`${Routes.COST_FORM}/${groupId}`)
     }
 
     const participants = await getParticipantsByGroupId(groupId)
@@ -67,9 +68,9 @@ const NewCostPage = async ({ params }: Props) => {
   const title = cost?.id ? 'Edit cost' : 'Add a new cost'
 
   return (
-    <ContainerForm title={title}>
+    <FormContainer title={title}>
       <CostForm cost={cost} groupId={groupId} />
-    </ContainerForm>
+    </FormContainer>
   )
 }
 

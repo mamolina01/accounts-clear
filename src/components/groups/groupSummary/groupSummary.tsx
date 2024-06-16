@@ -4,7 +4,7 @@ import { CostsList } from './costs/costsList/CostsList'
 import { useState } from 'react'
 import { Balances } from './balances/Balance'
 import { GroupProps } from '@/types/group'
-import { EmptyCosts } from '@/components'
+import { EmptyCosts } from './costs/emptyCosts/EmptyCosts'
 
 export const GroupSummary = ({ group }: { group: GroupProps }) => {
   const [tabActive, setTabActive] = useState('costs')

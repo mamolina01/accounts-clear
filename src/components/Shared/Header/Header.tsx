@@ -3,8 +3,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import styles from './Header.module.scss'
 import { auth } from '@/auth.config'
-import { SignOut } from './SignOut'
 import { Routes } from '@/enums/routes'
+import { AuthenticatedTabs } from './authenticatedTabs/AuthenticatedTabs'
 
 export const Header = async () => {
   const session = await auth()
@@ -17,19 +17,7 @@ export const Header = async () => {
       </Link>
 
       {session?.user ? (
-        <nav className={styles.nav}>
-          <Link href={Routes.BALANCES} className={styles.link}>
-            Balances
-          </Link>
-          <div className={styles.userContainer}>
-            <div className={styles.textContainer}>
-              <p>{session.user.name}</p>
-              <p className={styles.email}>{session.user.email}</p>
-            </div>
-            {session.user.image && <Image src={session.user.image} alt="" />}
-            <SignOut />
-          </div>
-        </nav>
+        <AuthenticatedTabs user={session.user} />
       ) : (
         <nav className={styles.nav}>
           <Link href={Routes.LOGIN} className={styles.link}>

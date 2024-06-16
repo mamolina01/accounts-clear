@@ -1,6 +1,6 @@
 export * from './auth'
 
-export * from './balanceForm'
+export * from './groupForm'
 export * from './costForm'
 export * from './groups'
 
