@@ -30,10 +30,14 @@
 
     .link {
       @apply text-primary border-b-2 border-b-transparent hover:border-sky-600 capitalize;
+
+      &.active {
+        @apply border-sky-600;
+      }
     }
 
     .register {
-      @apply bg-sky-600 hover:bg-opacity-50 text-white py-1 px-6 rounded text-lg;
+      @apply bg-sky-600 hover:bg-opacity-50 text-white py-1 px-3 rounded;
     }
   }
 }
