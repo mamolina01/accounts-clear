@@ -1,0 +1,31 @@
+.container {
+  @apply flex flex-col p-3 bg-primary rounded relative;
+
+  .title {
+    @apply text-3xl text-center mb-4;
+  }
+
+  .group {
+    @apply grid grid-cols-[30px_auto] items-center p-2 hover:bg-tertiary cursor-pointer;
+
+    .listIcon {
+      @apply w-2 h-2 bg-quarteriary rounded-full ml-[6px];
+    }
+
+    .textContainer {
+      @apply flex flex-col text-lg;
+
+      .description {
+        @apply text-base text-tertiary;
+      }
+    }
+  }
+
+  .option {
+    @apply grid grid-cols-[30px_auto] items-center p-2 hover:bg-tertiary cursor-pointer text-lg;
+  }
+
+  .divider {
+    @apply border-t border-tertiary;
+  }
+}

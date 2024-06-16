@@ -1,25 +1,30 @@
 'use server'
 
 import prisma from '@/lib/prisma'
-import { Participant } from '../../types/cost'
+import { auth } from '@/auth.config'
 
-export const getGroupsByUserId = async (userId: string) => {
+export const getGroupsByUserId = async () => {
+  const session = await auth()
+
+  if (!session) return []
+
   try {
     const participant = await prisma.participant.findFirst({
       where: {
-        userId: userId
+        userId: session.user.id
       }
     })
 
-    if (!participant) return []
+    if (!participant) return {}
 
-    const groups = await prisma.group.findMany({
+    const group = await prisma.group.findFirst({
       where: {
         participants: {
           some: {
             userId: participant.userId
           }
-        }
+        },
+        id: session.user.id
       },
       include: {
         participants: {
@@ -58,9 +63,9 @@ export const getGroupsByUserId = async (userId: string) => {
       }
     })
 
-    if (!groups) return []
+    if (!group) return {}
 
-    return groups
+    return group
   } catch (error) {
     console.log(error)
     throw new Error('There was an error getting a group')
