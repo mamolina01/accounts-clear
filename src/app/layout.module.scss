@@ -1,0 +1,7 @@
+.container {
+  @apply min-h-screen flex flex-col justify-between;
+
+  .subContainer {
+    min-height: calc(100vh - 56px - 68px);
+  }
+}

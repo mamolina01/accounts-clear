@@ -35,7 +35,7 @@ export const AuthenticatedTabs = ({ user }: Props) => {
         New group
       </Link>
       <Link href="#" className={styles.link}>
-        Join a group
+        Join group
       </Link>
       <div className={styles.userContainer}>
         <div className={styles.textContainer}>

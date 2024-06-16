@@ -4,6 +4,7 @@ import './globals.css'
 import { Providers } from './Providers'
 import 'animate.css'
 import { Footer, Header } from '@/components'
+import styles from './layout.module.scss'
 
 const monserrat = Montserrat({ subsets: ['latin'] })
 
@@ -21,9 +22,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={monserrat.className}>
         <Providers>
-          <div className="min-h-screen flex flex-col justify-between">
+          <div className={styles.container}>
             <Header />
-            {children}
+            <div className={styles.subContainer}>{children}</div>
             <Footer />
           </div>
         </Providers>

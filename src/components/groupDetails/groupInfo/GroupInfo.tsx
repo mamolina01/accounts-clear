@@ -1,11 +1,15 @@
 import { Category } from '@/components'
-import { GroupProps } from '@/types/group'
 import Link from 'next/link'
 import { BsPlusLg } from 'react-icons/bs'
-import { Menu } from './menu/Menu'
 import { Routes } from '@/enums/routes'
+import { GroupDetail } from '@/types/groupDetail'
+import { TopSection } from './topSection/TopSection'
 
-export const GroupData = async ({ group }: { group: GroupProps }) => {
+interface Props {
+  group: GroupDetail
+}
+
+export const GroupInfo = async ({ group }: Props) => {
   const getUsers = () => {
     let users = group.participants.map(participant => participant.name).join(', ')
     return users
@@ -13,10 +17,7 @@ export const GroupData = async ({ group }: { group: GroupProps }) => {
 
   return (
     <div className="grid grid-cols-2 gap-x-5 gap-y-3 p-3 bg-primary rounded relative">
-      <div className="col-span-2 flex justify-center items-center relative">
-        <h4 className="text-3xl">{group.name}</h4>
-        <Menu groupId={group.id} />
-      </div>
+      <TopSection group={group} />
       <div className="flex flex-col">
         <span className="text-lg">Description</span>
         <span className="text-tertiary">{group.description}</span>

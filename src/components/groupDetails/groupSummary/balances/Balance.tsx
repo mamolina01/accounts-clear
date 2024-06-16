@@ -1,11 +1,15 @@
-import { GroupProps } from '@/types/group'
 import { getBalance, getRefunds } from '@/utils'
 import { BalancesList } from './balancesList/BalancesList'
 import { useState } from 'react'
 import { Refunds } from './refunds/Refunds'
 import { TabsBalances } from './tabsBalances/TabsBalances'
+import { GroupDetail } from '@/types/groupDetail'
 
-export const Balances = ({ group }: { group: GroupProps }) => {
+interface Props {
+  group: GroupDetail
+}
+
+export const Balances = ({ group }: Props) => {
   const { costs, participants } = group
   const [activeTab, setActiveTab] = useState<string>('balances')
 
