@@ -5,7 +5,7 @@ import { Category } from '@prisma/client'
 import { Form, Formik } from 'formik'
 import { useRouter } from 'next/navigation'
 import { FormEventHandler } from 'react'
-import styles from './BalanceForm.module.scss'
+import styles from './GroupForm.module.scss'
 import { GroupInfo } from '@/types/group'
 import toast from 'react-hot-toast'
 import { Participants } from './participants/Participants'
@@ -14,7 +14,7 @@ interface Props {
   group: GroupInfo
 }
 
-export const BalanceForm = ({ group }: Props) => {
+export const GroupForm = ({ group }: Props) => {
   const router = useRouter()
 
   const handleSubmit = async (values: GroupInfo) => {

@@ -18,8 +18,14 @@ export const Header = async () => {
 
       {session?.user ? (
         <nav className={styles.nav}>
-          <Link href={Routes.BALANCES} className={styles.link}>
-            Balances
+          <Link href={Routes.GROUPS} className={styles.link}>
+            My groups
+          </Link>
+          <Link href={Routes.GROUP_FORM} className={styles.link}>
+            New group
+          </Link>
+          <Link href="#" className={styles.link}>
+            Join a group
           </Link>
           <div className={styles.userContainer}>
             <div className={styles.textContainer}>

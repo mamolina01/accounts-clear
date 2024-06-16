@@ -46,7 +46,7 @@ export const Menu = ({ groupId }: { groupId: string }) => {
       {showMenu && (
         <div className="bg-secondary border border-tertiary rounded absolute top-2 right-4" ref={menuRef}>
           <Link
-            href={`${Routes.BALANCE_FORM}/${groupId}`}
+            href={`${Routes.GROUP_FORM}/${groupId}`}
             className="flex px-4 py-1 items-center gap-3 cursor-pointer hover:text-primary"
           >
             <FaEdit />

@@ -1,9 +1,10 @@
 import { getGroupById } from '@/actions'
-import { BalanceForm, ContainerForm } from '@/components'
+import { GroupForm, FormContainer } from '@/components'
 import { redirect } from 'next/navigation'
 import { auth } from '@/auth.config'
 import { GroupInfo } from '@/types/group'
 import { Category } from '@prisma/client'
+import { Routes } from '@/enums/routes'
 
 interface Props {
   params: {
@@ -11,15 +12,15 @@ interface Props {
   }
 }
 
-const Balance = async ({ params }: Props) => {
+const Group = async ({ params }: Props) => {
   const groupId = params.id ? params.id[0] : ''
   const { group } = await getGroupById(groupId)
   const session = await auth()
 
   if (!group && groupId) {
-    redirect('/balance/submit')
+    redirect(Routes.GROUP_FORM)
   }
-  const title = group ? 'Edit balance' : 'New balance'
+  const title = group ? 'Edit group' : 'New group'
 
   const initialValues: GroupInfo = {
     name: '',
@@ -37,10 +38,10 @@ const Balance = async ({ params }: Props) => {
   }
 
   return (
-    <ContainerForm title={title}>
-      <BalanceForm group={group ?? initialValues} />
-    </ContainerForm>
+    <FormContainer title={title}>
+      <GroupForm group={group ?? initialValues} />
+    </FormContainer>
   )
 }
 
-export default Balance
+export default Group

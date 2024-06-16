@@ -1,4 +1,4 @@
 export * from './header/Header'
 export * from './category/Category'
-export * from './containerForm/ContainerForm'
+export * from './formContainer/FormContainer'
 export * from './footer/Footer'

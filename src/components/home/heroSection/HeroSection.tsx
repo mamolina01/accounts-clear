@@ -17,8 +17,8 @@ export const HeroSection = async () => {
           <p className={styles.description}>Split your expenses with your friends!</p>
           <div className={styles.buttons}>
             {isAuthenticated ? (
-              <Link href={Routes.BALANCES} className={styles.buttonBalances}>
-                My Balances
+              <Link href={Routes.GROUPS} className={styles.buttonBalances}>
+                My Groups
               </Link>
             ) : (
               <>

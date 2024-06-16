@@ -1,5 +1,5 @@
 .header {
-  @apply bg-primary py-4 px-10 flex items-center justify-between sticky top-0 z-10;
+  @apply bg-primary py-2 px-5 flex items-center justify-between sticky top-0 z-10;
 
   .logo {
     @apply flex gap-2 items-center;
@@ -10,7 +10,7 @@
   }
 
   .nav {
-    @apply flex gap-10 items-center;
+    @apply flex gap-6 items-center;
 
     .userContainer {
       @apply flex gap-2 items-center;
@@ -19,7 +19,7 @@
         @apply flex flex-col items-end;
 
         .email {
-          @apply text-sm text-tertiary;
+          @apply text-xs text-tertiary;
         }
       }
 
@@ -29,7 +29,7 @@
     }
 
     .link {
-      @apply text-primary hover:text-sky-600 text-lg border-b-2 border-b-transparent hover:border-sky-600;
+      @apply text-primary border-b-2 border-b-transparent hover:border-sky-600 capitalize;
     }
 
     .register {
