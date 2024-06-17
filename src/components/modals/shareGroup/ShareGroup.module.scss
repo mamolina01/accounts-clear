@@ -2,7 +2,11 @@
   @apply bg-black/70 absolute w-full h-full flex justify-center items-center z-10;
 
   .container {
-    @apply flex flex-col bg-secondary p-5 rounded w-5/12 gap-4;
+    @apply flex flex-col bg-secondary p-5 rounded w-[550px] gap-4 relative;
+
+    .closeIcon {
+      @apply absolute top-2 right-2 cursor-pointer;
+    }
 
     .title {
       @apply text-2xl text-center;
@@ -23,6 +27,10 @@
 
         .textLink {
           @apply lowercase;
+        }
+
+        .copyIcon {
+          @apply cursor-pointer;
         }
       }
     }

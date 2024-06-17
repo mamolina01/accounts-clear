@@ -5,7 +5,7 @@ import { Providers } from './Providers'
 import 'animate.css'
 import { Footer, Header } from '@/components'
 import styles from './layout.module.scss'
-import { ShareGroup } from '@/components/groupDetails/groupInfo/topSection/shareGroup/ShareGroup'
+import { ShareGroup } from '@/components/modals'
 
 const monserrat = Montserrat({ subsets: ['latin'] })
 

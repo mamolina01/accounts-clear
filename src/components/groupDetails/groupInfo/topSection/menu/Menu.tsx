@@ -10,10 +10,12 @@ import { FaEdit, FaTrashAlt } from 'react-icons/fa'
 import Swal from 'sweetalert2'
 import styles from './Menu.module.scss'
 import { IoMdShare } from 'react-icons/io'
+import { useModalsStore } from '@/store'
 
 export const Menu = ({ groupId }: { groupId: string }) => {
   const [showMenu, setShowMenu] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
+  const { setShareModal } = useModalsStore(state => state)
 
   const closeMenu = () => {
     setShowMenu(false)
@@ -41,13 +43,21 @@ export const Menu = ({ groupId }: { groupId: string }) => {
     })
   }
 
+  const setModal = () => {
+    closeMenu()
+    setShareModal({
+      state: true,
+      id: groupId
+    })
+  }
+
   useOutsideClick(menuRef, closeMenu)
   return (
     <>
       <BsThreeDotsVertical size={20} className={styles.toggleMenuButton} onClick={() => setShowMenu(true)} />
       {showMenu && (
         <div className={styles.menuContainer} ref={menuRef}>
-          <button className={styles.button} onClick={deleteGroup}>
+          <button className={styles.button} onClick={setModal}>
             <IoMdShare />
             <span>Share</span>
           </button>
