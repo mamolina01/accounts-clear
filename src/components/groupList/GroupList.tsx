@@ -32,7 +32,7 @@ export const GroupList = async () => {
 
       <Link href={Routes.GROUP_FORM} className={`${styles.option} ${styles.divider}`}>
         <FiPlusCircle size={20} />
-        <span>Create new group</span>
+        <span>Create a new group</span>
       </Link>
 
       <div className={styles.option}>

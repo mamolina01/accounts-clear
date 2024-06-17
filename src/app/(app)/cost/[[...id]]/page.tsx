@@ -11,8 +11,13 @@ interface Props {
 }
 
 const NewCostPage = async ({ params }: Props) => {
-  const groupId = params.id[0] ? params.id[0] : ''
-  const costId = params.id[1] ? params.id[1] : ''
+  const ids = params.id ?? []
+  const groupId = ids[0] ? params.id[0] : ''
+  const costId = ids[1] ? params.id[1] : ''
+
+  if (!groupId) {
+    redirect(Routes.GROUPS)
+  }
 
   let cost: CostPropsTemp = {
     id: '',
