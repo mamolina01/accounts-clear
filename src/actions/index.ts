@@ -1,5 +1,5 @@
 export * from './groups/create-group'
-export * from './groups/get-groups-by-userId'
+export * from './groups/get-group-list-by-userId'
 export * from './groups/remove-group'
 export * from './groups/get-group-by-id'
 export * from './groups/update-group'
