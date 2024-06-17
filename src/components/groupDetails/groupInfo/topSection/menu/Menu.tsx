@@ -8,6 +8,8 @@ import toast from 'react-hot-toast'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import { FaEdit, FaTrashAlt } from 'react-icons/fa'
 import Swal from 'sweetalert2'
+import styles from './Menu.module.scss'
+import { IoMdShare } from 'react-icons/io'
 
 export const Menu = ({ groupId }: { groupId: string }) => {
   const [showMenu, setShowMenu] = useState(false)
@@ -42,22 +44,20 @@ export const Menu = ({ groupId }: { groupId: string }) => {
   useOutsideClick(menuRef, closeMenu)
   return (
     <>
-      <BsThreeDotsVertical className="text-xl cursor-pointer" onClick={() => setShowMenu(true)} />
+      <BsThreeDotsVertical size={20} className={styles.toggleMenuButton} onClick={() => setShowMenu(true)} />
       {showMenu && (
-        <div className="bg-secondary border border-tertiary rounded absolute top-2 right-4" ref={menuRef}>
-          <Link
-            href={`${Routes.GROUP_FORM}/${groupId}`}
-            className="flex px-4 py-1 items-center gap-3 cursor-pointer hover:text-primary"
-          >
+        <div className={styles.menuContainer} ref={menuRef}>
+          <button className={styles.button} onClick={deleteGroup}>
+            <IoMdShare />
+            <span>Share</span>
+          </button>
+          <Link href={`${Routes.GROUP_FORM}/${groupId}`} className={styles.button}>
             <FaEdit />
-            <p>Edit</p>
+            <span>Edit</span>
           </Link>
-          <button
-            className="flex px-4 py-1 items-center gap-3 cursor-pointer hover:text-primary border-t border-tertiary"
-            onClick={deleteGroup}
-          >
+          <button className={styles.button} onClick={deleteGroup}>
             <FaTrashAlt />
-            <p>Delete</p>
+            <span>Delete</span>
           </button>
         </div>
       )}
