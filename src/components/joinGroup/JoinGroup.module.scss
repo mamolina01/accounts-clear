@@ -1,0 +1,23 @@
+.container {
+  @apply flex flex-col items-start;
+
+  .label {
+    @apply font-medium text-lg;
+  }
+
+  .participantList {
+    @apply flex flex-col gap-1 w-full;
+
+    .participant {
+      @apply flex justify-between items-center py-1 px-2 bg-neutral-700 w-full cursor-pointer hover:bg-opacity-50;
+
+      &.disabled {
+        @apply bg-primary cursor-not-allowed;
+      }
+
+      .icon {
+        @apply text-primary;
+      }
+    }
+  }
+}

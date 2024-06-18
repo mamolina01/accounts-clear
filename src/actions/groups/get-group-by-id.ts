@@ -28,6 +28,33 @@ export const getGroupById = async (id: string) => {
   }
 }
 
+export const getGroupByIdToJoin = async (id: string) => {
+  try {
+    const group = await prisma.group.findFirst({
+      where: {
+        id: id
+      },
+      select: {
+        name: true,
+        description: true,
+        participants: {
+          select: {
+            id: true,
+            name: true,
+            userId: true
+          }
+        }
+      }
+    })
+
+    return {
+      group
+    }
+  } catch (error) {
+    throw new Error('There was an error getting a group')
+  }
+}
+
 export const getGroupByIdExtended = async (groupId: string) => {
   const session = await auth()
 

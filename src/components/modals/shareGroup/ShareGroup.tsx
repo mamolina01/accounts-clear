@@ -12,7 +12,7 @@ export const ShareGroup = () => {
   const { shareModal, setShareModal } = useModalsStore(state => state)
   const modalRef = useRef<HTMLDivElement>(null)
 
-  const baseUrl = `${window.location.protocol}//${window.location.hostname}:${window.location.port}${Routes.JOIN}/${shareModal.id}`
+  const baseUrl = `http://localhost:3000${Routes.JOIN}/${shareModal.id}`
   const url = `${baseUrl.substring(0, 45)}...`
 
   const closeModal = () => {
