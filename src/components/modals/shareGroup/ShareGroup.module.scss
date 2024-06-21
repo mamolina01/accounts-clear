@@ -1,38 +1,26 @@
-.overlay {
-  @apply bg-black/70 absolute w-full h-full flex justify-center items-center z-10;
+.title {
+  @apply text-2xl text-center;
+}
 
-  .container {
-    @apply flex flex-col bg-secondary p-5 rounded w-[550px] gap-4 relative;
+.text {
+  @apply text-xs text-tertiary text-center mt-2;
+}
 
-    .closeIcon {
-      @apply absolute top-2 right-2 cursor-pointer;
+.groupLink {
+  @apply font-medium text-lg;
+}
+
+.groupContainer {
+  @apply flex flex-col gap-1;
+  .linkContainer {
+    @apply flex justify-between items-center gap-2 bg-tertiary p-2 rounded overflow-hidden;
+
+    .textLink {
+      @apply lowercase;
     }
 
-    .title {
-      @apply text-2xl text-center;
-    }
-
-    .text {
-      @apply text-xs text-tertiary text-center mt-2;
-    }
-
-    .groupLink {
-      @apply font-medium text-lg;
-    }
-
-    .groupContainer {
-      @apply flex flex-col gap-1;
-      .linkContainer {
-        @apply flex justify-between items-center gap-2 bg-tertiary p-2 rounded overflow-hidden;
-
-        .textLink {
-          @apply lowercase;
-        }
-
-        .copyIcon {
-          @apply cursor-pointer;
-        }
-      }
+    .copyIcon {
+      @apply cursor-pointer;
     }
   }
 }
