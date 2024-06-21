@@ -2,6 +2,7 @@
 
 import { authenticate } from '@/actions'
 import { Routes } from '@/enums/routes'
+import { useGeneralBehaviourStore } from '@/store'
 import Link from 'next/link'
 import { useEffect } from 'react'
 import { useFormState, useFormStatus } from 'react-dom'
@@ -9,10 +10,17 @@ import { IoInformationOutline } from 'react-icons/io5'
 
 export const LoginForm = () => {
   const [state, dispatch] = useFormState(authenticate, undefined)
+  const { redirectUrl, setRedirectUrl } = useGeneralBehaviourStore(state => state)
 
   useEffect(() => {
     if (state === 'success') {
-      window.location.replace('/')
+      if (redirectUrl) {
+        const tempUrl = redirectUrl
+        setRedirectUrl('')
+        window.location.replace(tempUrl)
+      } else {
+        window.location.replace(Routes.HOME)
+      }
     }
   }, [state])
 

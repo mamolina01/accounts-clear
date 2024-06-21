@@ -8,6 +8,7 @@ import { CostProps, CostPropsTemp, Participant, ParticipantSelectable } from '@/
 import { useRouter } from 'next/navigation'
 import { updateCost } from '@/actions'
 import toast from 'react-hot-toast'
+import { Routes } from '@/enums/routes'
 
 interface Props {
   cost: CostPropsTemp
@@ -47,7 +48,7 @@ export const CostForm = ({ cost, groupId }: Props) => {
     if (ok) {
       toast.success('Successfully added!')
       setTimeout(() => {
-        router.push('/')
+        router.push(Routes.GROUPS)
       }, 1500)
     }
   }
