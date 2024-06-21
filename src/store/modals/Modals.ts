@@ -16,7 +16,7 @@ export const useModalsStore = create<State>()(set => ({
     state: false,
     id: ''
   },
-  isAuthModalOpen: true,
+  isAuthModalOpen: false,
   setShareModal: shareModal => {
     set({ shareModal })
   },

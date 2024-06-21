@@ -26,6 +26,7 @@ export const integrateUser = async (participantId: string) => {
       ok: true
     }
   } catch (error) {
+    console.log(error)
     return {
       ok: false
     }

@@ -1,5 +1,7 @@
-import { getGroupByIdToJoin } from '@/actions'
+import { UserIsAmongParticipants, getGroupByIdToJoin } from '@/actions'
 import { FormContainer, JoinGroup } from '@/components'
+import { Routes } from '@/enums/routes'
+import { redirect } from 'next/navigation'
 
 interface Props {
   params: {
@@ -9,6 +11,11 @@ interface Props {
 
 const JoinPage = async ({ params }: Props) => {
   const groupId = params.id ? params.id : ''
+  const isAmongParticipants = await UserIsAmongParticipants(groupId)
+  if (isAmongParticipants) {
+    redirect(Routes.GROUPS)
+  }
+
   const { group } = await getGroupByIdToJoin(groupId)
 
   return (
