@@ -5,7 +5,10 @@ interface State {
     state: boolean
     id: string
   }
+  isAuthModalOpen: boolean
   setShareModal: (shareModal: { state: boolean; id: string }) => void
+  setIsAuthModalOpen: (state: boolean) => void
+
 }
 
 export const useModalsStore = create<State>()(set => ({
@@ -13,7 +16,10 @@ export const useModalsStore = create<State>()(set => ({
     state: false,
     id: ''
   },
+  isAuthModalOpen: true,
   setShareModal: shareModal => {
     set({ shareModal })
-  }
+  },
+  setIsAuthModalOpen: state => set({ isAuthModalOpen: state })
+
 }))

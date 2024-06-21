@@ -5,7 +5,7 @@ import { Providers } from './Providers'
 import 'animate.css'
 import { Footer, Header } from '@/components'
 import styles from './layout.module.scss'
-import { ShareGroup } from '@/components/modals'
+import { AuthRequired, ShareGroup } from '@/components/modals'
 
 const monserrat = Montserrat({ subsets: ['latin'] })
 
@@ -28,6 +28,7 @@ export default function RootLayout({
             <div className={styles.subContainer}>{children}</div>
             <Footer />
             <ShareGroup />
+            <AuthRequired />
           </div>
         </Providers>
       </body>
