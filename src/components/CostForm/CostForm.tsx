@@ -38,7 +38,7 @@ export const CostForm = ({ cost, groupId }: Props) => {
       if (ok) {
         toast.success('Successfully updated!')
         setTimeout(() => {
-          router.push('/')
+          router.push(`${Routes.GROUPS}/${groupId}`)
         }, 1500)
       }
       return
@@ -48,7 +48,7 @@ export const CostForm = ({ cost, groupId }: Props) => {
     if (ok) {
       toast.success('Successfully added!')
       setTimeout(() => {
-        router.push(Routes.GROUPS)
+        router.push(`${Routes.GROUPS}/${groupId}`)
       }, 1500)
     }
   }
@@ -103,7 +103,7 @@ export const CostForm = ({ cost, groupId }: Props) => {
                 value={values.title}
                 placeholder="Enter a title"
                 onChange={e => setFieldValue('title', e.target.value)}
-                className={`${styles.input} ${errors.title ? styles.error : ''}`}
+                className={`${styles.input} ${titleError ? styles.error : ''}`}
               />
               <p className={styles.errorText}>{titleError}</p>
             </div>
@@ -120,7 +120,7 @@ export const CostForm = ({ cost, groupId }: Props) => {
                   value={values.amount}
                   placeholder="Enter an amount"
                   onChange={e => setFieldValue('amount', e.target.value)}
-                  className={`${styles.input} ${errors.amount ? styles.error : ''}`}
+                  className={`${styles.input} ${amountError ? styles.error : ''}`}
                 />
                 <span>ARS</span>
               </div>
@@ -133,7 +133,7 @@ export const CostForm = ({ cost, groupId }: Props) => {
               </label>
 
               <select
-                className={`${styles.select} ${errors.paidBy ? styles.error : ''}`}
+                className={`${styles.select} ${paidByError ? styles.error : ''}`}
                 id="paidBy"
                 defaultValue={cost.paidBy ? cost.paidBy : 'selectOne'}
                 onChange={e => handlePaidBy(e.target.value)}
@@ -154,7 +154,7 @@ export const CostForm = ({ cost, groupId }: Props) => {
               <label htmlFor="participants" className={styles.label}>
                 Participants
               </label>
-              <div className={`${styles.participantList} ${errors.assignedUsers ? styles.error : ''}`}>
+              <div className={`${styles.participantList} ${assignedUsersError ? styles.error : ''}`}>
                 {cost.assignedUsers.map(participant => (
                   <div key={participant.id} className={styles.participantContainer}>
                     {participant.selected ? (
