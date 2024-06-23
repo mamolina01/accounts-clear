@@ -35,6 +35,7 @@ export const getGroupByIdToJoin = async (id: string) => {
         id: id
       },
       select: {
+        id: true,
         name: true,
         description: true,
         participants: {
@@ -107,6 +108,9 @@ export const getGroupByIdExtended = async (groupId: string) => {
                 }
               }
             }
+          },
+          orderBy: {
+            date: 'desc'
           }
         }
       }

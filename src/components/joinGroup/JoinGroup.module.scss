@@ -1,6 +1,10 @@
 .container {
   @apply flex flex-col items-start;
 
+  .subtitle {
+    @apply self-center font-medium my-1;
+  }
+
   .label {
     @apply font-medium text-lg;
   }

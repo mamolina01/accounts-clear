@@ -18,6 +18,10 @@ const JoinPage = async ({ params }: Props) => {
 
   const { group } = await getGroupByIdToJoin(groupId)
 
+  if (!group) {
+    redirect(Routes.GROUPS)
+  }
+
   return (
     <FormContainer title="Join a new group">
       <JoinGroup group={group} />

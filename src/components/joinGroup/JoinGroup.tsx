@@ -6,13 +6,17 @@ import Swal from 'sweetalert2'
 import { useRouter } from 'next/navigation'
 import { Routes } from '@/enums/routes'
 import { integrateUser } from '@/actions'
+import toast from 'react-hot-toast'
+import { useGeneralBehaviourStore, useModalsStore } from '@/store'
+import { getCurrentUrl } from '@/utils'
 
 interface Props {
   group: {
+    id: string
     name: string
     description: string
     participants: Participant[]
-  } | null
+  }
 }
 
 interface Participant {
@@ -24,34 +28,32 @@ interface Participant {
 export const JoinGroup = ({ group }: Props) => {
   const session = useSession()
   const router = useRouter()
+  const { setIsAuthModalOpen } = useModalsStore(state => state)
+  const { redirectUrl, setRedirectUrl } = useGeneralBehaviourStore(state => state)
+
   const selectParticipant = async (participant: Participant) => {
     if (!session.data?.user) {
-      Swal.fire({
-        title: 'You need to login to continue',
-        icon: 'warning',
-        background: '#151515',
-        color: '#ffffff',
-        confirmButtonColor: '#0284c7',
-        showCancelButton: true,
-        confirmButtonText: 'Login',
-        cancelButtonText: 'Register'
-      }).then(async result => {
-        if (result.isConfirmed) {
-          router.push(Routes.LOGIN)
-        } else {
-          router.push(Routes.REGISTER)
-        }
-      })
+      setIsAuthModalOpen(true)
+      const url = getCurrentUrl(group.id)
+      setRedirectUrl(url)
       return
     }
 
+    if (redirectUrl) {
+      setRedirectUrl('')
+    }
+
     const { ok } = await integrateUser(participant.id)
-    
-    console.log('selecting participant')
+    if (ok) {
+      toast.success('Successfully added!')
+      setTimeout(() => {
+        router.push(Routes.GROUPS)
+      }, 1500)
+    }
   }
   return (
     <div className={styles.container}>
-      <p>Who of them are you?</p>
+      <p className={styles.subtitle}>Who of them are you?</p>
       <label className={styles.label}>Participants</label>
       <div className={styles.participantList}>
         {group?.participants.map(participant => (
