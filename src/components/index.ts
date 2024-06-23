@@ -6,4 +6,6 @@ export * from './groupDetails'
 
 export * from './groupList/GroupList'
 
+export * from './joinGroup/JoinGroup'
+
 export * from './shared'

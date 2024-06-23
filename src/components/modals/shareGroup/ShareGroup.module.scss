@@ -1,0 +1,26 @@
+.title {
+  @apply text-2xl text-center;
+}
+
+.text {
+  @apply text-xs text-tertiary text-center mt-2;
+}
+
+.groupLink {
+  @apply font-medium text-lg;
+}
+
+.groupContainer {
+  @apply flex flex-col gap-1;
+  .linkContainer {
+    @apply flex justify-between items-center gap-2 bg-tertiary p-2 rounded overflow-hidden;
+
+    .textLink {
+      @apply lowercase;
+    }
+
+    .copyIcon {
+      @apply cursor-pointer;
+    }
+  }
+}

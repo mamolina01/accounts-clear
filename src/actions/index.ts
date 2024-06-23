@@ -14,3 +14,5 @@ export * from './auth/logout'
 export * from './auth/register'
 
 export * from './participants/get-participants-by-group-id'
+export * from './participants/integrate-user'
+export * from './participants/user-is-among-participants'

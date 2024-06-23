@@ -1,7 +1,9 @@
 'use client'
 import { login, registerUser } from '@/actions'
 import { Routes } from '@/enums/routes'
+import { useGeneralBehaviourStore } from '@/store'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
@@ -18,6 +20,8 @@ export const RegisterForm = () => {
     handleSubmit,
     formState: { errors }
   } = useForm<FormProps>()
+  const router = useRouter()
+  const { redirectUrl, setRedirectUrl } = useGeneralBehaviourStore(state => state)
 
   const onSubmit: SubmitHandler<FormProps> = async data => {
     const { name, email, password } = data
@@ -30,7 +34,13 @@ export const RegisterForm = () => {
 
     setErrorMessage('')
     await login(email.toLowerCase(), password)
-    window.location.replace('/')
+    if (redirectUrl) {
+      const tempUrl = redirectUrl
+      setRedirectUrl('')
+      window.location.replace(tempUrl)
+    } else {
+      window.location.replace(Routes.HOME)
+    }
   }
 
   return (
