@@ -1,0 +1,28 @@
+.form {
+  @apply flex flex-col;
+
+  .inputContainer {
+    @apply flex flex-col gap-1;
+
+    .label {
+      @apply text-start text-xl capitalize;
+    }
+
+    .input,
+    .select {
+      @apply bg-transparent outline-none mx-1 pb-1 border-b-[1px] border-tertiary focus:border-primary;
+
+      &.error {
+        @apply border-red-500;
+      }
+    }
+
+    .errorText {
+      @apply text-red-500 text-sm mx-1 h-5;
+    }
+  }
+
+  .submitButton {
+    @apply bg-blue-500 rounded p-1 w-3/4 mx-auto mt-2;
+  }
+}

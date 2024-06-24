@@ -5,12 +5,13 @@ import { useModalsStore } from '@/store'
 import { Routes } from '@/enums/routes'
 import toast from 'react-hot-toast'
 import { Modal } from '@/components'
+import { getCurrentUrl } from '@/utils'
 
 export const ShareGroup = () => {
   const { shareModal, setShareModal } = useModalsStore(state => state)
 
   // TODO: check baseUrl
-  const baseUrl = `http://localhost:3000${Routes.JOIN}/${shareModal.id}`
+  const baseUrl = getCurrentUrl(shareModal.id)
   const url = `${baseUrl.substring(0, 45)}...`
 
   const closeModal = () => {

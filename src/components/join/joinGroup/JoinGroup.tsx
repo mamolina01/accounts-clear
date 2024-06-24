@@ -2,7 +2,6 @@
 import { AiOutlineSelect } from 'react-icons/ai'
 import styles from './JoinGroup.module.scss'
 import { useSession } from 'next-auth/react'
-import Swal from 'sweetalert2'
 import { useRouter } from 'next/navigation'
 import { Routes } from '@/enums/routes'
 import { integrateUser } from '@/actions'
