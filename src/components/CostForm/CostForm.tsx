@@ -9,6 +9,8 @@ import { useRouter } from 'next/navigation'
 import { updateCost } from '@/actions'
 import toast from 'react-hot-toast'
 import { Routes } from '@/enums/routes'
+import { useState } from 'react'
+import { InputNumber } from '..'
 
 interface Props {
   cost: CostPropsTemp
@@ -17,8 +19,10 @@ interface Props {
 
 export const CostForm = ({ cost, groupId }: Props) => {
   const router = useRouter()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const handleSubmit = async (values: CostPropsTemp) => {
+    setIsLoading(true)
     const formattedUsers = values.assignedUsers.map(user => {
       return {
         id: user.id,
@@ -40,6 +44,8 @@ export const CostForm = ({ cost, groupId }: Props) => {
         setTimeout(() => {
           router.push(`${Routes.GROUPS}/${groupId}`)
         }, 1500)
+      } else {
+        toast.error('Something went wrong!')
       }
       return
     }
@@ -50,7 +56,13 @@ export const CostForm = ({ cost, groupId }: Props) => {
       setTimeout(() => {
         router.push(`${Routes.GROUPS}/${groupId}`)
       }, 1500)
+    } else {
+      toast.error('Something went wrong!')
     }
+
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 1500)
   }
 
   return (
@@ -64,7 +76,7 @@ export const CostForm = ({ cost, groupId }: Props) => {
       validateOnMount={false}
     >
       {props => {
-        const { values, touched, errors, setFieldValue, handleSubmit } = props
+        const { values, touched, errors, isValid, setFieldValue, handleSubmit } = props
         const titleError = ((touched.title || values.title) && errors.title) || ''
         const amountError = ((touched.amount || values.amount) && errors.amount) || ''
         const paidByError = ((touched.paidBy || values.paidBy) && errors.paidBy) || ''
@@ -94,7 +106,7 @@ export const CostForm = ({ cost, groupId }: Props) => {
           <Form onSubmit={handleSubmit} className={styles.form}>
             <div className={styles.inputContainer}>
               <label htmlFor="title" className={styles.label}>
-                Title
+                Title <span className="text-red-500">*</span>
               </label>
               <input
                 id="title"
@@ -110,16 +122,15 @@ export const CostForm = ({ cost, groupId }: Props) => {
 
             <div className={styles.inputContainer}>
               <label htmlFor="amount" className={styles.label}>
-                Amount
+                Amount <span className="text-red-500">*</span>
               </label>
               <div className={styles.amountContainer}>
-                <input
-                  id="amount"
+                <InputNumber
                   name="amount"
                   type="text"
                   value={values.amount}
-                  placeholder="Enter an amount"
                   onChange={e => setFieldValue('amount', e.target.value)}
+                  placeholder="Enter an amount"
                   className={`${styles.input} ${amountError ? styles.error : ''}`}
                 />
                 <span>ARS</span>
@@ -129,7 +140,7 @@ export const CostForm = ({ cost, groupId }: Props) => {
 
             <div className={styles.inputContainer}>
               <label htmlFor="paidBy" className={styles.label}>
-                Paid by
+                Paid by <span className="text-red-500">*</span>
               </label>
 
               <select
@@ -172,7 +183,7 @@ export const CostForm = ({ cost, groupId }: Props) => {
               <p className={styles.errorText}>{assignedUsersError}</p>
             </div>
 
-            <button type="submit" className={styles.submitButton}>
+            <button type="submit" className={styles.submitButton} disabled={!isValid || isLoading}>
               Submit
             </button>
           </Form>

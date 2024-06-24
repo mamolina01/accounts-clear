@@ -4,7 +4,7 @@ import { validationSchemaNewBalance } from '@/validations'
 import { Category } from '@prisma/client'
 import { Form, Formik } from 'formik'
 import { useRouter } from 'next/navigation'
-import { FormEventHandler } from 'react'
+import { FormEventHandler, useState } from 'react'
 import styles from './GroupForm.module.scss'
 import { GroupInfo } from '@/types/group'
 import toast from 'react-hot-toast'
@@ -16,6 +16,7 @@ interface Props {
 
 export const GroupForm = ({ group }: Props) => {
   const router = useRouter()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const handleSubmit = async (values: GroupInfo) => {
     const data = {
@@ -24,7 +25,7 @@ export const GroupForm = ({ group }: Props) => {
       category: values.category,
       participants: values.participants
     }
-
+    setIsLoading(true)
     if (group.id) {
       const { ok } = await updateGroup(data, group?.id ?? '')
 
@@ -34,7 +35,7 @@ export const GroupForm = ({ group }: Props) => {
           router.push('/')
         }, 1500)
       } else {
-        toast.error('Something went wrong.')
+        toast.error('Something went wrong!')
       }
     } else {
       const { ok } = await createGroup(data)
@@ -45,8 +46,12 @@ export const GroupForm = ({ group }: Props) => {
           router.push('/')
         }, 1500)
       } else {
-        toast.error('Something went wrong.')
+        toast.error('Something went wrong!')
       }
+
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 1500)
     }
   }
 
@@ -137,7 +142,7 @@ export const GroupForm = ({ group }: Props) => {
 
               <Participants participants={values.participants} setFieldValue={setFieldValue} />
             </div>
-            <button type="submit" disabled={!isValid || isValidating} className={styles.submitButton}>
+            <button type="submit" disabled={!isValid || isLoading} className={styles.submitButton}>
               Submit
             </button>
           </Form>
