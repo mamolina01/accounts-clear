@@ -1,22 +1,22 @@
 .form {
-  @apply flex flex-col gap-4;
+  @apply flex flex-col;
 
   .inputContainer {
     @apply flex flex-col;
 
     .label {
-      @apply text-start text-sm font-semibold;
+      @apply text-start text-xl capitalize;
     }
 
     .input {
-      @apply bg-transparent outline-none m-1 border-b-[1px] border-transparent focus:border-tertiary;
+      @apply bg-transparent outline-none mx-1 pb-1 border-b-[1px] border-tertiary focus:border-primary;
 
       &.error {
         @apply border-red-500;
       }
     }
     .errorText {
-      @apply text-red-500 text-sm mx-1;
+      @apply text-red-500 text-sm mx-1 h-5;
     }
   }
 

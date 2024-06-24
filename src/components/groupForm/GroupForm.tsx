@@ -4,7 +4,7 @@ import { validationSchemaNewBalance } from '@/validations'
 import { Category } from '@prisma/client'
 import { Form, Formik } from 'formik'
 import { useRouter } from 'next/navigation'
-import { FormEventHandler } from 'react'
+import { FormEventHandler, useState } from 'react'
 import styles from './GroupForm.module.scss'
 import { GroupInfo } from '@/types/group'
 import toast from 'react-hot-toast'
@@ -16,6 +16,7 @@ interface Props {
 
 export const GroupForm = ({ group }: Props) => {
   const router = useRouter()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const handleSubmit = async (values: GroupInfo) => {
     const data = {
@@ -24,7 +25,7 @@ export const GroupForm = ({ group }: Props) => {
       category: values.category,
       participants: values.participants
     }
-
+    setIsLoading(true)
     if (group.id) {
       const { ok } = await updateGroup(data, group?.id ?? '')
 
@@ -34,7 +35,7 @@ export const GroupForm = ({ group }: Props) => {
           router.push('/')
         }, 1500)
       } else {
-        toast.error('Something went wrong.')
+        toast.error('Something went wrong!')
       }
     } else {
       const { ok } = await createGroup(data)
@@ -45,8 +46,12 @@ export const GroupForm = ({ group }: Props) => {
           router.push('/')
         }, 1500)
       } else {
-        toast.error('Something went wrong.')
+        toast.error('Something went wrong!')
       }
+
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 1500)
     }
   }
 
@@ -69,7 +74,11 @@ export const GroupForm = ({ group }: Props) => {
       }}
     >
       {props => {
-        const { values, isValid, isValidating, errors, setFieldValue, handleSubmit, validateField } = props
+        const { values, isValid, touched, errors, setFieldValue, handleSubmit, validateField } = props
+
+        const nameError = ((touched.name || values.name) && errors.name) || ''
+        const descriptionError = ((touched.description || values.description) && errors.description) || ''
+        const categoryError = ((touched.category || values.category) && errors.category) || ''
 
         const onSubmit: FormEventHandler<HTMLFormElement> = e => {
           e.preventDefault()
@@ -78,6 +87,7 @@ export const GroupForm = ({ group }: Props) => {
           }
           handleSubmit()
         }
+
         return (
           <Form onSubmit={onSubmit} className={styles.form}>
             <div className={styles.inputContainer}>
@@ -91,9 +101,9 @@ export const GroupForm = ({ group }: Props) => {
                 value={values.name}
                 placeholder="Enter a name"
                 onChange={e => setFieldValue('name', e.target.value)}
-                className={`${styles.input} ${errors.name && styles.error}`}
+                className={`${styles.input} ${nameError && styles.error}`}
               />
-              {errors.name && <p className={styles.errorText}>{errors.name}</p>}
+              <p className={styles.errorText}>{nameError}</p>
             </div>
             <div className={styles.inputContainer}>
               <label htmlFor="description" className={styles.label}>
@@ -106,13 +116,13 @@ export const GroupForm = ({ group }: Props) => {
                 value={values.description}
                 placeholder="Enter a description"
                 onChange={e => setFieldValue('description', e.target.value)}
-                className={`${styles.input} ${errors.description && styles.error}`}
+                className={`${styles.input} ${descriptionError && styles.error}`}
               />
-              {errors.description && <p className={styles.errorText}>{errors.description}</p>}
+              <p className={styles.errorText}>{descriptionError}</p>
             </div>
             <div className={styles.inputContainer}>
-              <label htmlFor="description" className={styles.label}>
-                Category
+              <label htmlFor="category" className={styles.label}>
+                Category <span className="text-red-500">*</span>
               </label>
               <select
                 value={values.category}
@@ -125,19 +135,20 @@ export const GroupForm = ({ group }: Props) => {
                   </option>
                 ))}
               </select>
-              {errors.description}
+              <p className={styles.errorText}>{categoryError}</p>
             </div>
 
             <div className={styles.inputContainer}>
-              <p className={styles.label}>
+              <label className={styles.label}>
                 Participants {'('}
                 {values.participants.length}
-                {')'}
-              </p>
+                {') '}
+                <span className="text-red-500">*</span>
+              </label>
 
               <Participants participants={values.participants} setFieldValue={setFieldValue} />
             </div>
-            <button type="submit" disabled={!isValid || isValidating} className={styles.submitButton}>
+            <button type="submit" disabled={!isValid || isLoading} className={styles.submitButton}>
               Submit
             </button>
           </Form>

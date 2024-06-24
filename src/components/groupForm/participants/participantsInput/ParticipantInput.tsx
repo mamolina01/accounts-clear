@@ -1,12 +1,14 @@
 'use client'
-import React, { FormEventHandler, useState } from 'react'
+import React, { ChangeEvent, FormEventHandler, useState } from 'react'
 import styles from '../Participants.module.scss'
 
 interface FormParticipantsProps {
-  addParticipant(name: string): { ok: boolean }
+  error: string
+  addParticipant: (name: string) => { ok: boolean }
+  setError: (value: string) => void
 }
 
-export const ParticipantInput = ({ addParticipant }: FormParticipantsProps) => {
+export const ParticipantInput = ({ error, addParticipant, setError }: FormParticipantsProps) => {
   const [participantName, setParticipantName] = useState<string>('')
 
   const handleSubmit: FormEventHandler<HTMLInputElement> = e => {
@@ -23,19 +25,28 @@ export const ParticipantInput = ({ addParticipant }: FormParticipantsProps) => {
     }
   }
 
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setParticipantName(e.target.value)
+
+    if (error) {
+      setError('')
+    }
+  }
+
   return (
     <div className={styles.participantInput}>
       <input
         type="text"
         value={participantName}
         placeholder="Participant name"
-        onChange={e => setParticipantName(e.target.value)}
+        onChange={handleChange}
         onSubmit={handleSubmit}
         className={styles.input}
       />
       <button type="button" className={styles.button} onClick={handleAddParticipant}>
         Add
       </button>
+      <p className={styles.errorText}>{error}</p>
     </div>
   )
 }
