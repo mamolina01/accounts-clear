@@ -5,6 +5,7 @@ import { GroupInfo, ParticipantGroup } from '@/types/group'
 import toast from 'react-hot-toast'
 import { generateID } from '@/helpers'
 import { FormikErrors } from 'formik'
+import { useState } from 'react'
 
 interface Props {
   participants: ParticipantGroup[]
@@ -16,13 +17,15 @@ interface Props {
 }
 
 export const Participants = ({ participants, setFieldValue }: Props) => {
+  const [error, setError] = useState<string>('')
+
   const addParticipant = (newParticipant: string) => {
     const usernameExists = participants.find(
       participant => participant.name.toLowerCase() === newParticipant.toLowerCase()
     )
 
     if (usernameExists) {
-      toast.error('This username exists.')
+      setError('This username exists.')
       return { ok: false }
     }
 
@@ -36,7 +39,7 @@ export const Participants = ({ participants, setFieldValue }: Props) => {
     )
 
     if (usernameExists) {
-      toast.error('This username exists.')
+      setError('This username exists.')
       return { ok: false }
     }
 
@@ -57,7 +60,7 @@ export const Participants = ({ participants, setFieldValue }: Props) => {
   }
   return (
     <>
-      <ParticipantInput addParticipant={addParticipant} />
+      <ParticipantInput addParticipant={addParticipant} error={error} setError={setError} />
       <ul className={`${styles.participantList}`}>
         {participants.map(participant => (
           <ParticipantItem
