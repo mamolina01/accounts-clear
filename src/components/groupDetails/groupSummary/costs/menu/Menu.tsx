@@ -29,7 +29,7 @@ export const Menu = ({ costId, groupId }: { costId: string; groupId: string }) =
       cancelButtonText: 'No'
     }).then(async result => {
       if (result.isConfirmed) {
-        const { ok } = await removeCost(costId)
+        const { ok } = await removeCost(costId, groupId)
         if (ok) {
           toast.success('Successfully removed!')
         } else {

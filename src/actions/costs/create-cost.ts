@@ -1,7 +1,9 @@
 'use server'
 
+import { Routes } from '@/enums/routes'
 import prisma from '@/lib/prisma'
 import { CostProps } from '@/types/cost'
+import { revalidatePath } from 'next/cache'
 
 export const createCost = async (data: CostProps, groupId: string) => {
   try {
@@ -34,6 +36,7 @@ export const createCost = async (data: CostProps, groupId: string) => {
         }
       }
     })
+    revalidatePath(`${Routes.GROUPS}/${groupId}`)
 
     return {
       ok: true

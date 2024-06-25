@@ -1,8 +1,10 @@
 'use server'
 
+import { Routes } from '@/enums/routes'
 import prisma from '@/lib/prisma'
+import { revalidatePath } from 'next/cache'
 
-export const removeCost = async (id: string) => {
+export const removeCost = async (id: string, groupId: string) => {
   try {
     await prisma.costAssignment.deleteMany({
       where: {
@@ -15,6 +17,7 @@ export const removeCost = async (id: string) => {
         id: id
       }
     })
+    revalidatePath(`${Routes.GROUPS}/${groupId}`)
 
     return {
       ok: true
