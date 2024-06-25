@@ -8,11 +8,11 @@ import toast from 'react-hot-toast'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import { FaEdit, FaTrashAlt } from 'react-icons/fa'
 import Swal from 'sweetalert2'
-import styles from './Menu.module.scss'
+import styles from './GroupMenu.module.scss'
 import { IoMdShare } from 'react-icons/io'
 import { useModalsStore } from '@/store'
 
-export const Menu = ({ groupId }: { groupId: string }) => {
+export const GroupMenu = ({ groupId }: { groupId: string }) => {
   const [showMenu, setShowMenu] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
   const { setShareModal } = useModalsStore(state => state)
@@ -53,7 +53,7 @@ export const Menu = ({ groupId }: { groupId: string }) => {
 
   useOutsideClick(menuRef, closeMenu)
   return (
-    <>
+    <div className={styles.container}>
       <BsThreeDotsVertical size={20} className={styles.toggleMenuButton} onClick={() => setShowMenu(true)} />
       {showMenu && (
         <div className={styles.menuContainer} ref={menuRef}>
@@ -71,6 +71,6 @@ export const Menu = ({ groupId }: { groupId: string }) => {
           </button>
         </div>
       )}
-    </>
+    </div>
   )
 }

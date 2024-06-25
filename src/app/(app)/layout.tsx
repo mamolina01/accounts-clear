@@ -11,7 +11,7 @@ const CostsLayout = async ({ children }: { readonly children: React.ReactNode })
           }
         }}
       />
-      <div className="flex flex-col w-1/2 mx-auto my-10 gap-5 animate__animated animate__fadeIn">{children}</div>
+      <div className="flex flex-col w-1/2 mx-auto my-10 gap-5">{children}</div>
     </>
   )
 }

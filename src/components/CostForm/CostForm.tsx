@@ -38,7 +38,7 @@ export const CostForm = ({ cost, groupId }: Props) => {
     }
 
     if (cost.id) {
-      const { ok } = await updateCost(data, cost.id)
+      const { ok } = await updateCost(data, cost.id, groupId)
       if (ok) {
         toast.success('Successfully updated!')
         setTimeout(() => {

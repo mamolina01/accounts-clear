@@ -1,9 +1,11 @@
 'use server'
 
+import { Routes } from '@/enums/routes'
 import prisma from '@/lib/prisma'
 import { CostProps } from '@/types/cost'
+import { revalidatePath } from 'next/cache'
 
-export const updateCost = async (cost: CostProps, costId: string) => {
+export const updateCost = async (cost: CostProps, costId: string, groupId: string) => {
   try {
     await prisma.cost.update({
       where: {
@@ -30,6 +32,8 @@ export const updateCost = async (cost: CostProps, costId: string) => {
     await prisma.costAssignment.createMany({
       data: participantsData
     })
+
+    revalidatePath(`${Routes.GROUPS}/${groupId}`)
 
     return {
       ok: true

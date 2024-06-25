@@ -42,7 +42,7 @@ export const JoinGroup = ({ group }: Props) => {
       setRedirectUrl('')
     }
 
-    const { ok } = await integrateUser(participant.id)
+    const { ok } = await integrateUser(participant.id, group.id)
     if (ok) {
       toast.success('Successfully added!')
       setTimeout(() => {

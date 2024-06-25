@@ -34,7 +34,7 @@ export const AuthenticatedTabs = ({ user }: Props) => {
       >
         New group
       </Link>
-      <Link href={Routes.JOIN} className={styles.link}>
+      <Link href={Routes.JOIN} className={`${styles.link} ${pathname === Routes.JOIN ? styles.active : ''}`}>
         Join group
       </Link>
       <div className={styles.userContainer}>
@@ -42,7 +42,7 @@ export const AuthenticatedTabs = ({ user }: Props) => {
           <p>{user.name}</p>
           <p className={styles.email}>{user.email}</p>
         </div>
-        {user.image && <Image src={user.image} alt="" />}
+        {user.image && <Image src={user.image} alt="user_image" />}
         <button className={styles.signOut} onClick={() => signOut()}>
           <IoLogOutOutline size={30} />
         </button>

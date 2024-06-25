@@ -1,6 +1,8 @@
 'use server'
 
+import { Routes } from '@/enums/routes'
 import prisma from '@/lib/prisma'
+import { revalidatePath } from 'next/cache'
 
 export const removeGroup = async (id: string) => {
   try {
@@ -27,6 +29,9 @@ export const removeGroup = async (id: string) => {
         id: id
       }
     })
+
+    revalidatePath(`${Routes.GROUPS}`)
+
     return {
       ok: true
     }

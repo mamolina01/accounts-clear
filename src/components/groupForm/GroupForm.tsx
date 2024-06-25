@@ -9,6 +9,7 @@ import styles from './GroupForm.module.scss'
 import { GroupInfo } from '@/types/group'
 import toast from 'react-hot-toast'
 import { Participants } from './participants/Participants'
+import { Routes } from '@/enums/routes'
 
 interface Props {
   group: GroupInfo
@@ -32,7 +33,7 @@ export const GroupForm = ({ group }: Props) => {
       if (ok) {
         toast.success('Successfully updated!')
         setTimeout(() => {
-          router.push('/')
+          router.push(Routes.GROUPS)
         }, 1500)
       } else {
         toast.error('Something went wrong!')
@@ -43,7 +44,7 @@ export const GroupForm = ({ group }: Props) => {
       if (ok) {
         toast.success('Successfully created!')
         setTimeout(() => {
-          router.push('/')
+          router.push(Routes.GROUPS)
         }, 1500)
       } else {
         toast.error('Something went wrong!')
