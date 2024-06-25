@@ -8,6 +8,7 @@ import Link from 'next/link'
 import { ChangeEvent, useState } from 'react'
 import styles from './LoginForm.module.scss'
 import { validationSchemaLogin } from '@/validations'
+import toast from 'react-hot-toast'
 
 export const LoginForm = () => {
   const { redirectUrl, setRedirectUrl } = useGeneralBehaviourStore(state => state)
@@ -19,14 +20,23 @@ export const LoginForm = () => {
     setIsLoading(true)
     const { ok, message } = await login(email, password)
 
-    if (ok) {
-      const tempUrl = redirectUrl
-      setRedirectUrl('')
-      window.location.replace(tempUrl)
-    } else {
+    if (!ok) {
       setError(message)
       setIsLoading(false)
+      return
     }
+
+    toast.success(message)
+    setTimeout(() => {
+      if (redirectUrl) {
+        const tempUrl = redirectUrl
+        setRedirectUrl('')
+
+        window.location.replace(tempUrl)
+      } else {
+        window.location.replace(Routes.HOME)
+      }
+    }, 1500)
   }
 
   return (
