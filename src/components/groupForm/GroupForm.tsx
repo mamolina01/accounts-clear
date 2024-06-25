@@ -36,6 +36,7 @@ export const GroupForm = ({ group }: Props) => {
           router.push(Routes.GROUPS)
         }, 1500)
       } else {
+        setIsLoading(false)
         toast.error('Something went wrong!')
       }
     } else {
@@ -47,12 +48,9 @@ export const GroupForm = ({ group }: Props) => {
           router.push(Routes.GROUPS)
         }, 1500)
       } else {
+        setIsLoading(false)
         toast.error('Something went wrong!')
       }
-
-      setTimeout(() => {
-        setIsLoading(false)
-      }, 1500)
     }
   }
 

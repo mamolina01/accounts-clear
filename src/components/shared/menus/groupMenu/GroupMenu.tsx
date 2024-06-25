@@ -16,31 +16,14 @@ export const GroupMenu = ({ groupId }: { groupId: string }) => {
   const [showMenu, setShowMenu] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
   const { setShareModal } = useModalsStore(state => state)
+  const { setIsRemoveGroupModalOpen } = useModalsStore(state => state)
 
   const closeMenu = () => {
     setShowMenu(false)
   }
 
   const deleteGroup = async () => {
-    Swal.fire({
-      title: 'Do you want to delete this group?',
-      icon: 'warning',
-      background: '#151515',
-      color: '#ffffff',
-      confirmButtonColor: '#0284c7',
-      showCancelButton: true,
-      confirmButtonText: 'Yes',
-      cancelButtonText: 'No'
-    }).then(async result => {
-      if (result.isConfirmed) {
-        const { ok } = await removeGroup(groupId)
-        if (ok) {
-          toast.success('Successfully removed!')
-        } else {
-          toast.error('There was an error. Contact the administrator.')
-        }
-      }
-    })
+    setIsRemoveGroupModalOpen({ id: groupId, state: true })
   }
 
   const setModal = () => {
