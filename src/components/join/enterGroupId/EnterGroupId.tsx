@@ -2,7 +2,7 @@
 import { Formik, Form } from 'formik'
 import styles from './EnterGroupId.module.scss'
 import { validationSchemaEnterGroupId } from '@/validations'
-import { getGroupByIdToJoin } from '@/actions'
+import { UserIsAmongParticipants, getGroupByIdToJoin } from '@/actions'
 import { ChangeEvent, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Routes } from '@/enums/routes'
@@ -14,9 +14,17 @@ export const EnterGroupId = () => {
   const handleSubmit = async (values: { id: string }) => {
     const { group } = await getGroupByIdToJoin(values.id)
 
-    console.log(!group)
+    // TODO: Verify if user is among participants
+
     if (!group) {
       setError(`Doesn't exists a group with this id`)
+      return
+    }
+
+    const isAmongParticipants = await UserIsAmongParticipants(values.id)
+
+    if (isAmongParticipants) {
+      setError(`You are already in this group`)
       return
     }
 
