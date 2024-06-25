@@ -1,10 +1,12 @@
-import { getGroupListByUserId } from '@/actions/groups/get-group-list-by-userId'
 import React from 'react'
 import { FiPlusCircle } from 'react-icons/fi'
 import { MdGroups } from 'react-icons/md'
 import styles from './GroupList.module.scss'
 import Link from 'next/link'
 import { Routes } from '@/enums/routes'
+import { GroupItem } from './groupItem/GroupItem'
+import { FormContainer } from '..'
+import { getGroupListByUserId } from '@/actions'
 
 interface Props {
   id: string
@@ -13,21 +15,14 @@ interface Props {
 }
 
 export const GroupList = async () => {
+  // TODO: Order by date
   const groups: Props[] = await getGroupListByUserId()
 
   return (
-    <div className={styles.container}>
-      <h4 className={styles.title}>My Groups</h4>
-
+    <FormContainer title="My Groups">
       {/* TODO: Develop an empty groups */}
       {groups.map(group => (
-        <Link href={`${Routes.GROUPS}/${group.id}`} className={styles.group} key={group.id}>
-          <div className={styles.listIcon} />
-          <div className={styles.textContainer}>
-            <p>{group.name}</p>
-            <p className={styles.description}>{group.description ?? 'No description'}</p>
-          </div>
-        </Link>
+        <GroupItem group={group} key={group.id} />
       ))}
 
       <Link href={Routes.GROUP_FORM} className={`${styles.option} ${styles.divider}`}>
@@ -39,6 +34,6 @@ export const GroupList = async () => {
         <MdGroups size={20} />
         <span>Join group</span>
       </div>
-    </div>
+    </FormContainer>
   )
 }
