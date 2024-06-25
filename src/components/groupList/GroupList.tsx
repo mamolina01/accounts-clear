@@ -7,6 +7,7 @@ import { Routes } from '@/enums/routes'
 import { GroupItem } from './groupItem/GroupItem'
 import { FormContainer } from '..'
 import { getGroupListByUserId } from '@/actions'
+import { EmptyGroups } from './emptyGroups/EmptyGroups'
 
 interface Props {
   id: string
@@ -21,9 +22,7 @@ export const GroupList = async () => {
   return (
     <FormContainer title="My Groups">
       {/* TODO: Develop an empty groups */}
-      {groups.map(group => (
-        <GroupItem group={group} key={group.id} />
-      ))}
+      {groups.length === 0 ? <EmptyGroups /> : groups.map(group => <GroupItem group={group} key={group.id} />)}
 
       <Link href={Routes.GROUP_FORM} className={`${styles.option} ${styles.divider}`}>
         <FiPlusCircle size={20} />
