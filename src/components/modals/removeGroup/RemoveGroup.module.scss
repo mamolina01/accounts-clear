@@ -1,0 +1,19 @@
+.title {
+  @apply text-2xl text-center;
+}
+
+.buttons {
+  @apply flex w-full items-center gap-2 mt-2;
+
+  .button {
+    @apply w-full rounded p-1 text-center;
+
+    &.login {
+      @apply bg-sky-600 hover:bg-sky-700;
+    }
+
+    &.register {
+      @apply bg-neutral-900 hover:bg-neutral-950;
+    }
+  }
+}
