@@ -1,8 +1,10 @@
 'use server'
 
 import { auth } from '@/auth.config'
+import { Routes } from '@/enums/routes'
 import prisma from '@/lib/prisma'
 import { GroupInfo } from '@/types/group'
+import { revalidatePath } from 'next/cache'
 
 export const createGroup = async (data: GroupInfo) => {
   try {
@@ -43,6 +45,8 @@ export const createGroup = async (data: GroupInfo) => {
     await prisma.participant.createMany({
       data: participantsData
     })
+
+    revalidatePath(`${Routes.GROUPS}`)
 
     return {
       ok: true
