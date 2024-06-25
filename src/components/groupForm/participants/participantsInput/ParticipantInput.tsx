@@ -1,5 +1,5 @@
 'use client'
-import React, { ChangeEvent, FormEventHandler, useState } from 'react'
+import React, { ChangeEvent, FormEventHandler, KeyboardEvent, useState } from 'react'
 import styles from '../Participants.module.scss'
 
 interface FormParticipantsProps {
@@ -10,11 +10,6 @@ interface FormParticipantsProps {
 
 export const ParticipantInput = ({ error, addParticipant, setError }: FormParticipantsProps) => {
   const [participantName, setParticipantName] = useState<string>('')
-
-  const handleSubmit: FormEventHandler<HTMLInputElement> = e => {
-    e.preventDefault()
-    handleAddParticipant()
-  }
 
   const handleAddParticipant = () => {
     if (participantName !== '') {
@@ -33,6 +28,13 @@ export const ParticipantInput = ({ error, addParticipant, setError }: FormPartic
     }
   }
 
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      handleAddParticipant()
+    }
+  }
+
   return (
     <div className={styles.participantInput}>
       <input
@@ -40,7 +42,7 @@ export const ParticipantInput = ({ error, addParticipant, setError }: FormPartic
         value={participantName}
         placeholder="Participant name"
         onChange={handleChange}
-        onSubmit={handleSubmit}
+        onKeyDown={handleKeyDown}
         className={styles.input}
       />
       <button type="button" className={styles.button} onClick={handleAddParticipant}>
