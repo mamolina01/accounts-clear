@@ -1,0 +1,11 @@
+.title {
+  @apply text-2xl text-center;
+}
+
+.description {
+  @apply self-center text-tertiary text-center;
+}
+
+.button {
+  @apply rounded py-1 px-2 text-center bg-sky-600 hover:bg-sky-700 uppercase w-fit self-center;
+}

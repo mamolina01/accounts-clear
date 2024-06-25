@@ -1,13 +1,13 @@
 'use client'
 import { ParticipantGroup as ParticipantProps } from '@/types/group'
 import React, { ChangeEvent, FormEventHandler, useEffect, useRef, useState } from 'react'
-import Swal from 'sweetalert2'
 import styles from '../Participants.module.scss'
 import Image from 'next/image'
 import check from '@/public/check.svg'
 import iconX from '@/public/iconX.svg'
 import { useOutsideClick } from '@/hooks'
 import { useSession } from 'next-auth/react'
+import { useModalsStore } from '@/store'
 
 interface Props {
   participant: ParticipantProps
@@ -21,7 +21,9 @@ export const ParticipantItem = ({ participant, editParticipant, removeParticipan
   const inputRef = useRef<HTMLInputElement>(null)
   const { data: session } = useSession()
   const [isUserParticipant, setIsUserParticipant] = useState<boolean>(true)
-
+  const { isNoRemoveParticipantModalOpen: isOpen, setNoRemoveParticipantModalOpen: setIsOpen } = useModalsStore(
+    state => state
+  )
   useEffect(() => {
     if (session) {
       setIsUserParticipant(session?.user.name.toLowerCase() === participant.name.toLowerCase())
@@ -43,14 +45,7 @@ export const ParticipantItem = ({ participant, editParticipant, removeParticipan
 
   const onClickRemove = () => {
     if (participant.assignedCosts?.length !== 0) {
-      Swal.fire({
-        title: "Couldn't be removed",
-        text: "This user couldn't be able to be removed, because he has costs assigned to him. ",
-        icon: 'warning',
-        background: '#151515',
-        color: '#ffffff',
-        confirmButtonColor: '#0284c7'
-      })
+      setIsOpen(true)
     } else {
       removeParticipant(participant)
     }
