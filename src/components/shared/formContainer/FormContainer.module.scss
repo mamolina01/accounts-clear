@@ -1,0 +1,6 @@
+.container {
+  @apply flex flex-col w-full px-3 py-5 rounded bg-secondary;
+  .title {
+    @apply text-2xl text-center;
+  }
+}

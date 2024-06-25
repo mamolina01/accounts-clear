@@ -18,7 +18,9 @@ const config: Config = {
       },
       backgroundColor: {
         primary: 'var(--bg-primary)',
-        secondary: 'var(--bg-secondary)'
+        secondary: 'var(--bg-secondary)',
+        tertiary: 'var(--bg-tertiary)',
+        quarteriary: 'var(--bg-quarteriary)'
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

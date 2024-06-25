@@ -1,0 +1,77 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Category {
+  Travel
+  House
+  Relationship
+  Celebration
+  Project
+  Others
+}
+
+model Group {
+  id           String        @id @default(uuid())
+  name         String
+  description  String
+  total        Int           @default(0)
+  category     Category
+  costs        Cost[]
+  participants Participant[]
+}
+
+model Participant {
+  id            String           @id @default(uuid())
+  name          String
+  groups        Group            @relation(fields: [groupId], references: [id])
+  groupId       String
+  user          User?            @relation(fields: [userId], references: [id])
+  userId        String?
+  assignedCosts CostAssignment[]
+  Cost          Cost[]
+}
+
+model User {
+  id       String  @id @default(uuid())
+  name     String
+  email    String  @unique
+  password String
+  image    String?
+  // Relación para los costos asignados a este usuario
+
+  participant Participant[]
+}
+
+model Cost {
+  id            String           @id @default(uuid())
+  title         String
+  amount        Int
+  date          DateTime
+  paidBy        Participant      @relation(fields: [participantId], references: [id])
+  // Relación con los usuarios asignados a este costo
+  assignedUsers CostAssignment[]
+  Group         Group?           @relation(fields: [groupId], references: [id])
+  groupId       String?
+  participantId String
+}
+
+model CostAssignment {
+  id String @id @default(uuid())
+
+  cost          Cost         @relation(fields: [costId], references: [id])
+  costId        String
+  participant   Participant? @relation(fields: [participantId], references: [id])
+  participantId String
+}

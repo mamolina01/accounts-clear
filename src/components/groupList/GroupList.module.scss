@@ -1,0 +1,30 @@
+.groupContainer {
+  @apply flex items-center p-2 hover:bg-tertiary cursor-pointer;
+
+  &:first-of-type {
+    @apply mt-4;
+  }
+  .group {
+    @apply grid grid-cols-[30px_auto] items-center flex-1;
+
+    .listIcon {
+      @apply w-2 h-2 bg-quarteriary rounded-full ml-[6px];
+    }
+
+    .textContainer {
+      @apply flex flex-col text-lg;
+
+      .description {
+        @apply text-base text-tertiary;
+      }
+    }
+  }
+}
+
+.option {
+  @apply grid grid-cols-[30px_auto] items-center p-2 hover:bg-tertiary cursor-pointer text-lg;
+}
+
+.divider {
+  @apply border-t border-tertiary;
+}

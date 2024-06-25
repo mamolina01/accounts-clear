@@ -1,8 +1,13 @@
+import { HeroSection, Information } from '@/components/home'
+import React from 'react'
 
-export default function Home() {
+const MainPage = () => {
   return (
     <>
-      <h3>page</h3>
+      <HeroSection />
+      <Information />
     </>
-  );
+  )
 }
+
+export default MainPage

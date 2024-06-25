@@ -18,7 +18,7 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: rgb(49, 49, 49)
+  background: #464648;
 }
 
 @layer utilities {
@@ -29,13 +29,30 @@ body {
 
 @layer base {
   :root {
-    --primary: #1287D8;
+    --primary: #0ea5e9;
     --secondary: #ffffff;
     --tertiary: #aaaaaa;
     --quarteriary: #6c6c6c;
 
-    --bg-primary: #464648;
-    --bg-secondary: #151515;
-
+    --bg-primary: #151515;
+    --bg-secondary: #202020;
+    --bg-tertiary: #383838;
+    --bg-quarteriary: #0275ae;
   }
+}
+
+.btn-primary {
+  @apply bg-blue-600 hover:bg-blue-800 text-white py-2 px-4 rounded transition-all;
+
+  &:disabled {
+    @apply bg-gray-600 cursor-not-allowed;
+  }
+}
+
+.btn-secondary {
+  @apply bg-gray-200 hover:bg-gray-300 text-black py-2 px-4 rounded transition-all;
+}
+
+.btn-danger {
+  @apply bg-red-500 hover:bg-red-700 text-white py-2 px-4 transition-all;
 }
