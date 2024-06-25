@@ -30,10 +30,10 @@ export const GroupList = async () => {
         <span>Create a new group</span>
       </Link>
 
-      <div className={styles.option}>
+      <Link href={Routes.JOIN} className={styles.option}>
         <MdGroups size={20} />
         <span>Join group</span>
-      </div>
+      </Link>
     </FormContainer>
   )
 }
