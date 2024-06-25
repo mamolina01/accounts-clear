@@ -1,6 +1,6 @@
 import * as yup from 'yup'
 
-export function validationSchemaNewBalance() {
+export const validationSchemaNewBalance = () => {
   return yup.object({
     name: yup.string().required('Name is required').max(20, 'Max 20 characters.'),
     description: yup.string().max(50, 'Max 50 characters.'),

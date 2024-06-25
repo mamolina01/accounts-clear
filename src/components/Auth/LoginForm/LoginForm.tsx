@@ -1,70 +1,114 @@
 'use client'
 
-import { authenticate } from '@/actions'
+import { login } from '@/actions'
 import { Routes } from '@/enums/routes'
 import { useGeneralBehaviourStore } from '@/store'
+import { Form, Formik } from 'formik'
 import Link from 'next/link'
-import { useEffect } from 'react'
-import { useFormState, useFormStatus } from 'react-dom'
-import { IoInformationOutline } from 'react-icons/io5'
+import { ChangeEvent, useState } from 'react'
+import styles from './LoginForm.module.scss'
+import { validationSchemaLogin } from '@/validations'
+import toast from 'react-hot-toast'
 
 export const LoginForm = () => {
-  const [state, dispatch] = useFormState(authenticate, undefined)
   const { redirectUrl, setRedirectUrl } = useGeneralBehaviourStore(state => state)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<string>('')
 
-  useEffect(() => {
-    if (state === 'success') {
+  const handleSubmit = async (values: { email: string; password: string }) => {
+    const { email, password } = values
+    setIsLoading(true)
+    const { ok, message } = await login(email, password)
+
+    if (!ok) {
+      setError(message)
+      setIsLoading(false)
+      return
+    }
+
+    toast.success(message)
+    setTimeout(() => {
       if (redirectUrl) {
         const tempUrl = redirectUrl
         setRedirectUrl('')
+
         window.location.replace(tempUrl)
       } else {
         window.location.replace(Routes.HOME)
       }
-    }
-  }, [state])
+    }, 1500)
+  }
 
   return (
-    <form action={dispatch} className="flex flex-col">
-      <label htmlFor="email">Correo electrónico</label>
-      <input className="px-3 py-2 bg-quarteriary rounded mb-5 outline-none" type="email" name="email" />
+    <Formik
+      initialValues={{ email: '', password: '' }}
+      validateOnChange
+      validationSchema={validationSchemaLogin()}
+      onSubmit={values => {
+        handleSubmit({ ...values })
+      }}
+    >
+      {props => {
+        const { values, isValid, touched, errors, handleBlur, handleSubmit, handleChange } = props
 
-      <label htmlFor="email">Contraseña</label>
-      <input className="px-3 py-2 bg-quarteriary rounded mb-5 outline-none" type="password" name="password" />
+        const emailError = ((touched.email || values.email) && errors.email) || ''
+        const passwordError = ((touched.password || values.password) && errors.password) || ''
 
-      <div className="flex h-8 items-end space-x-1" aria-live="polite" aria-atomic="true">
-        {state === 'CredentialsSignin' && (
-          <div className="flex mb-2">
-            <IoInformationOutline className="h-5 w-5 text-red-500" />
-            <p className="text-sm text-red-500">Credenciales invalidas</p>
-          </div>
-        )}
-      </div>
+        const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+          handleChange(e)
+          if (error) {
+            setError('')
+          }
+        }
 
-      <LoginButton />
+        return (
+          <Form onSubmit={handleSubmit} className={styles.form}>
+            <div className={styles.inputContainer}>
+              <label htmlFor="name" className={styles.label}>
+                Email
+              </label>
+              <input
+                name="email"
+                type="text"
+                value={values.email}
+                placeholder="Enter an email"
+                onChange={onChange}
+                onBlur={handleBlur}
+                className={`${styles.input} ${emailError && styles.error}`}
+              />
+              <p className={styles.errorText}>{emailError}</p>
+            </div>
+            <div className={styles.inputContainer}>
+              <label htmlFor="description" className={styles.label}>
+                Password
+              </label>
+              <input
+                name="password"
+                type="password"
+                value={values.password}
+                placeholder="Enter a password"
+                onChange={onChange}
+                onBlur={handleBlur}
+                className={`${styles.input} ${passwordError && styles.error}`}
+              />
+              <p className={styles.errorText}>{passwordError}</p>
+            </div>
 
-      <div className="flex items-center my-5">
-        <div className="flex-1 border-t border-gray-500"></div>
-        <div className="px-2 text-gray-800">O</div>
-        <div className="flex-1 border-t border-gray-500"></div>
-      </div>
+            <span className={`${styles.errorText} ${styles.apiError}`}>{error}</span>
 
-      <span className="text-sm text-center">
-        Still don't have your account?{' '}
-        <Link href={Routes.REGISTER} className="text-blue-500 font-semibold text-base">
-          Sign up!
-        </Link>
-      </span>
-    </form>
-  )
-}
+            <button type="submit" disabled={!isValid || isLoading || !!error} className={styles.submitButton}>
+              Submit
+            </button>
 
-const LoginButton = () => {
-  const { pending } = useFormStatus()
-
-  return (
-    <button type="submit" className="btn-primary" disabled={pending}>
-      Ingresar
-    </button>
+            <span className={styles.bottomText}>
+              Still don't have your account?{' '}
+              <Link href={Routes.REGISTER} className={styles.link}>
+                Sign up!
+              </Link>
+            </span>
+          </Form>
+        )
+      }}
+    </Formik>
   )
 }
