@@ -1,0 +1,42 @@
+.form {
+  @apply flex flex-col mt-6;
+
+  .inputContainer {
+    @apply flex flex-col;
+
+    .label {
+      @apply text-start text-xl capitalize;
+    }
+
+    .input {
+      @apply bg-transparent outline-none mx-1 pb-1 border-b-[1px] border-tertiary focus:border-primary;
+
+      &.error {
+        @apply border-red-500;
+      }
+    }
+  }
+
+  .errorText {
+    @apply text-red-500 text-sm mx-1 h-5;
+
+    &.apiError {
+      @apply text-center mb-4 text-base;
+    }
+  }
+
+  .submitButton {
+    @apply bg-sky-700 rounded p-1 w-3/4 mx-auto transition-all;
+
+    &:disabled {
+      @apply bg-opacity-50 bg-tertiary;
+    }
+  }
+
+  .bottomText {
+    @apply text-sm text-center mt-2;
+    .link {
+      @apply text-primary font-semibold text-base;
+    }
+  }
+}
