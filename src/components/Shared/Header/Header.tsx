@@ -28,7 +28,7 @@ export const Header = ({ session }: { session: Session | null }) => {
         {session?.user ? (
           <>
             <button onClick={toggleMenu} className={styles.hamburguerMenu}>
-              <IoMenu size={25} />
+              <IoMenu size={30} />
             </button>
             <AuthenticatedTabs user={session.user} />
           </>
@@ -45,7 +45,7 @@ export const Header = ({ session }: { session: Session | null }) => {
           </>
         )}
       </header>
-      {showMenuMobile && session?.user && <MobileMenu toggleMenu={toggleMenu} />}
+      {showMenuMobile && session?.user && <MobileMenu toggleMenu={toggleMenu} user={session.user} />}
     </div>
   )
 }

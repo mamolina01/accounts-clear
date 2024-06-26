@@ -1,6 +1,18 @@
 .nav {
   @apply fixed w-full h-screen bg-primary flex sm:hidden flex-col gap-10 items-center py-5;
 
+  .userContainer {
+    @apply flex gap-2 items-center;
+
+    .textContainer {
+      @apply flex flex-col items-end;
+
+      .email {
+        @apply text-xs text-tertiary;
+      }
+    }
+  }
+
   .tab {
     @apply text-xl capitalize;
 

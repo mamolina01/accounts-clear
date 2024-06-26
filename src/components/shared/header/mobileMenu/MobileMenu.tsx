@@ -3,12 +3,23 @@ import styles from './MobileMenu.module.scss'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { signOut } from 'next-auth/react'
+import Image from 'next/image'
 
 interface Props {
   toggleMenu: () => void
+  user: {
+    id: string
+    name: string
+    email: string
+    emailVerified?: string | undefined
+    image?: string | undefined
+    groups: {
+      id: string
+    }[]
+  }
 }
 
-export const MobileMenu = ({ toggleMenu }: Props) => {
+export const MobileMenu = ({ toggleMenu, user }: Props) => {
   const pathname = usePathname()
 
   const getStyles = (route: string) => {
@@ -17,6 +28,14 @@ export const MobileMenu = ({ toggleMenu }: Props) => {
 
   return (
     <div className={styles.nav}>
+      <div className={styles.userContainer}>
+        <div className={styles.textContainer}>
+          <p>{user.name}</p>
+          <p className={styles.email}>{user.email}</p>
+        </div>
+        {user.image && <Image src={user.image} alt="user_image" />}
+      </div>
+
       <Link onClick={toggleMenu} href={Routes.HOME} className={getStyles(Routes.HOME)}>
         Home
       </Link>

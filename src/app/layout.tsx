@@ -28,8 +28,8 @@ export default async function RootLayout({
         <Providers>
           <div className={styles.container}>
             <Header session={session} />
-            {/* <div>{children}</div>
-            <Footer /> */}
+            <div>{children}</div>
+            <Footer />
           </div>
           <Modals />
         </Providers>
