@@ -76,7 +76,7 @@ export const CostForm = ({ cost, groupId }: Props) => {
       validateOnMount={false}
     >
       {props => {
-        const { values, touched, errors, isValid, setFieldValue, handleSubmit } = props
+        const { values, touched, errors, isValid, setFieldValue, handleSubmit, handleBlur } = props
         const titleError = ((touched.title || values.title) && errors.title) || ''
         const amountError = ((touched.amount || values.amount) && errors.amount) || ''
         const paidByError = ((touched.paidBy || values.paidBy) && errors.paidBy) || ''
@@ -106,15 +106,15 @@ export const CostForm = ({ cost, groupId }: Props) => {
           <Form onSubmit={handleSubmit} className={styles.form}>
             <div className={styles.inputContainer}>
               <label htmlFor="title" className={styles.label}>
-                Title <span className="text-red-500">*</span>
+                Title <span className={styles.required}>*</span>
               </label>
               <input
-                id="title"
                 name="title"
                 type="text"
                 value={values.title}
                 placeholder="Enter a title"
                 onChange={e => setFieldValue('title', e.target.value)}
+                onBlur={handleBlur}
                 className={`${styles.input} ${titleError ? styles.error : ''}`}
               />
               <p className={styles.errorText}>{titleError}</p>
@@ -122,7 +122,7 @@ export const CostForm = ({ cost, groupId }: Props) => {
 
             <div className={styles.inputContainer}>
               <label htmlFor="amount" className={styles.label}>
-                Amount <span className="text-red-500">*</span>
+                Amount <span className={styles.required}>*</span>
               </label>
               <div className={styles.amountContainer}>
                 <InputNumber
@@ -131,6 +131,7 @@ export const CostForm = ({ cost, groupId }: Props) => {
                   value={values.amount}
                   onChange={e => setFieldValue('amount', e.target.value)}
                   placeholder="Enter an amount"
+                  onBlur={handleBlur}
                   className={`${styles.input} ${amountError ? styles.error : ''}`}
                 />
                 <span>ARS</span>
@@ -140,7 +141,7 @@ export const CostForm = ({ cost, groupId }: Props) => {
 
             <div className={styles.inputContainer}>
               <label htmlFor="paidBy" className={styles.label}>
-                Paid by <span className="text-red-500">*</span>
+                Paid by <span className={styles.required}>*</span>
               </label>
 
               <select
@@ -148,6 +149,7 @@ export const CostForm = ({ cost, groupId }: Props) => {
                 id="paidBy"
                 defaultValue={cost.paidBy ? cost.paidBy : 'selectOne'}
                 onChange={e => handlePaidBy(e.target.value)}
+                onBlur={handleBlur}
               >
                 <option value="selectOne" disabled>
                   -- Select one --
@@ -163,7 +165,7 @@ export const CostForm = ({ cost, groupId }: Props) => {
 
             <div className={styles.inputContainer}>
               <label htmlFor="participants" className={styles.label}>
-                Participants
+                Participants <span className={styles.required}>*</span>
               </label>
               <div className={`${styles.participantList} ${assignedUsersError ? styles.error : ''}`}>
                 {cost.assignedUsers.map(participant => (
@@ -176,7 +178,7 @@ export const CostForm = ({ cost, groupId }: Props) => {
                     ) : (
                       <ImCheckboxUnchecked className="text-sm" onClick={() => handleParticipants(participant)} />
                     )}
-                    <span>{participant.name}</span>
+                    <span className={styles.name}>{participant.name}</span>
                   </div>
                 ))}
               </div>

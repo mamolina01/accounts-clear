@@ -5,12 +5,16 @@
     @apply flex flex-col;
 
     .label {
-      @apply text-start text-xl capitalize;
+      @apply text-start md:text-xl capitalize;
+
+      .required {
+        @apply text-red-500;
+      }
     }
 
     .input,
     .select {
-      @apply bg-transparent outline-none mx-1 pb-1 border-b-[1px] border-tertiary focus:border-primary;
+      @apply bg-transparent outline-none mx-1 pb-1 border-b-[1px] border-tertiary focus:border-primary text-sm md:text-base;
 
       &.error {
         @apply border-red-500;
@@ -22,6 +26,9 @@
 
       .input {
         @apply flex-1;
+      }
+      span {
+        @apply text-sm md:text-base;
       }
     }
 
@@ -35,8 +42,8 @@
       .participantContainer {
         @apply flex items-center gap-2;
 
-        span {
-          @apply text-lg;
+        .name {
+          @apply text-sm md:text-base;
         }
       }
 
@@ -50,12 +57,12 @@
     }
 
     .errorText {
-      @apply text-red-500 text-sm mx-1 h-5;
+      @apply text-red-500 text-xs md:text-sm mx-1 h-5;
     }
   }
 
   .submitButton {
-    @apply bg-blue-500 rounded p-1 w-3/4 mx-auto transition-all;
+    @apply bg-blue-500 rounded p-1 w-1/2 md:w-3/4 mx-auto transition-all text-sm md:text-base;
 
     &:disabled {
       @apply bg-opacity-50 bg-tertiary;
