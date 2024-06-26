@@ -47,9 +47,9 @@ export const ShareGroup = () => {
           </button>
         </div>
       </div>
-      <button className="flex items-center gap-2 self-center bg-quarteriary p-1 rounded">
+      <button className="flex items-center gap-2 self-center bg-quarteriary p-1 rounded" onClick={copyLink}>
         Copy link to join
-        <MdOutlineContentCopy size={20} onClick={copyLink} className={styles.copyIcon} />
+        <MdOutlineContentCopy size={20} className={styles.copyIcon} />
       </button>
       <p className={styles.text}>Anyone with the id can join this group</p>
     </Modal>

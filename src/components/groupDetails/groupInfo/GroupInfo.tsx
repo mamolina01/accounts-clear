@@ -20,7 +20,7 @@ export const GroupInfo = async ({ group }: Props) => {
       <TopSection group={group} />
       <div className="flex flex-col">
         <span className="text-lg">Description</span>
-        <span className="text-tertiary">{group.description}</span>
+        <span className="text-tertiary">{group.description ? group.description : 'No description'}</span>
         <span className="text-lg">Participants</span>
         <span className="text-tertiary text-sm">{getUsers()}</span>
       </div>
