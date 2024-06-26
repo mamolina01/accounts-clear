@@ -1,0 +1,43 @@
+.container {
+  @apply grid grid-cols-2 gap-x-5 gap-y-3 p-3 bg-primary rounded relative;
+
+  .leftContainer {
+    @apply flex flex-col;
+
+    .label {
+      @apply md:text-lg;
+    }
+
+    .description {
+      @apply text-tertiary text-xs md:text-sm;
+    }
+
+    .users {
+      @apply text-tertiary text-xs md:text-sm;
+    }
+  }
+
+  .rightContainer {
+    @apply flex flex-col items-end;
+
+    .label {
+      @apply md:text-xl;
+    }
+
+    .total {
+      @apply text-xl md:text-2xl text-primary;
+    }
+  }
+
+  .addButtonContainer {
+    @apply w-full absolute -bottom-4;
+
+    .button {
+      @apply bg-sky-600 hover:bg-sky-700 rounded-full h-8 w-8 md:h-10 md:w-10 mx-auto flex justify-center items-center;
+
+      .icon {
+        @apply text-2xl md:text-3xl;
+      }
+    }
+  }
+}
