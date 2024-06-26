@@ -24,7 +24,7 @@ export const AuthenticatedTabs = ({ user }: Props) => {
   const pathname = usePathname()
 
   return (
-    <nav className={styles.nav}>
+    <nav className={`${styles.nav} ${styles.authenticated}`}>
       <Link href={Routes.GROUPS} className={`${styles.link} ${pathname === Routes.GROUPS ? styles.active : ''}`}>
         My groups
       </Link>

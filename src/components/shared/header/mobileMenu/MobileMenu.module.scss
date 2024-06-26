@@ -1,7 +1,11 @@
 .nav {
-  @apply fixed w-full h-screen bg-primary flex flex-col items-center pt-16;
+  @apply fixed w-full h-screen bg-primary flex sm:hidden flex-col gap-10 items-center py-5;
 
-  .link {
-    @apply text-xl;
+  .tab {
+    @apply text-xl capitalize;
+
+    &.active {
+      @apply text-primary;
+    }
   }
 }

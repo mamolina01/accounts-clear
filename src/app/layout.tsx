@@ -28,10 +28,10 @@ export default async function RootLayout({
         <Providers>
           <div className={styles.container}>
             <Header session={session} />
-            <div className={styles.subContainer}>{children}</div>
-            <Footer />
-            <Modals />
+            {/* <div>{children}</div>
+            <Footer /> */}
           </div>
+          <Modals />
         </Providers>
       </body>
     </html>

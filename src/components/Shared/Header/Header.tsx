@@ -18,18 +18,20 @@ export const Header = ({ session }: { session: Session | null }) => {
   }
 
   return (
-    <>
+    <div className={styles.wrapper}>
       <header className={styles.header}>
         <Link href={Routes.HOME} className={styles.logo}>
           <Image src={coin} alt="coin" width={35} />
           <span className={styles.title}>Clear Accounts</span>
         </Link>
 
-        <button onClick={toggleMenu} className={styles.hamburguerMenu}>
-          <IoMenu size={25} />
-        </button>
         {session?.user ? (
-          <AuthenticatedTabs user={session.user} />
+          <>
+            <button onClick={toggleMenu} className={styles.hamburguerMenu}>
+              <IoMenu size={25} />
+            </button>
+            <AuthenticatedTabs user={session.user} />
+          </>
         ) : (
           <>
             <nav className={styles.nav}>
@@ -43,7 +45,7 @@ export const Header = ({ session }: { session: Session | null }) => {
           </>
         )}
       </header>
-      {showMenuMobile && <MobileMenu toggleMenu={toggleMenu} />}
-    </>
+      {showMenuMobile && session?.user && <MobileMenu toggleMenu={toggleMenu} />}
+    </div>
   )
 }

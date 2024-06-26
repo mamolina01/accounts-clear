@@ -1,47 +1,55 @@
-.header {
-  @apply bg-primary py-2 px-2 lg:px-5 flex items-center justify-between sticky top-0 z-10 w-full;
+.wrapper {
+  @apply relative;
 
-  .logo {
-    @apply flex gap-2 items-center;
+  .header {
+    @apply bg-primary py-2 px-3 lg:px-5 flex items-center justify-between sticky top-0 z-10 w-full;
 
-    .title {
-      @apply lg:text-3xl text-primary font-medium;
-    }
-  }
-
-  .hamburguerMenu {
-    @apply block lg:hidden;
-  }
-
-  .nav {
-    @apply hidden lg:flex gap-6 items-center;
-
-    .userContainer {
+    .logo {
       @apply flex gap-2 items-center;
 
-      .textContainer {
-        @apply flex flex-col items-end;
+      .title {
+        @apply sm:text-xl lg:text-3xl text-primary font-medium;
+      }
+    }
 
-        .email {
-          @apply text-xs text-tertiary;
+    .hamburguerMenu {
+      @apply block sm:hidden;
+    }
+
+    .nav {
+      @apply flex gap-2 sm:gap-4 lg:gap-6 items-center;
+
+      &.authenticated {
+        @apply hidden sm:flex;
+      }
+
+      .userContainer {
+        @apply flex gap-2 items-center;
+
+        .textContainer {
+          @apply flex flex-col items-end;
+
+          .email {
+            @apply text-xs text-tertiary;
+          }
+        }
+
+        .signOut {
+          @apply flex items-center  rounded text-primary;
         }
       }
 
-      .signOut {
-        @apply flex items-center  rounded text-primary;
+      .link {
+        @apply text-primary border-b-2 border-b-transparent hover:border-sky-600 capitalize;
+
+        &.active {
+          @apply lg:border-sky-600;
+        }
       }
-    }
 
-    .link {
-      @apply text-primary border-b-2 border-b-transparent hover:border-sky-600 capitalize;
-
-      &.active {
-        @apply border-sky-600;
+      .register {
+        @apply bg-sky-600 hover:bg-opacity-50 text-white py-[2px] lg:py-1 px-1 lg:px-3 rounded;
       }
-    }
-
-    .register {
-      @apply bg-sky-600 hover:bg-opacity-50 text-white py-1 px-3 rounded;
     }
   }
 }
