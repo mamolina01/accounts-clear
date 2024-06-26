@@ -1,0 +1,7 @@
+.nav {
+  @apply fixed w-full h-screen bg-primary flex flex-col items-center pt-16;
+
+  .link {
+    @apply text-xl;
+  }
+}
