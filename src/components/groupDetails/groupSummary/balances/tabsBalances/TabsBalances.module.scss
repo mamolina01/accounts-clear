@@ -2,7 +2,7 @@
   @apply flex justify-between w-full rounded px-1;
 
   .button {
-    @apply w-full flex pt-1 justify-center items-center gap-1 cursor-pointer transition-all text-tertiary border-t-2 border-transparent;
+    @apply w-full flex pt-1 justify-center items-center gap-1 cursor-pointer transition-all text-tertiary border-t-2 border-transparent text-sm md:text-base;
 
     &.active {
       @apply text-secondary border-t-amber-200;

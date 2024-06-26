@@ -1,5 +1,5 @@
-import React from 'react'
 import { EmptyRefunds } from './emptyRefunds/EmptyRefunds'
+import styles from './Refunds.module.scss'
 
 interface Props {
   participantsToPay: (
@@ -27,16 +27,16 @@ export const Refunds = ({ refunds }: { refunds: Props[] }) => {
   return (
     <>
       {refunds.map((refund, refundIndex) => (
-        <div key={`refund-${refundIndex}`} className="flex flex-col gap-2 animate__animated animate__fadeIn">
+        <div key={`refund-${refundIndex}`} className={styles.container}>
           {refund.participantsToPay.map(participant => (
-            <div className="grid grid-cols-2 gap-2 bg-secondary p-2 rounded" key={`${refund.name} - ${participant.to}`}>
-              <div className="flex flex-col">
-                <p>{refund.name}</p>
-                <p className="text-xs text-tertiary">Must pay to</p>
-                <p>{participant.to}</p>
+            <div className={styles.participantContainer} key={`${refund.name} - ${participant.to}`}>
+              <div className={styles.leftContainer}>
+                <p className={styles.name}>{refund.name}</p>
+                <p className={styles.mustPayTo}>Must pay to</p>
+                <p className={styles.name}>{participant.to}</p>
               </div>
-              <div className="flex flex-col items-end justify-center">
-                <p className="text-primary text-xl">${participant.amount}</p>
+              <div className={styles.rightContainer}>
+                <p className={styles.amount}>${participant.amount}</p>
               </div>
             </div>
           ))}

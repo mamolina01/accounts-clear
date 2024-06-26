@@ -27,7 +27,7 @@
         @apply flex gap-2 items-center;
 
         .textContainer {
-          @apply flex flex-col items-end;
+          @apply flex flex-col items-end text-sm;
 
           .email {
             @apply text-xs text-tertiary;

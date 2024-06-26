@@ -1,9 +1,10 @@
-import { Category } from '@/components'
 import Link from 'next/link'
 import { BsPlusLg } from 'react-icons/bs'
 import { Routes } from '@/enums/routes'
 import { GroupDetail } from '@/types/groupDetail'
 import { TopSection } from './topSection/TopSection'
+import styles from './GroupInfo.module.scss'
+import { Category } from './category/Category'
 
 interface Props {
   group: GroupDetail
@@ -16,25 +17,22 @@ export const GroupInfo = async ({ group }: Props) => {
   }
 
   return (
-    <div className="grid grid-cols-2 gap-x-5 gap-y-3 p-3 bg-primary rounded relative">
+    <div className={styles.container}>
       <TopSection group={group} />
-      <div className="flex flex-col">
-        <span className="text-lg">Description</span>
-        <span className="text-tertiary">{group.description ? group.description : 'No description'}</span>
-        <span className="text-lg">Participants</span>
-        <span className="text-tertiary text-sm">{getUsers()}</span>
+      <div className={styles.leftContainer}>
+        <span className={styles.label}>Description</span>
+        <span className={styles.description}>{group.description ? group.description : 'No description'}</span>
+        <span className={styles.label}>Participants</span>
+        <span className={styles.users}>{getUsers()}</span>
       </div>
-      <div className="flex flex-col items-end">
+      <div className={styles.rightContainer}>
         <Category category={group.category} />
-        <p className="text-xl">Total</p>
-        <p className="text-2xl text-primary">${group.total}</p>
+        <p className={styles.label}>Total</p>
+        <p className={styles.total}>${group.total}</p>
       </div>
-      <div className="w-full absolute -bottom-4 ">
-        <Link
-          href={`${Routes.COST_FORM}/${group.id}`}
-          className=" bg-sky-600 hover:bg-sky-700 rounded-full h-10 w-10 mx-auto flex justify-center items-center"
-        >
-          <BsPlusLg className=" text-3xl" />
+      <div className={styles.addButtonContainer}>
+        <Link href={`${Routes.COST_FORM}/${group.id}`} className={styles.button}>
+          <BsPlusLg className={styles.icon} />
         </Link>
       </div>
     </div>

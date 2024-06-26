@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import { IoArrowBack } from 'react-icons/io5'
-
+import styles from './TopSection.module.scss'
 import { GroupDetail } from '@/types/groupDetail'
 import Link from 'next/link'
 import { Routes } from '@/enums/routes'
@@ -13,11 +13,11 @@ interface Props {
 
 export const TopSection = ({ group }: Props) => {
   return (
-    <div className="col-span-2 flex justify-between items-center">
+    <div className={styles.container}>
       <Link href={Routes.GROUPS}>
         <IoArrowBack size={20} />
       </Link>
-      <h4 className="text-3xl">{group.name}</h4>
+      <h4 className={styles.name}>{group.name}</h4>
       <GroupMenu groupId={group.id} />
     </div>
   )

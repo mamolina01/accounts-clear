@@ -9,10 +9,10 @@
     }
 
     .icon {
-      @apply text-2xl;
+      @apply text-lg md:text-2xl;
     }
     span {
-      @apply text-center text-lg;
+      @apply text-center md:text-lg;
     }
   }
 }

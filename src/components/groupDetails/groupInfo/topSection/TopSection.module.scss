@@ -1,0 +1,7 @@
+.container {
+  @apply col-span-2 flex justify-between items-center;
+
+  .name {
+    @apply text-xl md:text-2xl text-center;
+  }
+}

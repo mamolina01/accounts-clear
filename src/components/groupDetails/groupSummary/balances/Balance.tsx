@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Refunds } from './refunds/Refunds'
 import { TabsBalances } from './tabsBalances/TabsBalances'
 import { GroupDetail } from '@/types/groupDetail'
-
+import styles from './Balance.module.scss'
 interface Props {
   group: GroupDetail
 }
@@ -18,7 +18,7 @@ export const Balances = ({ group }: Props) => {
 
   return (
     <>
-      <div className="flex flex-col gap-2 max-h-[280px] overflow-scroll">
+      <div className={styles.container}>
         {activeTab === 'refunds' ? <Refunds refunds={refunds} /> : <BalancesList balance={balance} />}
       </div>
       <TabsBalances activeTab={activeTab} setActiveTab={setActiveTab} />
