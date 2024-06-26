@@ -34,7 +34,7 @@ export const useModalsStore = create<State>()(set => ({
     id: ''
   },
   isRemoveCostModalOpen: {
-    state: true,
+    state: false,
     id: ''
   },
   isNoRemoveParticipantModalOpen: false,
