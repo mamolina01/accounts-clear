@@ -1,21 +1,23 @@
 'use client'
 import { Modal } from '@/components'
 import { useModalsStore } from '@/store'
-import styles from './RemoveGroup.module.scss'
-import { removeGroup } from '@/actions'
+import styles from './RemoveCost.module.scss'
+import { removeCost } from '@/actions'
 import toast from 'react-hot-toast'
 import Image from 'next/image'
 import warningIcon from '@/public/warning.svg'
 
-export const RemoveGroup = () => {
-  const { isRemoveGroupModalOpen, setIsRemoveGroupModalOpen } = useModalsStore(state => state)
+export const RemoveCost = () => {
+  const { isRemoveCostModalOpen, setIsRemoveCostModalOpen } = useModalsStore(state => state)
+  const { state, id } = isRemoveCostModalOpen
 
   const closeModal = () => {
-    setIsRemoveGroupModalOpen({ id: '', state: false })
+    setIsRemoveCostModalOpen({ id: '', state: false })
   }
 
-  const onDeleteGroup = async () => {
-    const { ok } = await removeGroup(isRemoveGroupModalOpen.id)
+  const onDeleteCost = async () => {
+    const { ok } = await removeCost(id)
+
     if (ok) {
       toast.success('Successfully removed!')
     } else {
@@ -25,11 +27,11 @@ export const RemoveGroup = () => {
   }
 
   return (
-    <Modal isOpen={isRemoveGroupModalOpen.state} closeModal={closeModal}>
+    <Modal isOpen={state} closeModal={closeModal}>
       <Image src={warningIcon} alt="warning" className={styles.icon} />
-      <h4 className={styles.title}>Do you want to delete this group?</h4>
+      <h4 className={styles.title}>Do you want to delete this cost?</h4>
       <div className={styles.buttons}>
-        <button className={`${styles.button} ${styles.confirm}`} onClick={onDeleteGroup}>
+        <button className={`${styles.button} ${styles.confirm}`} onClick={onDeleteCost}>
           Yes
         </button>
         <button className={`${styles.button} ${styles.cancel}`} onClick={closeModal}>
