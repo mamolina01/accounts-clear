@@ -1,5 +1,6 @@
 import { GroupDetail } from '@/types/groupDetail'
 import { CostItem } from '../costItem/CostItem'
+import styles from './CostList.module.scss'
 
 interface Props {
   group: GroupDetail
@@ -7,7 +8,7 @@ interface Props {
 
 export const CostsList = ({ group }: Props) => {
   return (
-    <div className="flex flex-col gap-1">
+    <div className={styles.container}>
       {group.costs.map(cost => (
         <CostItem key={cost.id} cost={cost} groupId={group.id} />
       ))}

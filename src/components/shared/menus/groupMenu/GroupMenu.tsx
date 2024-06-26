@@ -34,18 +34,18 @@ export const GroupMenu = ({ groupId }: { groupId: string }) => {
   useOutsideClick(menuRef, closeMenu)
   return (
     <div className={styles.container}>
-      <BsThreeDotsVertical size={20} className={styles.toggleMenuButton} onClick={() => setShowMenu(true)} />
+      <BsThreeDotsVertical className={styles.toggleMenuButton} onClick={() => setShowMenu(true)} />
       {showMenu && (
         <div className={styles.menuContainer} ref={menuRef}>
-          <button className={styles.button} onClick={setModal}>
+          <button className={styles.option} onClick={setModal}>
             <IoMdShare />
             <span>Share</span>
           </button>
-          <Link href={`${Routes.GROUP_FORM}/${groupId}`} className={styles.button}>
+          <Link href={`${Routes.GROUP_FORM}/${groupId}`} className={styles.option}>
             <FaEdit />
             <span>Edit</span>
           </Link>
-          <button className={styles.button} onClick={deleteGroup}>
+          <button className={styles.option} onClick={deleteGroup}>
             <FaTrashAlt />
             <span>Delete</span>
           </button>
