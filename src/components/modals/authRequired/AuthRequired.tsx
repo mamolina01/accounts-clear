@@ -4,6 +4,7 @@ import { useModalsStore } from '@/store'
 import styles from './AuthRequired.module.scss'
 import Link from 'next/link'
 import { Routes } from '@/enums/routes'
+import { CiWarning } from 'react-icons/ci'
 
 export const AuthRequired = () => {
   const { isAuthModalOpen, setIsAuthModalOpen } = useModalsStore(state => state)
@@ -13,6 +14,7 @@ export const AuthRequired = () => {
   }
   return (
     <Modal isOpen={isAuthModalOpen} closeModal={closeModal}>
+      <CiWarning className="self-center" size={80} />
       <h4 className={styles.title}>Authentication required</h4>
       <p className={styles.description}>You must be registered to select a group</p>
       <div className={styles.buttons}>
