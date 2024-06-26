@@ -2,7 +2,7 @@
   @apply flex items-center p-2 hover:bg-tertiary cursor-pointer;
 
   &:first-of-type {
-    @apply mt-4;
+    @apply mt-2 md:mt-4;
   }
   .group {
     @apply grid grid-cols-[30px_auto] items-center flex-1;
@@ -12,17 +12,17 @@
     }
 
     .textContainer {
-      @apply flex flex-col text-lg;
+      @apply flex flex-col md:text-lg;
 
       .description {
-        @apply text-base text-tertiary;
+        @apply text-xs md:text-sm text-tertiary;
       }
     }
   }
 }
 
 .option {
-  @apply grid grid-cols-[30px_auto] items-center p-2 hover:bg-tertiary cursor-pointer text-lg;
+  @apply grid grid-cols-[30px_auto] items-center p-2 hover:bg-tertiary cursor-pointer;
 }
 
 .divider {
