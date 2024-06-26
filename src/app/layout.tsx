@@ -30,8 +30,8 @@ export default async function RootLayout({
             <Header session={session} />
             <div>{children}</div>
             <Footer />
+            <Modals />
           </div>
-          <Modals />
         </Providers>
       </body>
     </html>

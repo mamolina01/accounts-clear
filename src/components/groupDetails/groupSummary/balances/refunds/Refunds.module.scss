@@ -1,0 +1,27 @@
+.container {
+  @apply flex flex-col gap-2;
+
+  .participantContainer {
+    @apply grid grid-cols-2 gap-2 bg-secondary p-2 rounded;
+  }
+
+  .leftContainer {
+    @apply flex flex-col;
+
+    .name {
+      @apply text-sm md:text-base;
+    }
+
+    .mustPayTo {
+      @apply text-xs text-tertiary;
+    }
+  }
+
+  .rightContainer {
+    @apply flex flex-col items-end justify-center;
+
+    .amount {
+      @apply text-primary text-lg md:text-xl;
+    }
+  }
+}

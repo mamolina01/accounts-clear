@@ -1,0 +1,27 @@
+.container {
+  @apply flex w-full;
+
+  .rightText {
+    @apply text-start text-sm md:text-base;
+  }
+
+  .leftText {
+    @apply text-end text-sm md:text-base;
+  }
+
+  .leftTotal {
+    @apply bg-red-800 rounded-l text-end;
+  }
+
+  .rightTotal {
+    @apply bg-green-700 rounded-r;
+  }
+
+  &.reverse {
+    @apply flex-row-reverse;
+  }
+
+  .balance {
+    @apply flex-1 px-2 text-sm md:text-base;
+  }
+}
