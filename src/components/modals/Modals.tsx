@@ -1,13 +1,14 @@
 import React from 'react'
-import { AuthRequired, NoRemoveParticipant, RemoveGroup, ShareGroup } from '.'
+import { AuthRequired, NoRemoveParticipant, RemoveCost, RemoveGroup, ShareGroup } from '.'
 
 export const Modals = () => {
   return (
     <>
-      <ShareGroup />
       <AuthRequired />
-      <RemoveGroup />
       <NoRemoveParticipant />
+      <RemoveCost />
+      <RemoveGroup />
+      <ShareGroup />
     </>
   )
 }
