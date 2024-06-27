@@ -13,7 +13,6 @@ import toast from 'react-hot-toast'
 export const LoginForm = () => {
   const { redirectUrl, setRedirectUrl } = useGeneralBehaviourStore(state => state)
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [error, setError] = useState<string>('')
 
   const handleSubmit = async (values: { email: string; password: string }) => {
     const { email, password } = values
@@ -21,7 +20,7 @@ export const LoginForm = () => {
     const { ok, message } = await login(email, password)
 
     if (!ok) {
-      setError(message)
+      toast.error(message)
       setIsLoading(false)
       return
     }
@@ -54,13 +53,6 @@ export const LoginForm = () => {
         const emailError = ((touched.email || values.email) && errors.email) || ''
         const passwordError = ((touched.password || values.password) && errors.password) || ''
 
-        const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-          handleChange(e)
-          if (error) {
-            setError('')
-          }
-        }
-
         return (
           <Form onSubmit={handleSubmit} className={styles.form}>
             <div className={styles.inputContainer}>
@@ -72,7 +64,7 @@ export const LoginForm = () => {
                 type="text"
                 value={values.email}
                 placeholder="Enter an email"
-                onChange={onChange}
+                onChange={handleChange}
                 onBlur={handleBlur}
                 className={`${styles.input} ${emailError && styles.error}`}
               />
@@ -87,16 +79,14 @@ export const LoginForm = () => {
                 type="password"
                 value={values.password}
                 placeholder="Enter a password"
-                onChange={onChange}
+                onChange={handleChange}
                 onBlur={handleBlur}
                 className={`${styles.input} ${passwordError && styles.error}`}
               />
               <p className={styles.errorText}>{passwordError}</p>
             </div>
 
-            <span className={`${styles.errorText} ${styles.apiError}`}>{error}</span>
-
-            <button type="submit" disabled={!isValid || isLoading || !!error} className={styles.submitButton}>
+            <button type="submit" disabled={!isValid || isLoading} className={styles.submitButton}>
               Submit
             </button>
 
