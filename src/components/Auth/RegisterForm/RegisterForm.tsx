@@ -16,7 +16,6 @@ interface FormProps {
 }
 
 export const RegisterForm = () => {
-  const [error, setError] = useState<string>('')
   const { redirectUrl, setRedirectUrl } = useGeneralBehaviourStore(state => state)
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
@@ -26,12 +25,11 @@ export const RegisterForm = () => {
     const { ok, message } = await registerUser(name, email, password)
 
     if (!ok) {
-      setError(message)
+      toast.error(message)
       setIsLoading(false)
       return
     }
 
-    setError('')
     toast.success(message)
     setTimeout(() => {
       if (redirectUrl) {
@@ -60,13 +58,6 @@ export const RegisterForm = () => {
         const emailError = ((touched.email || values.email) && errors.email) || ''
         const passwordError = ((touched.password || values.password) && errors.password) || ''
 
-        const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-          handleChange(e)
-          if (error) {
-            setError('')
-          }
-        }
-
         return (
           <Form onSubmit={handleSubmit} className={styles.form}>
             <div className={styles.inputContainer}>
@@ -78,7 +69,7 @@ export const RegisterForm = () => {
                 type="text"
                 value={values.name}
                 placeholder="Enter a name"
-                onChange={onChange}
+                onChange={handleChange}
                 onBlur={handleBlur}
                 className={`${styles.input} ${nameError && styles.error}`}
               />
@@ -93,7 +84,7 @@ export const RegisterForm = () => {
                 type="text"
                 value={values.email}
                 placeholder="Enter an email"
-                onChange={onChange}
+                onChange={handleChange}
                 onBlur={handleBlur}
                 className={`${styles.input} ${emailError && styles.error}`}
               />
@@ -108,16 +99,14 @@ export const RegisterForm = () => {
                 type="password"
                 value={values.password}
                 placeholder="Enter a password"
-                onChange={onChange}
+                onChange={handleChange}
                 onBlur={handleBlur}
                 className={`${styles.input} ${passwordError && styles.error}`}
               />
               <p className={styles.errorText}>{passwordError}</p>
             </div>
 
-            <span className={`${styles.errorText} ${styles.apiError}`}>{error}</span>
-
-            <button type="submit" disabled={!isValid || isLoading || !!error} className={styles.submitButton}>
+            <button type="submit" disabled={!isValid || isLoading} className={styles.submitButton}>
               Submit
             </button>
 

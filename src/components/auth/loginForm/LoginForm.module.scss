@@ -19,10 +19,6 @@
 
   .errorText {
     @apply text-red-500 text-xs md:text-sm mx-1 h-5;
-
-    &.apiError {
-      @apply text-center text-xs md:text-sm;
-    }
   }
 
   .submitButton {
