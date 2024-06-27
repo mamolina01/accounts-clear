@@ -1,8 +1,8 @@
 'use client'
-import { Modal } from '@/components'
 import { useModalsStore } from '@/store'
 import styles from './NoRemoveParticipant.module.scss'
 import { CiWarning } from 'react-icons/ci'
+import { Modal } from '../modal/Modal'
 
 export const NoRemoveParticipant = () => {
   const { isNoRemoveParticipantModalOpen: isOpen, setNoRemoveParticipantModalOpen: setIsOpen } = useModalsStore(

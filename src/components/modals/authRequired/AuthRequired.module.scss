@@ -1,9 +1,13 @@
+.icon {
+  @apply text-6xl md:text-8xl self-center;
+}
+
 .title {
-  @apply text-2xl text-center;
+  @apply text-lg md:text-2xl text-center;
 }
 
 .description {
-  @apply self-center text-tertiary;
+  @apply self-center text-tertiary text-center text-sm md:text-base;
 }
 
 .buttons {
@@ -17,7 +21,7 @@
     }
 
     &.register {
-      @apply bg-neutral-900 hover:bg-neutral-950;
+      @apply bg-neutral-700 hover:bg-neutral-900;
     }
   }
 }

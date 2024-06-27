@@ -1,11 +1,11 @@
 'use client'
-import { Modal } from '@/components'
 import { useModalsStore } from '@/store'
 import styles from './RemoveGroup.module.scss'
 import { removeGroup } from '@/actions'
 import toast from 'react-hot-toast'
 import Image from 'next/image'
 import warningIcon from '@/public/warning.svg'
+import { Modal } from '../modal/Modal'
 
 export const RemoveGroup = () => {
   const { isRemoveGroupModalOpen, setIsRemoveGroupModalOpen } = useModalsStore(state => state)

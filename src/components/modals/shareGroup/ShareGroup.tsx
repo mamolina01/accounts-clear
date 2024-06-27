@@ -3,8 +3,8 @@ import { MdOutlineContentCopy } from 'react-icons/md'
 import styles from './ShareGroup.module.scss'
 import { useModalsStore } from '@/store'
 import toast from 'react-hot-toast'
-import { Modal } from '@/components'
 import { getCurrentUrl } from '@/utils'
+import { Modal } from '../modal/Modal'
 
 export const ShareGroup = () => {
   const { shareModal, setShareModal } = useModalsStore(state => state)
