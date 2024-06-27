@@ -9,7 +9,7 @@ const main = async () => {
   await prisma.user.deleteMany()
   await prisma.group.deleteMany()
 
-  addData()
+  // addData()
 }
 
 const addData = async () => {

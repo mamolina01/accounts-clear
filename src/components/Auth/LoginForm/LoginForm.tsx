@@ -99,7 +99,7 @@ export const LoginForm = () => {
             </button>
 
             <span className={styles.bottomText}>
-              Still don't have your account?{' '}
+              Still don{"'"}t have your account?{' '}
               <Link href={Routes.REGISTER} className={styles.link}>
                 Sign up!
               </Link>
