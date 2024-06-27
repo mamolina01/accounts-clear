@@ -1,10 +1,10 @@
-import { getGroupById } from '@/actions'
 import { GroupForm, FormContainer } from '@/components'
 import { redirect } from 'next/navigation'
 import { auth } from '@/auth.config'
 import { GroupInfo } from '@/types/group'
 import { Category } from '@prisma/client'
 import { Routes } from '@/enums/routes'
+import { getGroupById } from '@/actions/groups/get-group-by-id'
 
 interface Props {
   params: {

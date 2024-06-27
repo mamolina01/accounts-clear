@@ -1,4 +1,5 @@
-import { UserIsAmongParticipants, getGroupByIdToJoin } from '@/actions'
+import { getGroupByIdToJoin } from '@/actions/groups/get-group-by-id'
+import { UserIsAmongParticipants } from '@/actions/participants/user-is-among-participants'
 import { FormContainer, JoinGroup } from '@/components'
 import { Routes } from '@/enums/routes'
 import { redirect } from 'next/navigation'

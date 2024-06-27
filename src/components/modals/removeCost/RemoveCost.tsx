@@ -1,11 +1,11 @@
 'use client'
 import { useModalsStore } from '@/store'
 import styles from './RemoveCost.module.scss'
-import { removeCost } from '@/actions'
 import toast from 'react-hot-toast'
 import Image from 'next/image'
 import warningIcon from '@/public/warning.svg'
 import { Modal } from '../modal/Modal'
+import { removeCost } from '@/actions/costs/remove-cost'
 
 export const RemoveCost = () => {
   const { isRemoveCostModalOpen, setIsRemoveCostModalOpen: setIsOpen } = useModalsStore(state => state)

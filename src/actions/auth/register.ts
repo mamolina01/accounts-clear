@@ -2,7 +2,7 @@
 
 import prisma from '@/lib/prisma'
 import bcryptjs from 'bcryptjs'
-import { login } from '..'
+import { login } from './login'
 export const registerUser = async (name: string, email: string, password: string) => {
   try {
 

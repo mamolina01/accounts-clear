@@ -1,5 +1,4 @@
 'use client'
-import { registerUser } from '@/actions'
 import { Routes } from '@/enums/routes'
 import { useGeneralBehaviourStore } from '@/store'
 import { Form, Formik } from 'formik'
@@ -8,6 +7,7 @@ import { ChangeEvent, useState } from 'react'
 import styles from './RegisterForm.module.scss'
 import { validationSchemaRegister } from '@/validations'
 import toast from 'react-hot-toast'
+import { registerUser } from '@/actions/auth/register'
 
 interface FormProps {
   name: string

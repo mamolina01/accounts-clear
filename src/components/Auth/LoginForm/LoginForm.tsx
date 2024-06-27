@@ -1,6 +1,5 @@
 'use client'
 
-import { login } from '@/actions'
 import { Routes } from '@/enums/routes'
 import { useGeneralBehaviourStore } from '@/store'
 import { Form, Formik } from 'formik'
@@ -12,6 +11,7 @@ import toast from 'react-hot-toast'
 import Image from 'next/image'
 import { signIn } from 'next-auth/react'
 import googleIcon from '@/public/images/google.png'
+import { login } from '@/actions/auth/login'
 
 export const LoginForm = () => {
   const { redirectUrl, setRedirectUrl } = useGeneralBehaviourStore(state => state)

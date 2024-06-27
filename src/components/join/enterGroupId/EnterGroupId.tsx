@@ -2,10 +2,11 @@
 import { Formik, Form } from 'formik'
 import styles from './EnterGroupId.module.scss'
 import { validationSchemaEnterGroupId } from '@/validations'
-import { UserIsAmongParticipants, getGroupByIdToJoin } from '@/actions'
 import { ChangeEvent, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Routes } from '@/enums/routes'
+import { getGroupByIdToJoin } from '@/actions/groups/get-group-by-id'
+import { UserIsAmongParticipants } from '@/actions/participants/user-is-among-participants'
 
 export const EnterGroupId = () => {
   const [error, setError] = useState('')

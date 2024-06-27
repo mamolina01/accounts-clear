@@ -5,6 +5,7 @@ import NextAuth from 'next-auth'
 import prisma from './lib/prisma'
 import bcryptjs from 'bcryptjs'
 import GoogleProvider from 'next-auth/providers/google';
+import { loginWithGoogle } from './actions/auth/login'
 
 export const authConfig: NextAuthConfig = {
   pages: {
@@ -20,10 +21,12 @@ export const authConfig: NextAuthConfig = {
       }
       return token
     },
-    session({ session, token, user }) {
+    async session({ session, token, user }) {
       session.user = token.data as any
+      const { id, email, name } = session.user
+      await loginWithGoogle(id, email)
       return session
-    }
+    },
   },
   providers: [
     Credentials({
@@ -40,7 +43,7 @@ export const authConfig: NextAuthConfig = {
         const user = await prisma.user.findUnique({
           where: { email: email.toLowerCase() }
         })
-        if (!user) return null
+        if (!user || !user.password) return null
 
         // Comparar las contraseñas
         if (!bcryptjs.compareSync(password, user.password)) return null
