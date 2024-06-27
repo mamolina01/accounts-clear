@@ -1,15 +1,15 @@
 .form {
-  @apply flex flex-col mt-6;
+  @apply flex flex-col mt-2 md:mt-4;
 
   .inputContainer {
     @apply flex flex-col;
 
     .label {
-      @apply text-start text-xl capitalize;
+      @apply text-start md:text-xl capitalize;
     }
 
     .input {
-      @apply bg-transparent outline-none mx-1 pb-1 border-b-[1px] border-tertiary focus:border-primary;
+      @apply bg-transparent outline-none mx-1 pb-1 border-b-[1px] border-tertiary focus:border-primary text-sm md:text-base;
 
       &.error {
         @apply border-red-500;
@@ -18,15 +18,15 @@
   }
 
   .errorText {
-    @apply text-red-500 text-sm mx-1 h-5;
+    @apply text-red-500 text-xs md:text-sm mx-1 h-5;
 
     &.apiError {
-      @apply text-center mb-4 text-base;
+      @apply text-center text-xs md:text-sm;
     }
   }
 
   .submitButton {
-    @apply bg-sky-700 rounded p-1 w-3/4 mx-auto transition-all;
+    @apply bg-blue-500 rounded p-1 w-1/2 md:w-3/4 mx-auto transition-all text-sm md:text-base;
 
     &:disabled {
       @apply bg-opacity-50 bg-tertiary;
@@ -34,9 +34,9 @@
   }
 
   .bottomText {
-    @apply text-sm text-center mt-4;
+    @apply text-xs md:text-sm text-center mt-2;
     .link {
-      @apply text-primary font-semibold text-base;
+      @apply text-primary font-semibold text-sm md:text-base;
     }
   }
 }
