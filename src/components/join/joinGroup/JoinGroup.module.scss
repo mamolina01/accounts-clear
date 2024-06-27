@@ -2,25 +2,25 @@
   @apply flex flex-col items-start;
 
   .subtitle {
-    @apply self-center font-medium my-1;
+    @apply self-center text-tertiary my-1;
   }
 
   .label {
-    @apply font-medium text-lg;
+    @apply md:text-xl capitalize;
   }
 
   .participantList {
     @apply flex flex-col gap-1 w-full;
 
     .participant {
-      @apply flex justify-between items-center py-1 px-2 bg-neutral-700 w-full cursor-pointer hover:bg-opacity-50;
+      @apply flex justify-between items-center py-1 px-2 bg-neutral-700 w-full cursor-pointer hover:bg-opacity-50 text-sm md:text-base;
 
       &.disabled {
-        @apply bg-primary cursor-not-allowed;
+        @apply bg-secondary cursor-not-allowed;
       }
 
       .icon {
-        @apply text-primary;
+        @apply text-primary text-lg md:text-xl;
       }
     }
   }

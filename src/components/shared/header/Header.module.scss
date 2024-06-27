@@ -17,7 +17,7 @@
     }
 
     .nav {
-      @apply flex gap-2 sm:gap-4 lg:gap-6 items-center;
+      @apply flex gap-3 lg:gap-6 items-center;
 
       &.authenticated {
         @apply hidden sm:flex;
@@ -40,7 +40,7 @@
       }
 
       .link {
-        @apply text-primary border-b-2 border-b-transparent hover:border-sky-600 capitalize;
+        @apply text-primary border-b-2 border-b-transparent hover:border-sky-600 capitalize text-sm md:text-base;
 
         &.active {
           @apply lg:border-sky-600;
@@ -48,7 +48,7 @@
       }
 
       .register {
-        @apply bg-sky-600 hover:bg-opacity-50 text-white py-[2px] lg:py-1 px-1 lg:px-3 rounded;
+        @apply bg-sky-600 hover:bg-opacity-50 text-white py-[2px] lg:py-1 px-1 lg:px-3 rounded text-sm md:text-base;
       }
     }
   }
