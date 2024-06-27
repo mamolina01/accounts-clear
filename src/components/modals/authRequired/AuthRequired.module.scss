@@ -11,7 +11,7 @@
 }
 
 .buttons {
-  @apply flex w-full items-center gap-2;
+  @apply flex w-full items-center gap-2 mt-2;
 
   .button {
     @apply w-full rounded p-1 text-center;

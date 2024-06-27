@@ -8,14 +8,15 @@ import warningIcon from '@/public/warning.svg'
 import { Modal } from '../modal/Modal'
 
 export const RemoveGroup = () => {
-  const { isRemoveGroupModalOpen, setIsRemoveGroupModalOpen } = useModalsStore(state => state)
+  const { isRemoveGroupModalOpen, setIsRemoveGroupModalOpen: setIsOpen } = useModalsStore(state => state)
+  const { state: isOpen, id } = isRemoveGroupModalOpen
 
   const closeModal = () => {
-    setIsRemoveGroupModalOpen({ id: '', state: false })
+    setIsOpen({ id: '', state: false })
   }
 
   const onDeleteGroup = async () => {
-    const { ok } = await removeGroup(isRemoveGroupModalOpen.id)
+    const { ok } = await removeGroup(id)
     if (ok) {
       toast.success('Successfully removed!')
     } else {
@@ -25,7 +26,7 @@ export const RemoveGroup = () => {
   }
 
   return (
-    <Modal isOpen={isRemoveGroupModalOpen.state} closeModal={closeModal}>
+    <Modal isOpen={isOpen} closeModal={closeModal}>
       <Image src={warningIcon} alt="warning" className={styles.icon} />
       <h4 className={styles.title}>Do you want to delete this group?</h4>
       <div className={styles.buttons}>

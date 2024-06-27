@@ -7,13 +7,13 @@ import { CiWarning } from 'react-icons/ci'
 import { Modal } from '../modal/Modal'
 
 export const AuthRequired = () => {
-  const { isAuthModalOpen, setIsAuthModalOpen } = useModalsStore(state => state)
+  const { isAuthModalOpen: isOpen, setIsAuthModalOpen: setIsOpen } = useModalsStore(state => state)
 
   const closeModal = () => {
-    setIsAuthModalOpen(false)
+    setIsOpen(false)
   }
   return (
-    <Modal isOpen={isAuthModalOpen} closeModal={closeModal}>
+    <Modal isOpen={isOpen} closeModal={closeModal}>
       <CiWarning className={styles.icon} />
       <h4 className={styles.title}>Authentication required</h4>
       <p className={styles.description}>You must be registered to select a group</p>
