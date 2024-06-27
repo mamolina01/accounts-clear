@@ -4,6 +4,7 @@ import { z } from 'zod'
 import NextAuth from 'next-auth'
 import prisma from './lib/prisma'
 import bcryptjs from 'bcryptjs'
+import GoogleProvider from 'next-auth/providers/google';
 
 export const authConfig: NextAuthConfig = {
   pages: {
@@ -49,7 +50,11 @@ export const authConfig: NextAuthConfig = {
 
         return rest
       }
-    })
+    }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
   ]
 }
 

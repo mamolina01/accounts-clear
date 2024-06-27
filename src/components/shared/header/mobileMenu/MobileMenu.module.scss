@@ -1,5 +1,5 @@
 .nav {
-  @apply fixed z-20 w-full h-screen bg-primary flex sm:hidden flex-col gap-10 items-center py-5;
+  @apply fixed z-20 w-full h-screen bg-primary flex lg:hidden flex-col gap-10 items-center py-5;
 
   .userContainer {
     @apply flex gap-2 items-center;
@@ -10,6 +10,10 @@
       .email {
         @apply text-xs text-tertiary;
       }
+    }
+
+    .userImage {
+      @apply rounded-full h-7 w-7;
     }
   }
 

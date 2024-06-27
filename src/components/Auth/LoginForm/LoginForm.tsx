@@ -5,10 +5,13 @@ import { Routes } from '@/enums/routes'
 import { useGeneralBehaviourStore } from '@/store'
 import { Form, Formik } from 'formik'
 import Link from 'next/link'
-import { ChangeEvent, useState } from 'react'
+import { useState } from 'react'
 import styles from './LoginForm.module.scss'
 import { validationSchemaLogin } from '@/validations'
 import toast from 'react-hot-toast'
+import Image from 'next/image'
+import { signIn } from 'next-auth/react'
+import googleIcon from '@/public/images/google.png'
 
 export const LoginForm = () => {
   const { redirectUrl, setRedirectUrl } = useGeneralBehaviourStore(state => state)
@@ -84,6 +87,11 @@ export const LoginForm = () => {
                 className={`${styles.input} ${passwordError && styles.error}`}
               />
               <p className={styles.errorText}>{passwordError}</p>
+            </div>
+
+            <div className={styles.googleButton} onClick={() => signIn('google')}>
+              <Image src={googleIcon} alt="googleIcon" className={styles.icon} />
+              <span className={styles.text}>Sign in with Google</span>
             </div>
 
             <button type="submit" disabled={!isValid || isLoading} className={styles.submitButton}>

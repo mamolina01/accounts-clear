@@ -13,14 +13,14 @@
     }
 
     .hamburguerMenu {
-      @apply block sm:hidden;
+      @apply block lg:hidden;
     }
 
     .nav {
       @apply flex gap-3 lg:gap-6 items-center;
 
       &.authenticated {
-        @apply hidden sm:flex;
+        @apply hidden lg:flex;
       }
 
       .userContainer {
@@ -34,8 +34,12 @@
           }
         }
 
+        .userImage {
+          @apply rounded-full h-7 w-7;
+        }
+
         .signOut {
-          @apply flex items-center  rounded text-primary;
+          @apply flex items-center text-primary text-2xl;
         }
       }
 
