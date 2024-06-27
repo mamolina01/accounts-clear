@@ -21,8 +21,20 @@
     @apply text-red-500 text-xs md:text-sm mx-1 h-5;
   }
 
+  .googleButton {
+    @apply flex justify-center items-center gap-2 rounded p-1 w-3/4 mx-auto border border-secondary cursor-pointer;
+
+    .icon {
+      @apply w-5 h-5;
+    }
+
+    .text {
+      @apply text-sm md:text-base;
+    }
+  }
+
   .submitButton {
-    @apply bg-blue-500 rounded p-1 w-1/2 md:w-3/4 mx-auto transition-all text-sm md:text-base;
+    @apply bg-blue-500 rounded p-1 w-3/4 mx-auto transition-all text-sm md:text-base mt-4;
 
     &:disabled {
       @apply bg-opacity-50 bg-tertiary;

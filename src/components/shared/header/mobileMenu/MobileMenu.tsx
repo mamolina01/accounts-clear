@@ -33,7 +33,7 @@ export const MobileMenu = ({ toggleMenu, user }: Props) => {
           <p>{user.name}</p>
           <p className={styles.email}>{user.email}</p>
         </div>
-        {user.image && <Image src={user.image} alt="user_image" />}
+        {user.image && <Image src={user.image} alt="user_image" width={28} height={28} className={styles.userImage} />}
       </div>
 
       <Link onClick={toggleMenu} href={Routes.HOME} className={getStyles(Routes.HOME)}>
