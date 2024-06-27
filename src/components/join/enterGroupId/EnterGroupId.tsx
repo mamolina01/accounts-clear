@@ -10,14 +10,15 @@ import { Routes } from '@/enums/routes'
 export const EnterGroupId = () => {
   const [error, setError] = useState('')
   const router = useRouter()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const handleSubmit = async (values: { id: string }) => {
+    setIsLoading(true)
     const { group } = await getGroupByIdToJoin(values.id)
-
-    // TODO: Verify if user is among participants
 
     if (!group) {
       setError(`Doesn't exists a group with this id`)
+      setIsLoading(false)
       return
     }
 
@@ -25,6 +26,7 @@ export const EnterGroupId = () => {
 
     if (isAmongParticipants) {
       setError(`You are already in this group`)
+      setIsLoading(false)
       return
     }
 
@@ -42,7 +44,7 @@ export const EnterGroupId = () => {
       validateOnMount={false}
     >
       {props => {
-        const { values, touched, errors, handleChange, handleSubmit } = props
+        const { values, touched, errors, isValid, handleChange, handleSubmit } = props
         const idError = ((touched.id || values.id) && errors.id) || ''
 
         const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -56,7 +58,7 @@ export const EnterGroupId = () => {
           <Form onSubmit={handleSubmit} className={styles.form}>
             <div className={styles.inputContainer}>
               <label htmlFor="title" className={styles.label}>
-                Group id
+                Group id <span className={styles.required}>*</span>
               </label>
               <input
                 name="id"
@@ -69,7 +71,7 @@ export const EnterGroupId = () => {
               <p className={styles.errorText}>{error ? error : idError}</p>
             </div>
 
-            <button type="submit" className={styles.submitButton}>
+            <button type="submit" className={styles.submitButton} disabled={!isValid || isLoading || !!error}>
               Submit
             </button>
           </Form>

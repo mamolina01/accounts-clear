@@ -1,16 +1,19 @@
 .form {
-  @apply flex flex-col;
+  @apply flex flex-col mt-2 md:mt-4;
 
   .inputContainer {
     @apply flex flex-col gap-1;
 
     .label {
-      @apply text-start text-xl capitalize;
+      @apply text-start md:text-xl capitalize;
+      .required {
+        @apply text-red-500;
+      }
     }
 
     .input,
     .select {
-      @apply bg-transparent outline-none mx-1 pb-1 border-b-[1px] border-tertiary focus:border-primary;
+      @apply bg-transparent outline-none mx-1 pb-1 border-b-[1px] border-tertiary focus:border-primary text-sm md:text-base;
 
       &.error {
         @apply border-red-500;
@@ -23,6 +26,10 @@
   }
 
   .submitButton {
-    @apply bg-blue-500 rounded p-1 w-3/4 mx-auto mt-1;
+    @apply bg-blue-500 rounded p-1 w-1/2 md:w-3/4 mx-auto transition-all text-sm md:text-base;
+
+    &:disabled {
+      @apply bg-opacity-50 bg-tertiary;
+    }
   }
 }

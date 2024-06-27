@@ -62,7 +62,7 @@ export const JoinGroup = ({ group }: Props) => {
             onClick={() => selectParticipant(participant)}
           >
             <span>{participant.name}</span>
-            {!participant.userId && <AiOutlineSelect size={20} className={styles.icon} />}
+            {!participant.userId && <AiOutlineSelect className={styles.icon} />}
           </div>
         ))}
       </div>
