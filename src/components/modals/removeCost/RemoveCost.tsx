@@ -1,18 +1,18 @@
 'use client'
-import { Modal } from '@/components'
 import { useModalsStore } from '@/store'
 import styles from './RemoveCost.module.scss'
 import { removeCost } from '@/actions'
 import toast from 'react-hot-toast'
 import Image from 'next/image'
 import warningIcon from '@/public/warning.svg'
+import { Modal } from '../modal/Modal'
 
 export const RemoveCost = () => {
-  const { isRemoveCostModalOpen, setIsRemoveCostModalOpen } = useModalsStore(state => state)
-  const { state, id } = isRemoveCostModalOpen
+  const { isRemoveCostModalOpen, setIsRemoveCostModalOpen: setIsOpen } = useModalsStore(state => state)
+  const { state: isOpen, id } = isRemoveCostModalOpen
 
   const closeModal = () => {
-    setIsRemoveCostModalOpen({ id: '', state: false })
+    setIsOpen({ id: '', state: false })
   }
 
   const onDeleteCost = async () => {
@@ -27,7 +27,7 @@ export const RemoveCost = () => {
   }
 
   return (
-    <Modal isOpen={state} closeModal={closeModal}>
+    <Modal isOpen={isOpen} closeModal={closeModal}>
       <Image src={warningIcon} alt="warning" className={styles.icon} />
       <h4 className={styles.title}>Do you want to delete this cost?</h4>
       <div className={styles.buttons}>
