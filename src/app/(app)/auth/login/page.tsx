@@ -1,5 +1,5 @@
 import { FormContainer } from '@/components'
-import { LoginForm } from '@/components/auth'
+import { LoginForm } from '@/components/auth/loginForm/LoginForm'
 
 const LoginPage = () => {
   return (

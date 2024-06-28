@@ -1,5 +1,5 @@
 import { getGroupByIdExtended } from '@/actions/groups/get-group-by-id'
-import { GroupDetails } from '@/components/groupDetails'
+import { GroupDetails } from '@/components/groupDetails/GroupDetails'
 import React from 'react'
 
 interface Props {
