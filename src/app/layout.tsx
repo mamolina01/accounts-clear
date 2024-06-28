@@ -12,7 +12,10 @@ const monserrat = Montserrat({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Clear Accounts',
-  description: 'Split your expenses with your friends!'
+  description: 'Split your expenses with your friends!',
+  icons: {
+    icon: '/icon.png'
+  }
 }
 
 export default async function RootLayout({
