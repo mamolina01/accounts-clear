@@ -1,10 +1,11 @@
-export * from './auth'
-
 export * from './groupForm'
-export * from './costForm'
 
 export * from './groupList/GroupList'
 
 export * from './join'
 
-export * from './shared'
+export * from './shared/footer/Footer'
+export * from './shared/formContainer/FormContainer'
+export * from './shared/header/Header'
+export * from './shared/inputNumber/InputNumber'
+export * from './shared/menus/groupMenu/GroupMenu'

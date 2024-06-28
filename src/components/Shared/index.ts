@@ -1,5 +1,0 @@
-export * from './header/Header'
-export * from './formContainer/FormContainer'
-export * from './footer/Footer'
-export * from './inputNumber/InputNumber'
-export * from './menus/groupMenu/GroupMenu'

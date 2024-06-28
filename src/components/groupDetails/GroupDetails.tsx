@@ -1,6 +1,7 @@
 import React from 'react'
-import { GroupInfo, GroupSummary } from '.'
 import { GroupDetail } from '@/types/groupDetail'
+import { GroupInfo } from './groupInfo/GroupInfo'
+import { GroupSummary } from './groupSummary/GroupSummary'
 
 interface Props {
   group: GroupDetail

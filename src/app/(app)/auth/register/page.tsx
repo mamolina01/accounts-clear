@@ -1,4 +1,5 @@
-import { FormContainer, RegisterForm } from '@/components'
+import { FormContainer } from '@/components'
+import { RegisterForm } from '@/components/auth'
 
 const NewAccountPage = () => {
   return (
