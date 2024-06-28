@@ -10,7 +10,7 @@ export const Information = () => {
         Keep track of expenses and balances shared with roommates, travel companions, groups, friends, and family.
       </InformationItem>
       <InformationItem image={image2} title="Good accounting makes good friends." reverseColumn>
-        With <span className="text-primary font-semibold">Clear Accounts</span>, split expenses with any group: trips,
+        With <span className={styles.highlightSection}>Clear Accounts</span>, split expenses with any group: trips,
         roommates, friends, and family.
       </InformationItem>
     </div>
