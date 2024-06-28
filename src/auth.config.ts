@@ -17,9 +17,9 @@ export const authConfig: NextAuthConfig = {
     },
     async jwt({ token, user }) {
       if (user) {
-        if (user.provider && user.provider === 'Google') {
+        if (user?.provider === 'Google') {
           const data = await getUserId(user.email!)
-          if (data && data.id) {
+          if (data?.id) {
             user.id = data.id
           }
         }
@@ -68,7 +68,7 @@ export const authConfig: NextAuthConfig = {
             provider: 'Credentials'
           }
         })
-        if (!user || !user.password) return null
+        if (!user?.password) return null
 
         // Comparar las contraseñas
         if (!bcryptjs.compareSync(password, user.password)) return null
