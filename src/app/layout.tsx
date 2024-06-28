@@ -3,10 +3,11 @@ import { Montserrat } from 'next/font/google'
 import './globals.css'
 import { Providers } from './Providers'
 import 'animate.css'
-import { Footer, Header } from '@/components'
+import { Footer } from '@/components'
 import styles from './layout.module.scss'
 import { Modals } from '@/components/modals'
 import { auth } from '@/auth.config'
+import { Header } from '@/components/shared/header/Header'
 
 const monserrat = Montserrat({ subsets: ['latin'] })
 

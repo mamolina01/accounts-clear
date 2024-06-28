@@ -6,6 +6,5 @@ export * from './join'
 
 export * from './shared/footer/Footer'
 export * from './shared/formContainer/FormContainer'
-export * from './shared/header/Header'
 export * from './shared/inputNumber/InputNumber'
 export * from './shared/menus/groupMenu/GroupMenu'
