@@ -4,10 +4,10 @@ import styles from './JoinGroup.module.scss'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { Routes } from '@/enums/routes'
-import { integrateUser } from '@/actions'
 import toast from 'react-hot-toast'
 import { useGeneralBehaviourStore, useModalsStore } from '@/store'
 import { getCurrentUrl } from '@/utils'
+import { integrateUser } from '@/actions/participants/integrate-user'
 
 interface Props {
   group: {

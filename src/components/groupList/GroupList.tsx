@@ -6,8 +6,8 @@ import Link from 'next/link'
 import { Routes } from '@/enums/routes'
 import { GroupItem } from './groupItem/GroupItem'
 import { FormContainer } from '..'
-import { getGroupListByUserId } from '@/actions'
 import { EmptyGroups } from './emptyGroups/EmptyGroups'
+import { getGroupListByUserId } from '@/actions/groups/get-group-list-by-userId'
 
 interface Props {
   id: string

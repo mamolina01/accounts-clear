@@ -28,7 +28,7 @@ export const ParticipantItem = ({ participant, editParticipant, removeParticipan
     if (session) {
       setIsUserParticipant(session?.user.name.toLowerCase() === participant.name.toLowerCase())
     }
-  }, [session])
+  }, [session, participant.name])
 
   const handleChange: FormEventHandler<HTMLInputElement> = (e: ChangeEvent<HTMLInputElement>) => {
     setTempParticipant({ ...tempParticipant, name: e.target.value })

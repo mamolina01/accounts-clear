@@ -1,4 +1,4 @@
-import NextAuth, { DefaultSession } from 'next-auth'
+import NextAuth, { DefaultSession, DefaultUser } from 'next-auth'
 
 declare module 'next-auth' {
   interface Session {
@@ -11,6 +11,11 @@ declare module 'next-auth' {
       groups: {
         id: string
       }[]
+      provider: string
     } & DefaultSession['user']
+  }
+
+  interface User extends DefaultUser {
+    provider: string
   }
 }

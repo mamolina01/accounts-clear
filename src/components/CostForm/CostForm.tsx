@@ -3,14 +3,14 @@ import { Form, Formik } from 'formik'
 import styles from './CostForm.module.scss'
 import { validationSchemaNewCost } from '@/validations'
 import { ImCheckboxChecked, ImCheckboxUnchecked } from 'react-icons/im'
-import { createCost } from '@/actions'
 import { CostProps, CostPropsTemp, Participant, ParticipantSelectable } from '@/types/cost'
 import { useRouter } from 'next/navigation'
-import { updateCost } from '@/actions'
 import toast from 'react-hot-toast'
 import { Routes } from '@/enums/routes'
 import { useState } from 'react'
 import { InputNumber } from '..'
+import { updateCost } from '@/actions/costs/update-cost'
+import { createCost } from '@/actions/costs/create-cost'
 
 interface Props {
   cost: CostPropsTemp

@@ -1,5 +1,4 @@
 'use client'
-import { updateGroup, createGroup } from '@/actions'
 import { validationSchemaNewBalance } from '@/validations'
 import { Category } from '@prisma/client'
 import { Form, Formik } from 'formik'
@@ -10,6 +9,8 @@ import { GroupInfo } from '@/types/group'
 import toast from 'react-hot-toast'
 import { Participants } from './participants/Participants'
 import { Routes } from '@/enums/routes'
+import { createGroup } from '@/actions/groups/create-group'
+import { updateGroup } from '@/actions/groups/update-group'
 
 interface Props {
   group: GroupInfo

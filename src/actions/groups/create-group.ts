@@ -9,7 +9,7 @@ import { revalidatePath } from 'next/cache'
 export const createGroup = async (data: GroupInfo) => {
   try {
     const session = await auth()
-    if (!session?.user.name) {
+    if (!session?.user) {
       return {
         ok: false
       }
