@@ -1,4 +1,5 @@
-import { getCost, getParticipantsByGroupId } from '@/actions'
+import { getCost } from '@/actions/costs/get-cost'
+import { getParticipantsByGroupId } from '@/actions/participants/get-participants-by-group-id'
 import { CostForm, FormContainer } from '@/components'
 import { Routes } from '@/enums/routes'
 import { CostPropsTemp, Participant, ParticipantSelectable } from '@/types/cost'

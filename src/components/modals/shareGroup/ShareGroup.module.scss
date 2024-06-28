@@ -1,13 +1,9 @@
 .title {
-  @apply text-2xl text-center;
+  @apply text-lg md:text-2xl text-center;
 }
 
-.text {
-  @apply text-xs text-tertiary text-center mt-2;
-}
-
-.groupLink {
-  @apply font-medium text-lg;
+.label {
+  @apply text-start md:text-xl;
 }
 
 .groupContainer {
@@ -18,9 +14,17 @@
     .textLink {
       @apply lowercase;
     }
-
-    .copyIcon {
-      @apply cursor-pointer;
-    }
   }
+}
+
+.copyButton {
+  @apply flex items-center gap-2 self-center bg-quarteriary p-1 rounded;
+
+  .icon {
+    @apply text-lg;
+  }
+}
+
+.text {
+  @apply text-xs text-tertiary text-center;
 }

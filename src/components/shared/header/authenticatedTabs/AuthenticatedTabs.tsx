@@ -24,7 +24,7 @@ export const AuthenticatedTabs = ({ user }: Props) => {
   const pathname = usePathname()
 
   return (
-    <nav className={styles.nav}>
+    <nav className={`${styles.nav} ${styles.authenticated}`}>
       <Link href={Routes.GROUPS} className={`${styles.link} ${pathname === Routes.GROUPS ? styles.active : ''}`}>
         My groups
       </Link>
@@ -42,9 +42,9 @@ export const AuthenticatedTabs = ({ user }: Props) => {
           <p>{user.name}</p>
           <p className={styles.email}>{user.email}</p>
         </div>
-        {user.image && <Image src={user.image} alt="user_image" />}
-        <button className={styles.signOut} onClick={() => signOut()}>
-          <IoLogOutOutline size={30} />
+        {user.image && <Image src={user.image} alt="user_image" width={28} height={28} className={styles.userImage} />}
+        <button onClick={() => signOut()}>
+          <IoLogOutOutline className={styles.signOut} />
         </button>
       </div>
     </nav>

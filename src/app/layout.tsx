@@ -5,31 +5,35 @@ import { Providers } from './Providers'
 import 'animate.css'
 import { Footer, Header } from '@/components'
 import styles from './layout.module.scss'
-import { AuthRequired, RemoveGroup, ShareGroup } from '@/components/modals'
+import { Modals } from '@/components/modals'
+import { auth } from '@/auth.config'
 
 const monserrat = Montserrat({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Clear Accounts',
-  description: 'Split your expenses with your friends!'
+  description: 'Split your expenses with your friends!',
+  icons: {
+    icon: '/icon.png'
+  }
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const session = await auth()
+
   return (
     <html lang="en">
       <body className={monserrat.className}>
         <Providers>
           <div className={styles.container}>
-            <Header />
-            <div className={styles.subContainer}>{children}</div>
+            <Header session={session} />
+            <div>{children}</div>
             <Footer />
-            <ShareGroup />
-            <AuthRequired />
-            <RemoveGroup />
+            <Modals />
           </div>
         </Providers>
       </body>

@@ -1,6 +1,6 @@
 import * as yup from 'yup'
 
-export function validationSchemaNewCost() {
+export const validationSchemaNewCost = () => {
   return yup.object({
     title: yup.string().required('Title is required').max(20, 'Max 20 characters.'),
     amount: yup.string().required('Amount is required'),

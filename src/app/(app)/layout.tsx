@@ -1,4 +1,4 @@
-import React from 'react'
+import styles from './Layout.module.scss'
 import { Toaster } from 'react-hot-toast'
 
 const CostsLayout = async ({ children }: { readonly children: React.ReactNode }) => {
@@ -11,7 +11,7 @@ const CostsLayout = async ({ children }: { readonly children: React.ReactNode })
           }
         }}
       />
-      <div className="flex flex-col w-1/2 mx-auto my-10 gap-5">{children}</div>
+      <div className={styles.wrapper}>{children}</div>
     </>
   )
 }

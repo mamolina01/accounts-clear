@@ -2,13 +2,6 @@
 
 import prisma from '@/lib/prisma'
 
-interface UserProps {
-  participant: {
-    id: string
-    name: string
-  } | null
-}
-
 export const getCost = async (id: string) => {
   try {
     const cost = await prisma.cost.findUnique({

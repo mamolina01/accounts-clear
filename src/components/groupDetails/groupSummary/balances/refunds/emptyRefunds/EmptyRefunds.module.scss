@@ -1,0 +1,11 @@
+.container {
+  @apply flex flex-col items-center gap-2 my-2;
+
+  .icon {
+    @apply h-10 w-10;
+  }
+
+  .text {
+    @apply text-tertiary text-sm md:text-base;
+  }
+}

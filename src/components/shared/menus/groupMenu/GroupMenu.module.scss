@@ -1,13 +1,13 @@
 .container {
   @apply relative;
   .toggleMenuButton {
-    @apply cursor-pointer;
+    @apply text-lg md:text-xl cursor-pointer;
   }
 
   .menuContainer {
     @apply bg-secondary border border-tertiary rounded absolute top-0 right-4 z-10;
 
-    .button {
+    .option {
       @apply flex px-4 py-1 items-center gap-3 cursor-pointer hover:text-primary text-sm;
     }
   }

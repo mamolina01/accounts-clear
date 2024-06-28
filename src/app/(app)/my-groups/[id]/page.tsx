@@ -1,4 +1,4 @@
-import { getGroupByIdExtended } from '@/actions'
+import { getGroupByIdExtended } from '@/actions/groups/get-group-by-id'
 import { GroupDetails } from '@/components'
 import React from 'react'
 

@@ -4,8 +4,9 @@ import { NextResponse, type NextRequest } from 'next/server'
 // Middleware function
 const middleware = async (req: NextRequest) => {
   const session = await auth()
+  const isAuthRoute = req.nextUrl.pathname.startsWith('/auth')
 
-  if (!session) {
+  if ((!session && !isAuthRoute) || (session && isAuthRoute)) {
     return NextResponse.redirect(new URL('/', req.url))
   }
 
@@ -13,7 +14,7 @@ const middleware = async (req: NextRequest) => {
 }
 
 export const config = {
-  matcher: ['/group/:path*', '/my-groups', '/cost/:path*']
+  matcher: ['/group/:path*', '/my-groups/:path*', '/cost/:path*', '/auth/:path*']
 }
 
 export default middleware

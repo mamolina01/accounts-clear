@@ -1,11 +1,13 @@
 'use client'
-import { login, registerUser } from '@/actions'
 import { Routes } from '@/enums/routes'
 import { useGeneralBehaviourStore } from '@/store'
+import { Form, Formik } from 'formik'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { ChangeEvent, useState } from 'react'
+import styles from './RegisterForm.module.scss'
+import { validationSchemaRegister } from '@/validations'
+import toast from 'react-hot-toast'
+import { registerUser } from '@/actions/auth/register'
 
 interface FormProps {
   name: string
@@ -14,76 +16,109 @@ interface FormProps {
 }
 
 export const RegisterForm = () => {
-  const [errorMessage, setErrorMessage] = useState('')
-  const {
-    register,
-    handleSubmit,
-    formState: { errors }
-  } = useForm<FormProps>()
-  const router = useRouter()
   const { redirectUrl, setRedirectUrl } = useGeneralBehaviourStore(state => state)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  const onSubmit: SubmitHandler<FormProps> = async data => {
+  const onSubmit = async (data: FormProps) => {
+    setIsLoading(true)
     const { name, email, password } = data
-    const resp = await registerUser(name, email, password)
+    const { ok, message } = await registerUser(name, email, password)
 
-    if (!resp.ok) {
-      setErrorMessage(resp.message)
+    if (!ok) {
+      toast.error(message)
+      setIsLoading(false)
       return
     }
 
-    setErrorMessage('')
-    await login(email.toLowerCase(), password)
-    if (redirectUrl) {
-      const tempUrl = redirectUrl
-      setRedirectUrl('')
-      window.location.replace(tempUrl)
-    } else {
-      window.location.replace(Routes.HOME)
-    }
+    toast.success(message)
+    setTimeout(() => {
+      if (redirectUrl) {
+        const tempUrl = redirectUrl
+        setRedirectUrl('')
+
+        window.location.replace(tempUrl)
+      } else {
+        window.location.replace(Routes.HOME)
+      }
+    }, 1500)
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
-      {errors.name?.type === 'required' && <span className="text-red-500">El nombre es obligatorio</span>}
-      <label htmlFor="name">Nombre Completo</label>
-      <input
-        className={`px-2 py-2 bg-quarteriary rounded mb-5 outline-none ${errors.name ? 'border-red-500' : ''}`}
-        type="text"
-        {...register('name', { required: true })}
-      />
+    <Formik
+      initialValues={{ name: '', email: '', password: '' }}
+      validateOnChange
+      validationSchema={validationSchemaRegister()}
+      onSubmit={values => {
+        onSubmit({ ...values })
+      }}
+    >
+      {props => {
+        const { values, isValid, touched, errors, handleBlur, handleSubmit, handleChange } = props
+        const nameError = ((touched.name || values.name) && errors.name) || ''
+        const emailError = ((touched.email || values.email) && errors.email) || ''
+        const passwordError = ((touched.password || values.password) && errors.password) || ''
 
-      <label htmlFor="email">Correo electrónico</label>
-      <input
-        className={`px-2 py-2 bg-quarteriary rounded mb-5 outline-none ${errors.email ? 'border-red-500' : ''}`}
-        type="email"
-        {...register('email', { required: true, pattern: /^\S+@\S+$/i })}
-      />
+        return (
+          <Form onSubmit={handleSubmit} className={styles.form}>
+            <div className={styles.inputContainer}>
+              <label htmlFor="name" className={styles.label}>
+                Name
+              </label>
+              <input
+                name="name"
+                type="text"
+                value={values.name}
+                placeholder="Enter a name"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={`${styles.input} ${nameError && styles.error}`}
+              />
+              <p className={styles.errorText}>{nameError}</p>
+            </div>
+            <div className={styles.inputContainer}>
+              <label htmlFor="name" className={styles.label}>
+                Email
+              </label>
+              <input
+                name="email"
+                type="text"
+                value={values.email}
+                placeholder="Enter an email"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={`${styles.input} ${emailError && styles.error}`}
+              />
+              <p className={styles.errorText}>{emailError}</p>
+            </div>
+            <div className={styles.inputContainer}>
+              <label htmlFor="description" className={styles.label}>
+                Password
+              </label>
+              <input
+                name="password"
+                type="password"
+                value={values.password}
+                placeholder="Enter a password"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={`${styles.input} ${passwordError && styles.error}`}
+              />
+              <p className={styles.errorText}>{passwordError}</p>
+            </div>
 
-      <label htmlFor="password">Contraseña</label>
-      <input
-        className={`px-2 py-2 bg-quarteriary rounded mb-5 outline-none ${errors.password ? 'border-red-500' : ''}`}
-        type="password"
-        {...register('password', { required: true })}
-      />
+            <button type="submit" disabled={!isValid || isLoading} className={styles.submitButton}>
+              Submit
+            </button>
 
-      {errorMessage && <span className="text-red-500">{errorMessage}</span>}
-
-      <button className="btn-primary">Crear cuenta</button>
-
-      {/* divisor line */}
-      <div className="flex items-center my-5">
-        <div className="flex-1 border-t border-gray-500"></div>
-        <div className="px-2 text-gray-800">O</div>
-        <div className="flex-1 border-t border-gray-500"></div>
-      </div>
-
-      <span className="text-sm text-center">
-        Do you already have your account?{' '}
-        <Link href={Routes.LOGIN} className="text-blue-500 font-semibold text-base">
-          Sign up!
-        </Link>
-      </span>
-    </form>
+            <span className={styles.bottomText}>
+              Do you already have your account?{' '}
+              <Link href={Routes.LOGIN} className={styles.link}>
+                Sign in!
+              </Link>
+            </span>
+          </Form>
+        )
+      }}
+    </Formik>
   )
 }

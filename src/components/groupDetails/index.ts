@@ -1,3 +1,3 @@
 export * from './groupInfo/GroupInfo'
-export * from './groupSummary/groupSummary'
+export * from './groupSummary/GroupSummary'
 export * from './GroupDetails'

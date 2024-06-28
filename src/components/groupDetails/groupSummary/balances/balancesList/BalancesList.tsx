@@ -1,4 +1,4 @@
-import React from 'react'
+import styles from './BalancesList.module.scss'
 
 interface Props {
   id: string
@@ -22,17 +22,17 @@ export const BalancesList = ({ balance }: { balance: Props[] }) => {
   const getClasses = (total: number) => {
     if (total < 0) {
       return {
-        name: 'text-start',
-        total: `bg-red-800 rounded-l text-end`
+        name: styles.rightText,
+        total: styles.leftTotal
       }
     } else if (total > 0) {
       return {
-        name: 'text-end',
-        total: `bg-green-700 rounded-r`
+        name: styles.leftText,
+        total: styles.rightTotal
       }
     } else {
       return {
-        name: 'text-end',
+        name: styles.leftText,
         total: ``
       }
     }
@@ -41,12 +41,9 @@ export const BalancesList = ({ balance }: { balance: Props[] }) => {
   return (
     <>
       {balance.map(participant => (
-        <div
-          className={`flex w-full animate__animated animate__fadeIn ${participant.total < 0 ? 'flex-row-reverse' : ''}`}
-          key={participant.id}
-        >
-          <p className={`${getClasses(participant.total).name} flex-1 px-2`}>{participant.name}</p>
-          <p className={`${getClasses(participant.total).total} flex-1 px-2`}>{getTotal(participant.total)}</p>
+        <div className={`${styles.container} ${participant.total < 0 ? styles.reverse : ''}`} key={participant.id}>
+          <p className={`${getClasses(participant.total).name} ${styles.balance}`}>{participant.name}</p>
+          <p className={`${getClasses(participant.total).total} ${styles.balance}`}>{getTotal(participant.total)}</p>
         </div>
       ))}
     </>

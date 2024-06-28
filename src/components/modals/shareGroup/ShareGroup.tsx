@@ -3,18 +3,17 @@ import { MdOutlineContentCopy } from 'react-icons/md'
 import styles from './ShareGroup.module.scss'
 import { useModalsStore } from '@/store'
 import toast from 'react-hot-toast'
-import { Modal } from '@/components'
 import { getCurrentUrl } from '@/utils'
+import { Modal } from '../modal/Modal'
 
 export const ShareGroup = () => {
-  const { shareModal, setShareModal } = useModalsStore(state => state)
-
+  const { shareModal, setShareModal: setIsOpen } = useModalsStore(state => state)
+  const { state: isOpen, id } = shareModal
   // TODO: check baseUrl
-  const baseUrl = getCurrentUrl(shareModal.id)
-  const url = `${baseUrl.substring(0, 45)}...`
+  const baseUrl = getCurrentUrl(id)
 
   const closeModal = () => {
-    setShareModal({ id: '', state: false })
+    setIsOpen({ id: '', state: false })
   }
 
   const copyLink = async () => {
@@ -26,18 +25,33 @@ export const ShareGroup = () => {
     }
   }
 
+  const copyID = async () => {
+    try {
+      await navigator.clipboard.writeText(id)
+      toast.success('Copied to clipboard')
+    } catch (err) {
+      toast.error('Error copying')
+    }
+  }
+
   return (
-    <Modal isOpen={shareModal.state} closeModal={closeModal}>
+    <Modal isOpen={isOpen} closeModal={closeModal}>
       <h5 className={styles.title}>Share Group</h5>
 
       <div className={styles.groupContainer}>
-        <p className={styles.groupLink}>Group Link</p>
+        <label className={styles.label}>Group ID</label>
         <div className={styles.linkContainer}>
-          <p className={styles.textLink}>{url}</p>
-          <MdOutlineContentCopy size={20} onClick={copyLink} className={styles.copyIcon} />
+          <p className={styles.textLink}>{id}</p>
+          <button className={styles.copyButton}>
+            <MdOutlineContentCopy onClick={copyID} className={styles.icon} />
+          </button>
         </div>
       </div>
-      <p className={styles.text}>Anyone with the link can join this group</p>
+      <button className={styles.copyButton} onClick={copyLink}>
+        Copy link to join
+        <MdOutlineContentCopy className={styles.icon} />
+      </button>
+      <p className={styles.text}>Anyone with the id can join this group</p>
     </Modal>
   )
 }

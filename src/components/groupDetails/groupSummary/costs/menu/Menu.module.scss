@@ -1,0 +1,15 @@
+.container {
+  @apply self-center relative;
+
+  .icon {
+    @apply text-lg md:text-xl cursor-pointer;
+  }
+
+  .menu {
+    @apply bg-secondary border border-tertiary rounded absolute top-2 right-4 z-10;
+
+    .option {
+      @apply flex px-4 py-1 items-center gap-3 cursor-pointer hover:text-primary text-sm;
+    }
+  }
+}

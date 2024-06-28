@@ -1,16 +1,16 @@
 import Image from 'next/image'
-import React from 'react'
+import styles from './Category.module.scss'
 
 export const Category = ({ category }: { category: string }) => {
   return (
-    <div className="flex gap-2 items-center">
-      <span className="text-sm sm:text-xl capitalize">{category}</span>
+    <div className={styles.container}>
+      <span className={styles.text}>{category}</span>
       <Image
         src={`/icons/${category.toLowerCase()}.png`}
         alt={category}
         width={20}
         height={20}
-        className="object-contain h-[10px] w-[10px] sm:h-[20px] sm:w-[20px]"
+        className={styles.icon}
       />
     </div>
   )
