@@ -89,14 +89,14 @@ export const LoginForm = () => {
               <p className={styles.errorText}>{passwordError}</p>
             </div>
 
+            <button type="submit" disabled={!isValid || isLoading} className={styles.submitButton}>
+              Submit
+            </button>
+
             <div className={styles.googleButton} onClick={() => signIn('google')}>
               <Image src={googleIcon} alt="googleIcon" className={styles.icon} />
               <span className={styles.text}>Sign in with Google</span>
             </div>
-
-            <button type="submit" disabled={!isValid || isLoading} className={styles.submitButton}>
-              Submit
-            </button>
 
             <span className={styles.bottomText}>
               Still don{"'"}t have your account?{' '}

@@ -27,7 +27,8 @@ const addData = async () => {
     data: {
       name: initialData.users[0].name,
       email: initialData.users[0].email,
-      password: initialData.users[0].password
+      password: initialData.users[0].password,
+      provider: 'Credentials'
     }
   })
 

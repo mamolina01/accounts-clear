@@ -22,6 +22,11 @@ enum Category {
   Others
 }
 
+enum Providers {
+  Google
+  Credentials
+}
+
 model Group {
   id           String        @id @default(uuid())
   name         String
@@ -44,14 +49,17 @@ model Participant {
 }
 
 model User {
-  id       String  @id @default(uuid())
+  id       String    @id @default(uuid())
   name     String
-  email    String? @unique
+  email    String
   password String?
   image    String?
+  provider Providers
   // Relación para los costos asignados a este usuario
 
   participant Participant[]
+
+  @@unique([email, provider])
 }
 
 model Cost {

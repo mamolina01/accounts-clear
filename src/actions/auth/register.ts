@@ -3,12 +3,13 @@
 import prisma from '@/lib/prisma'
 import bcryptjs from 'bcryptjs'
 import { login } from './login'
+
 export const registerUser = async (name: string, email: string, password: string) => {
   try {
-
     const emailExists = await prisma.user.findFirst({
       where: {
-        email: email
+        email: email,
+        provider: 'Credentials'
       }
     })
 
@@ -23,7 +24,8 @@ export const registerUser = async (name: string, email: string, password: string
       data: {
         name: name,
         email: email.toLowerCase(),
-        password: bcryptjs.hashSync(password)
+        password: bcryptjs.hashSync(password),
+        provider: 'Credentials'
       }
     })
 
