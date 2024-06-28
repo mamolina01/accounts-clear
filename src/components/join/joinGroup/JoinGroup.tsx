@@ -8,6 +8,7 @@ import toast from 'react-hot-toast'
 import { useGeneralBehaviourStore, useModalsStore } from '@/store'
 import { getCurrentUrl } from '@/utils'
 import { integrateUser } from '@/actions/participants/integrate-user'
+import { useEffect, useState } from 'react'
 
 interface Props {
   group: {
@@ -29,12 +30,19 @@ export const JoinGroup = ({ group }: Props) => {
   const router = useRouter()
   const { setIsAuthModalOpen } = useModalsStore(state => state)
   const { redirectUrl, setRedirectUrl } = useGeneralBehaviourStore(state => state)
+  const [baseUrl, setBaseUrl] = useState<string>('')
+
+  useEffect(() => {
+    if (group.id) {
+      const url = getCurrentUrl(group.id)
+      setBaseUrl(url)
+    }
+  }, [group.id])
 
   const selectParticipant = async (participant: Participant) => {
     if (!session.data?.user) {
       setIsAuthModalOpen(true)
-      const url = getCurrentUrl(group.id)
-      setRedirectUrl(url)
+      setRedirectUrl(baseUrl)
       return
     }
 

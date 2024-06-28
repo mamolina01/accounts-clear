@@ -1,6 +1,10 @@
-import { Routes } from "@/enums/routes"
+import { Routes } from '@/enums/routes'
 
 export const getCurrentUrl = (id: string) => {
-    const baseUrl = `http://localhost:3000${Routes.JOIN}/${id}`
-    return baseUrl
+  const urlCompleta = window.location.href
+
+  // Crear un objeto URL para descomponer la URL en sus partes
+  const url = new URL(urlCompleta)
+  const baseUrl = `${url.origin}${Routes.JOIN}/${id}`
+  return baseUrl
 }
