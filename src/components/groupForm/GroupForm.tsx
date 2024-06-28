@@ -92,7 +92,7 @@ export const GroupForm = ({ group }: Props) => {
           <Form onSubmit={onSubmit} className={styles.form}>
             <div className={styles.inputContainer}>
               <label htmlFor="name" className={styles.label}>
-                Name <span className="text-red-500">*</span>
+                Name <span className={styles.required}>*</span>
               </label>
               <input
                 id="name"
@@ -122,7 +122,7 @@ export const GroupForm = ({ group }: Props) => {
             </div>
             <div className={styles.inputContainer}>
               <label htmlFor="category" className={styles.label}>
-                Category <span className="text-red-500">*</span>
+                Category <span className={styles.required}>*</span>
               </label>
               <select
                 value={values.category}
@@ -143,7 +143,7 @@ export const GroupForm = ({ group }: Props) => {
                 Participants {'('}
                 {values.participants.length}
                 {') '}
-                <span className="text-red-500">*</span>
+                <span className={styles.required}>*</span>
               </label>
 
               <Participants participants={values.participants} setFieldValue={setFieldValue} />

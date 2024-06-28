@@ -20,6 +20,10 @@
 
       .description {
         @apply text-neutral-300 text-sm md:text-lg text-center;
+
+        .highlightSection {
+          @apply text-primary font-semibold;
+        }
       }
     }
   }

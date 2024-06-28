@@ -172,11 +172,11 @@ export const CostForm = ({ cost, groupId }: Props) => {
                   <div key={participant.id} className={styles.participantContainer}>
                     {participant.selected ? (
                       <ImCheckboxChecked
-                        className="text-sm text-primary"
+                        className={`${styles.icon} ${styles.selected}`}
                         onClick={() => handleParticipants(participant)}
                       />
                     ) : (
-                      <ImCheckboxUnchecked className="text-sm" onClick={() => handleParticipants(participant)} />
+                      <ImCheckboxUnchecked className={styles.icon} onClick={() => handleParticipants(participant)} />
                     )}
                     <span className={styles.name}>{participant.name}</span>
                   </div>

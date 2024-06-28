@@ -6,6 +6,10 @@
 
     .label {
       @apply text-start text-xl capitalize;
+
+      .required {
+        @apply text-red-500;
+      }
     }
 
     .input {

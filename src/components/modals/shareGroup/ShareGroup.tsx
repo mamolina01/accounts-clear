@@ -5,12 +5,19 @@ import { useModalsStore } from '@/store'
 import toast from 'react-hot-toast'
 import { getCurrentUrl } from '@/utils'
 import { Modal } from '../modal/Modal'
+import { useEffect, useState } from 'react'
 
 export const ShareGroup = () => {
   const { shareModal, setShareModal: setIsOpen } = useModalsStore(state => state)
   const { state: isOpen, id } = shareModal
-  // TODO: check baseUrl
-  const baseUrl = getCurrentUrl(id)
+  const [baseUrl, setBaseUrl] = useState<string>('')
+
+  useEffect(() => {
+    if (id) {
+      const url = getCurrentUrl(id)
+      setBaseUrl(url)
+    }
+  }, [id])
 
   const closeModal = () => {
     setIsOpen({ id: '', state: false })
@@ -39,7 +46,7 @@ export const ShareGroup = () => {
       <h5 className={styles.title}>Share Group</h5>
 
       <div className={styles.groupContainer}>
-        <label className={styles.label}>Group ID</label>
+        <span className={styles.label}>Group ID</span>
         <div className={styles.linkContainer}>
           <p className={styles.textLink}>{id}</p>
           <button className={styles.copyButton}>

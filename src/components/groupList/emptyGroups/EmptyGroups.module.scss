@@ -1,0 +1,10 @@
+.link {
+  @apply flex flex-col gap-3 py-5 rounded items-center;
+  .icon {
+    @apply h-16 w-16;
+  }
+
+  .text {
+    @apply text-tertiary text-lg;
+  }
+}

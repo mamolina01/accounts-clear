@@ -42,6 +42,14 @@
       .participantContainer {
         @apply flex items-center gap-2;
 
+        .icon {
+          @apply text-sm;
+
+          &.selected {
+            @apply text-primary;
+          }
+        }
+
         .name {
           @apply text-sm md:text-base;
         }
