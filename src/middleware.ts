@@ -7,7 +7,7 @@ const middleware = async (req: NextRequest) => {
   const isAuthRoute = req.nextUrl.pathname.startsWith('/auth')
 
   if ((!session && !isAuthRoute) || (session && isAuthRoute)) {
-    return NextResponse.redirect(new URL('/', req.url))
+    return NextResponse.redirect(new URL('/', req.nextUrl.origin))
   }
 
   return NextResponse.next()
