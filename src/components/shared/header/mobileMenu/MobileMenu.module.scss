@@ -5,7 +5,11 @@
     @apply flex gap-2 items-center;
 
     .textContainer {
-      @apply flex flex-col items-end;
+      @apply flex flex-col items-center;
+
+      &.imageExists {
+        @apply items-end;
+      }
 
       .email {
         @apply text-xs text-tertiary;

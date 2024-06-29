@@ -29,7 +29,7 @@ export const MobileMenu = ({ toggleMenu, user }: Props) => {
   return (
     <div className={styles.nav}>
       <div className={styles.userContainer}>
-        <div className={styles.textContainer}>
+        <div className={`${styles.textContainer} ${user.image ? styles.imageExists : ''}`}>
           <p>{user.name}</p>
           <p className={styles.email}>{user.email}</p>
         </div>
