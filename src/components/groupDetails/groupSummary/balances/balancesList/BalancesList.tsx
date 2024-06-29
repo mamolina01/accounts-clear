@@ -8,7 +8,7 @@ interface Props {
 
 export const BalancesList = ({ balance }: { balance: Props[] }) => {
   const getTotal = (total: number) => {
-    const totalAbsolute = Math.abs(total)
+    const totalAbsolute = Math.abs(total).toFixed(2)
 
     if (total < 0) {
       return `- $${totalAbsolute}`
