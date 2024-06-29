@@ -2,7 +2,6 @@ import { getCost } from '@/actions/costs/get-cost'
 import { getParticipantsByGroupId } from '@/actions/participants/get-participants-by-group-id'
 import { FormContainer } from '@/components'
 import { CostForm } from '@/components/CostForm/CostForm'
-
 import { Routes } from '@/enums/routes'
 import { CostPropsTemp, Participant, ParticipantSelectable } from '@/types/cost'
 import { redirect } from 'next/navigation'
