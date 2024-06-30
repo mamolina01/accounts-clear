@@ -43,7 +43,18 @@ export const getGroupByIdToJoin = async (id: string) => {
             id: true,
             name: true,
             userId: true
-          }
+          },
+          orderBy: [
+            {
+              userId: {
+                sort: 'asc',
+                nulls: 'last'
+              }
+            },
+            {
+              name: 'asc'
+            }
+          ]
         }
       }
     })
