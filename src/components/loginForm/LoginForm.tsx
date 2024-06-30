@@ -41,6 +41,17 @@ export const LoginForm = () => {
     }, 1500)
   }
 
+  const handleGoogleLogin = async () => {
+    if (redirectUrl) {
+      const tempUrl = redirectUrl
+      setRedirectUrl('')
+
+      await signIn('google', { callbackUrl: tempUrl })
+    } else {
+      await signIn('google')
+    }
+  }
+
   return (
     <Formik
       initialValues={{ email: '', password: '' }}
@@ -93,7 +104,7 @@ export const LoginForm = () => {
               Submit
             </button>
 
-            <div className={styles.googleButton} onClick={() => signIn('google')}>
+            <div className={styles.googleButton} onClick={handleGoogleLogin}>
               <Image src={googleIcon} alt="googleIcon" className={styles.icon} />
               <span className={styles.text}>Sign in with Google</span>
             </div>
