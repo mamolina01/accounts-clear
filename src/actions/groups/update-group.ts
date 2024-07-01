@@ -29,33 +29,39 @@ export const updateGroup = async (group: GroupInfo, groupId: string) => {
       }
     })
 
-    modifiedUsers.map(async (participant: ParticipantGroup) => {
-      await prisma.participant.update({
-        where: {
-          id: participant.id
-        },
-        data: {
-          name: participant.name
-        }
+    if (modifiedUsers.length > 0) {
+      modifiedUsers.map(async (participant: ParticipantGroup) => {
+        await prisma.participant.update({
+          where: {
+            id: participant.id
+          },
+          data: {
+            name: participant.name
+          }
+        })
       })
-    })
+    }
 
-    removedUsers.map(async (participant: ParticipantGroup) => {
-      await prisma.participant.delete({
-        where: {
-          id: participant.id
-        }
+    if (removedUsers.length > 0) {
+      removedUsers.map(async (participant: ParticipantGroup) => {
+        await prisma.participant.delete({
+          where: {
+            id: participant.id
+          }
+        })
       })
-    })
+    }
 
-    const participantsData = newUsers.map(({ name }) => ({
-      name: name,
-      groupId: groupId
-    }))
+    if (newUsers.length > 0) {
+      const participantsData = newUsers.map(({ name }) => ({
+        name: name,
+        groupId: groupId
+      }))
 
-    await prisma.participant.createMany({
-      data: participantsData
-    })
+      await prisma.participant.createMany({
+        data: participantsData
+      })
+    }
 
     revalidatePath(`${Routes.GROUPS}`)
 

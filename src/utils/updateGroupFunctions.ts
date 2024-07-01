@@ -30,7 +30,10 @@ export const updateGroupFunctions = (initialParticipants: ParticipantGroup[], pa
     }, {} as Record<string, number>)
 
     const removedParticipants = combinedArray.filter(
-      participant => idCount[participant.id] === 1 && participant.assignedCosts.length === 0
+      participant =>
+        idCount[participant.id] === 1 &&
+        participant.assignedCosts.length === 0 &&
+        !participants.some(p => p.id === participant.id)
     )
 
     return removedParticipants
