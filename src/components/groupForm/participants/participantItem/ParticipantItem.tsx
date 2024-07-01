@@ -1,6 +1,6 @@
 'use client'
 import { ParticipantGroup as ParticipantProps } from '@/types/group'
-import React, { ChangeEvent, FormEventHandler, useEffect, useRef, useState } from 'react'
+import React, { ChangeEvent, FormEventHandler, KeyboardEvent, useEffect, useRef, useState } from 'react'
 import styles from '../Participants.module.scss'
 import Image from 'next/image'
 import check from '@/public/check.svg'
@@ -34,16 +34,17 @@ export const ParticipantItem = ({ participant, editParticipant, removeParticipan
     setTempParticipant({ ...tempParticipant, name: e.target.value })
   }
 
-  const onClickEdit = () => {
+  const onEdit = () => {
     if (tempParticipant.name === participant.name) return
     const { ok } = editParticipant(tempParticipant)
 
     if (ok) {
       setIsEditting(false)
+      inputRef.current?.blur()
     }
   }
 
-  const onClickRemove = () => {
+  const onRemove = () => {
     if (participant.assignedCosts?.length !== 0) {
       setIsOpen(true)
     } else {
@@ -65,6 +66,13 @@ export const ParticipantItem = ({ participant, editParticipant, removeParticipan
     }
   }
 
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      onEdit()
+    }
+  }
+
   useOutsideClick(inputRef, onLeaveInput)
 
   return (
@@ -76,14 +84,15 @@ export const ParticipantItem = ({ participant, editParticipant, removeParticipan
         disabled={isUserParticipant}
         className={`${styles.input} ${isEditting ? styles.active : ''}`}
         onChange={handleChange}
+        onKeyDown={handleKeyDown}
         onFocus={() => setIsEditting(true)}
       />
 
       {!isUserParticipant &&
         (isEditting ? (
-          <Image alt="check" src={check} height={25} width={25} onClick={onClickEdit} className={styles.button} />
+          <Image alt="check" src={check} height={25} width={25} onClick={onEdit} className={styles.button} />
         ) : (
-          <Image alt="iconX" src={iconX} onClick={onClickRemove} className={styles.button} />
+          <Image alt="iconX" src={iconX} onClick={onRemove} className={styles.button} />
         ))}
     </li>
   )
