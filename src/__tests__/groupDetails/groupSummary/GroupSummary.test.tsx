@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { GroupSummary } from '@/components/groupDetails/groupSummary/GroupSummary'
 import { GroupDetail } from '@/types/groupDetail'
@@ -53,33 +53,38 @@ describe('GroupSummary Component', () => {
     expect(screen.getByText(/Add your first cost/i)).toBeInTheDocument()
   })
 
-  //   test('renders CostsList by default when costs are present', () => {
-  //     render(<GroupSummary group={groupWithCosts} />)
-  //     expect(screen.getByRole('button', { name: /costs/i })).toHaveClass('active')
-  //     expect(screen.queryByRole('button', { name: /balances/i })).not.toHaveClass('active')
-  //     expect(screen.getByText('Cost 1')).toBeInTheDocument()
-  //     expect(screen.getByText('Cost 2')).toBeInTheDocument()
-  //   })
+  test('renders CostsList by default when costs are present', () => {
+    render(<GroupSummary group={groupWithCosts} />)
 
-  //   test('switches tabs and renders Balances component when balances tab is clicked', () => {
-  //     render(<GroupSummary group={groupWithCosts} />)
+    expect(screen.getByRole('button', { name: /costs/i })).toHaveClass('active')
+    expect(screen.queryByRole('button', { name: /balances/i })).toBeNull() // Verifica que no se encuentre el elemento
 
-  //     fireEvent.click(screen.getByRole('button', { name: /balances/i }))
+    expect(screen.getByText('Dinner')).toBeInTheDocument()
+    expect(screen.getByText('Lunch')).toBeInTheDocument()
+  })
 
-  //     expect(screen.queryByText('Cost 1')).not.toBeInTheDocument()
-  //     expect(screen.queryByText('Cost 2')).not.toBeInTheDocument()
-  //     expect(screen.getByText('Balance 1')).toBeInTheDocument()
-  //     expect(screen.getByText('Balance 2')).toBeInTheDocument()
-  //   })
+  test('switches tabs and renders Balances component when balances tab is clicked', () => {
+    render(<GroupSummary group={groupWithCosts} />)
 
-  //   test('switches tabs using userEvent and renders correct content', () => {
-  //     render(<GroupSummary group={groupWithCosts} />)
+    fireEvent.click(screen.getByRole('button', { name: /balance/i }))
 
-  //     userEvent.click(screen.getByRole('button', { name: /balances/i }))
+    expect(screen.queryByText('Dinner')).not.toBeInTheDocument()
+    expect(screen.queryByText('Lunch')).not.toBeInTheDocument()
+    expect(screen.getByText('John Doe')).toBeInTheDocument()
+    expect(screen.getByText('Jane Smith')).toBeInTheDocument()
+  })
 
-  //     expect(screen.queryByText('Cost 1')).not.toBeInTheDocument()
-  //     expect(screen.queryByText('Cost 2')).not.toBeInTheDocument()
-  //     expect(screen.getByText('Balance 1')).toBeInTheDocument()
-  //     expect(screen.getByText('Balance 2')).toBeInTheDocument()
-  //   })
+  test('switches tabs using userEvent and renders correct content', async () => {
+    render(<GroupSummary group={groupWithCosts} />)
+
+    userEvent.click(screen.getByRole('button', { name: /balance/i }))
+
+    await waitFor(() => {
+      // After waiting, expect specific content to be absent or present
+      expect(screen.queryByText('Dinner')).not.toBeInTheDocument()
+      expect(screen.queryByText('Lunch')).not.toBeInTheDocument()
+      expect(screen.getByText('John Doe')).toBeInTheDocument()
+      expect(screen.getByText('Jane Smith')).toBeInTheDocument()
+    })
+  })
 })
