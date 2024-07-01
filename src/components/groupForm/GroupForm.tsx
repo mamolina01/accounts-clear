@@ -34,7 +34,7 @@ export const GroupForm = ({ group }: Props) => {
       if (ok) {
         toast.success('Successfully updated!')
         setTimeout(() => {
-          router.push(Routes.GROUPS)
+          router.push(`${Routes.GROUPS}/${group.id}`)
         }, 1500)
       } else {
         setIsLoading(false)
