@@ -23,10 +23,12 @@ export const CostForm = ({ cost, groupId }: Props) => {
 
   const handleSubmit = async (values: CostPropsTemp) => {
     setIsLoading(true)
-    const formattedUsers = values.assignedUsers.map(user => {
-      return {
-        id: user.id,
-        name: user.name
+    const formattedUsers = values.assignedUsers.filter(user => {
+      if (user.selected) {
+        return {
+          id: user.id,
+          name: user.name
+        }
       }
     })
 
