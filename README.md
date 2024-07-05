@@ -7,5 +7,9 @@
 3. Install dependencies `yarn install`
 4. Run database `docker compose up -d`
 5. Run prisma migrations `npx prisma migrate dev`
-6. Ejecutar seed `yarn seed`
+6. Run seed `yarn seed`
 7. Run the project `yarn dev`
+
+## Test
+
+1. Run `yarn test:watch`
