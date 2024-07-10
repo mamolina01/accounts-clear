@@ -3,20 +3,13 @@ import { useEffect, useState } from 'react'
 import { BsChevronDown } from 'react-icons/bs'
 import { Menu } from '../menu/Menu'
 import styles from './CostItem.module.scss'
-
-interface AssignedUserProps {
-  id: string
-  participant: {
-    name: string
-  }
-}
+import { Cost } from '@/types/groupDetail'
 
 interface Props {
-  cost: any
+  cost: Cost
   groupId: string
 }
 
-// TODO: Check this any
 export const CostItem = ({ cost, groupId }: Props) => {
   const [showMore, setShowMore] = useState<boolean>(false)
   const [loaded, setLoaded] = useState<boolean>(false)
@@ -51,9 +44,9 @@ export const CostItem = ({ cost, groupId }: Props) => {
         <div className={styles.extraContent}>
           <p className={styles.usersQuantity}>For {cost.assignedUsers.length} participants:</p>
           <ul className={styles.usersList}>
-            {cost.assignedUsers.map((user: AssignedUserProps) => (
-              <li className={styles.user} key={`${cost.title}-${user.participant.name}`}>
-                <p>{user.participant.name} </p>
+            {cost.assignedUsers.map(user => (
+              <li className={styles.user} key={`${cost.title}-${user.participant?.name}`}>
+                <p>{user.participant?.name} </p>
                 <p>${amountPerPerson(cost.amount, cost.assignedUsers.length)}</p>
               </li>
             ))}
