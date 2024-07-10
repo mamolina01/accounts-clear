@@ -28,7 +28,9 @@ export const CostItem = ({ cost, groupId }: Props) => {
   return (
     // TODO: Add animation
     <div className={styles.container}>
-      <BsChevronDown className={`${styles.arrow} ${showMore && styles.isOpen}`} onClick={toggleShowMore} />
+      <button aria-label="toggle showMore" onClick={toggleShowMore}>
+        <BsChevronDown className={`${styles.arrow} ${showMore && styles.isOpen}`} />
+      </button>
       <div>
         <p className={styles.title}>{cost.title}</p>
         <p className={styles.paidBy}>
@@ -46,7 +48,7 @@ export const CostItem = ({ cost, groupId }: Props) => {
           <ul className={styles.usersList}>
             {cost.assignedUsers.map(user => (
               <li className={styles.user} key={`${cost.title}-${user.participant?.name}`}>
-                <p>{user.participant?.name} </p>
+                <p>{user.participant?.name}</p>
                 <p>${amountPerPerson(cost.amount, cost.assignedUsers.length)}</p>
               </li>
             ))}
