@@ -41,7 +41,11 @@ export const BalancesList = ({ balance }: { balance: Props[] }) => {
   return (
     <>
       {balance.map(participant => (
-        <div className={`${styles.container} ${participant.total < 0 ? styles.reverse : ''}`} key={participant.id}>
+        <div
+          className={`${styles.container} ${participant.total < 0 ? styles.reverse : ''}`}
+          key={participant.id}
+          data-testid="balance"
+        >
           <p className={`${getClasses(participant.total).name} ${styles.balance}`}>{participant.name}</p>
           <p className={`${getClasses(participant.total).total} ${styles.balance}`}>{getTotal(participant.total)}</p>
         </div>
