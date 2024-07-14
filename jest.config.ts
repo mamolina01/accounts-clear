@@ -14,7 +14,11 @@ const config: Config = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   preset: 'ts-jest',
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/src/$1'
+    '^@/(.*)$': '<rootDir>/src/$1',
+    '^next-auth/react$': '<rootDir>/__mocks__/next-auth/react.ts',
+    '^next-auth/providers/credentials$': '<rootDir>/__mocks__/next-auth/providers/credentials.ts',
+    '^next-auth/providers/google$': '<rootDir>/__mocks__/next-auth/providers/google.ts',
+    '^next-auth$': '<rootDir>/__mocks__/next-auth.ts'
   }
 }
 
