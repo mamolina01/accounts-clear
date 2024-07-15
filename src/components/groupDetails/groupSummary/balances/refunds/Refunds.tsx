@@ -21,7 +21,7 @@ interface Props {
 
 export const Refunds = ({ refunds }: { refunds: Props[] }) => {
   if (refunds.length === 0) {
-    return <EmptyRefunds />
+    return <EmptyRefunds data-testid="empty-refunds" />
   }
 
   return (
