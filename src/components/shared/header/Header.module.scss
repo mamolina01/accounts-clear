@@ -1,5 +1,5 @@
 .wrapper {
-  @apply relative sticky top-0;
+  @apply sticky top-0 z-10;
 
   .header {
     @apply bg-primary py-2 px-3 lg:px-5 flex items-center justify-between z-10 w-full;
