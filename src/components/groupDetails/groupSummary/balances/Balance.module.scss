@@ -1,3 +1,11 @@
 .container {
-  @apply flex flex-col gap-2 max-h-[280px] overflow-scroll;
+  @apply flex flex-col gap-2 max-h-[190px] md:max-h-[300px] overflow-scroll pl-2 pr-1;
+
+  &::-webkit-scrollbar {
+    @apply h-full w-[6px];
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @apply bg-sky-700 rounded-xl;
+  }
 }
