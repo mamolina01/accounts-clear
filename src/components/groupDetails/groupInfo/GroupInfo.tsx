@@ -10,7 +10,7 @@ interface Props {
   group: GroupDetail
 }
 
-export const GroupInfo = async ({ group }: Props) => {
+export const GroupInfo = ({ group }: Props) => {
   const getUsers = () => {
     let users = group.participants.map(participant => participant.name).join(', ')
     return users

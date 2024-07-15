@@ -21,7 +21,7 @@ interface Props {
 
 export const Refunds = ({ refunds }: { refunds: Props[] }) => {
   if (refunds.length === 0) {
-    return <EmptyRefunds />
+    return <EmptyRefunds data-testid="empty-refunds" />
   }
 
   return (
@@ -36,7 +36,7 @@ export const Refunds = ({ refunds }: { refunds: Props[] }) => {
                 <p className={styles.name}>{participant.to}</p>
               </div>
               <div className={styles.rightContainer}>
-                <p className={styles.amount}>${participant.amount}</p>
+                <p className={styles.amount}>${participant.amount.toFixed(2)}</p>
               </div>
             </div>
           ))}

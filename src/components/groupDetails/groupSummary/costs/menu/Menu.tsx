@@ -24,9 +24,11 @@ export const Menu = ({ costId, groupId }: { costId: string; groupId: string }) =
   useOutsideClick(menuRef, closeMenu)
   return (
     <div className={styles.container}>
-      <BsThreeDotsVertical className={styles.icon} onClick={() => setShowMenu(true)} />
+      <button aria-label="Toggle menu" className={styles.iconButton} onClick={() => setShowMenu(true)}>
+        <BsThreeDotsVertical className={styles.icon} />
+      </button>
       {showMenu && (
-        <div className={styles.menu} ref={menuRef}>
+        <div data-testid="menu" className={styles.menu} ref={menuRef}>
           <Link href={`${Routes.COST_FORM}/${groupId}/${costId}`} className={`${styles.option}`}>
             <FaEdit />
             <p>Edit</p>
