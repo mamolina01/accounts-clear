@@ -7,9 +7,11 @@
     "header": {
       "login": "Login",
       "register": "Register",
+      "home": "Home",
       "myGroups": "My groups",
       "newGroup": "New group",
-      "joinGroup": "Join group"
+      "joinGroup": "Join group",
+      "logout": "Logout"
     }
   }
 }
