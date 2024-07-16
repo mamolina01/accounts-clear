@@ -2,5 +2,14 @@
   "Metadata": {
     "title": "Clear Accounts",
     "description": "Divide tus cuentas con tus amigos!"
+  },
+  "layout": {
+    "header": {
+      "login": "Ingresar",
+      "register": "Registrarse",
+      "myGroups": "Mis grupos",
+      "newGroup": "Nuevo grupo",
+      "joinGroup": "Unirse a un grupo"
+    }
   }
 }

@@ -2,5 +2,14 @@
   "Metadata": {
     "title": "Clear Accounts",
     "description": "Split your expenses with your friends!"
+  },
+  "layout": {
+    "header": {
+      "login": "Login",
+      "register": "Register",
+      "myGroups": "My groups",
+      "newGroup": "New group",
+      "joinGroup": "Join group"
+    }
   }
 }
