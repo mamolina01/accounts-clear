@@ -12,6 +12,9 @@
       "newGroup": "Nuevo grupo",
       "joinGroup": "Unirse a un grupo",
       "logout": "Salir"
+    },
+    "footer": {
+      "frontendDeveloper": "Desarrollador Frontend"
     }
   }
 }

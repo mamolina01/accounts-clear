@@ -12,6 +12,9 @@
       "newGroup": "New group",
       "joinGroup": "Join group",
       "logout": "Logout"
+    },
+    "footer": {
+      "frontendDeveloper": "Frontend Developer"
     }
   }
 }
