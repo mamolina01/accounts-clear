@@ -3,9 +3,9 @@ import Link from 'next/link'
 import styles from '../Header.module.scss'
 import Image from 'next/image'
 import { Routes } from '@/enums/routes'
-import { signOut } from 'next-auth/react'
 import { IoLogOutOutline } from 'react-icons/io5'
 import { usePathname } from 'next/navigation'
+import { logout } from '@/actions/auth/signout'
 
 interface Props {
   user: {
@@ -22,6 +22,10 @@ interface Props {
 
 export const AuthenticatedTabs = ({ user }: Props) => {
   const pathname = usePathname()
+
+  const signOut = async () => {
+    await logout()
+  }
 
   return (
     <nav className={`${styles.nav} ${styles.authenticated}`}>
