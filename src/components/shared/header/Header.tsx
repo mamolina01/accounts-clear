@@ -9,10 +9,11 @@ import { IoMenu } from 'react-icons/io5'
 import { MobileMenu } from './mobileMenu/MobileMenu'
 import { useState } from 'react'
 import { Session } from 'next-auth'
+import { useTranslations } from 'next-intl'
 
 export const Header = ({ session }: { session: Session | null }) => {
   const [showMenuMobile, setShowMenuMobile] = useState<boolean>(false)
-
+  const t = useTranslations('layout.header')
   const toggleMenu = () => {
     setShowMenuMobile(!showMenuMobile)
   }
@@ -36,10 +37,10 @@ export const Header = ({ session }: { session: Session | null }) => {
           <>
             <nav className={styles.nav}>
               <Link href={Routes.LOGIN} className={styles.link}>
-                Login
+                {t('login')}
               </Link>
               <Link href={Routes.REGISTER} className={styles.register}>
-                Register
+                {t('register')}
               </Link>
             </nav>
           </>

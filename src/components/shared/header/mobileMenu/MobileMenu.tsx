@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { signOut } from 'next-auth/react'
 import Image from 'next/image'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   toggleMenu: () => void
@@ -21,6 +22,7 @@ interface Props {
 
 export const MobileMenu = ({ toggleMenu, user }: Props) => {
   const pathname = usePathname()
+  const t = useTranslations('layout.header')
 
   const getStyles = (route: string) => {
     return `${styles.tab} ${pathname === route ? styles.active : ''}`
@@ -37,19 +39,19 @@ export const MobileMenu = ({ toggleMenu, user }: Props) => {
       </div>
 
       <Link onClick={toggleMenu} href={Routes.HOME} className={getStyles(Routes.HOME)}>
-        Home
+        {t('home')}
       </Link>
       <Link onClick={toggleMenu} href={Routes.GROUPS} className={getStyles(Routes.GROUPS)}>
-        My Groups
+        {t('myGroups')}
       </Link>
       <Link onClick={toggleMenu} href={Routes.GROUP_FORM} className={getStyles(Routes.GROUP_FORM)}>
-        New group
+        {t('newGroup')}
       </Link>
       <Link onClick={toggleMenu} href={Routes.JOIN} className={getStyles(Routes.JOIN)}>
-        Join group
+        {t('joinGroup')}
       </Link>
       <button className={styles.tab} onClick={() => signOut()}>
-        Logout
+        {t('logout')}
       </button>
     </div>
   )
