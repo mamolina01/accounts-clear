@@ -2,12 +2,12 @@ import createMiddleware from 'next-intl/middleware'
 import { auth } from './auth.config'
 import { NextRequest, NextResponse } from 'next/server'
 import { Routes } from './enums/routes'
-import { AppLocaleConfig } from './config/locales'
+import { AppLocaleConfig, Locales, locales } from './config/locales'
 import { ProtectedRoutes } from './config/protectedRoutes'
 
 const isProtectedRoute = (pathname: Routes) => {
   let transformedPathname = pathname
-  if (pathname.startsWith('/en')) {
+  if (pathname.startsWith(Locales.EN)) {
     transformedPathname = transformedPathname.substring(3) as Routes
   }
 
@@ -28,6 +28,10 @@ export default async function middleware(request: NextRequest) {
 
   if ((!session && isProtectedRoute(pathname as Routes)) || (session && isAuthRoute)) {
     return NextResponse.redirect(new URL('/', request.nextUrl))
+  }
+
+  if (pathname.includes('/api')) {
+    return NextResponse.next()
   }
 
   return intlMiddleware(request)
