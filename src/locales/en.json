@@ -16,5 +16,28 @@
     "footer": {
       "frontendDeveloper": "Frontend Developer"
     }
+  },
+  "home": {
+    "heroSection": {
+      "welcome": "Welcome to",
+      "splitWithFriends": "Split your expenses with your friends!",
+      "myGroups": "My groups",
+      "login": "Login",
+      "register": "Register"
+    },
+    "information": {
+      "item1": {
+        "title": "Keep your accounts up to date.",
+        "description": "Keep track of expenses and balances shared with roommates, travel companions, groups, friends, and family."
+      },
+      "item2": {
+        "title": "Good accounting makes good friends.",
+        "description": {
+          "part1": "With ",
+          "part2": "Clear Accounts",
+          "part3": ", split expenses with any group: trips, roommates, friends, and family."
+        }
+      }
+    }
   }
 }

@@ -16,5 +16,28 @@
     "footer": {
       "frontendDeveloper": "Desarrollador Frontend"
     }
+  },
+  "home": {
+    "heroSection": {
+      "welcome": "Bienvenido a",
+      "splitWithFriends": "Divide tus gastos con tus amigos!",
+      "myGroups": "Mis grupos",
+      "login": "Ingresar",
+      "register": "Registrarse"
+    },
+    "information": {
+      "item1": {
+        "title": "Manten tus cuentas al día",
+        "description": "Lleve un registro de los gastos y saldos compartidos con compañeros de cuarto, compañeros de viaje, grupos, amigos y familiares."
+      },
+      "item2": {
+        "title": "Cuentas claras hacen buenos amigos.",
+        "description": {
+          "part1": "Con ",
+          "part2": "Clear Accounts",
+          "part3": ", divide gastos con cualquier grupo: viajes, compañeros de cuarto, amigos y familiares."
+        }
+      }
+    }
   }
 }
