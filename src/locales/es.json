@@ -39,5 +39,12 @@
         }
       }
     }
+  },
+  "groupList": {
+    "title": "Mis grupos",
+    "create": "Crea un nuevo grupo",
+    "join": "Ingresa a un grupo",
+    "noDescription": "Sin descripción",
+    "createYourGroup": "Crea tu primer grupo"
   }
 }

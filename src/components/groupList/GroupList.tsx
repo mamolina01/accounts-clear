@@ -7,30 +7,27 @@ import { Routes } from '@/enums/routes'
 import { GroupItem } from './groupItem/GroupItem'
 import { FormContainer } from '..'
 import { EmptyGroups } from './emptyGroups/EmptyGroups'
-import { getGroupListByUserId } from '@/actions/groups/get-group-list-by-userId'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   id: string
   name: string
   description: string
 }
-
-export const GroupList = async () => {
-  // TODO: Order by date
-  const groups: Props[] = await getGroupListByUserId()
-
+export const GroupList = ({ groups }: { groups: Props[] }) => {
+  const t = useTranslations('groupList')
   return (
-    <FormContainer title="My Groups">
+    <FormContainer title={t('title')}>
       {groups.length === 0 ? <EmptyGroups /> : groups.map(group => <GroupItem group={group} key={group.id} />)}
 
       <Link href={Routes.GROUP_FORM} className={`${styles.option} ${styles.divider}`}>
         <FiPlusCircle size={20} />
-        <span>Create a new group</span>
+        <span>{t('create')}</span>
       </Link>
 
       <Link href={Routes.JOIN} className={styles.option}>
         <MdGroups size={20} />
-        <span>Join group</span>
+        <span>{t('join')}</span>
       </Link>
     </FormContainer>
   )
