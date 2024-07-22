@@ -118,5 +118,33 @@
     "signInGoogle": "Sign in with Google",
     "dontHaveAccount": "Still don't have your account?",
     "signUp": "Sign up!"
+  },
+  "register": {
+    "title": "Sign up",
+    "name": {
+      "label": "Name",
+      "placeholder": "Enter a name",
+      "errors": {
+        "required": "Name is required"
+      }
+    },
+    "email": {
+      "label": "Email",
+      "placeholder": "Enter an email",
+      "errors": {
+        "required": "Email is required",
+        "invalid": "Invalid email"
+      }
+    },
+    "password": {
+      "label": "Password",
+      "placeholder": "Enter a password",
+      "errors": {
+        "required": "Password is required"
+      }
+    },
+    "submit": "Sign up",
+    "alreadyHaveAccount": "Do you already have your account?",
+    "signIn": "Sign in!"
   }
 }
