@@ -4,6 +4,7 @@ import { BsChevronDown } from 'react-icons/bs'
 import { Menu } from '../menu/Menu'
 import styles from './CostItem.module.scss'
 import { Cost } from '@/types/groupDetail'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   cost: Cost
@@ -14,6 +15,7 @@ export const CostItem = ({ cost, groupId }: Props) => {
   const [showMore, setShowMore] = useState<boolean>(false)
   const [loaded, setLoaded] = useState<boolean>(false)
   const toggleShowMore = () => setShowMore(!showMore)
+  const t = useTranslations('groupDetails.groupSummary.costItem')
 
   const amountPerPerson = (amountMoney: number, payers: number) => {
     return (amountMoney / payers).toFixed(2)
@@ -34,7 +36,7 @@ export const CostItem = ({ cost, groupId }: Props) => {
       <div>
         <p className={styles.title}>{cost.title}</p>
         <p className={styles.paidBy}>
-          Paid by: <span>{cost.paidBy.name}</span>
+          {t('paidBy')} <span>{cost.paidBy.name}</span>
         </p>
       </div>
       <div className={styles.rightContainer}>
@@ -44,7 +46,7 @@ export const CostItem = ({ cost, groupId }: Props) => {
       <Menu costId={cost.id} groupId={groupId} />
       {showMore && (
         <div className={styles.extraContent}>
-          <p className={styles.usersQuantity}>For {cost.assignedUsers.length} participants:</p>
+          <p className={styles.usersQuantity}>{t('participants.part1')} {cost.assignedUsers.length} {t('participants.part2')}:</p>
           <ul className={styles.usersList}>
             {cost.assignedUsers.map(user => (
               <li className={styles.user} key={`${cost.title}-${user.participant?.name}`}>

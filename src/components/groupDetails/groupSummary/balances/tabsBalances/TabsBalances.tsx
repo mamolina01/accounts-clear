@@ -1,4 +1,5 @@
 'use client'
+import { useTranslations } from 'next-intl'
 import styles from './TabsBalances.module.scss'
 import { GrMoney } from 'react-icons/gr'
 import { MdCurrencyExchange } from 'react-icons/md'
@@ -9,6 +10,7 @@ interface Props {
 }
 
 export const TabsBalances = ({ activeTab, setActiveTab }: Props) => {
+  const t = useTranslations('groupDetails.groupSummary.tabsBalances')
   return (
     <div className={styles.container}>
       <button
@@ -23,7 +25,7 @@ export const TabsBalances = ({ activeTab, setActiveTab }: Props) => {
         onClick={() => setActiveTab('refunds')}
       >
         <GrMoney className={styles.icon} />
-        <span>Refunds</span>
+        <span>{t('refunds')}</span>
       </button>
     </div>
   )

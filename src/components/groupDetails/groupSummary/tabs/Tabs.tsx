@@ -2,6 +2,7 @@
 import { BsFillBarChartFill } from 'react-icons/bs'
 import { IoMdMenu } from 'react-icons/io'
 import styles from './Tabs.module.scss'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   tabActive: string
@@ -9,6 +10,7 @@ interface Props {
 }
 
 export const Tabs = ({ tabActive, setTabActive }: Props) => {
+  const t = useTranslations('groupDetails.groupSummary.tabs')
   return (
     <div className={styles.container}>
       <button
@@ -16,7 +18,7 @@ export const Tabs = ({ tabActive, setTabActive }: Props) => {
         onClick={() => setTabActive('costs')}
       >
         <IoMdMenu className={styles.icon} />
-        <span>Costs</span>
+        <span>{t('costs')}</span>
       </button>
       <button
         className={`${styles.button} ${tabActive === 'balance' ? styles.active : ''}`}

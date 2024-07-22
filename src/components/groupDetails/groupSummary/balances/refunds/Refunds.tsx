@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl'
 import { EmptyRefunds } from './emptyRefunds/EmptyRefunds'
 import styles from './Refunds.module.scss'
 
@@ -20,6 +21,7 @@ interface Props {
 }
 
 export const Refunds = ({ refunds }: { refunds: Props[] }) => {
+  const t = useTranslations('groupDetails.groupSummary.refunds')
   if (refunds.length === 0) {
     return <EmptyRefunds data-testid="empty-refunds" />
   }
@@ -32,7 +34,7 @@ export const Refunds = ({ refunds }: { refunds: Props[] }) => {
             <div className={styles.participantContainer} key={`${refund.name} - ${participant.to}`}>
               <div className={styles.leftContainer}>
                 <p className={styles.name}>{refund.name}</p>
-                <p className={styles.mustPayTo}>Must pay to</p>
+                <p className={styles.mustPayTo}>{t('mustPayTo')}</p>
                 <p className={styles.name}>{participant.to}</p>
               </div>
               <div className={styles.rightContainer}>

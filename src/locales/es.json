@@ -59,6 +59,25 @@
         "Project": "Proyecto",
         "Others": "Otros"
       }
+    },
+    "groupSummary": {
+      "tabs": {
+        "costs": "Costos"
+      },
+      "costItem": {
+        "paidBy": "Pagado por:",
+        "participants": {
+          "part1": "Para",
+          "part2": "participantes"
+        }
+      },
+      "tabsBalances": {
+        "refunds": "Reembolsos"
+      },
+      "refunds": {
+        "mustPayTo": "Debe pagar a"
+      },
+      "add1stCost": "Agrega tu primer gasto"
     }
   }
 }
