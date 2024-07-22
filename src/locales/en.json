@@ -96,5 +96,27 @@
       "participants": "Participants",
       "success": "Succesfully added!"
     }
+  },
+  "login": {
+    "title": "Sign in",
+    "email": {
+      "label": "Email",
+      "placeholder": "Enter an email",
+      "errors": {
+        "required": "Email is required",
+        "invalid": "Invalid email"
+      }
+    },
+    "password": {
+      "label": "Password",
+      "placeholder": "Enter a password",
+      "errors": {
+        "required": "Password is required"
+      }
+    },
+    "submit": "Sign in",
+    "signInGoogle": "Sign in with Google",
+    "dontHaveAccount": "Still don't have your account?",
+    "signUp": "Sign up!"
   }
 }
