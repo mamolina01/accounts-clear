@@ -1,5 +1,4 @@
 'use client'
-import { validationSchemaNewBalance } from '@/validations'
 import { Category } from '@prisma/client'
 import { Form, Formik } from 'formik'
 import { useRouter } from 'next/navigation'
@@ -11,6 +10,9 @@ import { Participants } from './participants/Participants'
 import { Routes } from '@/enums/routes'
 import { createGroup } from '@/actions/groups/create-group'
 import { updateGroup } from '@/actions/groups/update-group'
+import { FormContainer } from '..'
+import { useTranslations } from 'next-intl'
+import { validationSchemaNewGroup } from '@/validations'
 
 interface Props {
   group: GroupInfo
@@ -19,6 +21,7 @@ interface Props {
 export const GroupForm = ({ group }: Props) => {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const t = useTranslations('groupForm')
 
   const handleSubmit = async (values: GroupInfo) => {
     const data = {
@@ -64,96 +67,102 @@ export const GroupForm = ({ group }: Props) => {
     Category.Others
   ]
 
+  const title = group.name ? t('editGroup') : t('createGroup')
+
   return (
-    <Formik
-      initialValues={group}
-      validateOnChange
-      validationSchema={validationSchemaNewBalance()}
-      onSubmit={values => {
-        handleSubmit({ ...values })
-      }}
-    >
-      {props => {
-        const { values, isValid, touched, errors, setFieldValue, handleSubmit, validateField } = props
+    <FormContainer title={title}>
+      <Formik
+        initialValues={group}
+        validateOnChange
+        validationSchema={validationSchemaNewGroup()}
+        onSubmit={values => {
+          handleSubmit({ ...values })
+        }}
+      >
+        {props => {
+          const { values, isValid, touched, errors, setFieldValue, handleSubmit, validateField } = props
 
-        const nameError = ((touched.name || values.name) && errors.name) || ''
-        const descriptionError = ((touched.description || values.description) && errors.description) || ''
-        const categoryError = ((touched.category || values.category) && errors.category) || ''
+          const nameError = ((touched.name || values.name) && errors.name && t(`name.errors.${errors.name}`)) || ''
+          const descriptionError =
+            ((touched.description || values.description) &&
+              errors.description &&
+              t(`description.errors.${errors.description}`)) ||
+            ''
 
-        const onSubmit: FormEventHandler<HTMLFormElement> = e => {
-          e.preventDefault()
-          if (values.participants.length === 0) {
-            validateField('participants')
+          const onSubmit: FormEventHandler<HTMLFormElement> = e => {
+            e.preventDefault()
+            if (values.participants.length === 0) {
+              validateField('participants')
+            }
+            handleSubmit()
           }
-          handleSubmit()
-        }
 
-        return (
-          <Form onSubmit={onSubmit} className={styles.form}>
-            <div className={styles.inputContainer}>
-              <label htmlFor="name" className={styles.label}>
-                Name <span className={styles.required}>*</span>
-              </label>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                value={values.name}
-                placeholder="Enter a name"
-                onChange={e => setFieldValue('name', e.target.value)}
-                className={`${styles.input} ${nameError && styles.error}`}
-              />
-              <p className={styles.errorText}>{nameError}</p>
-            </div>
-            <div className={styles.inputContainer}>
-              <label htmlFor="description" className={styles.label}>
-                Description
-              </label>
-              <input
-                id="description"
-                name="description"
-                type="text"
-                value={values.description}
-                placeholder="Enter a description"
-                onChange={e => setFieldValue('description', e.target.value)}
-                className={`${styles.input} ${descriptionError && styles.error}`}
-              />
-              <p className={styles.errorText}>{descriptionError}</p>
-            </div>
-            <div className={styles.inputContainer}>
-              <label htmlFor="category" className={styles.label}>
-                Category <span className={styles.required}>*</span>
-              </label>
-              <select
-                value={values.category}
-                className={styles.input}
-                onChange={e => setFieldValue('category', e.target.value)}
-              >
-                {categoryOptions.map(category => (
-                  <option value={category} key={category}>
-                    {category}
-                  </option>
-                ))}
-              </select>
-              <p className={styles.errorText}>{categoryError}</p>
-            </div>
+          return (
+            <Form onSubmit={onSubmit} className={styles.form}>
+              <div className={styles.inputContainer}>
+                <label htmlFor="name" className={styles.label}>
+                  {t('name.label')} <span className={styles.required}>*</span>
+                </label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  value={values.name}
+                  placeholder={t('name.placeholder')}
+                  onChange={e => setFieldValue('name', e.target.value)}
+                  className={`${styles.input} ${nameError && styles.error}`}
+                />
+                <p className={styles.errorText}>{nameError}</p>
+              </div>
+              <div className={styles.inputContainer}>
+                <label htmlFor="description" className={styles.label}>
+                  {t('description.label')}
+                </label>
+                <input
+                  id="description"
+                  name="description"
+                  type="text"
+                  value={values.description}
+                  placeholder={t('description.placeholder')}
+                  onChange={e => setFieldValue('description', e.target.value)}
+                  className={`${styles.input} ${descriptionError && styles.error}`}
+                />
+                <p className={styles.errorText}>{descriptionError}</p>
+              </div>
+              <div className={styles.inputContainer}>
+                <label htmlFor="category" className={styles.label}>
+                  {t('category.label')} <span className={styles.required}>*</span>
+                </label>
+                <select
+                  value={values.category}
+                  className={styles.input}
+                  onChange={e => setFieldValue('category', e.target.value)}
+                >
+                  {categoryOptions.map(category => (
+                    <option value={category} key={category}>
+                      {category}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
-            <div className={styles.inputContainer}>
-              <label className={styles.label}>
-                Participants {'('}
-                {values.participants.length}
-                {') '}
-                <span className={styles.required}>*</span>
-              </label>
+              <div className={styles.inputContainer}>
+                <label className={styles.label}>
+                  {t('participants.label')} {'('}
+                  {values.participants.length}
+                  {') '}
+                  <span className={styles.required}>*</span>
+                </label>
 
-              <Participants participants={values.participants} setFieldValue={setFieldValue} />
-            </div>
-            <button type="submit" disabled={!isValid || isLoading} className={styles.submitButton}>
-              Submit
-            </button>
-          </Form>
-        )
-      }}
-    </Formik>
+                <Participants participants={values.participants} setFieldValue={setFieldValue} />
+              </div>
+              <button type="submit" disabled={!isValid || isLoading} className={styles.submitButton}>
+                {t(group.name ? 'editGroup' : 'createGroup')}
+              </button>
+            </Form>
+          )
+        }}
+      </Formik>
+    </FormContainer>
   )
 }

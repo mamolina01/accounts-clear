@@ -146,5 +146,31 @@
     "submit": "Registrarse",
     "alreadyHaveAccount": "¿Ya tienes tu cuenta?",
     "signIn": "Ingresa!"
+  },
+  "groupForm": {
+    "createGroup": "Crear grupo",
+    "editGroup": "Editar grupo",
+    "name": {
+      "label": "Nombre",
+      "placeholder": "Ingrese un nombre",
+      "errors": {
+        "required": "El nombre es requerido",
+        "max": "Máximo 20 caracteres"
+      }
+    },
+    "description": {
+      "label": "Descripción",
+      "placeholder": "Enter a descripción",
+      "errors": {
+        "max": "Máximo 50 caracteres"
+      }
+    },
+    "category": {
+      "label": "Categoria"
+    },
+    "participants": {
+      "label": "Participantes",
+      "min": "Se requiere al menos un participante"
+    }
   }
 }

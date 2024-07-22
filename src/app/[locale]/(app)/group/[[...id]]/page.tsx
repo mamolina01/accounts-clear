@@ -20,7 +20,6 @@ const Group = async ({ params }: Props) => {
   if (!group && groupId) {
     redirect(Routes.GROUP_FORM)
   }
-  const title = group ? 'Edit group' : 'New group'
 
   const initialValues: GroupInfo = {
     name: '',
@@ -37,11 +36,7 @@ const Group = async ({ params }: Props) => {
     })
   }
 
-  return (
-    <FormContainer title={title}>
-      <GroupForm group={group ?? initialValues} />
-    </FormContainer>
-  )
+  return <GroupForm group={group ?? initialValues} />
 }
 
 export default Group
