@@ -1,9 +1,11 @@
 import { FormContainer } from '@/components'
 import { LoginForm } from '@/components/loginForm/LoginForm'
+import { useTranslations } from 'next-intl'
 
 const LoginPage = () => {
+  const t = useTranslations('login')
   return (
-    <FormContainer title="Login">
+    <FormContainer title={t('title')}>
       <LoginForm />
     </FormContainer>
   )

@@ -84,7 +84,7 @@
     "enterGroup": {
       "title": "Ingresa a un nuevo grupo",
       "label": "ID del grupo",
-      "placeholder": "Ingresar id del grupo",
+      "placeholder": "Ingrese id del grupo",
       "submit": "Ingresar",
       "noExists": "No existe un grupo con ese id",
       "isAmongParticipants": "Ya eres miembro de este grupo",
@@ -96,5 +96,27 @@
       "participants": "Participantes",
       "success": "Agregado existosamente!"
     }
+  },
+  "login": {
+    "title": "Ingresar",
+    "email": {
+      "label": "Email",
+      "placeholder": "Ingrese un email",
+      "errors": {
+        "required": "El email es requerido",
+        "invalid": "Email invalido"
+      }
+    },
+    "password": {
+      "label": "Contraseña",
+      "placeholder": "Ingrese una contraseña",
+      "errors": {
+        "required": "La contraseña es requerida"
+      }
+    },
+    "submit": "Ingresar",
+    "signInGoogle": "Ingresar con Google",
+    "dontHaveAccount": "¿Aún no tienes tu cuenta?",
+    "signUp": "Registrate!"
   }
 }

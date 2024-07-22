@@ -3,7 +3,7 @@
 import { Routes } from '@/enums/routes'
 import { useGeneralBehaviourStore } from '@/store'
 import { Form, Formik } from 'formik'
-import Link from 'next/link'
+import { Link } from '@/lib/i18nNavigation'
 import { useState } from 'react'
 import styles from './LoginForm.module.scss'
 import { validationSchemaLogin } from '@/validations'
@@ -12,10 +12,12 @@ import Image from 'next/image'
 import { signIn } from 'next-auth/react'
 import googleIcon from '@/public/images/google.png'
 import { login } from '@/actions/auth/login'
+import { useTranslations } from 'next-intl'
 
 export const LoginForm = () => {
   const { redirectUrl, setRedirectUrl } = useGeneralBehaviourStore(state => state)
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const t = useTranslations('login')
 
   const handleSubmit = async (values: { email: string; password: string }) => {
     const { email, password } = values
@@ -64,20 +66,20 @@ export const LoginForm = () => {
       {props => {
         const { values, isValid, touched, errors, handleBlur, handleSubmit, handleChange } = props
 
-        const emailError = ((touched.email || values.email) && errors.email) || ''
-        const passwordError = ((touched.password || values.password) && errors.password) || ''
+        const emailError = ((touched.email || values.email) && t(`email.errors.${errors.email}`)) || ''
+        const passwordError = ((touched.password || values.password) && t(`password.errors.${errors.password}`)) || ''
 
         return (
           <Form onSubmit={handleSubmit} className={styles.form}>
             <div className={styles.inputContainer}>
               <label htmlFor="name" className={styles.label}>
-                Email
+                {t('email.label')}
               </label>
               <input
                 name="email"
                 type="text"
                 value={values.email}
-                placeholder="Enter an email"
+                placeholder={t('email.placeholder')}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 className={`${styles.input} ${emailError && styles.error}`}
@@ -86,13 +88,13 @@ export const LoginForm = () => {
             </div>
             <div className={styles.inputContainer}>
               <label htmlFor="description" className={styles.label}>
-                Password
+                {t('password.label')}
               </label>
               <input
                 name="password"
                 type="password"
                 value={values.password}
-                placeholder="Enter a password"
+                placeholder={t('password.placeholder')}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 className={`${styles.input} ${passwordError && styles.error}`}
@@ -101,18 +103,18 @@ export const LoginForm = () => {
             </div>
 
             <button type="submit" disabled={!isValid || isLoading} className={styles.submitButton}>
-              Submit
+              {t('submit')}
             </button>
 
             <div className={styles.googleButton} onClick={handleGoogleLogin}>
               <Image src={googleIcon} alt="googleIcon" className={styles.icon} />
-              <span className={styles.text}>Sign in with Google</span>
+              <span className={styles.text}>{t('signInGoogle')}</span>
             </div>
 
             <span className={styles.bottomText}>
-              Still don{"'"}t have your account?{' '}
+              {t('dontHaveAccount')}{' '}
               <Link href={Routes.REGISTER} className={styles.link}>
-                Sign up!
+                {t('signUp')}
               </Link>
             </span>
           </Form>
