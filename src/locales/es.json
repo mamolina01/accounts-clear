@@ -101,7 +101,7 @@
     "title": "Ingresar",
     "email": {
       "label": "Email",
-      "placeholder": "Ingrese un email",
+      "placeholder": "Ingrese su email",
       "errors": {
         "required": "El email es requerido",
         "invalid": "Email invalido"
@@ -109,7 +109,7 @@
     },
     "password": {
       "label": "Contraseña",
-      "placeholder": "Ingrese una contraseña",
+      "placeholder": "Ingrese su contraseña",
       "errors": {
         "required": "La contraseña es requerida"
       }
@@ -118,5 +118,33 @@
     "signInGoogle": "Ingresar con Google",
     "dontHaveAccount": "¿Aún no tienes tu cuenta?",
     "signUp": "Registrate!"
+  },
+  "register": {
+    "title": "Registrarse",
+    "name": {
+      "label": "Nombre",
+      "placeholder": "Ingrese un nombre",
+      "errors": {
+        "required": "El nombre es requerido"
+      }
+    },
+    "email": {
+      "label": "Email",
+      "placeholder": "Ingrese su email",
+      "errors": {
+        "required": "El email es requerido",
+        "invalid": "Email invalido"
+      }
+    },
+    "password": {
+      "label": "Contraseña",
+      "placeholder": "Ingrese su contraseña",
+      "errors": {
+        "required": "La contraseña es requerida"
+      }
+    },
+    "submit": "Registrarse",
+    "alreadyHaveAccount": "¿Ya tienes tu cuenta?",
+    "signIn": "Ingresa!"
   }
 }
