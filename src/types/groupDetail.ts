@@ -1,9 +1,11 @@
+import { Category } from '@prisma/client'
+
 export interface GroupDetail {
   id: string
   name: string
   description: string
   total: number
-  category: string
+  category: Category
   participants: Participant[]
   costs: Cost[]
 }

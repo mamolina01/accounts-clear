@@ -46,5 +46,38 @@
     "join": "Join group",
     "noDescription": "No description",
     "createYourGroup": "Create your first group"
+  },
+  "groupDetails": {
+    "groupInfo": {
+      "description": "Description",
+      "participants": "Participants",
+      "categories": {
+        "Travel": "Travel",
+        "House": "House",
+        "Relationship": "Relationship",
+        "Celebration": "Celebration",
+        "Project": "Project",
+        "Others": "Others"
+      }
+    },
+    "groupSummary": {
+      "tabs": {
+        "costs": "Costs"
+      },
+      "costItem": {
+        "paidBy": "Paid by:",
+        "participants": {
+          "part1": "For",
+          "part2": "participants"
+        }
+      },
+      "tabsBalances": {
+        "refunds": "Refunds"
+      },
+      "refunds": {
+        "mustPayTo": "Must pay to"
+      },
+      "add1stCost": "Add your first cost"
+    }
   }
 }
