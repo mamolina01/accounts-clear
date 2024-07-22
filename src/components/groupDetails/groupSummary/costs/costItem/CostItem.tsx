@@ -46,7 +46,9 @@ export const CostItem = ({ cost, groupId }: Props) => {
       <Menu costId={cost.id} groupId={groupId} />
       {showMore && (
         <div className={styles.extraContent}>
-          <p className={styles.usersQuantity}>{t('participants.part1')} {cost.assignedUsers.length} {t('participants.part2')}:</p>
+          <p className={styles.usersQuantity}>
+            {t('participants.part1')} {cost.assignedUsers.length} {t('participants.part2')}:
+          </p>
           <ul className={styles.usersList}>
             {cost.assignedUsers.map(user => (
               <li className={styles.user} key={`${cost.title}-${user.participant?.name}`}>
