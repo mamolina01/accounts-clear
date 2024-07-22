@@ -46,5 +46,19 @@
     "join": "Ingresa a un grupo",
     "noDescription": "Sin descripción",
     "createYourGroup": "Crea tu primer grupo"
+  },
+  "groupDetails": {
+    "groupInfo": {
+      "description": "Descripción",
+      "participants": "Participantes",
+      "categories": {
+        "Travel": "Viaje",
+        "House": "Hogar",
+        "Relationship": "Relación",
+        "Celebration": "Celebración",
+        "Project": "Proyecto",
+        "Others": "Otros"
+      }
+    }
   }
 }
