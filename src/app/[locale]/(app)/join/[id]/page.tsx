@@ -23,11 +23,7 @@ const JoinPageId = async ({ params }: Props) => {
     redirect(Routes.JOIN)
   }
 
-  return (
-    <FormContainer title={`Join to ${group.name}`}>
-      <JoinGroup group={group} />
-    </FormContainer>
-  )
+  return <JoinGroup group={group} />
 }
 
 export default JoinPageId

@@ -89,6 +89,12 @@
       "noExists": "No existe un grupo con ese id",
       "isAmongParticipants": "Ya eres miembro de este grupo",
       "idRequired": "El ID es requerido"
+    },
+    "joinGroup": {
+      "title": "Ingresa a",
+      "subtitle": "¿Quien de ellos eres?",
+      "participants": "Participantes",
+      "success": "Agregado existosamente!"
     }
   }
 }
