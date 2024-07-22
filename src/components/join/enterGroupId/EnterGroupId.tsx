@@ -7,18 +7,20 @@ import { useRouter } from 'next/navigation'
 import { Routes } from '@/enums/routes'
 import { getGroupByIdToJoin } from '@/actions/groups/get-group-by-id'
 import { UserIsAmongParticipants } from '@/actions/participants/user-is-among-participants'
+import { useTranslations } from 'next-intl'
 
 export const EnterGroupId = () => {
   const [error, setError] = useState('')
   const router = useRouter()
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const t = useTranslations('join.enterGroup')
 
   const handleSubmit = async (values: { id: string }) => {
     setIsLoading(true)
     const { group } = await getGroupByIdToJoin(values.id)
 
     if (!group) {
-      setError(`Doesn't exists a group with this id`)
+      setError(t('noExists'))
       setIsLoading(false)
       return
     }
@@ -26,7 +28,7 @@ export const EnterGroupId = () => {
     const isAmongParticipants = await UserIsAmongParticipants(values.id)
 
     if (isAmongParticipants) {
-      setError(`You are already in this group`)
+      setError(t('isAmongParticipants'))
       setIsLoading(false)
       return
     }
@@ -46,7 +48,7 @@ export const EnterGroupId = () => {
     >
       {props => {
         const { values, touched, errors, isValid, handleChange, handleSubmit } = props
-        const idError = ((touched.id || values.id) && errors.id) || ''
+        const idError = ((touched.id || values.id) && t(errors.id)) || ''
 
         const onChange = (e: ChangeEvent<HTMLInputElement>) => {
           handleChange(e)
@@ -59,13 +61,14 @@ export const EnterGroupId = () => {
           <Form onSubmit={handleSubmit} className={styles.form}>
             <div className={styles.inputContainer}>
               <label htmlFor="title" className={styles.label}>
-                Group id <span className={styles.required}>*</span>
+                {t('label')} <span className={styles.required}>*</span>
               </label>
               <input
+                id="title"
                 name="id"
                 type="text"
                 value={values.id}
-                placeholder="Enter group id"
+                placeholder={t('placeholder')}
                 onChange={onChange}
                 className={`${styles.input} ${error || idError ? styles.error : ''}`}
               />
@@ -73,7 +76,7 @@ export const EnterGroupId = () => {
             </div>
 
             <button type="submit" className={styles.submitButton} disabled={!isValid || isLoading || !!error}>
-              Submit
+              {t('submit')}
             </button>
           </Form>
         )

@@ -79,5 +79,22 @@
       },
       "add1stCost": "Add your first cost"
     }
+  },
+  "join": {
+    "enterGroup": {
+      "title": "Join a new group",
+      "label": "Group id",
+      "placeholder": "Enter group id",
+      "submit": "Submit",
+      "noExists": "Doesn't exists a group with this id",
+      "isAmongParticipants": "you are already a member of this group",
+      "idRequired": "ID is required"
+    },
+    "joinGroup": {
+      "title": "Join to",
+      "subtitle": "Who of them are you?",
+      "participants": "Participants",
+      "success": "Succesfully added!"
+    }
   }
 }
