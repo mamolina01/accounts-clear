@@ -14,14 +14,14 @@
   @apply flex w-full items-center gap-2 mt-2;
 
   .button {
-    @apply w-full rounded p-1 text-center;
+    @apply w-full rounded p-1 text-center border border-transparent hover:border-tertiary;
 
     &.login {
-      @apply bg-sky-600 hover:bg-sky-700;
+      @apply bg-quarteriary;
     }
 
     &.register {
-      @apply bg-neutral-700 hover:bg-neutral-900;
+      @apply bg-primary;
     }
   }
 }
