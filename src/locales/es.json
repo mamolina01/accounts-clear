@@ -219,5 +219,13 @@
     "successfullyUpdated": "Actualizado exitosamente!",
     "successfullyAdded": "Agregado exitosamente!",
     "somethingWrong": "Algo salió mal"
+  },
+  "modals": {
+    "authRequired": {
+      "title": "Autenticación requerida",
+      "description": "Debes estar autenticado para seleccionar un grupo",
+      "login": "Ingresar",
+      "register": "Registrarse"
+    }
   }
 }

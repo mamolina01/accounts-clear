@@ -219,5 +219,13 @@
         "min": "At least one participant is required"
       }
     }
+  },
+  "modals": {
+    "authRequired": {
+      "title": "Authentication required",
+      "description": "You must be authenticated to select a group",
+      "login": "Login",
+      "register": "Register"
+    }
   }
 }
