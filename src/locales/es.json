@@ -244,6 +244,14 @@
       "no": "No",
       "successfullyDeleted": "Eliminado exitosamente!",
       "somethingWrong": "Algo salió mal"
+    },
+    "shareGroup": {
+      "title": "Compartir grupo",
+      "groupID": "ID del grupo",
+      "copyToJoin": "Copiar enlace para unirse",
+      "anyoneCanJoin": "Cualquiera con el id podrá unirse a este grupo",
+      "copied": "Copiado al portapapeles",
+      "errorCopying": "Error copiando"
     }
   }
 }
