@@ -4,6 +4,7 @@ import { Link, usePathname } from '@/lib/i18nNavigation'
 import { signOut } from 'next-auth/react'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
+import { LanguageSwitch } from '../languageSwitch/LanguageSwitch'
 
 interface Props {
   toggleMenu: () => void
@@ -52,6 +53,7 @@ export const MobileMenu = ({ toggleMenu, user }: Props) => {
       <button className={styles.tab} onClick={() => signOut()}>
         {t('logout')}
       </button>
+      <LanguageSwitch />
     </div>
   )
 }
