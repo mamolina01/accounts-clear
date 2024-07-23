@@ -2,7 +2,7 @@
 import { AiOutlineSelect } from 'react-icons/ai'
 import styles from './JoinGroup.module.scss'
 import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
+import { useRouter } from '@/lib/i18nNavigation'
 import { Routes } from '@/enums/routes'
 import toast from 'react-hot-toast'
 import { useGeneralBehaviourStore, useModalsStore } from '@/store'

@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { Link } from '@/lib/i18nNavigation'
 import styles from './HeroSection.module.scss'
 import { auth } from '@/auth.config'
 import { Routes } from '@/enums/routes'

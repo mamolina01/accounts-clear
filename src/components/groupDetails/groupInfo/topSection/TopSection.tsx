@@ -3,7 +3,7 @@ import React from 'react'
 import { IoArrowBack } from 'react-icons/io5'
 import styles from './TopSection.module.scss'
 import { GroupDetail } from '@/types/groupDetail'
-import Link from 'next/link'
+import { Link } from '@/lib/i18nNavigation'
 import { Routes } from '@/enums/routes'
 import { GroupMenu } from '@/components'
 

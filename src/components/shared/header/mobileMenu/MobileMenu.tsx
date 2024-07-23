@@ -1,6 +1,6 @@
 import { Routes } from '@/enums/routes'
 import styles from './MobileMenu.module.scss'
-import Link from 'next/link'
+import { Link } from '@/lib/i18nNavigation'
 import { usePathname } from 'next/navigation'
 import { signOut } from 'next-auth/react'
 import Image from 'next/image'

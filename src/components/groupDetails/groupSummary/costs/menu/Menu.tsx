@@ -2,7 +2,7 @@
 import { Routes } from '@/enums/routes'
 import { useOutsideClick } from '@/hooks'
 import { useModalsStore } from '@/store'
-import Link from 'next/link'
+import { Link } from '@/lib/i18nNavigation'
 import React, { useRef, useState } from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import { FaEdit, FaTrashAlt } from 'react-icons/fa'
