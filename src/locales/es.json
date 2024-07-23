@@ -230,6 +230,13 @@
     "noRemove": {
       "title": "No puede ser eliminado",
       "description": "Este usuario no se pudo eliminar porque tiene costos asignados"
+    },
+    "removeCost": {
+      "title": "¿Quieres eliminar este gasto?",
+      "yes": "Si",
+      "no": "No",
+      "successfullyDeleted": "Eliminado exitosamente!",
+      "somethingWrong": "Algo salió mal"
     }
   }
 }
