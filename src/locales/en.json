@@ -182,5 +182,37 @@
     "successfullyUpdated": "Successfully updated!",
     "successfullyCreated": "Successfully created!",
     "somethingWrong": "Something went wrong"
+  },
+  "costForm": {
+    "editCost": "Edit cost",
+    "addNewCost": "Add a new cost",
+    "title": {
+      "label": "Title",
+      "placeholder": "Enter a title",
+      "errors": {
+        "required": "Title is required",
+        "max": "Max 20 characters"
+      }
+    },
+    "amount": {
+      "label": "Amount",
+      "placeholder": "Enter an amount",
+      "errors": {
+        "required": "Amount is required"
+      }
+    },
+    "paidBy": {
+      "label": "Paid by",
+      "placeholder": "Select one",
+      "errors": {
+        "required": "The payer is required"
+      }
+    },
+    "participants": {
+      "label": "Participants",
+      "errors": {
+        "min": "At least one participant is required"
+      }
+    }
   }
 }

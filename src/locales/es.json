@@ -179,5 +179,40 @@
     "successfullyUpdated": "Actualizado exitosamente!",
     "successfullyCreated": "Creado exitosamente!",
     "somethingWrong": "Algo salió mal"
+  },
+  "costForm": {
+    "editCost": "Editar costo",
+    "addNewCost": "Agregar un nuevo cost",
+    "title": {
+      "label": "Titulo",
+      "placeholder": "Ingrese un titulo",
+      "errors": {
+        "required": "El titulo requerido",
+        "max": "Máximo 20 caracteres"
+      }
+    },
+    "amount": {
+      "label": "Monto",
+      "placeholder": "Ingrese un monto",
+      "errors": {
+        "required": "El monto es requerido"
+      }
+    },
+    "paidBy": {
+      "label": "Pagado por",
+      "placeholder": "Seleccione uno",
+      "errors": {
+        "required": "El pagador es requerido"
+      }
+    },
+    "participants": {
+      "label": "Participantes",
+      "errors": {
+        "min": "Se requiere al menos un participante"
+      }
+    },
+    "successfullyUpdated": "Actualizado exitosamente!",
+    "successfullyAdded": "Agregado exitosamente!",
+    "somethingWrong": "Algo salió mal"
   }
 }
