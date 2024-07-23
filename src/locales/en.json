@@ -80,6 +80,11 @@
       "add1stCost": "Add your first cost"
     }
   },
+  "groupMenu": {
+    "share": "Share",
+    "edit": "Edit",
+    "delete": "Delete"
+  },
   "join": {
     "enterGroup": {
       "title": "Join a new group",
