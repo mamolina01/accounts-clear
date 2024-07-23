@@ -1,7 +1,7 @@
 'use client'
 import { Category } from '@prisma/client'
 import { Form, Formik } from 'formik'
-import { useRouter } from 'next/navigation'
+import { useRouter } from '@/lib/i18nNavigation'
 import { FormEventHandler, useState } from 'react'
 import styles from './GroupForm.module.scss'
 import { GroupInfo } from '@/types/group'
