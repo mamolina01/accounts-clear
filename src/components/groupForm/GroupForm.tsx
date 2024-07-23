@@ -140,7 +140,7 @@ export const GroupForm = ({ group }: Props) => {
                 >
                   {categoryOptions.map(category => (
                     <option value={category} key={category}>
-                      {category}
+                      {t(`category.options.${category}`)}
                     </option>
                   ))}
                 </select>
