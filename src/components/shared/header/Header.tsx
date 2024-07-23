@@ -10,6 +10,7 @@ import { MobileMenu } from './mobileMenu/MobileMenu'
 import { useState } from 'react'
 import { Session } from 'next-auth'
 import { useTranslations } from 'next-intl'
+import { LanguageSwitch } from './languageSwitch/LanguageSwitch'
 
 export const Header = ({ session }: { session: Session | null }) => {
   const [showMenuMobile, setShowMenuMobile] = useState<boolean>(false)
@@ -34,16 +35,15 @@ export const Header = ({ session }: { session: Session | null }) => {
             <AuthenticatedTabs user={session.user} />
           </>
         ) : (
-          <>
-            <nav className={styles.nav}>
-              <Link href={Routes.LOGIN} className={styles.link}>
-                {t('login')}
-              </Link>
-              <Link href={Routes.REGISTER} className={styles.register}>
-                {t('register')}
-              </Link>
-            </nav>
-          </>
+          <nav className={styles.nav}>
+            <LanguageSwitch />
+            <Link href={Routes.LOGIN} className={styles.link}>
+              {t('login')}
+            </Link>
+            <Link href={Routes.REGISTER} className={styles.register}>
+              {t('register')}
+            </Link>
+          </nav>
         )}
       </header>
       {showMenuMobile && session?.user && <MobileMenu toggleMenu={toggleMenu} user={session.user} />}

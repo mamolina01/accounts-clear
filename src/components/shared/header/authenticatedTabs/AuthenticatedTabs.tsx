@@ -6,6 +6,7 @@ import { IoLogOutOutline } from 'react-icons/io5'
 import { Link, usePathname } from '@/lib/i18nNavigation'
 import { logout } from '@/actions/auth/signout'
 import { useTranslations } from 'next-intl'
+import { LanguageSwitch } from '../languageSwitch/LanguageSwitch'
 
 interface Props {
   user: {
@@ -42,6 +43,7 @@ export const AuthenticatedTabs = ({ user }: Props) => {
       <Link href={Routes.JOIN} className={`${styles.link} ${pathname === Routes.JOIN ? styles.active : ''}`}>
         {t('joinGroup')}
       </Link>
+      <LanguageSwitch />
       <div className={styles.userContainer}>
         <div className={styles.textContainer}>
           <p>{user.name}</p>
