@@ -72,13 +72,7 @@ const NewCostPage = async ({ params }: Props) => {
     }
   }
 
-  const title = cost?.id ? 'Edit cost' : 'Add a new cost'
-
-  return (
-    <FormContainer title={title}>
-      <CostForm cost={cost} groupId={groupId} />
-    </FormContainer>
-  )
+  return <CostForm cost={cost} groupId={groupId} />
 }
 
 export default NewCostPage

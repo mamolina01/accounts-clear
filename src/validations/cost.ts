@@ -2,9 +2,9 @@ import * as yup from 'yup'
 
 export const validationSchemaNewCost = () => {
   return yup.object({
-    title: yup.string().required('Title is required').max(20, 'Max 20 characters.'),
-    amount: yup.string().required('Amount is required'),
-    paidBy: yup.string().required('Paid By is required'),
-    assignedUsers: yup.array().min(1, 'At least one participant is required')
+    title: yup.string().required('required').max(20, 'max'),
+    amount: yup.string().required('required'),
+    paidBy: yup.string().required('required'),
+    assignedUsers: yup.array().min(1, 'min')
   })
 }

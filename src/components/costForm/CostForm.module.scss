@@ -5,7 +5,7 @@
     @apply flex flex-col;
 
     .label {
-      @apply text-start md:text-xl capitalize;
+      @apply text-start md:text-xl;
 
       .required {
         @apply text-red-500;
@@ -70,7 +70,7 @@
   }
 
   .submitButton {
-    @apply bg-blue-500 rounded p-1 w-3/4 md:w-1/2 mx-auto transition-all text-sm md:text-base;
+    @apply bg-blue-500 hover:bg-blue-600 rounded p-1 w-3/4 md:w-1/2 mx-auto transition-all text-sm md:text-base;
 
     &:disabled {
       @apply bg-opacity-50 bg-tertiary;
