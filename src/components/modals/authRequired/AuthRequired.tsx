@@ -1,7 +1,7 @@
 'use client'
 import { useModalsStore } from '@/store'
 import styles from './AuthRequired.module.scss'
-import Link from 'next/link'
+import { Link } from '@/lib/i18nNavigation'
 import { Routes } from '@/enums/routes'
 import { CiWarning } from 'react-icons/ci'
 import { Modal } from '../modal/Modal'

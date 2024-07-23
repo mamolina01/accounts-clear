@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import Link from 'next/link'
+import { Link } from '@/lib/i18nNavigation'
 import icon from '@/public/emptyCosts.svg'
 import { Routes } from '@/enums/routes'
 import styles from './EmptyCosts.module.scss'

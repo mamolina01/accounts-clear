@@ -1,5 +1,5 @@
 'use client'
-import Link from 'next/link'
+import { Link } from '@/lib/i18nNavigation'
 import styles from '../Header.module.scss'
 import Image from 'next/image'
 import { Routes } from '@/enums/routes'

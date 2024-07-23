@@ -1,7 +1,6 @@
 'use client'
 import { Routes } from '@/enums/routes'
-import { useRouter } from 'next/navigation'
-import React from 'react'
+import { useRouter } from '@/lib/i18nNavigation'
 
 const NotFoundPage = () => {
   const router = useRouter()

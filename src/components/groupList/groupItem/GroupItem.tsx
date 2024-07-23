@@ -1,5 +1,5 @@
 import { Routes } from '@/enums/routes'
-import Link from 'next/link'
+import { Link } from '@/lib/i18nNavigation'
 import styles from '../GroupList.module.scss'
 import { GroupMenu } from '@/components'
 import { useTranslations } from 'next-intl'

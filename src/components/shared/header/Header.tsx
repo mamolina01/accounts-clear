@@ -1,6 +1,6 @@
 'use client'
 import coin from '@/public/coin.svg'
-import Link from 'next/link'
+import { Link } from '@/lib/i18nNavigation'
 import Image from 'next/image'
 import styles from './Header.module.scss'
 import { Routes } from '@/enums/routes'

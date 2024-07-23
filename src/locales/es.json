@@ -80,6 +80,11 @@
       "add1stCost": "Agrega tu primer gasto"
     }
   },
+  "groupMenu": {
+    "share": "Compartir",
+    "edit": "Editar",
+    "delete": "Eliminar"
+  },
   "join": {
     "enterGroup": {
       "title": "Ingresa a un nuevo grupo",
