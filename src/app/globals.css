@@ -31,11 +31,11 @@ body {
   :root {
     --primary: #0ea5e9;
     --secondary: #1e232d;
-    --tertiary: #aaaaaa;
+    --tertiary: #8d99ae;
     --quarteriary: #6c6c6c;
 
     --bg-primary: #1e232d;
-    --bg-secondary: #202020;
+    --bg-secondary: #29303e;
     --bg-tertiary: #30384b;
     --bg-quarteriary: #0275ae;
   }

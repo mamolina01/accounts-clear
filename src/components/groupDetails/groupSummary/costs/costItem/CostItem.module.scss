@@ -1,5 +1,5 @@
 .container {
-  @apply bg-secondary w-full p-2 md:p-3 rounded grid grid-cols-[auto_1fr_auto_auto] gap-y-1 gap-x-2 hover:bg-neutral-800 cursor-pointer;
+  @apply bg-secondary w-full p-2 md:p-3 rounded grid grid-cols-[auto_1fr_auto_auto] gap-y-1 gap-x-2 hover:bg-tertiary cursor-pointer;
 
   .arrow {
     @apply transition-all self-center text-sm md:text-base;
