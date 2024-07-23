@@ -9,6 +9,7 @@ import { removeGroup } from '@/actions/groups/remove-group'
 import { useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { Routes } from '@/enums/routes'
+import { useTranslations } from 'next-intl'
 
 export const RemoveGroup = () => {
   const { isRemoveGroupModalOpen, setIsRemoveGroupModalOpen: setIsOpen } = useModalsStore(state => state)
@@ -16,6 +17,7 @@ export const RemoveGroup = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const pathname = usePathname()
   const router = useRouter()
+  const t = useTranslations('modals.removeGroup')
 
   const closeModal = () => {
     setIsOpen({ id: '', state: false })
@@ -29,13 +31,13 @@ export const RemoveGroup = () => {
       setIsLoading(true)
       const { ok } = await removeGroup(id)
       if (ok) {
-        toast.success('Successfully removed!')
+        toast.success(t('successfullyDeleted'))
       } else {
-        toast.error('Something went wrong!')
+        toast.error(t('somethingWrong'))
       }
       closeModal()
     } catch (error) {
-      toast.error('Something went wrong!')
+      toast.error(t('somethingWrong'))
     }
     setIsLoading(false)
   }
@@ -43,13 +45,13 @@ export const RemoveGroup = () => {
   return (
     <Modal isOpen={isOpen} closeModal={closeModal}>
       <Image src={warningIcon} alt="warning" className={styles.icon} />
-      <h4 className={styles.title}>Do you want to delete this group?</h4>
+      <h4 className={styles.title}>{t('title')}</h4>
       <div className={styles.buttons}>
         <button className={`${styles.button} ${styles.confirm}`} onClick={onDeleteGroup} disabled={isLoading}>
-          Yes
+          {t('yes')}
         </button>
         <button className={`${styles.button} ${styles.cancel}`} onClick={closeModal} disabled={isLoading}>
-          No
+          {t('no')}
         </button>
       </div>
     </Modal>

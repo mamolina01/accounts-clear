@@ -237,6 +237,13 @@
       "no": "No",
       "successfullyDeleted": "Eliminado exitosamente!",
       "somethingWrong": "Algo salió mal"
+    },
+    "removeGroup": {
+      "title": "¿Quieres eliminar este grupo?",
+      "yes": "Si",
+      "no": "No",
+      "successfullyDeleted": "Eliminado exitosamente!",
+      "somethingWrong": "Algo salió mal"
     }
   }
 }
