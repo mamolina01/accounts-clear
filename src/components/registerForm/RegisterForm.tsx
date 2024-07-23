@@ -9,6 +9,8 @@ import { validationSchemaRegister } from '@/validations'
 import toast from 'react-hot-toast'
 import { registerUser } from '@/actions/auth/register'
 import { useTranslations } from 'next-intl'
+import { getLocaleRoute } from '@/helpers'
+import { usePathname } from 'next/navigation'
 
 interface FormProps {
   name: string
@@ -20,6 +22,7 @@ export const RegisterForm = () => {
   const { redirectUrl, setRedirectUrl } = useGeneralBehaviourStore(state => state)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const t = useTranslations('register')
+  const pathname = usePathname()
   const onSubmit = async (data: FormProps) => {
     setIsLoading(true)
     const { name, email, password } = data
@@ -37,9 +40,9 @@ export const RegisterForm = () => {
         const tempUrl = redirectUrl
         setRedirectUrl('')
 
-        window.location.replace(tempUrl)
+        window.location.replace(getLocaleRoute(pathname, tempUrl))
       } else {
-        window.location.replace(Routes.HOME)
+        window.location.replace(getLocaleRoute(pathname, Routes.HOME))
       }
     }, 1500)
   }
@@ -55,9 +58,10 @@ export const RegisterForm = () => {
     >
       {props => {
         const { values, isValid, touched, errors, handleBlur, handleSubmit, handleChange } = props
-        const nameError = ((touched.name || values.name) && t(`name.errors.${errors.name}`)) || ''
-        const emailError = ((touched.email || values.email) && t(`email.errors.${errors.email}`)) || ''
-        const passwordError = ((touched.password || values.password) && t(`password.errors.${errors.password}`)) || ''
+        const nameError = ((touched.name || values.name) && errors.name && t(`name.errors.${errors.name}`)) || ''
+        const emailError = ((touched.email || values.email) && errors.email && t(`email.errors.${errors.email}`)) || ''
+        const passwordError =
+          ((touched.password || values.password) && errors.password && t(`password.errors.${errors.password}`)) || ''
 
         return (
           <Form onSubmit={handleSubmit} className={styles.form}>

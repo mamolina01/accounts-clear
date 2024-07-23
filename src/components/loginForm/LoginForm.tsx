@@ -13,11 +13,14 @@ import { signIn } from 'next-auth/react'
 import googleIcon from '@/public/images/google.png'
 import { login } from '@/actions/auth/login'
 import { useTranslations } from 'next-intl'
+import { getLocaleRoute } from '@/helpers'
+import { usePathname } from 'next/navigation'
 
 export const LoginForm = () => {
   const { redirectUrl, setRedirectUrl } = useGeneralBehaviourStore(state => state)
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const t = useTranslations('login')
+  const pathname = usePathname()
 
   const handleSubmit = async (values: { email: string; password: string }) => {
     const { email, password } = values
@@ -36,9 +39,9 @@ export const LoginForm = () => {
         const tempUrl = redirectUrl
         setRedirectUrl('')
 
-        window.location.replace(tempUrl)
+        window.location.replace(getLocaleRoute(pathname, tempUrl))
       } else {
-        window.location.replace(Routes.HOME)
+        window.location.replace(getLocaleRoute(pathname, Routes.HOME))
       }
     }, 1500)
   }
@@ -66,8 +69,9 @@ export const LoginForm = () => {
       {props => {
         const { values, isValid, touched, errors, handleBlur, handleSubmit, handleChange } = props
 
-        const emailError = ((touched.email || values.email) && t(`email.errors.${errors.email}`)) || ''
-        const passwordError = ((touched.password || values.password) && t(`password.errors.${errors.password}`)) || ''
+        const emailError = ((touched.email || values.email) && errors.email && t(`email.errors.${errors.email}`)) || ''
+        const passwordError =
+          ((touched.password || values.password) && errors.password && t(`password.errors.${errors.password}`)) || ''
 
         return (
           <Form onSubmit={handleSubmit} className={styles.form}>
