@@ -172,8 +172,13 @@
     },
     "category": {
       "label": "Category",
-      "errors": {
-        "required": "Category is required"
+      "options": {
+        "Travel": "Travel",
+        "House": "House",
+        "Relationship": "Relationship",
+        "Celebration": "Celebration",
+        "Project": "Project",
+        "Others": "Others"
       }
     },
     "participants": {

@@ -171,7 +171,15 @@
       }
     },
     "category": {
-      "label": "Categoria"
+      "label": "Categoría",
+      "options": {
+        "Travel": "Viaje",
+        "House": "Hogar",
+        "Relationship": "Relación",
+        "Celebration": "Celebración",
+        "Project": "Proyecto",
+        "Others": "Otros"
+      }
     },
     "participants": {
       "label": "Participantes",
