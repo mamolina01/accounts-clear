@@ -1,6 +1,7 @@
 'use client'
 import React, { ChangeEvent, FormEventHandler, KeyboardEvent, useState } from 'react'
 import styles from '../Participants.module.scss'
+import { useTranslations } from 'next-intl'
 
 interface FormParticipantsProps {
   error: string
@@ -10,6 +11,7 @@ interface FormParticipantsProps {
 
 export const ParticipantInput = ({ error, addParticipant, setError }: FormParticipantsProps) => {
   const [participantName, setParticipantName] = useState<string>('')
+  const t = useTranslations('groupForm')
 
   const handleAddParticipant = () => {
     if (participantName !== '') {
@@ -40,13 +42,13 @@ export const ParticipantInput = ({ error, addParticipant, setError }: FormPartic
       <input
         type="text"
         value={participantName}
-        placeholder="Participant name"
+        placeholder={t('participants.placeholder')}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         className={styles.input}
       />
       <button type="button" className={styles.button} onClick={handleAddParticipant}>
-        Add
+        {t('participants.addButton')}
       </button>
       <p className={styles.errorText}>{error}</p>
     </div>

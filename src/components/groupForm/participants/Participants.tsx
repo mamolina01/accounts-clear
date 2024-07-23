@@ -6,6 +6,7 @@ import toast from 'react-hot-toast'
 import { generateID } from '@/helpers'
 import { FormikErrors } from 'formik'
 import { useState } from 'react'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   participants: ParticipantGroup[]
@@ -18,6 +19,7 @@ interface Props {
 
 export const Participants = ({ participants, setFieldValue }: Props) => {
   const [error, setError] = useState<string>('')
+  const t = useTranslations('groupForm')
 
   const addParticipant = (newParticipant: string) => {
     const usernameExists = participants.find(
@@ -25,7 +27,7 @@ export const Participants = ({ participants, setFieldValue }: Props) => {
     )
 
     if (usernameExists) {
-      setError('This username exists.')
+      setError(t('usernameExists'))
       return { ok: false }
     }
 
@@ -39,7 +41,7 @@ export const Participants = ({ participants, setFieldValue }: Props) => {
     )
 
     if (usernameExists) {
-      setError('This username exists.')
+      setError(t('usernameExists'))
       return { ok: false }
     }
 
@@ -52,7 +54,7 @@ export const Participants = ({ participants, setFieldValue }: Props) => {
 
   const removeParticipant = (participant: ParticipantGroup) => {
     if (participant.assignedCosts.length > 0) {
-      toast.error('This user has assigned costs.')
+      toast.error(t('userHasAssignedCost'))
       return
     }
     const tempParticipants = participants.filter(tempParticipant => tempParticipant.id !== participant.id)
