@@ -7,7 +7,7 @@ import warningIcon from '@/public/warning.svg'
 import { Modal } from '../modal/Modal'
 import { removeGroup } from '@/actions/groups/remove-group'
 import { useState } from 'react'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname, useRouter } from '@/lib/i18nNavigation'
 import { Routes } from '@/enums/routes'
 import { useTranslations } from 'next-intl'
 
@@ -21,9 +21,6 @@ export const RemoveGroup = () => {
 
   const closeModal = () => {
     setIsOpen({ id: '', state: false })
-    if (pathname !== Routes.GROUPS) {
-      router.push(Routes.GROUPS)
-    }
   }
 
   const onDeleteGroup = async () => {
@@ -32,6 +29,9 @@ export const RemoveGroup = () => {
       const { ok } = await removeGroup(id)
       if (ok) {
         toast.success(t('successfullyDeleted'))
+        if (pathname !== Routes.GROUPS) {
+          router.push(Routes.GROUPS)
+        }
       } else {
         toast.error(t('somethingWrong'))
       }

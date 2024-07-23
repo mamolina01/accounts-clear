@@ -1,10 +1,9 @@
 'use client'
-import { Link } from '@/lib/i18nNavigation'
 import styles from '../Header.module.scss'
 import Image from 'next/image'
 import { Routes } from '@/enums/routes'
 import { IoLogOutOutline } from 'react-icons/io5'
-import { usePathname } from 'next/navigation'
+import { Link, usePathname } from '@/lib/i18nNavigation'
 import { logout } from '@/actions/auth/signout'
 import { useTranslations } from 'next-intl'
 
