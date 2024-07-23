@@ -3,11 +3,13 @@ import { useModalsStore } from '@/store'
 import styles from './NoRemoveParticipant.module.scss'
 import { CiWarning } from 'react-icons/ci'
 import { Modal } from '../modal/Modal'
+import { useTranslations } from 'next-intl'
 
 export const NoRemoveParticipant = () => {
   const { isNoRemoveParticipantModalOpen: isOpen, setNoRemoveParticipantModalOpen: setIsOpen } = useModalsStore(
     state => state
   )
+  const t = useTranslations('modals.noRemove')
 
   const closeModal = () => {
     setIsOpen(false)
@@ -15,10 +17,8 @@ export const NoRemoveParticipant = () => {
   return (
     <Modal isOpen={isOpen} closeModal={closeModal}>
       <CiWarning className={styles.icon} />
-      <h4 className={styles.title}>Couldn{"'"}t be removed</h4>
-      <p className={styles.description}>
-        This user couldn{"'"}t be able to be removed, because he has costs assigned to him.
-      </p>
+      <h4 className={styles.title}>{t('title')}</h4>
+      <p className={styles.description}>{t('description')}</p>
       <button className={styles.button} onClick={closeModal}>
         ok
       </button>

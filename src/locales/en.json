@@ -226,6 +226,10 @@
       "description": "You must be authenticated to select a group",
       "login": "Login",
       "register": "Register"
+    },
+    "noRemove": {
+      "title": "Couldn't be deleted",
+      "description": "This user could not be deleted because they have assigned costs"
     }
   }
 }

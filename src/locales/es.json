@@ -226,6 +226,10 @@
       "description": "Debes estar autenticado para seleccionar un grupo",
       "login": "Ingresar",
       "register": "Registrarse"
+    },
+    "noRemove": {
+      "title": "No puede ser eliminado",
+      "description": "Este usuario no se pudo eliminar porque tiene costos asignados"
     }
   }
 }
