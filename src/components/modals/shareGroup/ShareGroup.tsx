@@ -6,11 +6,13 @@ import toast from 'react-hot-toast'
 import { getCurrentUrl } from '@/utils'
 import { Modal } from '../modal/Modal'
 import { useEffect, useState } from 'react'
+import { useTranslations } from 'next-intl'
 
 export const ShareGroup = () => {
   const { shareModal, setShareModal: setIsOpen } = useModalsStore(state => state)
   const { state: isOpen, id } = shareModal
   const [baseUrl, setBaseUrl] = useState<string>('')
+  const t = useTranslations('modals.shareGroup')
 
   useEffect(() => {
     if (id) {
@@ -26,27 +28,27 @@ export const ShareGroup = () => {
   const copyLink = async () => {
     try {
       await navigator.clipboard.writeText(baseUrl)
-      toast.success('Copied to clipboard')
+      toast.success(t('copied'))
     } catch (err) {
-      toast.error('Error copying')
+      toast.error(t('errorCopying'))
     }
   }
 
   const copyID = async () => {
     try {
       await navigator.clipboard.writeText(id)
-      toast.success('Copied to clipboard')
+      toast.success(t('copied'))
     } catch (err) {
-      toast.error('Error copying')
+      toast.error(t('errorCopying'))
     }
   }
 
   return (
     <Modal isOpen={isOpen} closeModal={closeModal}>
-      <h5 className={styles.title}>Share Group</h5>
+      <h4 className={styles.title}>{t('title')}</h4>
 
       <div className={styles.groupContainer}>
-        <span className={styles.label}>Group ID</span>
+        <span className={styles.label}>{t('groupID')}</span>
         <div className={styles.linkContainer}>
           <p className={styles.textLink}>{id}</p>
           <button className={styles.copyButton}>
@@ -55,10 +57,10 @@ export const ShareGroup = () => {
         </div>
       </div>
       <button className={styles.copyButton} onClick={copyLink}>
-        Copy link to join
+        {t('copyToJoin')}
         <MdOutlineContentCopy className={styles.icon} />
       </button>
-      <p className={styles.text}>Anyone with the id can join this group</p>
+      <p className={styles.text}>{t('anyoneCanJoin')}</p>
     </Modal>
   )
 }
