@@ -1,19 +1,21 @@
 'use client'
 import { Routes } from '@/enums/routes'
 import { useOutsideClick } from '@/hooks'
-import Link from 'next/link'
+import { Link } from '@/lib/i18nNavigation'
 import React, { useRef, useState } from 'react'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import { FaEdit, FaTrashAlt } from 'react-icons/fa'
 import styles from './GroupMenu.module.scss'
 import { IoMdShare } from 'react-icons/io'
 import { useModalsStore } from '@/store'
+import { useTranslations } from 'next-intl'
 
 export const GroupMenu = ({ groupId }: { groupId: string }) => {
   const [showMenu, setShowMenu] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
   const { setShareModal } = useModalsStore(state => state)
   const { setIsRemoveGroupModalOpen } = useModalsStore(state => state)
+  const t = useTranslations('groupMenu')
 
   const closeMenu = () => {
     setShowMenu(false)
@@ -39,15 +41,15 @@ export const GroupMenu = ({ groupId }: { groupId: string }) => {
         <div className={styles.menuContainer} ref={menuRef}>
           <button className={styles.option} onClick={setModal}>
             <IoMdShare />
-            <span>Share</span>
+            <span>{t('share')}</span>
           </button>
           <Link href={`${Routes.GROUP_FORM}/${groupId}`} className={styles.option}>
             <FaEdit />
-            <span>Edit</span>
+            <span>{t('edit')}</span>
           </Link>
           <button className={styles.option} onClick={deleteGroup}>
             <FaTrashAlt />
-            <span>Delete</span>
+            <span>{t('delete')}</span>
           </button>
         </div>
       )}

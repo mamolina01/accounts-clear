@@ -1,6 +1,6 @@
 'use client'
 import coin from '@/public/coin.svg'
-import Link from 'next/link'
+import { Link } from '@/lib/i18nNavigation'
 import Image from 'next/image'
 import styles from './Header.module.scss'
 import { Routes } from '@/enums/routes'
@@ -9,10 +9,12 @@ import { IoMenu } from 'react-icons/io5'
 import { MobileMenu } from './mobileMenu/MobileMenu'
 import { useState } from 'react'
 import { Session } from 'next-auth'
+import { useTranslations } from 'next-intl'
+import { LanguageSwitch } from './languageSwitch/LanguageSwitch'
 
 export const Header = ({ session }: { session: Session | null }) => {
   const [showMenuMobile, setShowMenuMobile] = useState<boolean>(false)
-
+  const t = useTranslations('layout.header')
   const toggleMenu = () => {
     setShowMenuMobile(!showMenuMobile)
   }
@@ -33,16 +35,15 @@ export const Header = ({ session }: { session: Session | null }) => {
             <AuthenticatedTabs user={session.user} />
           </>
         ) : (
-          <>
-            <nav className={styles.nav}>
-              <Link href={Routes.LOGIN} className={styles.link}>
-                Login
-              </Link>
-              <Link href={Routes.REGISTER} className={styles.register}>
-                Register
-              </Link>
-            </nav>
-          </>
+          <nav className={styles.nav}>
+            <LanguageSwitch />
+            <Link href={Routes.LOGIN} className={styles.link}>
+              {t('login')}
+            </Link>
+            <Link href={Routes.REGISTER} className={styles.register}>
+              {t('register')}
+            </Link>
+          </nav>
         )}
       </header>
       {showMenuMobile && session?.user && <MobileMenu toggleMenu={toggleMenu} user={session.user} />}

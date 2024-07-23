@@ -1,0 +1,11 @@
+.languageContainer {
+  @apply flex items-center gap-1;
+
+  button {
+    @apply outline-none text-lg md:text-sm;
+  }
+
+  .active {
+    @apply text-primary;
+  }
+}

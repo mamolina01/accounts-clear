@@ -1,20 +1,42 @@
+import createMiddleware from 'next-intl/middleware'
 import { auth } from './auth.config'
-import { NextResponse, type NextRequest } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
+import { Routes } from './enums/routes'
+import { AppLocaleConfig, Locales } from './config/locales'
+import { ProtectedRoutes } from './config/protectedRoutes'
 
-// Middleware function
-const middleware = async (req: NextRequest) => {
+const getPathname = (pathname: Routes) => {
+  let transformedPathname = pathname
+  if (pathname.startsWith(`/${Locales.ES}`)) {
+    transformedPathname = transformedPathname.substring(3) as Routes
+  }
+  return transformedPathname
+}
+
+const intlMiddleware = createMiddleware({
+  locales: AppLocaleConfig.locales,
+  localePrefix: AppLocaleConfig.localePrefix,
+  defaultLocale: AppLocaleConfig.defaultLocale,
+  localeDetection: false
+})
+
+export default async function middleware(request: NextRequest) {
+  const pathname = getPathname(request.nextUrl.pathname as Routes)
   const session = await auth()
-  const isAuthRoute = req.nextUrl.pathname.startsWith('/auth')
+  const isAuthRoute = pathname.startsWith('/auth')
 
-  if ((!session && !isAuthRoute) || (session && isAuthRoute)) {
-    return NextResponse.redirect(new URL('/', req.nextUrl.origin))
+  if ((!session && ProtectedRoutes.includes(pathname)) || (session && isAuthRoute)) {
+    return NextResponse.redirect(new URL('/', request.nextUrl))
   }
 
-  return NextResponse.next()
+  if (pathname.includes('/api')) {
+    return NextResponse.next()
+  }
+
+  return intlMiddleware(request)
 }
 
 export const config = {
-  matcher: ['/group/:path*', '/my-groups/:path*', '/cost/:path*', '/auth/:path*']
+  // Match only internationalized pathnames
+  matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/']
 }
-
-export default middleware

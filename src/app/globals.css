@@ -18,7 +18,7 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: #464648;
+  background: #dfe4e7;
 }
 
 @layer utilities {
@@ -30,13 +30,13 @@ body {
 @layer base {
   :root {
     --primary: #0ea5e9;
-    --secondary: #ffffff;
+    --secondary: #1e232d;
     --tertiary: #aaaaaa;
     --quarteriary: #6c6c6c;
 
-    --bg-primary: #151515;
+    --bg-primary: #1e232d;
     --bg-secondary: #202020;
-    --bg-tertiary: #383838;
+    --bg-tertiary: #30384b;
     --bg-quarteriary: #0275ae;
   }
 }

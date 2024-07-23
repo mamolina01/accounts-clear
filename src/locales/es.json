@@ -1,0 +1,257 @@
+{
+  "Metadata": {
+    "title": "Clear Accounts",
+    "description": "Divide tus cuentas con tus amigos!"
+  },
+  "layout": {
+    "header": {
+      "login": "Ingresar",
+      "register": "Registrarse",
+      "home": "Inicio",
+      "myGroups": "Mis grupos",
+      "newGroup": "Nuevo grupo",
+      "joinGroup": "Unirse a un grupo",
+      "logout": "Salir"
+    },
+    "footer": {
+      "frontendDeveloper": "Desarrollador Frontend"
+    }
+  },
+  "home": {
+    "heroSection": {
+      "welcome": "Bienvenido a",
+      "splitWithFriends": "Divide tus gastos con tus amigos!",
+      "myGroups": "Mis grupos",
+      "login": "Ingresar",
+      "register": "Registrarse"
+    },
+    "information": {
+      "item1": {
+        "title": "Manten tus cuentas al día",
+        "description": "Lleve un registro de los gastos y saldos compartidos con compañeros de cuarto, compañeros de viaje, grupos, amigos y familiares."
+      },
+      "item2": {
+        "title": "Cuentas claras hacen buenos amigos.",
+        "description": {
+          "part1": "Con ",
+          "part2": "Clear Accounts",
+          "part3": ", divide gastos con cualquier grupo: viajes, compañeros de cuarto, amigos y familiares."
+        }
+      }
+    }
+  },
+  "groupList": {
+    "title": "Mis grupos",
+    "create": "Crea un nuevo grupo",
+    "join": "Ingresa a un grupo",
+    "noDescription": "Sin descripción",
+    "createYourGroup": "Crea tu primer grupo"
+  },
+  "groupDetails": {
+    "groupInfo": {
+      "description": "Descripción",
+      "participants": "Participantes",
+      "categories": {
+        "Travel": "Viaje",
+        "House": "Hogar",
+        "Relationship": "Relación",
+        "Celebration": "Celebración",
+        "Project": "Proyecto",
+        "Others": "Otros"
+      }
+    },
+    "groupSummary": {
+      "tabs": {
+        "costs": "Costos"
+      },
+      "costItem": {
+        "paidBy": "Pagado por:",
+        "participants": {
+          "part1": "Para",
+          "part2": "participantes"
+        }
+      },
+      "tabsBalances": {
+        "refunds": "Reembolsos"
+      },
+      "refunds": {
+        "mustPayTo": "Debe pagar a"
+      },
+      "add1stCost": "Agrega tu primer gasto"
+    }
+  },
+  "groupMenu": {
+    "share": "Compartir",
+    "edit": "Editar",
+    "delete": "Eliminar"
+  },
+  "join": {
+    "enterGroup": {
+      "title": "Ingresa a un nuevo grupo",
+      "label": "ID del grupo",
+      "placeholder": "Ingrese id del grupo",
+      "submit": "Ingresar",
+      "noExists": "No existe un grupo con ese id",
+      "isAmongParticipants": "Ya eres miembro de este grupo",
+      "idRequired": "El ID es requerido"
+    },
+    "joinGroup": {
+      "title": "Ingresa a",
+      "subtitle": "¿Quien de ellos eres?",
+      "participants": "Participantes",
+      "success": "Agregado exitosamente!"
+    }
+  },
+  "login": {
+    "title": "Ingresar",
+    "email": {
+      "label": "Email",
+      "placeholder": "Ingrese su email",
+      "errors": {
+        "required": "El email es requerido",
+        "invalid": "Email invalido"
+      }
+    },
+    "password": {
+      "label": "Contraseña",
+      "placeholder": "Ingrese su contraseña",
+      "errors": {
+        "required": "La contraseña es requerida"
+      }
+    },
+    "submit": "Ingresar",
+    "signInGoogle": "Ingresar con Google",
+    "dontHaveAccount": "¿Aún no tienes tu cuenta?",
+    "signUp": "Registrate!"
+  },
+  "register": {
+    "title": "Registrarse",
+    "name": {
+      "label": "Nombre",
+      "placeholder": "Ingrese un nombre",
+      "errors": {
+        "required": "El nombre es requerido"
+      }
+    },
+    "email": {
+      "label": "Email",
+      "placeholder": "Ingrese su email",
+      "errors": {
+        "required": "El email es requerido",
+        "invalid": "Email invalido"
+      }
+    },
+    "password": {
+      "label": "Contraseña",
+      "placeholder": "Ingrese su contraseña",
+      "errors": {
+        "required": "La contraseña es requerida"
+      }
+    },
+    "submit": "Registrarse",
+    "alreadyHaveAccount": "¿Ya tienes tu cuenta?",
+    "signIn": "Ingresa!"
+  },
+  "groupForm": {
+    "createGroup": "Crear grupo",
+    "editGroup": "Editar grupo",
+    "name": {
+      "label": "Nombre",
+      "placeholder": "Ingrese un nombre",
+      "errors": {
+        "required": "El nombre es requerido",
+        "max": "Máximo 20 caracteres"
+      }
+    },
+    "description": {
+      "label": "Descripción",
+      "placeholder": "Ingrese una descripción",
+      "errors": {
+        "max": "Máximo 50 caracteres"
+      }
+    },
+    "category": {
+      "label": "Categoria"
+    },
+    "participants": {
+      "label": "Participantes",
+      "placeholder": "Nombre de participante",
+      "addButton": "Agregar",
+      "min": "Se requiere al menos un participante"
+    },
+    "usernameExists": "Este nombre de usuario existe",
+    "userHasAssignedCost": "Este usuario tiene costos asignados",
+    "successfullyUpdated": "Actualizado exitosamente!",
+    "successfullyCreated": "Creado exitosamente!",
+    "somethingWrong": "Algo salió mal"
+  },
+  "costForm": {
+    "editCost": "Editar costo",
+    "addNewCost": "Agregar un nuevo cost",
+    "title": {
+      "label": "Titulo",
+      "placeholder": "Ingrese un titulo",
+      "errors": {
+        "required": "El titulo requerido",
+        "max": "Máximo 20 caracteres"
+      }
+    },
+    "amount": {
+      "label": "Monto",
+      "placeholder": "Ingrese un monto",
+      "errors": {
+        "required": "El monto es requerido"
+      }
+    },
+    "paidBy": {
+      "label": "Pagado por",
+      "placeholder": "Seleccione uno",
+      "errors": {
+        "required": "El pagador es requerido"
+      }
+    },
+    "participants": {
+      "label": "Participantes",
+      "errors": {
+        "min": "Se requiere al menos un participante"
+      }
+    },
+    "successfullyUpdated": "Actualizado exitosamente!",
+    "successfullyAdded": "Agregado exitosamente!",
+    "somethingWrong": "Algo salió mal"
+  },
+  "modals": {
+    "authRequired": {
+      "title": "Autenticación requerida",
+      "description": "Debes estar autenticado para seleccionar un grupo",
+      "login": "Ingresar",
+      "register": "Registrarse"
+    },
+    "noRemove": {
+      "title": "No puede ser eliminado",
+      "description": "Este usuario no se pudo eliminar porque tiene costos asignados"
+    },
+    "removeCost": {
+      "title": "¿Quieres eliminar este gasto?",
+      "yes": "Si",
+      "no": "No",
+      "successfullyDeleted": "Eliminado exitosamente!",
+      "somethingWrong": "Algo salió mal"
+    },
+    "removeGroup": {
+      "title": "¿Quieres eliminar este grupo?",
+      "yes": "Si",
+      "no": "No",
+      "successfullyDeleted": "Eliminado exitosamente!",
+      "somethingWrong": "Algo salió mal"
+    },
+    "shareGroup": {
+      "title": "Compartir grupo",
+      "groupID": "ID del grupo",
+      "copyToJoin": "Copiar enlace para unirse",
+      "anyoneCanJoin": "Cualquiera con el id podrá unirse a este grupo",
+      "copied": "Copiado al portapapeles",
+      "errorCopying": "Error copiando"
+    }
+  }
+}

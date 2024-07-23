@@ -1,11 +1,12 @@
 'use client'
-import Link from 'next/link'
 import styles from '../Header.module.scss'
 import Image from 'next/image'
 import { Routes } from '@/enums/routes'
-import { signOut } from 'next-auth/react'
 import { IoLogOutOutline } from 'react-icons/io5'
-import { usePathname } from 'next/navigation'
+import { Link, usePathname } from '@/lib/i18nNavigation'
+import { logout } from '@/actions/auth/signout'
+import { useTranslations } from 'next-intl'
+import { LanguageSwitch } from '../languageSwitch/LanguageSwitch'
 
 interface Props {
   user: {
@@ -22,21 +23,27 @@ interface Props {
 
 export const AuthenticatedTabs = ({ user }: Props) => {
   const pathname = usePathname()
+  const t = useTranslations('layout.header')
+
+  const signOut = async () => {
+    await logout()
+  }
 
   return (
     <nav className={`${styles.nav} ${styles.authenticated}`}>
       <Link href={Routes.GROUPS} className={`${styles.link} ${pathname === Routes.GROUPS ? styles.active : ''}`}>
-        My groups
+        {t('myGroups')}
       </Link>
       <Link
         href={Routes.GROUP_FORM}
         className={`${styles.link} ${pathname === Routes.GROUP_FORM ? styles.active : ''}`}
       >
-        New group
+        {t('newGroup')}
       </Link>
       <Link href={Routes.JOIN} className={`${styles.link} ${pathname === Routes.JOIN ? styles.active : ''}`}>
-        Join group
+        {t('joinGroup')}
       </Link>
+      <LanguageSwitch />
       <div className={styles.userContainer}>
         <div className={styles.textContainer}>
           <p>{user.name}</p>

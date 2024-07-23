@@ -1,5 +1,5 @@
-import { GroupForm, FormContainer } from '@/components'
-import { redirect } from 'next/navigation'
+import { GroupForm } from '@/components'
+import { redirect } from '@/lib/i18nNavigation'
 import { auth } from '@/auth.config'
 import { GroupInfo } from '@/types/group'
 import { Category } from '@prisma/client'
@@ -19,8 +19,8 @@ const Group = async ({ params }: Props) => {
 
   if (!group && groupId) {
     redirect(Routes.GROUP_FORM)
+    return
   }
-  const title = group ? 'Edit group' : 'New group'
 
   const initialValues: GroupInfo = {
     name: '',
@@ -37,11 +37,7 @@ const Group = async ({ params }: Props) => {
     })
   }
 
-  return (
-    <FormContainer title={title}>
-      <GroupForm group={group ?? initialValues} />
-    </FormContainer>
-  )
+  return <GroupForm group={group ?? initialValues} />
 }
 
 export default Group

@@ -1,0 +1,257 @@
+{
+  "Metadata": {
+    "title": "Clear Accounts",
+    "description": "Split your expenses with your friends!"
+  },
+  "layout": {
+    "header": {
+      "login": "Login",
+      "register": "Register",
+      "home": "Home",
+      "myGroups": "My groups",
+      "newGroup": "New group",
+      "joinGroup": "Join group",
+      "logout": "Logout"
+    },
+    "footer": {
+      "frontendDeveloper": "Frontend Developer"
+    }
+  },
+  "home": {
+    "heroSection": {
+      "welcome": "Welcome to",
+      "splitWithFriends": "Split your expenses with your friends!",
+      "myGroups": "My groups",
+      "login": "Login",
+      "register": "Register"
+    },
+    "information": {
+      "item1": {
+        "title": "Keep your accounts up to date.",
+        "description": "Keep track of expenses and balances shared with roommates, travel companions, groups, friends, and family."
+      },
+      "item2": {
+        "title": "Good accounting makes good friends.",
+        "description": {
+          "part1": "With ",
+          "part2": "Clear Accounts",
+          "part3": ", split expenses with any group: trips, roommates, friends, and family."
+        }
+      }
+    }
+  },
+  "groupList": {
+    "title": "My groups",
+    "create": "Create a new group",
+    "join": "Join group",
+    "noDescription": "No description",
+    "createYourGroup": "Create your first group"
+  },
+  "groupDetails": {
+    "groupInfo": {
+      "description": "Description",
+      "participants": "Participants",
+      "categories": {
+        "Travel": "Travel",
+        "House": "House",
+        "Relationship": "Relationship",
+        "Celebration": "Celebration",
+        "Project": "Project",
+        "Others": "Others"
+      }
+    },
+    "groupSummary": {
+      "tabs": {
+        "costs": "Costs"
+      },
+      "costItem": {
+        "paidBy": "Paid by:",
+        "participants": {
+          "part1": "For",
+          "part2": "participants"
+        }
+      },
+      "tabsBalances": {
+        "refunds": "Refunds"
+      },
+      "refunds": {
+        "mustPayTo": "Must pay to"
+      },
+      "add1stCost": "Add your first cost"
+    }
+  },
+  "groupMenu": {
+    "share": "Share",
+    "edit": "Edit",
+    "delete": "Delete"
+  },
+  "join": {
+    "enterGroup": {
+      "title": "Join a new group",
+      "label": "Group id",
+      "placeholder": "Enter group id",
+      "submit": "Submit",
+      "noExists": "Doesn't exists a group with this id",
+      "isAmongParticipants": "you are already a member of this group",
+      "idRequired": "ID is required"
+    },
+    "joinGroup": {
+      "title": "Join to",
+      "subtitle": "Who of them are you?",
+      "participants": "Participants",
+      "success": "Succesfully added!"
+    }
+  },
+  "login": {
+    "title": "Sign in",
+    "email": {
+      "label": "Email",
+      "placeholder": "Enter an email",
+      "errors": {
+        "required": "Email is required",
+        "invalid": "Invalid email"
+      }
+    },
+    "password": {
+      "label": "Password",
+      "placeholder": "Enter a password",
+      "errors": {
+        "required": "Password is required"
+      }
+    },
+    "submit": "Sign in",
+    "signInGoogle": "Sign in with Google",
+    "dontHaveAccount": "Still don't have your account?",
+    "signUp": "Sign up!"
+  },
+  "register": {
+    "title": "Sign up",
+    "name": {
+      "label": "Name",
+      "placeholder": "Enter a name",
+      "errors": {
+        "required": "Name is required"
+      }
+    },
+    "email": {
+      "label": "Email",
+      "placeholder": "Enter an email",
+      "errors": {
+        "required": "Email is required",
+        "invalid": "Invalid email"
+      }
+    },
+    "password": {
+      "label": "Password",
+      "placeholder": "Enter a password",
+      "errors": {
+        "required": "Password is required"
+      }
+    },
+    "submit": "Sign up",
+    "alreadyHaveAccount": "Do you already have your account?",
+    "signIn": "Sign in!"
+  },
+  "groupForm": {
+    "createGroup": "Create group",
+    "editGroup": "Edit group",
+    "name": {
+      "label": "Name",
+      "placeholder": "Enter a name",
+      "errors": {
+        "required": "Name is required",
+        "max": "Max 20 characters"
+      }
+    },
+    "description": {
+      "label": "Description",
+      "placeholder": "Enter a description",
+      "errors": {
+        "max": "Max 50 characters"
+      }
+    },
+    "category": {
+      "label": "Category",
+      "errors": {
+        "required": "Category is required"
+      }
+    },
+    "participants": {
+      "label": "Participants",
+      "placeholder": "Participant name",
+      "addButton": "Add",
+      "min": "At least one participant is required"
+    },
+    "usernameExists": "This username exists",
+    "userHasAssignedCost": "This user has assigned costs",
+    "successfullyUpdated": "Successfully updated!",
+    "successfullyCreated": "Successfully created!",
+    "somethingWrong": "Something went wrong"
+  },
+  "costForm": {
+    "editCost": "Edit cost",
+    "addNewCost": "Add a new cost",
+    "title": {
+      "label": "Title",
+      "placeholder": "Enter a title",
+      "errors": {
+        "required": "Title is required",
+        "max": "Max 20 characters"
+      }
+    },
+    "amount": {
+      "label": "Amount",
+      "placeholder": "Enter an amount",
+      "errors": {
+        "required": "Amount is required"
+      }
+    },
+    "paidBy": {
+      "label": "Paid by",
+      "placeholder": "Select one",
+      "errors": {
+        "required": "The payer is required"
+      }
+    },
+    "participants": {
+      "label": "Participants",
+      "errors": {
+        "min": "At least one participant is required"
+      }
+    }
+  },
+  "modals": {
+    "authRequired": {
+      "title": "Authentication required",
+      "description": "You must be authenticated to select a group",
+      "login": "Login",
+      "register": "Register"
+    },
+    "noRemove": {
+      "title": "Couldn't be deleted",
+      "description": "This user could not be deleted because they have assigned costs"
+    },
+    "removeCost": {
+      "title": "Do you want to delete this cost?",
+      "yes": "Yes",
+      "no": "No",
+      "successfullyDeleted": "Successfully deleted!",
+      "somethingWrong": "Something went wrong"
+    },
+    "removeGroup": {
+      "title": "Do you want to delete this group?",
+      "yes": "Yes",
+      "no": "No",
+      "successfullyDeleted": "Successfully deleted!",
+      "somethingWrong": "Something went wrong"
+    },
+    "shareGroup": {
+      "title": "Share group",
+      "groupID": "Group ID",
+      "copyToJoin": "Copy link to join",
+      "anyoneCanJoin": "Anyone with the id can join this group",
+      "copied": "Copied to clipboard",
+      "errorCopying": "Error copying"
+    }
+  }
+}

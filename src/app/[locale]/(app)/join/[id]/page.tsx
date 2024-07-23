@@ -1,8 +1,8 @@
 import { getGroupByIdToJoin } from '@/actions/groups/get-group-by-id'
 import { UserIsAmongParticipants } from '@/actions/participants/user-is-among-participants'
-import { FormContainer, JoinGroup } from '@/components'
+import { JoinGroup } from '@/components'
 import { Routes } from '@/enums/routes'
-import { redirect } from 'next/navigation'
+import { redirect } from '@/lib/i18nNavigation'
 
 interface Props {
   params: {
@@ -21,13 +21,10 @@ const JoinPageId = async ({ params }: Props) => {
 
   if (!group) {
     redirect(Routes.JOIN)
+    return
   }
 
-  return (
-    <FormContainer title={`Join to ${group.name}`}>
-      <JoinGroup group={group} />
-    </FormContainer>
-  )
+  return <JoinGroup group={group} />
 }
 
 export default JoinPageId

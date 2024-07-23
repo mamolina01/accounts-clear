@@ -2,13 +2,15 @@
 import { AiOutlineSelect } from 'react-icons/ai'
 import styles from './JoinGroup.module.scss'
 import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
+import { useRouter } from '@/lib/i18nNavigation'
 import { Routes } from '@/enums/routes'
 import toast from 'react-hot-toast'
 import { useGeneralBehaviourStore, useModalsStore } from '@/store'
 import { getCurrentUrl } from '@/utils'
 import { integrateUser } from '@/actions/participants/integrate-user'
 import { useEffect, useState } from 'react'
+import { FormContainer } from '@/components'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   group: {
@@ -31,6 +33,7 @@ export const JoinGroup = ({ group }: Props) => {
   const { setIsAuthModalOpen } = useModalsStore(state => state)
   const { redirectUrl, setRedirectUrl } = useGeneralBehaviourStore(state => state)
   const [baseUrl, setBaseUrl] = useState<string>('')
+  const t = useTranslations('join.joinGroup')
 
   useEffect(() => {
     if (group.id) {
@@ -52,28 +55,30 @@ export const JoinGroup = ({ group }: Props) => {
 
     const { ok } = await integrateUser(participant.id, group.id)
     if (ok) {
-      toast.success('Successfully added!')
+      toast.success(t('success'))
       setTimeout(() => {
         router.push(Routes.GROUPS)
       }, 1500)
     }
   }
   return (
-    <div className={styles.container}>
-      <p className={styles.subtitle}>Who of them are you?</p>
-      <label className={styles.label}>Participants</label>
-      <div className={styles.participantList}>
-        {group?.participants.map(participant => (
-          <div
-            key={participant.id}
-            className={`${styles.participant} ${participant.userId ? styles.disabled : ''}`}
-            onClick={() => selectParticipant(participant)}
-          >
-            <span>{participant.name}</span>
-            {!participant.userId && <AiOutlineSelect className={styles.icon} />}
-          </div>
-        ))}
+    <FormContainer title={`${t('title')} ${group.name}`}>
+      <div className={styles.container}>
+        <p className={styles.subtitle}>{t('subtitle')}</p>
+        <label className={styles.label}>{t('participants')}</label>
+        <div className={styles.participantList}>
+          {group?.participants.map(participant => (
+            <div
+              key={participant.id}
+              className={`${styles.participant} ${participant.userId ? styles.disabled : ''}`}
+              onClick={() => selectParticipant(participant)}
+            >
+              <span>{participant.name}</span>
+              {!participant.userId && <AiOutlineSelect className={styles.icon} />}
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </FormContainer>
   )
 }
