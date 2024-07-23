@@ -35,25 +35,25 @@ export const GroupForm = ({ group }: Props) => {
       const { ok } = await updateGroup(data, group?.id ?? '')
 
       if (ok) {
-        toast.success('Successfully updated!')
+        toast.success(t('succesfullyUpdated'))
         setTimeout(() => {
           router.push(`${Routes.GROUPS}/${group.id}`)
         }, 1500)
       } else {
         setIsLoading(false)
-        toast.error('Something went wrong!')
+        toast.error(t('somethingWrong'))
       }
     } else {
       const { ok } = await createGroup(data)
 
       if (ok) {
-        toast.success('Successfully created!')
+        toast.success(t('succesfullyCreated'))
         setTimeout(() => {
           router.push(Routes.GROUPS)
         }, 1500)
       } else {
         setIsLoading(false)
-        toast.error('Something went wrong!')
+        toast.error(t('somethingWrong'))
       }
     }
   }

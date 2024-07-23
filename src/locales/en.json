@@ -173,7 +173,14 @@
     },
     "participants": {
       "label": "Participants",
+      "placeholder": "Participant name",
+      "addButton": "Add",
       "min": "At least one participant is required"
-    }
+    },
+    "usernameExists": "This username exists",
+    "userHasAssignedCost": "This user has assigned costs",
+    "successfullyUpdated": "Successfully updated!",
+    "successfullyCreated": "Successfully created!",
+    "somethingWrong": "Something went wrong"
   }
 }

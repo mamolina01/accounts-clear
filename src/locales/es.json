@@ -94,7 +94,7 @@
       "title": "Ingresa a",
       "subtitle": "¿Quien de ellos eres?",
       "participants": "Participantes",
-      "success": "Agregado existosamente!"
+      "success": "Agregado exitosamente!"
     }
   },
   "login": {
@@ -160,7 +160,7 @@
     },
     "description": {
       "label": "Descripción",
-      "placeholder": "Enter a descripción",
+      "placeholder": "Ingrese una descripción",
       "errors": {
         "max": "Máximo 50 caracteres"
       }
@@ -170,7 +170,14 @@
     },
     "participants": {
       "label": "Participantes",
+      "placeholder": "Nombre de participante",
+      "addButton": "Agregar",
       "min": "Se requiere al menos un participante"
-    }
+    },
+    "usernameExists": "Este nombre de usuario existe",
+    "userHasAssignedCost": "Este usuario tiene costos asignados",
+    "successfullyUpdated": "Actualizado exitosamente!",
+    "successfullyCreated": "Creado exitosamente!",
+    "somethingWrong": "Algo salió mal"
   }
 }

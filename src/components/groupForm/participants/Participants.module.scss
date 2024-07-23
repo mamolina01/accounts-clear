@@ -1,5 +1,5 @@
 .participantInput {
-  @apply grid grid-cols-[1fr_50px] gap-x-3 mt-2 mx-1;
+  @apply grid grid-cols-[1fr_auto] gap-x-3 mt-2 mx-1;
 
   .input {
     @apply bg-transparent text-secondary outline-none w-full border-b-[1px] border-tertiary focus:border-primary;
