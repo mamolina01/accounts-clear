@@ -80,7 +80,7 @@ export const GroupForm = ({ group }: Props) => {
         }}
       >
         {props => {
-          const { values, isValid, touched, errors, setFieldValue, handleSubmit, validateField } = props
+          const { values, isValid, touched, errors, setFieldValue, handleSubmit, validateField, validateForm } = props
 
           const nameError = ((touched.name || values.name) && errors.name && t(`name.errors.${errors.name}`)) || ''
           const descriptionError =
@@ -89,11 +89,14 @@ export const GroupForm = ({ group }: Props) => {
               t(`description.errors.${errors.description}`)) ||
             ''
 
-          const onSubmit: FormEventHandler<HTMLFormElement> = e => {
+          const onSubmit: FormEventHandler<HTMLFormElement> = async e => {
             e.preventDefault()
             if (values.participants.length === 0) {
               validateField('participants')
             }
+            await setFieldValue('name', values.name.trim())
+            await setFieldValue('description', values.description.trim())
+            await validateForm()
             handleSubmit()
           }
 

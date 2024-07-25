@@ -7,7 +7,7 @@ import { CostProps, CostPropsTemp, Participant, ParticipantSelectable } from '@/
 import { useRouter } from '@/lib/i18nNavigation'
 import toast from 'react-hot-toast'
 import { Routes } from '@/enums/routes'
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
 import { FormContainer, InputNumber } from '..'
 import { updateCost } from '@/actions/costs/update-cost'
 import { createCost } from '@/actions/costs/create-cost'
@@ -82,7 +82,7 @@ export const CostForm = ({ cost, groupId }: Props) => {
         validateOnMount={false}
       >
         {props => {
-          const { values, touched, errors, isValid, setFieldValue, handleSubmit, handleBlur } = props
+          const { values, touched, errors, isValid, setFieldValue, handleSubmit, handleBlur, validateForm } = props
           const titleError =
             ((touched.title || values.title) && errors.title && t(`title.errors.${errors.title}`)) || ''
           const amountError =
@@ -114,8 +114,15 @@ export const CostForm = ({ cost, groupId }: Props) => {
             setFieldValue('paidBy', id)
           }
 
+          const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
+            e.preventDefault()
+            await setFieldValue('title', values.title.trim())
+            await validateForm()
+            handleSubmit()
+          }
+
           return (
-            <Form onSubmit={handleSubmit} className={styles.form}>
+            <Form onSubmit={onSubmit} className={styles.form}>
               <div className={styles.inputContainer}>
                 <label htmlFor="title" className={styles.label}>
                   {t('title.label')} <span className={styles.required}>*</span>
