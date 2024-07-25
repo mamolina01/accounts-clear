@@ -2,7 +2,7 @@
   @apply bg-black/70 absolute w-full h-full flex justify-center items-center z-10;
 
   .container {
-    @apply flex flex-col bg-secondary p-5 rounded w-[340px] md:w-[450px] lg:w-[550px] gap-3 relative;
+    @apply flex flex-col bg-primary p-5 rounded w-[340px] md:w-[450px] lg:w-[550px] gap-3 relative;
 
     .closeIcon {
       @apply absolute top-2 right-2 cursor-pointer;
