@@ -1,8 +1,6 @@
 import { getGroupListByUserId } from '@/actions/groups/get-group-list-by-userId'
 import { GroupList } from '@/components/groupList/GroupList'
-import { Locales } from '@/config/locales'
-import { Metadata, ResolvingMetadata } from 'next'
-import { useTranslations } from 'next-intl'
+import { Metadata } from 'next'
 
 interface Props {
   id: string
@@ -10,7 +8,7 @@ interface Props {
   description: string
 }
 
-export function generateMetadata(parent: ResolvingMetadata): Metadata {
+export function generateMetadata(): Metadata {
   return {
     title: 'My groups',
     description: 'Groups list'
