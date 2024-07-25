@@ -3,7 +3,7 @@ import { Routes } from '@/enums/routes'
 import { useGeneralBehaviourStore } from '@/store'
 import { Form, Formik } from 'formik'
 import { Link } from '@/lib/i18nNavigation'
-import { useState } from 'react'
+import { FormEventHandler, useState } from 'react'
 import styles from './RegisterForm.module.scss'
 import { validationSchemaRegister } from '@/validations'
 import toast from 'react-hot-toast'
@@ -57,14 +57,33 @@ export const RegisterForm = () => {
       }}
     >
       {props => {
-        const { values, isValid, touched, errors, handleBlur, handleSubmit, handleChange } = props
+        const {
+          values,
+          isValid,
+          touched,
+          errors,
+          handleBlur,
+          handleSubmit,
+          handleChange,
+          setFieldValue,
+          validateForm
+        } = props
         const nameError = ((touched.name || values.name) && errors.name && t(`name.errors.${errors.name}`)) || ''
         const emailError = ((touched.email || values.email) && errors.email && t(`email.errors.${errors.email}`)) || ''
         const passwordError =
           ((touched.password || values.password) && errors.password && t(`password.errors.${errors.password}`)) || ''
 
+        const onSubmit: FormEventHandler<HTMLFormElement> = async e => {
+          e.preventDefault()
+
+          await setFieldValue('name', values.name.trim())
+          await setFieldValue('password', values.password.trim())
+          await validateForm()
+          handleSubmit()
+        }
+
         return (
-          <Form onSubmit={handleSubmit} className={styles.form}>
+          <Form onSubmit={onSubmit} className={styles.form}>
             <div className={styles.inputContainer}>
               <label htmlFor="name" className={styles.label}>
                 {t('name.label')}

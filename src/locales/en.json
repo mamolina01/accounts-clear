@@ -223,7 +223,10 @@
       "errors": {
         "min": "At least one participant is required"
       }
-    }
+    },
+    "successfullyUpdated": "Successfully updated!",
+    "successfullyAdded": "Successfully added!",
+    "somethingWrong": "Something went wrong"
   },
   "modals": {
     "authRequired": {

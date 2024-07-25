@@ -14,7 +14,7 @@ export const ParticipantInput = ({ error, addParticipant, setError }: FormPartic
   const t = useTranslations('groupForm')
 
   const handleAddParticipant = () => {
-    if (participantName !== '') {
+    if (participantName.trim() !== '') {
       const { ok } = addParticipant(participantName)
       if (ok) {
         setParticipantName('')
