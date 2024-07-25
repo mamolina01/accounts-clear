@@ -4,10 +4,20 @@ import { CostForm } from '@/components/costForm/CostForm'
 import { Routes } from '@/enums/routes'
 import { CostPropsTemp, Participant, ParticipantSelectable } from '@/types/cost'
 import { redirect } from '@/lib/i18nNavigation'
+import { Metadata } from 'next'
 
 interface Props {
   params: {
     id: string[]
+  }
+}
+
+export const generateMetadata = ({ params }: Props): Metadata => {
+  const ids = params.id ?? []
+  const costId = ids[1] ? params.id[1] : ''
+
+  return {
+    title: costId ? 'Edit cost' : 'Add a new cost'
   }
 }
 

@@ -12,7 +12,10 @@ import { NextIntlClientProvider } from 'next-intl'
 const monserrat = Montserrat({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Clear Accounts',
+  title: {
+    template: '%s - Clear Accounts',
+    default: 'Home - Clear Accounts'
+  },
   description: 'Split your expenses with your friends!',
   icons: {
     icon: '/icon.png'
