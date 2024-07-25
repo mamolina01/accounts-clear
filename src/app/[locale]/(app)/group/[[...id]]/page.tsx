@@ -5,10 +5,20 @@ import { GroupInfo } from '@/types/group'
 import { Category } from '@prisma/client'
 import { Routes } from '@/enums/routes'
 import { getGroupById } from '@/actions/groups/get-group-by-id'
+import { Metadata } from 'next'
 
 interface Props {
   params: {
     id?: string[]
+  }
+}
+
+export const generateMetadata = ({ params }: Props): Metadata => {
+  const ids = params.id ?? []
+  const groupId = params.id ? params.id[0] : ''
+
+  return {
+    title: groupId ? 'Edit group' : 'Create group'
   }
 }
 

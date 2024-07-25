@@ -3,10 +3,22 @@ import { UserIsAmongParticipants } from '@/actions/participants/user-is-among-pa
 import { JoinGroup } from '@/components'
 import { Routes } from '@/enums/routes'
 import { redirect } from '@/lib/i18nNavigation'
+import { Metadata } from 'next'
 
 interface Props {
   params: {
     id: string
+  }
+}
+
+export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
+  const groupId = params.id ?? ''
+
+  const { group } = await getGroupByIdToJoin(groupId)
+
+  return {
+    title: group?.name,
+    description: `Join to ${group?.name} group.`
   }
 }
 
