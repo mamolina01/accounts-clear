@@ -1,19 +1,15 @@
 .form {
   @apply flex flex-col;
 
-  .icon {
-    @apply text-3xl md:text-7xl self-center;
-  }
-
   .title {
-    @apply text-2xl self-center;
+    @apply text-lg md:text-2xl text-center;
   }
 
   .inputContainer {
     @apply flex flex-col gap-1;
 
     .label {
-      @apply text-start md:text-lg;
+      @apply text-start md:text-xl;
       .required {
         @apply text-red-500;
       }
