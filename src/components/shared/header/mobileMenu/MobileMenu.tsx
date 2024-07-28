@@ -5,6 +5,7 @@ import { signOut } from 'next-auth/react'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { LanguageSwitch } from '../languageSwitch/LanguageSwitch'
+import { useModalsStore } from '@/store'
 
 interface Props {
   toggleMenu: () => void
@@ -23,6 +24,12 @@ interface Props {
 export const MobileMenu = ({ toggleMenu, user }: Props) => {
   const pathname = usePathname()
   const t = useTranslations('layout.header')
+  const { isJoinGroupModalOpen, setIsJoinGroupModalOpen } = useModalsStore(state => state)
+
+  const toggleJoinGroupModal = () => {
+    toggleMenu()
+    setIsJoinGroupModalOpen(!isJoinGroupModalOpen)
+  }
 
   const getStyles = (route: string) => {
     return `${styles.tab} ${pathname === route ? styles.active : ''}`
@@ -47,9 +54,9 @@ export const MobileMenu = ({ toggleMenu, user }: Props) => {
       <Link onClick={toggleMenu} href={Routes.GROUP_FORM} className={getStyles(Routes.GROUP_FORM)}>
         {t('newGroup')}
       </Link>
-      <Link onClick={toggleMenu} href={Routes.JOIN} className={getStyles(Routes.JOIN)}>
+      <button onClick={toggleJoinGroupModal} className={styles.tab}>
         {t('joinGroup')}
-      </Link>
+      </button>
       <button className={styles.tab} onClick={() => signOut()}>
         {t('logout')}
       </button>
