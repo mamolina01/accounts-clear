@@ -13,7 +13,7 @@ import { useModalsStore } from '@/store'
 
 export const JoinGroup = () => {
   const t = useTranslations('join.enterGroup')
-  const [error, setError] = useState('')
+  const [error, setError] = useState<string>('')
   const router = useRouter()
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const { isJoinGroupModalOpen: isOpen, setIsJoinGroupModalOpen: setIsOpen } = useModalsStore(state => state)
@@ -56,7 +56,7 @@ export const JoinGroup = () => {
       >
         {props => {
           const { values, touched, errors, isValid, handleChange, handleSubmit } = props
-          const idError = ((touched.id || values.id) && t(errors.id)) || ''
+          const idError = ((touched.id || values.id) && errors.id && t(errors.id)) || ''
 
           const onChange = (e: ChangeEvent<HTMLInputElement>) => {
             handleChange(e)
