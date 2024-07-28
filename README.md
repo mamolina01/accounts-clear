@@ -36,7 +36,6 @@ of each participant and determine the reimbursements necessary to equalize expen
    npm install
    # or
    yarn install
-   Open http://localhost:3000 in your browser to view the project.
    ```
 
 5. Run the Project
