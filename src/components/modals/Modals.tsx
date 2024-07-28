@@ -1,5 +1,5 @@
 import React from 'react'
-import { AuthRequired, NoRemoveParticipant, RemoveCost, RemoveGroup, ShareGroup } from '.'
+import { AuthRequired, JoinGroup, NoRemoveParticipant, RemoveCost, RemoveGroup, ShareGroup } from '.'
 
 export const Modals = () => {
   return (
@@ -9,6 +9,7 @@ export const Modals = () => {
       <RemoveCost />
       <RemoveGroup />
       <ShareGroup />
+      <JoinGroup />
     </>
   )
 }
