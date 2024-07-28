@@ -7,6 +7,7 @@ import { Link, usePathname } from '@/lib/i18nNavigation'
 import { logout } from '@/actions/auth/signout'
 import { useTranslations } from 'next-intl'
 import { LanguageSwitch } from '../languageSwitch/LanguageSwitch'
+import { useModalsStore } from '@/store'
 
 interface Props {
   user: {
@@ -24,6 +25,11 @@ interface Props {
 export const AuthenticatedTabs = ({ user }: Props) => {
   const pathname = usePathname()
   const t = useTranslations('layout.header')
+  const { isJoinGroupModalOpen, setIsJoinGroupModalOpen } = useModalsStore(state => state)
+
+  const toggleJoinGroupModal = () => {
+    setIsJoinGroupModalOpen(!isJoinGroupModalOpen)
+  }
 
   const signOut = async () => {
     await logout()
@@ -40,9 +46,9 @@ export const AuthenticatedTabs = ({ user }: Props) => {
       >
         {t('newGroup')}
       </Link>
-      <Link href={Routes.JOIN} className={`${styles.link} ${pathname === Routes.JOIN ? styles.active : ''}`}>
+      <button className={`${styles.link} ${isJoinGroupModalOpen ? styles.active : ''}`} onClick={toggleJoinGroupModal}>
         {t('joinGroup')}
-      </Link>
+      </button>
       <LanguageSwitch />
       <div className={styles.userContainer}>
         <div className={styles.textContainer}>
