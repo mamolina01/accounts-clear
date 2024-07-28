@@ -4,6 +4,5 @@ export enum Routes {
   GROUP_FORM = '/group',
   COST_FORM = '/cost',
   LOGIN = '/auth/login',
-  REGISTER = '/auth/register',
-  JOIN = '/join'
+  REGISTER = '/auth/register'
 }
