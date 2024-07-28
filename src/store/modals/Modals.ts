@@ -9,18 +9,19 @@ interface State {
   isRemoveGroupModalOpen: {
     state: boolean
     id: string
-  },
+  }
   isRemoveCostModalOpen: {
     state: boolean
     id: string
-  },
+  }
   isNoRemoveParticipantModalOpen: boolean
+  isJoinGroupModalOpen: boolean
   setShareModal: (shareModal: { state: boolean; id: string }) => void
   setIsAuthModalOpen: (state: boolean) => void
   setIsRemoveGroupModalOpen: (isRemoveGroupModalOpen: { state: boolean; id: string }) => void
-  setNoRemoveParticipantModalOpen: (state: boolean) => void,
+  setNoRemoveParticipantModalOpen: (state: boolean) => void
   setIsRemoveCostModalOpen: (isRemoveCostModalOpen: { state: boolean; id: string }) => void
-
+  setIsJoinGroupModalOpen: (state: boolean) => void
 }
 
 export const useModalsStore = create<State>()(set => ({
@@ -38,6 +39,7 @@ export const useModalsStore = create<State>()(set => ({
     id: ''
   },
   isNoRemoveParticipantModalOpen: false,
+  isJoinGroupModalOpen: false,
   setShareModal: shareModal => {
     set({ shareModal })
   },
@@ -45,5 +47,5 @@ export const useModalsStore = create<State>()(set => ({
   setIsRemoveGroupModalOpen: isRemoveGroupModalOpen => set({ isRemoveGroupModalOpen }),
   setNoRemoveParticipantModalOpen: state => set({ isNoRemoveParticipantModalOpen: state }),
   setIsRemoveCostModalOpen: isRemoveCostModalOpen => set({ isRemoveCostModalOpen }),
-
+  setIsJoinGroupModalOpen: state => set({ isJoinGroupModalOpen: state })
 }))

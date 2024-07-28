@@ -22,7 +22,7 @@
 }
 
 .option {
-  @apply grid grid-cols-[30px_auto] items-center p-2 hover:bg-tertiary cursor-pointer;
+  @apply grid grid-cols-[30px_auto] items-center p-2 hover:bg-tertiary cursor-pointer text-start;
 }
 
 .divider {
