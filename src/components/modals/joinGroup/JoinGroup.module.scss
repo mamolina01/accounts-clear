@@ -1,5 +1,9 @@
 .form {
-  @apply flex flex-col mt-2 md:mt-4;
+  @apply flex flex-col;
+
+  .title {
+    @apply text-lg md:text-2xl text-center;
+  }
 
   .inputContainer {
     @apply flex flex-col gap-1;

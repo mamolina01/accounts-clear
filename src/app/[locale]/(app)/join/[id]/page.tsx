@@ -32,7 +32,7 @@ const JoinPageId = async ({ params }: Props) => {
   const { group } = await getGroupByIdToJoin(groupId)
 
   if (!group) {
-    redirect(Routes.JOIN)
+    redirect(Routes.HOME)
     return
   }
 
