@@ -1,13 +1,8 @@
-import React from 'react'
-import { FiPlusCircle } from 'react-icons/fi'
-import { MdGroups } from 'react-icons/md'
-import styles from './GroupList.module.scss'
-import { Link } from '@/lib/i18nNavigation'
-import { Routes } from '@/enums/routes'
 import { GroupItem } from './groupItem/GroupItem'
 import { FormContainer } from '..'
 import { EmptyGroups } from './emptyGroups/EmptyGroups'
 import { useTranslations } from 'next-intl'
+import { ActionButtons } from './actionButtons/ActionButtons'
 
 interface Props {
   id: string
@@ -20,15 +15,7 @@ export const GroupList = ({ groups }: { groups: Props[] }) => {
     <FormContainer title={t('title')}>
       {groups.length === 0 ? <EmptyGroups /> : groups.map(group => <GroupItem group={group} key={group.id} />)}
 
-      <Link href={Routes.GROUP_FORM} className={`${styles.option} ${styles.divider}`}>
-        <FiPlusCircle size={20} />
-        <span>{t('create')}</span>
-      </Link>
-
-      <Link href={Routes.JOIN} className={styles.option}>
-        <MdGroups size={20} />
-        <span>{t('join')}</span>
-      </Link>
+      <ActionButtons />
     </FormContainer>
   )
 }
