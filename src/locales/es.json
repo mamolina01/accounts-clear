@@ -51,6 +51,7 @@
     "groupInfo": {
       "description": "Descripción",
       "participants": "Participantes",
+      "noDescription": "Sin descripción",
       "categories": {
         "Travel": "Viaje",
         "House": "Hogar",
@@ -62,7 +63,7 @@
     },
     "groupSummary": {
       "tabs": {
-        "costs": "Costos"
+        "costs": "Gastos"
       },
       "costItem": {
         "paidBy": "Pagado por:",
@@ -188,13 +189,13 @@
       "min": "Se requiere al menos un participante"
     },
     "usernameExists": "Este nombre de usuario existe",
-    "userHasAssignedCost": "Este usuario tiene costos asignados",
+    "userHasAssignedCost": "Este usuario tiene gastos asignados",
     "successfullyUpdated": "Actualizado exitosamente!",
     "successfullyCreated": "Creado exitosamente!",
     "somethingWrong": "Algo salió mal"
   },
   "costForm": {
-    "editCost": "Editar costo",
+    "editCost": "Editar gasto",
     "addNewCost": "Agregar un nuevo cost",
     "title": {
       "label": "Titulo",
@@ -237,7 +238,7 @@
     },
     "noRemove": {
       "title": "No puede ser eliminado",
-      "description": "Este usuario no se pudo eliminar porque tiene costos asignados"
+      "description": "Este usuario no se pudo eliminar porque tiene gastos asignados"
     },
     "removeCost": {
       "title": "¿Quieres eliminar este gasto?",
