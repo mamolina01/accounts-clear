@@ -33,7 +33,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale}>
-      <body className={monserrat.className}>
+      <body className={`${monserrat.className} overflow-x-hidden w-full`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Providers>
             <div className={styles.container}>
