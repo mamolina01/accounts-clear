@@ -51,6 +51,7 @@
     "groupInfo": {
       "description": "Description",
       "participants": "Participants",
+      "noDescription": "No description",
       "categories": {
         "Travel": "Travel",
         "House": "House",

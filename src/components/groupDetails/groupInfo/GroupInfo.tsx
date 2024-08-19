@@ -23,7 +23,7 @@ export const GroupInfo = ({ group }: Props) => {
       <TopSection group={group} />
       <div className={styles.leftContainer}>
         <span className={styles.label}>{t('description')}</span>
-        <span className={styles.description}>{group.description ? group.description : 'No description'}</span>
+        <span className={styles.description}>{group.description ? group.description : t('noDescription')}</span>
         <span className={styles.label}>{t('participants')}</span>
         <span className={styles.users}>{getUsers()}</span>
       </div>
